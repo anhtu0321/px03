@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class loginController extends Controller
 {
     public function getLogin(){
+        if(Auth::check()){return redirect()->route('home');}
         return view('login');
     }
     public function postLogin(Request $request){

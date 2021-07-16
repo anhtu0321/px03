@@ -51,7 +51,7 @@
 		<label for="my-input" class="form-check-label">Lưu tài khoản</label>
 	</div>
 	<div class="form-group">
-		<button type="submit" class="btn">Login </button>
+		<button type="submit" class="btn">Đăng nhập</button>
 	</div>
 	
 	@if ( Session::has('error') )

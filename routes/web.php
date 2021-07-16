@@ -17,3 +17,6 @@ Route::get('/', 'loginController@getLogin')->name('login');
 Route::post('/', 'loginController@postLogin');
 Route::get('/logout','loginController@getLogout')->name('logout');
 Route::get('/home', 'HomeController@index')->name('home');
+route::group(['prefix'=>'admin'],function(){
+    route::get('/','adminController@getHome')->name('admin.home');
+});
