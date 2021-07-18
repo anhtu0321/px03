@@ -14,7 +14,7 @@ class LoaiVanBanController extends Controller
      */
     public function index()
     {
-        //
+        return LoaiVanBan::orderBy('thu_tu','asc')->paginate(10);
     }
 
     /**
@@ -35,7 +35,12 @@ class LoaiVanBanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validateForm($request);
+        $loaiVanBan = new LoaiVanBan;
+        $loaiVanBan->ten_loai = $request->ten_loai;
+        $loaiVanBan->thu_tu = $request->thu_tu;
+        $loaiVanBan->trang_thai = $request->trang_thai;
+        $loaiVanBan->save();
     }
 
     /**
@@ -55,9 +60,9 @@ class LoaiVanBanController extends Controller
      * @param  \App\LoaiVanBan  $loaiVanBan
      * @return \Illuminate\Http\Response
      */
-    public function edit(LoaiVanBan $loaiVanBan)
+    public function edit(LoaiVanBan $loaiVanBan, $id)
     {
-        //
+        return LoaiVanBan::where('id',$id)->get();
     }
 
     /**
@@ -82,4 +87,20 @@ class LoaiVanBanController extends Controller
     {
         //
     }
+    public function validateForm(Request $request){
+        return $request->validate([
+            'ten_loai' => 'required',
+            'thu_tu' => 'required|numeric',
+        ], 
+        $messages = [
+            'required' => ':attribute không được để trống.',
+            'numeric' => ':attribute phải là ký tự số.'
+        ],
+        $attributes = [
+            'ten_loai' => 'Tên loại',
+            'thu_tu' => 'Thứ tự'
+        ]
+    );
+    }
+    
 }

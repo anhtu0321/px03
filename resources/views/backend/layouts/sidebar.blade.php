@@ -32,7 +32,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<router-link to="loaivanban" class="nav-link">
+					<router-link to="/loaivanban" class="nav-link">
 						<a>
 							<i class="nav-icon fas fa-th"></i>
 							<p>

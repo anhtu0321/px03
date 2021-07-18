@@ -15,10 +15,7 @@
 		@include('backend.layouts.header')
 		@include('backend.layouts.sidebar')
 		<div class="content-wrapper">
-			@include('backend.layouts.content-header')
-			<section class="content">
-				@yield('content')
-			</section>
+			@yield('content')
 		</div>
 	<aside class="control-sidebar control-sidebar-dark">
 	{{--Bang tuy chon che do hien thi  --}}
@@ -29,8 +26,8 @@
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
-<script src="{{ asset('dist/js/adminlte.js')}}"></script>
-<script src="{{ asset('dist/js/demo.js')}}"></script>
+<script src="{{asset('dist/js/adminlte.js')}}"></script>
+<script src="{{asset('dist/js/demo.js')}}"></script>
 <script src="{{asset('plugins/jquery-mousewheel/jquery.mousewheel.js')}}"></script>
 <script src="{{asset('plugins/raphael/raphael.min.js')}}"></script>
 <script src="{{asset('plugins/jquery-mapael/jquery.mapael.min.js')}}"></script>

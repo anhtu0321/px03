@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+// Loại Văn bản
+Route::post('/addLoaiVanBan','LoaiVanBanController@store');
+Route::get('/listLoaiVanBan','LoaiVanBanController@index');
+Route::get('/editLoaiVanBan/{id}','LoaiVanBanController@edit');
