@@ -2194,9 +2194,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['listData'],
   methods: {
-    loadLoaiVanBan: function loadLoaiVanBan() {
-      this.$store.dispatch('getListLoaiVanBanAc');
-      alert("den day");
+    loadLoaiVanBan: function loadLoaiVanBan(id) {
+      this.$store.dispatch('getListLoaiVanBanAc', id);
     }
   }
 });
@@ -39100,7 +39099,11 @@ var render = function() {
                       "button",
                       {
                         staticClass: "btn btn-danger btn-sm",
-                        on: { click: _vm.loadLoaiVanBan }
+                        on: {
+                          click: function($event) {
+                            return _vm.loadLoaiVanBan(list.id)
+                          }
+                        }
                       },
                       [_vm._v("Xóa")]
                     )
