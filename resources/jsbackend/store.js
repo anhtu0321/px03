@@ -14,7 +14,7 @@ const storeInfo = {
         getListLoaiVanBanAc(context, id){
             axios.get(`/px03/public/api/editLoaiVanBan/${id}`)
             .then(response=>{
-                context.commit('getListLoaiVanBan',response.data);
+                context.commit('getListLoaiVanBan',response);
             })
         }
     },

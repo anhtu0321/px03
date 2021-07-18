@@ -19,8 +19,8 @@
                             <td>{{list.thu_tu}}</td>
                             <td>{{list.trang_thai == 1? "Sử dụng" : "Không sử dụng"}}</td>
                             <td>
-                                <router-link class="btn btn-primary btn-sm" :to="`/loaivanban/edit/${list.id}`" >Sửa</router-link>
-                                <button class="btn btn-danger btn-sm" @click="loadLoaiVanBan(list.id)">Xóa</button>
+                                <router-link class="btn btn-primary btn-sm" @click.native="loadLoaiVanBan()" :to="`/loaivanban/edit/${list.id}`" >Sửa</router-link>
+                                <button class="btn btn-danger btn-sm">Xóa</button>
                             </td>
                         </tr>
                     </tbody>
@@ -34,8 +34,9 @@
 export default {
     props:['listData'],
     methods:{
-        loadLoaiVanBan(id){
-            this.$store.dispatch('getListLoaiVanBanAc',id);
+        loadLoaiVanBan(){
+            alert("den day");
+            // this.$store.dispatch('getListLoaiVanBanAc',id);
         }
     }
 }

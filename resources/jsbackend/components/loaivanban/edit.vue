@@ -82,10 +82,10 @@ export default {
 		},
 		loadDataLoaiVanBan(){
 			let listLoaiVanBan = this.$store.getters.getListLoaiVanBan;
-			this.ten_loai = listLoaiVanBan.ten_loai;
-			this.thu_tu = listLoaiVanBan.thu_tu;
-			this.trang_thai = listLoaiVanBan.trang_thai;
-			console.log(listLoaiVanBan);
+			this.ten_loai = listLoaiVanBan.data[0].ten_loai;
+			this.thu_tu = listLoaiVanBan.data[0].thu_tu;
+			this.trang_thai = listLoaiVanBan.data[0].trang_thai;
+			console.log(listLoaiVanBan.data);
 		}
 	},
 	components:{contentHeader, list},

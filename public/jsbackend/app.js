@@ -2132,10 +2132,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     loadDataLoaiVanBan: function loadDataLoaiVanBan() {
       var listLoaiVanBan = this.$store.getters.getListLoaiVanBan;
-      this.ten_loai = listLoaiVanBan.ten_loai;
-      this.thu_tu = listLoaiVanBan.thu_tu;
-      this.trang_thai = listLoaiVanBan.trang_thai;
-      console.log(listLoaiVanBan);
+      this.ten_loai = listLoaiVanBan.data[0].ten_loai;
+      this.thu_tu = listLoaiVanBan.data[0].thu_tu;
+      this.trang_thai = listLoaiVanBan.data[0].trang_thai;
+      console.log(listLoaiVanBan.data);
     }
   },
   components: {
@@ -2194,8 +2194,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['listData'],
   methods: {
-    loadLoaiVanBan: function loadLoaiVanBan(id) {
-      this.$store.dispatch('getListLoaiVanBanAc', id);
+    loadLoaiVanBan: function loadLoaiVanBan() {
+      alert("den day"); // this.$store.dispatch('getListLoaiVanBanAc',id);
     }
   }
 });
@@ -39090,23 +39090,19 @@ var render = function() {
                       "router-link",
                       {
                         staticClass: "btn btn-primary btn-sm",
-                        attrs: { to: "/loaivanban/edit/" + list.id }
+                        attrs: { to: "/loaivanban/edit/" + list.id },
+                        nativeOn: {
+                          click: function($event) {
+                            return _vm.loadLoaiVanBan()
+                          }
+                        }
                       },
                       [_vm._v("Sửa")]
                     ),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger btn-sm",
-                        on: {
-                          click: function($event) {
-                            return _vm.loadLoaiVanBan(list.id)
-                          }
-                        }
-                      },
-                      [_vm._v("Xóa")]
-                    )
+                    _c("button", { staticClass: "btn btn-danger btn-sm" }, [
+                      _vm._v("Xóa")
+                    ])
                   ],
                   1
                 )
@@ -56294,7 +56290,7 @@ var storeInfo = {
   actions: {
     getListLoaiVanBanAc: function getListLoaiVanBanAc(context, id) {
       axios.get("/px03/public/api/editLoaiVanBan/".concat(id)).then(function (response) {
-        context.commit('getListLoaiVanBan', response.data);
+        context.commit('getListLoaiVanBan', response);
       });
     }
   },
