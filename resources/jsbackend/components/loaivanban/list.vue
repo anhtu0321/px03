@@ -56,6 +56,7 @@ export default {
                 axios.get(`/px03/public/api/deleteLoaiVanBan/${id}`)
                 .then(reponse=>{
                     this.$store.dispatch('acListLoai',this.currentPage);
+                    this.$router.push('/loaivanban');
                 })
             }
         }

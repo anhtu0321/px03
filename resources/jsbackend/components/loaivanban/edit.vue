@@ -39,7 +39,7 @@
 		<list @dataById="updateLoaiById" :currentPage="currentPage"></list>
 		<div class="row">
             <div class="col-md-8 trang justify-content-end">
-                <paginate :page_number="listData.last_page" @getPage="loadPage"></paginate>
+                <paginate :last_pages="listData.last_page" @getPage="loadPage"></paginate>
             </div>
         </div>
 	</div>

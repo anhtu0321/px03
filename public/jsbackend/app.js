@@ -2245,6 +2245,8 @@ __webpack_require__.r(__webpack_exports__);
       if (confirm('ban muon xoa that a ?') == true) {
         axios.get("/px03/public/api/deleteLoaiVanBan/".concat(id)).then(function (reponse) {
           _this2.$store.dispatch('acListLoai', _this2.currentPage);
+
+          _this2.$router.push('/loaivanban');
         });
       }
     }
@@ -2278,10 +2280,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      currentPage: 1
+      currentPage: 1,
+      offset: 4,
+      from: '',
+      to: ''
     };
   },
-  props: ['page_number'],
+  props: ['last_pages'],
+  computed: {
+    pagesNumber: function pagesNumber() {
+      if (this.last_page <= this.offset * 2 + 1) {
+        this.from = 1;
+        this.to = this.last_page;
+      } else {
+        if (this.currentPage <= this.offset) {
+          this.from = 1;
+          this.to = 1 + this.offset * 2;
+
+          if (this.to > this.last_page) {
+            this.to = this.last_page;
+          }
+        }
+
+        if (this.currentPage > this.offset && this.currentPage <= this.last_page - this.offset) {
+          this.from = this.currentPage - this.offset;
+          this.to = this.currentPage + this.offset;
+        }
+
+        if (this.currentPage > this.last_page - this.offset) {
+          this.from = this.last_page - this.offset * 2;
+          this.to = this.last_page;
+        }
+      }
+
+      var pagesArray = [];
+
+      for (var i = this.from; i <= this.to; i++) {
+        pagesArray.push(i);
+      }
+
+      return pagesArray;
+    },
+    last_page: function last_page() {
+      return this.last_pages;
+    }
+  },
   methods: {
     setPage: function setPage(newPage) {
       this.currentPage = newPage;
@@ -2294,7 +2337,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     next: function next() {
-      if (this.currentPage < this.page_number) {
+      if (this.currentPage < this.last_page) {
         this.currentPage++;
         this.$emit('getPage', this.currentPage);
       }
@@ -38940,7 +38983,7 @@ var render = function() {
           { staticClass: "col-md-8 trang justify-content-end" },
           [
             _c("paginate", {
-              attrs: { page_number: _vm.listData.last_page },
+              attrs: { last_pages: _vm.listData.last_page },
               on: { getPage: _vm.loadPage }
             })
           ],
@@ -39171,7 +39214,7 @@ var render = function() {
           { staticClass: "col-md-8 trang justify-content-end" },
           [
             _c("paginate", {
-              attrs: { page_number: _vm.listData.last_page },
+              attrs: { last_pages: _vm.listData.last_page },
               on: { getPage: _vm.loadPage }
             })
           ],
@@ -39338,7 +39381,7 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _vm._l(_vm.page_number, function(page) {
+        _vm._l(_vm.pagesNumber, function(page) {
           return _c(
             "li",
             {
