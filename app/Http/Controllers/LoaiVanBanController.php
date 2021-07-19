@@ -14,7 +14,7 @@ class LoaiVanBanController extends Controller
      */
     public function index()
     {
-        return LoaiVanBan::orderBy('thu_tu','asc')->paginate(10);
+        return LoaiVanBan::orderBy('thu_tu','asc')->paginate(5);
     }
 
     /**
@@ -72,9 +72,13 @@ class LoaiVanBanController extends Controller
      * @param  \App\LoaiVanBan  $loaiVanBan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, LoaiVanBan $loaiVanBan)
+    public function update(Request $request, LoaiVanBan $loaiVanBan, $id)
     {
-        //
+        $loaiVanBan = LoaiVanBan::find($id);
+        $loaiVanBan->ten_loai = $request->ten_loai;
+        $loaiVanBan->thu_tu = $request->thu_tu;
+        $loaiVanBan->trang_thai = $request->trang_thai;
+        $loaiVanBan->save();
     }
 
     /**
@@ -83,9 +87,9 @@ class LoaiVanBanController extends Controller
      * @param  \App\LoaiVanBan  $loaiVanBan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LoaiVanBan $loaiVanBan)
+    public function destroy(LoaiVanBan $loaiVanBan, $id)
     {
-        //
+        LoaiVanBan::destroy($id);
     }
     public function validateForm(Request $request){
         return $request->validate([

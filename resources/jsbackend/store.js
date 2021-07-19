@@ -2,29 +2,29 @@ import Vue from "vue";
 import Vuex from "vuex";
 Vue.use(Vuex);
 const storeInfo = {
-    state:{
-        listLoaiVanBan:'',
+    state: {
+        listLoai: '',
     },
-    getters:{
-        getListLoaiVanBan(state){
-            return state.listLoaiVanBan;
+    getters: {
+        getListLoai(state) {
+            return state.listLoai;
         }
     },
-    actions:{
-        getListLoaiVanBanAc(context, id){
-            axios.get(`/px03/public/api/editLoaiVanBan/${id}`)
-            .then(response=>{
-                context.commit('getListLoaiVanBan',response);
-            })
+    actions: {
+        acListLoai(context, page) {
+            axios.get('/px03/public/api/listLoaiVanBan?page=' + page)
+                .then(response => {
+                    context.commit('muListLoai', response.data);
+                })
         }
     },
-    mutations:{
-        getListLoaiVanBan(state, data){
-            state.listLoaiVanBan = data;
+    mutations: {
+        muListLoai(state, response) {
+            state.listLoai = response;
         }
     },
 }
-    
+
 const store = new Vuex.Store(
     storeInfo
 )

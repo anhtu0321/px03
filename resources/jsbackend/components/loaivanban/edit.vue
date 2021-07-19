@@ -29,13 +29,19 @@
 						</div>
 						<div class="form-group col-md-12 text-right">
 							<button type="submit" class="btn btn-primary btn-sm">Sửa loại văn bản</button>
+							<router-link to="/loaivanban" class="btn btn-warning btn-sm">Quay lại</router-link>
 						</div>
 					</form>
 					</div>
 				</div>
 			</div>
   		</section>
-		<list :listData="listData"></list>
+		<list @dataById="updateLoaiById" :currentPage="currentPage"></list>
+		<div class="row">
+            <div class="col-md-8 trang justify-content-end">
+                <paginate :page_number="listData.last_page" @getPage="loadPage"></paginate>
+            </div>
+        </div>
 	</div>
 	
 </template>
@@ -44,6 +50,7 @@
 // import các components
 import contentHeader from '../content_header.vue'
 import list from './list.vue'
+import paginate from '../page.vue'
 export default {
 	data(){
 		return{
@@ -53,20 +60,22 @@ export default {
 			thu_tu:'',
 			trang_thai: 1,
 			error:'',
-			listData:''
+			currentPage:1,
 		}
 	},
+	computed:{
+        listData(){
+            return this.$store.getters.getListLoai;
+        }
+    },
 	methods:{
 		edit(){
 			let data = new FormData;
 			data.append('ten_loai', this.ten_loai);
 			data.append('thu_tu', this.thu_tu);
 			data.append('trang_thai', this.trang_thai);
-			axios.post('/px03/public/api/addLoaiVanBan', data)
+			axios.post(`/px03/public/api/updateLoaiVanBan/${this.$route.params.id}`, data)
 			.then(response=>{
-				this.ten_loai = '';
-				this.thu_tu = '';
-				this.error = '';
 				this.list();
 			})
 			.catch(error=>{
@@ -74,24 +83,27 @@ export default {
 			});
 		},
 		list(){
-			axios.get('/px03/public/api/listLoaiVanBan')
-			.then(response=>{
-				this.listData = response.data;
-			})
-			.catch();
+			this.$store.dispatch('acListLoai',this.currentPage);
 		},
-		loadDataLoaiVanBan(){
-			let listLoaiVanBan = this.$store.getters.getListLoaiVanBan;
-			this.ten_loai = listLoaiVanBan.data[0].ten_loai;
-			this.thu_tu = listLoaiVanBan.data[0].thu_tu;
-			this.trang_thai = listLoaiVanBan.data[0].trang_thai;
-			console.log(listLoaiVanBan.data);
+		updateLoaiById(data){
+			this.ten_loai = data.data[0].ten_loai;
+			this.thu_tu = data.data[0].thu_tu;
+			this.trang_thai = data.data[0].trang_thai;
+		},
+		loadPage(newPage){
+			this.currentPage = newPage;
+			this.list();
 		}
 	},
-	components:{contentHeader, list},
+	components:{contentHeader, list, paginate},
 	mounted(){
 		this.list();
-		this.loadDataLoaiVanBan();
+		axios.get(`/px03/public/api/editLoaiVanBan/${this.$route.params.id}`)
+        .then(response=>{
+            this.ten_loai = response.data[0].ten_loai;
+			this.thu_tu = response.data[0].thu_tu;
+			this.trang_thai = response.data[0].trang_thai;
+         })
 	},
 }
 </script>

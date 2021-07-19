@@ -33,7 +33,6 @@
 <script src="{{asset('plugins/jquery-mapael/jquery.mapael.min.js')}}"></script>
 <script src="{{asset('plugins/jquery-mapael/maps/usa_states.min.js')}}"></script>
 <script src="{{asset('plugins/chart.js/Chart.min.js')}}"></script>
-<script src="{{asset('dist/js/pages/dashboard2.js')}}"></script>
 <script src="{{asset('jsbackend/app.js')}}"></script>
 </body>
 </html>

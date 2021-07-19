@@ -35,7 +35,12 @@
 				</div>
 			</div>
   		</section>
-		<list :listData="listData"></list>
+		<list :currentPage="currentPage"></list>
+		<div class="row">
+            <div class="col-md-8 trang justify-content-end">
+                <paginate :page_number="listData.last_page" @getPage="loadPage"></paginate>
+            </div>
+        </div>
 	</div>
 	
 </template>
@@ -44,6 +49,7 @@
 // import các components
 import contentHeader from '../content_header.vue'
 import list from './list.vue'
+import paginate from '../page.vue'
 export default {
 	data(){
 		return{
@@ -53,9 +59,14 @@ export default {
 			thu_tu:'',
 			trang_thai: 1,
 			error:'',
-			listData:''
+			currentPage:1,
 		}
 	},
+	computed:{
+        listData(){
+            return this.$store.getters.getListLoai;
+        }
+    },
 	methods:{
 		add(){
 			let data = new FormData;
@@ -74,14 +85,14 @@ export default {
 			});
 		},
 		list(){
-			axios.get('/px03/public/api/listLoaiVanBan')
-			.then(response=>{
-				this.listData = response.data;
-			})
-			.catch();
+			this.$store.dispatch('acListLoai',this.currentPage);
+		},
+		loadPage(newPage){
+			this.currentPage = newPage;
+			this.list();
 		}
 	},
-	components:{contentHeader, list},
+	components:{contentHeader, list, paginate},
 	mounted(){
 		this.list();
 	}

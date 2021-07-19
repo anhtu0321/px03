@@ -21,3 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/addLoaiVanBan','LoaiVanBanController@store');
 Route::get('/listLoaiVanBan','LoaiVanBanController@index');
 Route::get('/editLoaiVanBan/{id}','LoaiVanBanController@edit');
+Route::post('/updateLoaiVanBan/{id}','LoaiVanBanController@update');
+Route::get('/deleteLoaiVanBan/{id}','LoaiVanBanController@destroy');
+

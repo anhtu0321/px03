@@ -9,7 +9,7 @@
 </head>
 <body>
 <!-- partial:index.partial.html -->
-<div class="panda">
+<div class="panda" id="app">
 <div class="ear"></div>
 <div class="face">
 	<div class="eye-shade"></div>
