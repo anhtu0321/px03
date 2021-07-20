@@ -5,41 +5,34 @@
     		<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-8 main">
-						<form method="post" class="form-row" @submit.prevent="add">
-						<div class="form-group col-md-6">
-							<label class="col-form-label col-form-label-sm">Tên Loại</label>
+						<form method="post" class="form-row" @submit.prevent="edit">
+						<div class="form-group col-md-8">
+							<label class="col-form-label col-form-label-sm">Tên Nguồn đi</label>
 							<input type="text" class="form-control form-control-sm" 
-								:class="{'is-invalid' : (error && error.ten_loai)}" 
-								v-model="ten_loai">
-							<p class="thongbao" v-if="error && error.ten_loai">{{ error.ten_loai[0]}}</p>
+								:class="{'is-invalid' : (error && error.ten_nguon)}" 
+								v-model="ten_nguon">
+							<p class="thongbao" v-if="error && error.ten_nguon">{{ error.ten_nguon[0]}}</p>
 						</div>
-						<div class="form-group col-md-3">
+						<div class="form-group col-md-4">
 							<label class="col-form-label col-form-label-sm">Thứ tự</label>
 							<input type="text" class="form-control form-control-sm" 
 								:class="{'is-invalid' : (error && error.thu_tu)}" 
 								v-model="thu_tu">
 							<p class="thongbao" v-if="error && error.thu_tu">{{ error.thu_tu[0]}}</p>
 						</div>
-						<div class="form-group col-md-3">
-							<label class="col-form-label col-form-label-sm">Trạng thái</label>
-							<select class="form-control form-control-sm" v-model="trang_thai">
-								<option value="1">Sử dụng</option>
-								<option value="0">Không Sử dụng</option>
-							</select>
-						</div>
 						<div class="form-group col-md-12 text-right">
-							<button type="submit" class="btn btn-primary btn-sm">Thêm loại văn bản</button>
-							<button type="submit" class="btn btn-warning btn-sm" @click.prevent="reloadData">Tải lại dữ liệu</button>
+							<button type="submit" class="btn btn-primary btn-sm">Sửa nguồn</button>
+                            <router-link to="/nguondi" class="btn btn-warning btn-sm">Quay lại</router-link>
 						</div>
 					</form>
 					</div>
 				</div>
 			</div>
   		</section>
-		<list></list>
+		<list @dataById="updateNguonDiById" :currentPage="currentPage"></list>
 		<div class="row">
             <div class="col-md-8 trang justify-content-end">
-                <paginate :last_pages="listData.last_page" @loadData="loadDataLoai"></paginate>
+                <paginate :last_pages="listData.last_page" @loadData="loadDataNguonDi"></paginate>
             </div>
         </div>
 	</div>
@@ -54,11 +47,10 @@ import paginate from '../page.vue'
 export default {
 	data(){
 		return{
-			tieude:'THÊM LOẠI VĂN BẢN',
-			link:'Thêm',
-			ten_loai:'',
+			tieude:'SỬA NGUỒN VĂN BẢN ĐI',
+			link:'Sửa',
+			ten_nguon:'',
 			thu_tu:'',
-			trang_thai: 1,
 			error:'',
 		}
 	},
@@ -67,20 +59,16 @@ export default {
             return this.$store.getters.getPage;
         },
         listData(){
-            return this.$store.getters.getListLoai;
+            return this.$store.getters.getListNguonDi;
         }
     },
 	methods:{
-		add(){
+		edit(){
 			let data = new FormData;
-			data.append('ten_loai', this.ten_loai);
+			data.append('ten_nguon', this.ten_nguon);
 			data.append('thu_tu', this.thu_tu);
-			data.append('trang_thai', this.trang_thai);
-			axios.post('/px03/public/api/addLoaiVanBan', data)
+			axios.post(`/px03/public/api/updateNguonDi/${this.$route.params.id}`, data)
 			.then(response=>{
-				this.ten_loai = '';
-				this.thu_tu = '';
-				this.error = '';
 				this.list();
 			})
 			.catch(error=>{
@@ -88,19 +76,23 @@ export default {
 			});
 		},
 		list(){
-			this.$store.dispatch('acListLoai',this.currentPage);
+			this.$store.dispatch('acListNguonDi',this.currentPage);
+        },
+        updateNguonDiById(data){
+			this.ten_nguon = data.data[0].ten_nguon;
+			this.thu_tu = data.data[0].thu_tu;
 		},
-		loadDataLoai(){
-			this.list();
-		},
-		reloadData(){
-			this.$store.dispatch('acGetPage',1);
+		loadDataNguonDi(){
 			this.list();
 		}
 	},
 	components:{contentHeader, list, paginate},
 	mounted(){
-		this.list();
+        axios.get(`/px03/public/api/editNguonDi/${this.$route.params.id}`)
+        .then(response=>{
+            this.ten_nguon = response.data[0].ten_nguon;
+			this.thu_tu = response.data[0].thu_tu;
+         })
 	}
 }
 </script>

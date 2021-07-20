@@ -10,7 +10,7 @@ class LoaiVanBanController extends Controller
    
     public function index()
     {
-        return LoaiVanBan::orderBy('thu_tu','asc')->paginate(3);
+        return LoaiVanBan::orderBy('thu_tu','asc')->paginate(10);
     }
     
     public function store(Request $request)

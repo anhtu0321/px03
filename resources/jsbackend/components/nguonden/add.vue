@@ -22,6 +22,7 @@
 						</div>
 						<div class="form-group col-md-12 text-right">
 							<button type="submit" class="btn btn-primary btn-sm">Thêm nguồn</button>
+							<button type="submit" class="btn btn-warning btn-sm" @click.prevent="reloadData">Tải lại dữ liệu</button>
 						</div>
 					</form>
 					</div>
@@ -81,6 +82,10 @@ export default {
 			this.$store.dispatch('acListNguonDen',this.currentPage);
 		},
 		loadDataNguonDen(){
+			this.list();
+		},
+		reloadData(){
+			this.$store.dispatch('acGetPage',1);
 			this.list();
 		}
 	},

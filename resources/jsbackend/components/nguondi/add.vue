@@ -6,29 +6,22 @@
 				<div class="row">
 					<div class="col-md-8 main">
 						<form method="post" class="form-row" @submit.prevent="add">
-						<div class="form-group col-md-6">
-							<label class="col-form-label col-form-label-sm">Tên Loại</label>
+						<div class="form-group col-md-8">
+							<label class="col-form-label col-form-label-sm">Tên Nguồn đi</label>
 							<input type="text" class="form-control form-control-sm" 
-								:class="{'is-invalid' : (error && error.ten_loai)}" 
-								v-model="ten_loai">
-							<p class="thongbao" v-if="error && error.ten_loai">{{ error.ten_loai[0]}}</p>
+								:class="{'is-invalid' : (error && error.ten_nguon)}" 
+								v-model="ten_nguon">
+							<p class="thongbao" v-if="error && error.ten_nguon">{{ error.ten_nguon[0]}}</p>
 						</div>
-						<div class="form-group col-md-3">
+						<div class="form-group col-md-4">
 							<label class="col-form-label col-form-label-sm">Thứ tự</label>
 							<input type="text" class="form-control form-control-sm" 
 								:class="{'is-invalid' : (error && error.thu_tu)}" 
 								v-model="thu_tu">
 							<p class="thongbao" v-if="error && error.thu_tu">{{ error.thu_tu[0]}}</p>
 						</div>
-						<div class="form-group col-md-3">
-							<label class="col-form-label col-form-label-sm">Trạng thái</label>
-							<select class="form-control form-control-sm" v-model="trang_thai">
-								<option value="1">Sử dụng</option>
-								<option value="0">Không Sử dụng</option>
-							</select>
-						</div>
 						<div class="form-group col-md-12 text-right">
-							<button type="submit" class="btn btn-primary btn-sm">Thêm loại văn bản</button>
+							<button type="submit" class="btn btn-primary btn-sm">Thêm nguồn</button>
 							<button type="submit" class="btn btn-warning btn-sm" @click.prevent="reloadData">Tải lại dữ liệu</button>
 						</div>
 					</form>
@@ -39,7 +32,7 @@
 		<list></list>
 		<div class="row">
             <div class="col-md-8 trang justify-content-end">
-                <paginate :last_pages="listData.last_page" @loadData="loadDataLoai"></paginate>
+                <paginate :last_pages="listData.last_page" @loadData="loadDataNguonDi"></paginate>
             </div>
         </div>
 	</div>
@@ -54,31 +47,29 @@ import paginate from '../page.vue'
 export default {
 	data(){
 		return{
-			tieude:'THÊM LOẠI VĂN BẢN',
+			tieude:'THÊM NGUỒN VĂN BẢN ĐI',
 			link:'Thêm',
-			ten_loai:'',
+			ten_nguon:'',
 			thu_tu:'',
-			trang_thai: 1,
 			error:'',
 		}
 	},
 	computed:{
 		currentPage(){
-            return this.$store.getters.getPage;
-        },
+			return this.$store.getters.getPage;
+		},
         listData(){
-            return this.$store.getters.getListLoai;
+            return this.$store.getters.getListNguonDi;
         }
     },
 	methods:{
 		add(){
 			let data = new FormData;
-			data.append('ten_loai', this.ten_loai);
+			data.append('ten_nguon', this.ten_nguon);
 			data.append('thu_tu', this.thu_tu);
-			data.append('trang_thai', this.trang_thai);
-			axios.post('/px03/public/api/addLoaiVanBan', data)
+			axios.post('/px03/public/api/addNguonDi', data)
 			.then(response=>{
-				this.ten_loai = '';
+				this.ten_nguon = '';
 				this.thu_tu = '';
 				this.error = '';
 				this.list();
@@ -88,9 +79,9 @@ export default {
 			});
 		},
 		list(){
-			this.$store.dispatch('acListLoai',this.currentPage);
+			this.$store.dispatch('acListNguonDi',this.currentPage);
 		},
-		loadDataLoai(){
+		loadDataNguonDi(){
 			this.list();
 		},
 		reloadData(){

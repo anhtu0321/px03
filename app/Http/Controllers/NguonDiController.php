@@ -7,79 +7,49 @@ use Illuminate\Http\Request;
 
 class NguonDiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return NguonDi::orderBy('thu_tu','asc')->paginate(10);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+        $this->validateForm($request);
+        $nguonDi = new NguonDi;
+        $nguonDi->ten_nguon = $request->ten_nguon;
+        $nguonDi->thu_tu = $request->thu_tu;
+        $nguonDi->save();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\NguonDi  $nguonDi
-     * @return \Illuminate\Http\Response
-     */
-    public function show(NguonDi $nguonDi)
+    public function edit(NguonDi $nguonDi, $id)
     {
-        //
+        return NguonDi::where('id',$id)->get();
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\NguonDi  $nguonDi
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(NguonDi $nguonDi)
+  
+    public function update(Request $request, NguonDi $nguonDi, $id)
     {
-        //
+        $nguonDi = NguonDi::find($id);
+        $nguonDi->ten_nguon = $request->ten_nguon;
+        $nguonDi->thu_tu = $request->thu_tu;
+        $nguonDi->save();
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\NguonDi  $nguonDi
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, NguonDi $nguonDi)
+    
+    public function destroy(NguonDi $nguonDi, $id)
     {
-        //
+        NguonDi::destroy($id);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\NguonDi  $nguonDi
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(NguonDi $nguonDi)
-    {
-        //
+    public function validateForm(Request $request){
+        return $request->validate([
+            'ten_nguon' => 'required',
+            'thu_tu' => 'required|numeric',
+        ], 
+        $messages = [
+            'required' => ':attribute không được để trống.',
+            'numeric' => ':attribute phải là ký tự số.'
+        ],
+        $attributes = [
+            'ten_nguon' => 'Tên nguồn',
+            'thu_tu' => 'Thứ tự'
+        ]);
     }
 }

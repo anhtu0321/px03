@@ -6,6 +6,7 @@ const storeInfo = {
         page: 1,
         listLoai: '',
         listNguonDen: '',
+        listNguonDi: '',
     },
     getters: {
         getPage(state) {
@@ -16,6 +17,9 @@ const storeInfo = {
         },
         getListNguonDen(state) {
             return state.listNguonDen;
+        },
+        getListNguonDi(state) {
+            return state.listNguonDi;
         }
     },
     actions: {
@@ -33,6 +37,12 @@ const storeInfo = {
                 .then(response => {
                     context.commit('muListNguonDen', response.data);
                 })
+        },
+        acListNguonDi(context, page) {
+            axios.get('/px03/public/api/listNguonDi?page=' + page)
+                .then(response => {
+                    context.commit('muListNguonDi', response.data);
+                })
         }
     },
     mutations: {
@@ -44,6 +54,9 @@ const storeInfo = {
         },
         muListNguonDen(state, response) {
             state.listNguonDen = response;
+        },
+        muListNguonDi(state, response) {
+            state.listNguonDi = response;
         }
     },
 }
