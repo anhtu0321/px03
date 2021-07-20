@@ -6,21 +6,19 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Tên loại</th>
+                            <th>Tên nguồn</th>
                             <th>Thứ tự</th>
-                            <th>Trạng thái</th>
                             <th>Cập nhật</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(list, index) in listData.data" :key="list.id" :class="list.id == idEdit? 'tractive':''">
                             <td>{{index + 1}}</td>
-                            <td>{{list.ten_loai}}</td>
+                            <td>{{list.ten_nguon}}</td>
                             <td>{{list.thu_tu}}</td>
-                            <td>{{list.trang_thai == 1? "Sử dụng" : "Không sử dụng"}}</td>
                             <td>
-                                <router-link class="btn btn-primary btn-sm" :to="`/loaivanban/edit/${list.id}`" @click.native="loadListLoai()">Sửa</router-link>
-                                <button class="btn btn-danger btn-sm" @click.prevent="deleteLoai(list.id)">Xóa</button>
+                                <router-link class="btn btn-primary btn-sm" :to="`/nguonden/edit/${list.id}`" @click.native="loadListNguonDen()">Sửa</router-link>
+                                <button class="btn btn-danger btn-sm" @click="deleteNguonDen(list.id)">Xóa</button>
                             </td>
                         </tr>
                     </tbody>
@@ -39,27 +37,27 @@ export default {
     },
     computed:{
         currentPage(){
-            return this.$store.getters.getPage;
-        },
+			return this.$store.getters.getPage;
+		},
         listData(){
-            return this.$store.getters.getListLoai;
-        },
+            return this.$store.getters.getListNguonDen;
+        }
     },
     methods:{
-        loadListLoai(){
+        loadListNguonDen(){
             this.idEdit = this.$route.params.id;
-            axios.get(`/px03/public/api/editLoaiVanBan/${this.$route.params.id}`)
+            axios.get(`/px03/public/api/editNguonDen/${this.$route.params.id}`)
             .then(response=>{
                 this.$emit('dataById', response);
             })
         },
-        deleteLoai(id){
+        deleteNguonDen(id){
             if(confirm('ban muon xoa that a ?') == true){
-                axios.get(`/px03/public/api/deleteLoaiVanBan/${id}`)
+                axios.get(`/px03/public/api/deleteNguonDen/${id}`)
                 .then(reponse=>{
-                    this.$store.dispatch('acListLoai',this.currentPage);
-                    if(this.$router.history.current.path !=='/loaivanban'){
-                        this.$router.push('/loaivanban');
+                    this.$store.dispatch('acListNguonDen',this.currentPage);
+                    if(this.$router.history.current.path !=='/nguonden'){
+                        this.$router.push('/nguonden');  
                     }
                 })
             }

@@ -23,4 +23,10 @@ Route::get('/listLoaiVanBan','LoaiVanBanController@index');
 Route::get('/editLoaiVanBan/{id}','LoaiVanBanController@edit');
 Route::post('/updateLoaiVanBan/{id}','LoaiVanBanController@update');
 Route::get('/deleteLoaiVanBan/{id}','LoaiVanBanController@destroy');
+// Nguồn đến
+Route::post('/addNguonDen','NguonDenController@store');
+Route::get('/listNguonDen','NguonDenController@index');
+Route::get('/editNguonDen/{id}','NguonDenController@edit');
+Route::post('/updateNguonDen/{id}','NguonDenController@update');
+Route::get('/deleteNguonDen/{id}','NguonDenController@destroy');
 

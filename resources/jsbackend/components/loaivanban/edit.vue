@@ -28,7 +28,7 @@
 							</select>
 						</div>
 						<div class="form-group col-md-12 text-right">
-							<button type="submit" class="btn btn-primary btn-sm">Sửa loại văn bản</button>
+							<button type="submit" class="btn btn-success btn-sm">Sửa loại văn bản</button>
 							<router-link to="/loaivanban" class="btn btn-warning btn-sm">Quay lại</router-link>
 						</div>
 					</form>
@@ -36,10 +36,10 @@
 				</div>
 			</div>
   		</section>
-		<list @dataById="updateLoaiById" :currentPage="currentPage"></list>
+		<list @dataById="updateLoaiById"></list>
 		<div class="row">
             <div class="col-md-8 trang justify-content-end">
-                <paginate :last_pages="listData.last_page" @getPage="loadPage"></paginate>
+                <paginate :last_pages="listData.last_page" @loadData="loadDataLoai"></paginate>
             </div>
         </div>
 	</div>
@@ -60,14 +60,16 @@ export default {
 			thu_tu:'',
 			trang_thai: 1,
 			error:'',
-			currentPage:1,
 		}
 	},
 	computed:{
+		currentPage(){
+            return this.$store.getters.getPage;
+        },
         listData(){
             return this.$store.getters.getListLoai;
         }
-    },
+	},
 	methods:{
 		edit(){
 			let data = new FormData;
@@ -90,20 +92,19 @@ export default {
 			this.thu_tu = data.data[0].thu_tu;
 			this.trang_thai = data.data[0].trang_thai;
 		},
-		loadPage(newPage){
-			this.currentPage = newPage;
+		loadDataLoai(){
 			this.list();
 		}
 	},
 	components:{contentHeader, list, paginate},
 	mounted(){
-		this.list();
+		// this.list();
 		axios.get(`/px03/public/api/editLoaiVanBan/${this.$route.params.id}`)
         .then(response=>{
             this.ten_loai = response.data[0].ten_loai;
 			this.thu_tu = response.data[0].thu_tu;
 			this.trang_thai = response.data[0].trang_thai;
-         })
+		});
 	},
 }
 </script>

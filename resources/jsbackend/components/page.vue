@@ -14,13 +14,17 @@ export default {
     	return{
 			currentPage: 1,
 			offset: 4,
-			from:'',
-			to:'',
+			from:1,
+			to:1,
 		}
     },
     props:['last_pages'],
 	computed: {
+			last_page(){
+				return this.last_pages;
+			},
             pagesNumber() {
+				if(this.last_page == null){return [];}
 				if(this.last_page<=this.offset*2+1){
 					this.from = 1;
 					this.to = this.last_page;
@@ -47,29 +51,32 @@ export default {
                 }
                 return pagesArray;
             },
-			last_page(){
-				return this.last_pages;
-			}
+			
         },
 	methods:{
 		setPage(newPage){
 			this.currentPage = newPage;
-			this.$emit('getPage', this.currentPage);
+			this.$store.dispatch('acGetPage', this.currentPage);
+			this.$emit('loadData');
 		},
 		prev(){
 			if(this.currentPage > 1){
 				this.currentPage--;
-				this.$emit('getPage', this.currentPage);
+				this.$store.dispatch('acGetPage', this.currentPage);
+				this.$emit('loadData');
 			}
 		},
 		next(){
 			if(this.currentPage < this.last_page){
 				this.currentPage++;
-				this.$emit('getPage', this.currentPage);
+				this.$store.dispatch('acGetPage', this.currentPage);
+				this.$emit('loadData');
 			}
 		}
 	},
-	
+	mounted(){
+		this.currentPage = this.$store.getters.getPage;
+	}
 }
 </script>
 

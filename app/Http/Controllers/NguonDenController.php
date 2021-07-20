@@ -7,79 +7,49 @@ use Illuminate\Http\Request;
 
 class NguonDenController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return NguonDen::orderBy('thu_tu','asc')->paginate(10);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+        $this->validateForm($request);
+        $nguonDen = new NguonDen;
+        $nguonDen->ten_nguon = $request->ten_nguon;
+        $nguonDen->thu_tu = $request->thu_tu;
+        $nguonDen->save();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\NguonDen  $nguonDen
-     * @return \Illuminate\Http\Response
-     */
-    public function show(NguonDen $nguonDen)
+    public function edit(NguonDen $nguonDen, $id)
     {
-        //
+        return NguonDen::where('id',$id)->get();
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\NguonDen  $nguonDen
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(NguonDen $nguonDen)
+  
+    public function update(Request $request, NguonDen $nguonDen, $id)
     {
-        //
+        $nguonDen = NguonDen::find($id);
+        $nguonDen->ten_nguon = $request->ten_nguon;
+        $nguonDen->thu_tu = $request->thu_tu;
+        $nguonDen->save();
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\NguonDen  $nguonDen
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, NguonDen $nguonDen)
+    
+    public function destroy(NguonDen $nguonDen, $id)
     {
-        //
+        NguonDen::destroy($id);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\NguonDen  $nguonDen
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(NguonDen $nguonDen)
-    {
-        //
+    public function validateForm(Request $request){
+        return $request->validate([
+            'ten_nguon' => 'required',
+            'thu_tu' => 'required|numeric',
+        ], 
+        $messages = [
+            'required' => ':attribute không được để trống.',
+            'numeric' => ':attribute phải là ký tự số.'
+        ],
+        $attributes = [
+            'ten_nguon' => 'Tên nguồn',
+            'thu_tu' => 'Thứ tự'
+        ]);
     }
 }
