@@ -12,6 +12,9 @@ import suaNguonDen from './components/nguonden/edit.vue';
 // -Nguon di
 import themNguonDi from './components/nguondi/add.vue';
 import suaNguonDi from './components/nguondi/edit.vue';
+// -Lanh dao
+import themLanhDao from './components/lanhdao/add.vue';
+import suaLanhDao from './components/lanhdao/edit.vue';
 
 const routes = [
     // router loai van ban
@@ -23,6 +26,11 @@ const routes = [
     // router nguon di
     { path: '/nguondi', component: themNguonDi },
     { path: '/nguondi/edit/:id', component: suaNguonDi },
+    // router lanh dao
+    { path: '/lanhdao', component: themLanhDao },
+    { path: '/lanhdao/edit/:id', component: suaLanhDao },
+
+
 ]
 
 const router = new VueRouter({

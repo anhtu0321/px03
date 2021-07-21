@@ -35,4 +35,10 @@ Route::get('/listNguonDi','NguonDiController@index');
 Route::get('/editNguonDi/{id}','NguonDiController@edit');
 Route::post('/updateNguonDi/{id}','NguonDiController@update');
 Route::get('/deleteNguonDi/{id}','NguonDiController@destroy');
+// Nguồn đi
+Route::post('/addLanhDao','LanhDaoController@store');
+Route::get('/listLanhDao','LanhDaoController@index');
+Route::get('/editLanhDao/{id}','LanhDaoController@edit');
+Route::post('/updateLanhDao/{id}','LanhDaoController@update');
+Route::get('/deleteLanhDao/{id}','LanhDaoController@destroy');
 

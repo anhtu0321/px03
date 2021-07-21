@@ -64,6 +64,16 @@
 					</ul>
 				</li>
 				<li class="nav-item">
+					<router-link to="/lanhdao" class="nav-link">
+						<a>
+							<i class="nav-icon fas fa-th"></i>
+							<p>
+								QL Lãnh đạo
+							</p>
+						</a>
+					</router-link>
+				</li>
+				<li class="nav-item">
 					<a href="{{route('logout')}}" class="nav-link">
 						<i class="fas fa-sign-out-alt nav-icon"></i>
 						<p>Đăng xuất</p>

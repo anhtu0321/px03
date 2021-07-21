@@ -7,79 +7,59 @@ use Illuminate\Http\Request;
 
 class LanhDaoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return LanhDao::orderBy('thu_tu','asc')->paginate(10);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+        $this->validateForm($request);
+        $lanhdao = new LanhDao;
+        $lanhdao->ho_ten = $request->ho_ten;
+        $lanhdao->cap_bac = $request->cap_bac;
+        $lanhdao->chuc_vu = $request->chuc_vu;
+        $lanhdao->thu_tu = $request->thu_tu;
+        $lanhdao->trang_thai = $request->trang_thai;
+        $lanhdao->save();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\LanhDao  $lanhDao
-     * @return \Illuminate\Http\Response
-     */
-    public function show(LanhDao $lanhDao)
+    public function edit(LanhDao $lanhdao, $id)
     {
-        //
+        return LanhDao::where('id',$id)->get();
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\LanhDao  $lanhDao
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(LanhDao $lanhDao)
+  
+    public function update(Request $request, LanhDao $lanhdao, $id)
     {
-        //
+        $lanhdao = LanhDao::find($id);
+        $lanhdao->ho_ten = $request->ho_ten;
+        $lanhdao->cap_bac = $request->cap_bac;
+        $lanhdao->chuc_vu = $request->chuc_vu;
+        $lanhdao->thu_tu = $request->thu_tu;
+        $lanhdao->trang_thai = $request->trang_thai;
+        $lanhdao->save();
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\LanhDao  $lanhDao
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, LanhDao $lanhDao)
+    
+    public function destroy(LanhDao $lanhdao, $id)
     {
-        //
+        LanhDao::destroy($id);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\LanhDao  $lanhDao
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(LanhDao $lanhDao)
-    {
-        //
+    public function validateForm(Request $request){
+        return $request->validate([
+            'ho_ten' => 'required',
+            'cap_bac' => 'required',
+            'chuc_vu' => 'required',
+            'thu_tu' => 'required|numeric',
+        ], 
+        $messages = [
+            'required' => ':attribute không được để trống.',
+            'numeric' => ':attribute phải là ký tự số.'
+        ],
+        $attributes = [
+            'ho_ten' => 'Họ tên',
+            'cap_bac' => 'Cấp bậc',
+            'chuc_vu' => 'Chức vụ',
+            'thu_tu' => 'Thứ tự'
+        ]);
     }
 }
