@@ -2028,9 +2028,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 // import các components
 
 
@@ -2038,11 +2035,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      tieude: 'THÊM LÃNH ĐẠO',
+      tieude: 'THÊM ĐƠN VỊ',
       link: 'Thêm',
       ten_phong: '',
       ten_phong_full: '',
       ky_hieu: '',
+      khoi: '',
       thu_tu: '',
       trang_thai: 1,
       error: ''
@@ -2053,7 +2051,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters.getPage;
     },
     listData: function listData() {
-      return this.$store.getters.getListLanhDao;
+      return this.$store.getters.getListDonVi;
     }
   },
   methods: {
@@ -2064,9 +2062,10 @@ __webpack_require__.r(__webpack_exports__);
       data.append('ten_phong', this.ten_phong);
       data.append('ten_phong_full', this.ten_phong_full);
       data.append('ky_hieu', this.ky_hieu);
+      data.append('khoi', this.khoi);
       data.append('thu_tu', this.thu_tu);
       data.append('trang_thai', this.trang_thai);
-      axios.post('/px03/public/api/addLanhDao', data).then(function (response) {
+      axios.post('/px03/public/api/addDonVi', data).then(function (response) {
         _this.ten_phong = '';
         _this.ten_phong_full = '';
         _this.ky_hieu = '';
@@ -2079,7 +2078,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     list: function list() {
-      this.$store.dispatch('acListLanhDao', this.currentPage);
+      this.$store.dispatch('acListDonVi', this.currentPage);
     },
     loadData: function loadData() {
       this.list();
@@ -2296,6 +2295,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2307,7 +2307,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters.getPage;
     },
     listData: function listData() {
-      return this.$store.getters.getListLanhDao;
+      return this.$store.getters.getListDonVi;
     }
   },
   methods: {
@@ -2315,7 +2315,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.idEdit = this.$route.params.id;
-      axios.get("/px03/public/api/editLanhDao/".concat(this.$route.params.id)).then(function (response) {
+      axios.get("/px03/public/api/editDonVi/".concat(this.$route.params.id)).then(function (response) {
         _this.$emit('dataById', response);
       });
     },
@@ -2323,11 +2323,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       if (confirm('ban muon xoa that a ?') == true) {
-        axios.get("/px03/public/api/deleteLanhDao/".concat(id)).then(function (reponse) {
-          _this2.$store.dispatch('acListLanhDao', _this2.currentPage);
+        axios.get("/px03/public/api/deleteDonVi/".concat(id)).then(function (reponse) {
+          _this2.$store.dispatch('acListDonVi', _this2.currentPage);
 
-          if (_this2.$router.history.current.path !== '/lanhdao') {
-            _this2.$router.push('/lanhdao');
+          if (_this2.$router.history.current.path !== '/DonVi') {
+            _this2.$router.push('/DonVi');
           }
         });
       }
@@ -41094,7 +41094,7 @@ var render = function() {
                         : _vm._e()
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "form-group col-md-2" }, [
+                    _c("div", { staticClass: "form-group col-md-3" }, [
                       _c(
                         "label",
                         { staticClass: "col-form-label col-form-label-sm" },
@@ -41139,40 +41139,38 @@ var render = function() {
                           ])
                         ]
                       )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group col-md-3" }, [
-                      _c("label", {
-                        staticClass: "col-form-label col-form-label-sm"
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-control" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary btn-sm",
-                            attrs: { type: "submit" }
-                          },
-                          [_vm._v("Thêm lãnh đạo")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-warning btn-sm",
-                            attrs: { type: "submit" },
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                return _vm.reloadData.apply(null, arguments)
-                              }
-                            }
-                          },
-                          [_vm._v("Tải lại dữ liệu")]
-                        )
-                      ])
                     ])
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "form-group col-md-12 text-right" },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary btn-sm",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Thêm đơn vị")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-warning btn-sm",
+                          attrs: { type: "submit" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.reloadData.apply(null, arguments)
+                            }
+                          }
+                        },
+                        [_vm._v("Tải lại dữ liệu")]
+                      )
+                    ]
+                  )
                 ]
               )
             ])
@@ -41549,7 +41547,7 @@ var render = function() {
                         "router-link",
                         {
                           staticClass: "btn btn-primary btn-sm",
-                          attrs: { to: "/lanhdao/edit/" + list.id },
+                          attrs: { to: "/donvi/edit/" + list.id },
                           nativeOn: {
                             click: function($event) {
                               return _vm.loadDataById()
@@ -41594,11 +41592,13 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("#")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Họ tên")]),
+        _c("th", [_vm._v("Tên đơn vị")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Cấp bậc")]),
+        _c("th", [_vm._v("Tên đầy đủ")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Chức vụ")]),
+        _c("th", [_vm._v("Ký hiệu")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Khối")]),
         _vm._v(" "),
         _c("th", [_vm._v("Thứ tự")]),
         _vm._v(" "),

@@ -53,20 +53,17 @@
 										v-model="thu_tu">
 									<p class="thongbao" v-if="error && error.thu_tu">{{ error.thu_tu[0]}}</p>
 								</div>
-								<div class="form-group col-md-2">
+								<div class="form-group col-md-3">
 									<label class="col-form-label col-form-label-sm">Trạng thái</label>
 									<select class="form-control form-control-sm" v-model="trang_thai">
 										<option value="1">Sử dụng</option>
 										<option value="0">Không Sử dụng</option>
 									</select>
 								</div>
-								<div class="form-group col-md-3">
-									<label class="col-form-label col-form-label-sm"></label>
-									<div class="form-control">
-										<button type="submit" class="btn btn-primary btn-sm">Thêm lãnh đạo</button>
-										<button type="submit" class="btn btn-warning btn-sm" @click.prevent="reloadData">Tải lại dữ liệu</button>
-									</div>
-								</div>
+							</div>
+							<div class="form-group col-md-12 text-right">
+								<button type="submit" class="btn btn-primary btn-sm">Thêm đơn vị</button>
+								<button type="submit" class="btn btn-warning btn-sm" @click.prevent="reloadData">Tải lại dữ liệu</button>
 							</div>
 
 					</form>
@@ -93,11 +90,12 @@ import paginate from '../page.vue'
 export default {
 	data(){
 		return{
-			tieude:'THÊM LÃNH ĐẠO',
+			tieude:'THÊM ĐƠN VỊ',
 			link:'Thêm',
 			ten_phong:'',
 			ten_phong_full:'',
 			ky_hieu:'',
+			khoi:'',
 			thu_tu:'',
 			trang_thai: 1,
 			error:'',
@@ -108,7 +106,7 @@ export default {
             return this.$store.getters.getPage;
         },
         listData(){
-            return this.$store.getters.getListLanhDao;
+            return this.$store.getters.getListDonVi;
         }
     },
 	methods:{
@@ -117,9 +115,10 @@ export default {
 			data.append('ten_phong', this.ten_phong);
 			data.append('ten_phong_full', this.ten_phong_full);
 			data.append('ky_hieu', this.ky_hieu);
+			data.append('khoi', this.khoi);
 			data.append('thu_tu', this.thu_tu);
 			data.append('trang_thai', this.trang_thai);
-			axios.post('/px03/public/api/addLanhDao', data)
+			axios.post('/px03/public/api/addDonVi', data)
 			.then(response=>{
 				this.ten_phong = '';
 				this.ten_phong_full = '';
@@ -133,7 +132,7 @@ export default {
 			});
 		},
 		list(){
-			this.$store.dispatch('acListLanhDao',this.currentPage);
+			this.$store.dispatch('acListDonVi',this.currentPage);
 		},
 		loadData(){
 			this.list();

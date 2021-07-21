@@ -3,10 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDelete;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DonVi extends Model
 {
-    use SoftDelete;
+    use SoftDeletes;
     protected $table = 'don_vi';
 }

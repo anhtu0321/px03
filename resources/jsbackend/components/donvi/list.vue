@@ -6,9 +6,10 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Họ tên</th>
-                            <th>Cấp bậc</th>
-                            <th>Chức vụ</th>
+                            <th>Tên đơn vị</th>
+                            <th>Tên đầy đủ</th>
+                            <th>Ký hiệu</th>
+                            <th>Khối</th>
                             <th>Thứ tự</th>
                             <th>Trạng thái</th>
                             <th>Cập nhật</th>
@@ -23,7 +24,7 @@
                             <td>{{list.thu_tu}}</td>
                             <td>{{list.trang_thai == 1? "Sử dụng" : "Không sử dụng"}}</td>
                             <td>
-                                <router-link class="btn btn-primary btn-sm" :to="`/lanhdao/edit/${list.id}`" @click.native="loadDataById()">Sửa</router-link>
+                                <router-link class="btn btn-primary btn-sm" :to="`/donvi/edit/${list.id}`" @click.native="loadDataById()">Sửa</router-link>
                                 <button class="btn btn-danger btn-sm" @click.prevent="deleteData(list.id)">Xóa</button>
                             </td>
                         </tr>
@@ -46,24 +47,24 @@ export default {
             return this.$store.getters.getPage;
         },
         listData(){
-            return this.$store.getters.getListLanhDao;
+            return this.$store.getters.getListDonVi;
         },
     },
     methods:{
         loadDataById(){
             this.idEdit = this.$route.params.id;
-            axios.get(`/px03/public/api/editLanhDao/${this.$route.params.id}`)
+            axios.get(`/px03/public/api/editDonVi/${this.$route.params.id}`)
             .then(response=>{
                 this.$emit('dataById', response);
             })
         },
         deleteData(id){
             if(confirm('ban muon xoa that a ?') == true){
-                axios.get(`/px03/public/api/deleteLanhDao/${id}`)
+                axios.get(`/px03/public/api/deleteDonVi/${id}`)
                 .then(reponse=>{
-                    this.$store.dispatch('acListLanhDao',this.currentPage);
-                    if(this.$router.history.current.path !=='/lanhdao'){
-                        this.$router.push('/lanhdao');
+                    this.$store.dispatch('acListDonVi',this.currentPage);
+                    if(this.$router.history.current.path !=='/DonVi'){
+                        this.$router.push('/DonVi');
                     }
                 })
             }
