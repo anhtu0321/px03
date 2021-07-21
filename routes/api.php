@@ -41,4 +41,9 @@ Route::get('/listLanhDao','LanhDaoController@index');
 Route::get('/editLanhDao/{id}','LanhDaoController@edit');
 Route::post('/updateLanhDao/{id}','LanhDaoController@update');
 Route::get('/deleteLanhDao/{id}','LanhDaoController@destroy');
-
+// Đơn vị
+Route::post('/addDonVi','DonViController@store');
+Route::get('/listDonVi','DonViController@index');
+Route::get('/editDonVi/{id}','DonViController@edit');
+Route::post('/updateDonVi/{id}','DonViController@update');
+Route::get('/deleteDonVi/{id}','DonViController@destroy');

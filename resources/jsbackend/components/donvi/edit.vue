@@ -9,7 +9,7 @@
 						<div class="form-group col-md-3">
 							<label class="col-form-label col-form-label-sm">Họ tên</label>
 							<input type="text" class="form-control form-control-sm" 
-								:class="{'is-invalid' : (error && error.ho_ten)}" 
+								:class="{'is-invalid' : (error && error.ten_loai)}" 
 								v-model="ho_ten">
 							<p class="thongbao" v-if="error && error.ho_ten">{{ error.ho_ten[0]}}</p>
 						</div>

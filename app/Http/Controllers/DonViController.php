@@ -7,79 +7,63 @@ use Illuminate\Http\Request;
 
 class DonViController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return DonVi::orderBy('thu_tu','asc')->paginate(10);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+        $this->validateForm($request);
+        $donvi = new DonVi;
+        $donvi->ten_phong = $request->ten_phong;
+        $donvi->ky_hieu = $request->ky_hieu;
+        $donvi->ten_phong_full = $request->ten_phong_full;
+        $donvi->khoi = $request->khoi;
+        $donvi->thu_tu = $request->thu_tu;
+        $donvi->trang_thai = $request->trang_thai;
+        $donvi->save();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\DonVi  $donVi
-     * @return \Illuminate\Http\Response
-     */
-    public function show(DonVi $donVi)
+    public function edit(DonVi $donvi, $id)
     {
-        //
+        return DonVi::where('id',$id)->get();
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\DonVi  $donVi
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(DonVi $donVi)
+  
+    public function update(Request $request, DonVi $donvi, $id)
     {
-        //
+        $donvi = DonVi::find($id);
+        $donvi->ten_phong = $request->ten_phong;
+        $donvi->ky_hieu = $request->ky_hieu;
+        $donvi->ten_phong_full = $request->ten_phong_full;
+        $donvi->khoi = $request->khoi;
+        $donvi->thu_tu = $request->thu_tu;
+        $donvi->trang_thai = $request->trang_thai;
+        $donvi->save();
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\DonVi  $donVi
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, DonVi $donVi)
+    
+    public function destroy(DonVi $donvi, $id)
     {
-        //
+        DonVi::destroy($id);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\DonVi  $donVi
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(DonVi $donVi)
-    {
-        //
+    public function validateForm(Request $request){
+        return $request->validate([
+            'ten_phong'=>'required',	
+            'ky_hieu'=>'required',
+            'ten_phong_full'=>'required',
+            'khoi'=>'required',
+            'thu_tu' => 'required|numeric',
+        ], 
+        $messages = [
+            'required' => ':attribute không được để trống.',
+            'numeric' => ':attribute phải là ký tự số.'
+        ],
+        $attributes = [
+            'ten_phong'=>'Tên phòng',	
+            'ky_hieu'=>'Ký hiệu',
+            'ten_phong_full'=>'Tên đầy đủ',
+            'khoi'=>'Khối',
+            'thu_tu' => 'Thứ tự'
+        ]);
     }
 }
