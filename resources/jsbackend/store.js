@@ -9,6 +9,7 @@ const storeInfo = {
         listNguonDi: '',
         listLanhDao: '',
         listDonVi: '',
+        listChucNang: '',
     },
     getters: {
         getPage(state) {
@@ -28,6 +29,9 @@ const storeInfo = {
         },
         getListDonVi(state) {
             return state.listDonVi;
+        },
+        getListChucNang(state) {
+            return state.listChucNang;
         }
     },
     actions: {
@@ -64,6 +68,12 @@ const storeInfo = {
                     context.commit('muListDonVi', response.data);
                 })
         },
+        acListChucNang(context, page) {
+            axios.get('/px03/public/api/listChucNang?page=' + page)
+                .then(response => {
+                    context.commit('muListChucNang', response.data);
+                })
+        },
     },
     mutations: {
         muGetPage(state, page) {
@@ -83,6 +93,9 @@ const storeInfo = {
         },
         muListDonVi(state, response) {
             state.listDonVi = response;
+        },
+        muListChucNang(state, response) {
+            state.listChucNang = response;
         },
     },
 }

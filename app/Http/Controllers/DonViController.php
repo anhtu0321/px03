@@ -9,7 +9,7 @@ class DonViController extends Controller
 {
     public function index()
     {
-        return DonVi::orderBy('thu_tu','asc')->paginate(10);
+        return DonVi::orderBy('khoi','asc')->orderBy('thu_tu','asc')->paginate(10);
     }
     
     public function store(Request $request)

@@ -47,3 +47,11 @@ Route::get('/listDonVi','DonViController@index');
 Route::get('/editDonVi/{id}','DonViController@edit');
 Route::post('/updateDonVi/{id}','DonViController@update');
 Route::get('/deleteDonVi/{id}','DonViController@destroy');
+// Chức năng
+Route::post('/addChucNang','PermissionController@store');
+Route::get('/listChucNang','PermissionController@index');
+Route::get('/editChucNang/{id}','PermissionController@edit');
+Route::post('/updateChucNang/{id}','PermissionController@update');
+Route::get('/deleteChucNang/{id}','PermissionController@destroy');
+Route::get('/listChucNangCha','PermissionController@listCha');
+

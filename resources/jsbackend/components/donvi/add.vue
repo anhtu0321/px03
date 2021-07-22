@@ -10,7 +10,7 @@
 
 							<div class="form-row">
 								<div class="form-group col-md-5">
-									<label class="col-form-label col-form-label-sm">Tên phòng</label>
+									<label class="col-form-label col-form-label-sm">Tên đơn vị</label>
 									<input type="text" class="form-control form-control-sm" 
 										:class="{'is-invalid' : (error && error.ten_phong)}" 
 										v-model="ten_phong">

@@ -84,6 +84,36 @@
 					</router-link>
 				</li>
 				<li class="nav-item">
+					<router-link to="/chucnang" class="nav-link">
+						<a>
+							<i class="nav-icon fas fa-th"></i>
+							<p>
+								QL Chức năng
+							</p>
+						</a>
+					</router-link>
+				</li>
+				<li class="nav-item">
+					<router-link to="/phanquyen" class="nav-link">
+						<a>
+							<i class="nav-icon fas fa-th"></i>
+							<p>
+								QL Phân quyền
+							</p>
+						</a>
+					</router-link>
+				</li>
+				<li class="nav-item">
+					<router-link to="/taikhoan" class="nav-link">
+						<a>
+							<i class="nav-icon fas fa-th"></i>
+							<p>
+								QL Tài khoản
+							</p>
+						</a>
+					</router-link>
+				</li>
+				<li class="nav-item">
 					<a href="{{route('logout')}}" class="nav-link">
 						<i class="fas fa-sign-out-alt nav-icon"></i>
 						<p>Đăng xuất</p>

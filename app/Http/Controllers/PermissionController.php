@@ -7,79 +7,58 @@ use Illuminate\Http\Request;
 
 class PermissionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return Permission::paginate(10);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function listCha(){
+        return Permission::where('parent_id','0')->get();
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $this->validateForm($request);
+        $Permission = new Permission;
+        $Permission->name = $request->name;
+        $Permission->display_name = $request->display_name;
+        $Permission->key_code = $request->key_code;
+        $Permission->parent_id = $request->parent_id;
+        $Permission->save();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Permission  $permission
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Permission $permission)
+    public function edit(Permission $Permission, $id)
     {
-        //
+        return Permission::where('id',$id)->get();
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Permission  $permission
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Permission $permission)
+  
+    public function update(Request $request, Permission $Permission, $id)
     {
-        //
+        $Permission = Permission::find($id);
+        $Permission->name = $request->name;
+        $Permission->display_name = $request->display_name;
+        $Permission->key_code = $request->key_code;
+        $Permission->parent_id = $request->parent_id;
+        $Permission->save();
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Permission  $permission
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Permission $permission)
+    
+    public function destroy(Permission $Permission, $id)
     {
-        //
+        Permission::destroy($id);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Permission  $permission
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Permission $permission)
-    {
-        //
+    public function validateForm(Request $request){
+        return $request->validate([
+            'name'=>'required',	
+            'display_name'=>'required',
+            'key_code'=>'required',
+            'parent_id'=>'required',
+        ], 
+        $messages = [
+            'required' => ':attribute không được để trống.',
+        ],
+        $attributes = [
+            'name'=>'Tên chức năng',	
+            'display_name'=>'Tên hiển thị',
+            'key_code'=>'key_code',
+            'parent_id'=>'Chức năng cha',
+        ]);
     }
 }

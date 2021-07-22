@@ -6,26 +6,22 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Tên đơn vị</th>
+                            <th>Tên chức năng</th>
                             <th>Tên đầy đủ</th>
-                            <th>Ký hiệu</th>
-                            <!-- <th>Khối</th> -->
-                            <th>Thứ tự</th>
-                            <th>Trạng thái</th>
+                            <th>Key Code</th>
+                            <th>Chức năng cha</th>
                             <th>Cập nhật</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(list, index) in listData.data" :key="list.id" :class="list.id == idEdit? 'tractive':''">
                             <td>{{index + 1}}</td>
-                            <td>{{list.ten_phong}}</td>
-                            <td>{{list.ten_phong_full}}</td>
-                            <td>{{list.ky_hieu}}</td>
-                            <!-- <td>{{list.khoi}}</td> -->
-                            <td>{{list.thu_tu}}</td>
-                            <td>{{list.trang_thai == 1? "Sử dụng" : "Không sử dụng"}}</td>
+                            <td>{{list.name}}</td>
+                            <td>{{list.display_name}}</td>
+                            <td>{{list.key_code}}</td>
+                            <td>{{list.parent_id}}</td>
                             <td>
-                                <router-link class="btn btn-primary btn-sm" :to="`/donvi/edit/${list.id}`" @click.native="loadDataById()">Sửa</router-link>
+                                <router-link class="btn btn-primary btn-sm" :to="`/chucnang/edit/${list.id}`" @click.native="loadDataById()">Sửa</router-link>
                                 <button class="btn btn-danger btn-sm" @click.prevent="deleteData(list.id)">Xóa</button>
                             </td>
                         </tr>
@@ -48,24 +44,24 @@ export default {
             return this.$store.getters.getPage;
         },
         listData(){
-            return this.$store.getters.getListDonVi;
+            return this.$store.getters.getListChucNang;
         },
     },
     methods:{
         loadDataById(){
             this.idEdit = this.$route.params.id;
-            axios.get(`/px03/public/api/editDonVi/${this.$route.params.id}`)
+            axios.get(`/px03/public/api/editChucNang/${this.$route.params.id}`)
             .then(response=>{
                 this.$emit('dataById', response);
             })
         },
         deleteData(id){
             if(confirm('ban muon xoa that a ?') == true){
-                axios.get(`/px03/public/api/deleteDonVi/${id}`)
+                axios.get(`/px03/public/api/deleteChucNang/${id}`)
                 .then(reponse=>{
-                    this.$store.dispatch('acListDonVi',this.currentPage);
-                    if(this.$router.history.current.path !=='/DonVi'){
-                        this.$router.push('/DonVi');
+                    this.$store.dispatch('acListChucNang',this.currentPage);
+                    if(this.$router.history.current.path !=='/chucnang'){
+                        this.$router.push('/chucnang');
                     }
                 })
             }
