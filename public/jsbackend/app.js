@@ -41954,7 +41954,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(list.key_code))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(list.parent_id))]),
+                  _c("td", [_vm._v(_vm._s(list.chucNangCha.name))]),
                   _vm._v(" "),
                   _c(
                     "td",

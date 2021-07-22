@@ -12,7 +12,7 @@ class PermissionController extends Controller
         return Permission::paginate(10);
     }
     public function listCha(){
-        return Permission::where('parent_id','0')->get();
+        return Permission::width('chucNangCha')->where('parent_id','0')->get();
     }
     public function store(Request $request)
     {

@@ -19,7 +19,7 @@
                             <td>{{list.name}}</td>
                             <td>{{list.display_name}}</td>
                             <td>{{list.key_code}}</td>
-                            <td>{{list.parent_id}}</td>
+                            <td>{{list.chucNangCha.name}}</td>
                             <td>
                                 <router-link class="btn btn-primary btn-sm" :to="`/chucnang/edit/${list.id}`" @click.native="loadDataById()">Sửa</router-link>
                                 <button class="btn btn-danger btn-sm" @click.prevent="deleteData(list.id)">Xóa</button>
