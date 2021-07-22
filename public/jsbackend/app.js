@@ -1979,6 +1979,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 // import các components
 
 
@@ -2067,6 +2073,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _content_header_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../content_header.vue */ "./resources/jsbackend/components/content_header.vue");
 /* harmony import */ var _list_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./list.vue */ "./resources/jsbackend/components/chucnang/list.vue");
 /* harmony import */ var _page_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../page.vue */ "./resources/jsbackend/components/page.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2251,10 +2263,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2344,6 +2352,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _content_header_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../content_header.vue */ "./resources/jsbackend/components/content_header.vue");
 /* harmony import */ var _list_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./list.vue */ "./resources/jsbackend/components/donvi/list.vue");
 /* harmony import */ var _page_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../page.vue */ "./resources/jsbackend/components/page.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2592,6 +2606,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 // import các components
 
 
@@ -2715,10 +2735,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2775,6 +2791,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _content_header_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../content_header.vue */ "./resources/jsbackend/components/content_header.vue");
 /* harmony import */ var _list_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./list.vue */ "./resources/jsbackend/components/lanhdao/list.vue");
 /* harmony import */ var _page_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../page.vue */ "./resources/jsbackend/components/page.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2981,6 +3003,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 // import các components
 
 
@@ -3066,10 +3094,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
 //
 //
 //
@@ -8664,7 +8688,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.main{\r\n\tmargin:0 auto;\r\n\tbox-shadow: -5px -5px 10px #ffffffe3, 5px 5px 8px rgba(94, 104, 121, 0.288);\r\n\tborder-radius: 10px;\r\n\tpadding:15px;\n}\n.thongbao{\r\n\tcolor:crimson;\r\n\tfont-size:0.8rem;\r\n\tmargin:0;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.main{\r\n\tmargin:0 auto;\r\n\tbox-shadow: -5px -5px 10px #ffffffe3, 5px 5px 8px rgba(94, 104, 121, 0.288);\r\n\tborder-radius: 10px;\r\n\tpadding:15px;\n}\n.thongbao{\r\n\tcolor:crimson;\r\n\tfont-size:0.8rem;\r\n\tmargin:0;\n}\n.list{\r\n    margin:0 auto;\r\n    margin-top:30px;\r\n    padding:0;\n}\r\n", ""]);
 
 // exports
 
@@ -8683,7 +8707,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.main{\r\n\tmargin:0 auto;\r\n\tbox-shadow: -5px -5px 10px #ffffffe3, 5px 5px 8px rgba(94, 104, 121, 0.288);\r\n\tborder-radius: 10px;\r\n\tpadding:15px;\n}\n.thongbao{\r\n\tcolor:crimson;\r\n\tfont-size:0.8rem;\r\n\tmargin:0;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.main{\r\n\tmargin:0 auto;\r\n\tbox-shadow: -5px -5px 10px #ffffffe3, 5px 5px 8px rgba(94, 104, 121, 0.288);\r\n\tborder-radius: 10px;\r\n\tpadding:15px;\n}\n.thongbao{\r\n\tcolor:crimson;\r\n\tfont-size:0.8rem;\r\n\tmargin:0;\n}\n.list{\r\n    margin:0 auto;\r\n    margin-top:30px;\r\n    padding:0;\n}\r\n", ""]);
 
 // exports
 
@@ -8721,7 +8745,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.main{\r\n\tmargin:0 auto;\r\n\tbox-shadow: -5px -5px 10px #ffffffe3, 5px 5px 8px rgba(94, 104, 121, 0.288);\r\n\tborder-radius: 10px;\r\n\tpadding:15px;\n}\n.thongbao{\r\n\tcolor:crimson;\r\n\tfont-size:0.8rem;\r\n\tmargin:0;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.main{\r\n\tmargin:0 auto;\r\n\tbox-shadow: -5px -5px 10px #ffffffe3, 5px 5px 8px rgba(94, 104, 121, 0.288);\r\n\tborder-radius: 10px;\r\n\tpadding:15px;\n}\n.thongbao{\r\n\tcolor:crimson;\r\n\tfont-size:0.8rem;\r\n\tmargin:0;\n}\n.list{\r\n    margin:0 auto;\r\n    margin-top:30px;\r\n    padding:0;\n}\r\n", ""]);
 
 // exports
 
@@ -8740,7 +8764,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.main{\r\n\tmargin:0 auto;\r\n\tbox-shadow: -5px -5px 10px #ffffffe3, 5px 5px 8px rgba(94, 104, 121, 0.288);\r\n\tborder-radius: 10px;\r\n\tpadding:15px;\n}\n.thongbao{\r\n\tcolor:crimson;\r\n\tfont-size:0.8rem;\r\n\tmargin:0;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.main{\r\n\tmargin:0 auto;\r\n\tbox-shadow: -5px -5px 10px #ffffffe3, 5px 5px 8px rgba(94, 104, 121, 0.288);\r\n\tborder-radius: 10px;\r\n\tpadding:15px;\n}\n.thongbao{\r\n\tcolor:crimson;\r\n\tfont-size:0.8rem;\r\n\tmargin:0;\n}\n.list{\r\n    margin:0 auto;\r\n    margin-top:30px;\r\n    padding:0;\n}\r\n", ""]);
 
 // exports
 
@@ -8759,7 +8783,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.list{\r\n    margin:0 auto;\r\n    margin-top:30px;\r\n    padding:0;\n}\n.trang{\r\n    margin:0 auto;\r\n    padding:0;\n}\n.tractive, .tractive:hover{\r\n    background:rgb(171, 204, 178);\n}\r\n", ""]);
+exports.push([module.i, "\n.tractive, .tractive:hover{\r\n    background:rgb(171, 204, 178);\n}\r\n", ""]);
 
 // exports
 
@@ -8778,7 +8802,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.main{\r\n\tmargin:0 auto;\r\n\tbox-shadow: -5px -5px 10px #ffffffe3, 5px 5px 8px rgba(94, 104, 121, 0.288);\r\n\tborder-radius: 10px;\r\n\tpadding:15px;\n}\n.thongbao{\r\n\tcolor:crimson;\r\n\tfont-size:0.8rem;\r\n\tmargin:0;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.main{\r\n\tmargin:0 auto;\r\n\tbox-shadow: -5px -5px 10px #ffffffe3, 5px 5px 8px rgba(94, 104, 121, 0.288);\r\n\tborder-radius: 10px;\r\n\tpadding:15px;\n}\n.thongbao{\r\n\tcolor:crimson;\r\n\tfont-size:0.8rem;\r\n\tmargin:0;\n}\n.list{\r\n    margin:0 auto;\r\n    margin-top:30px;\r\n    padding:0;\n}\r\n", ""]);
 
 // exports
 
@@ -8816,7 +8840,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.list{\r\n    margin:0 auto;\r\n    margin-top:30px;\r\n    padding:0;\n}\n.trang{\r\n    margin:0 auto;\r\n    padding:0;\n}\n.tractive, .tractive:hover{\r\n    background:rgb(171, 204, 178);\n}\r\n", ""]);
+exports.push([module.i, "\n.trang{\r\n    margin:0 auto;\r\n    padding:0;\n}\n.tractive, .tractive:hover{\r\n    background:rgb(171, 204, 178);\n}\r\n", ""]);
 
 // exports
 
@@ -41381,7 +41405,7 @@ var render = function() {
       _c("section", { staticClass: "content" }, [
         _c("div", { staticClass: "container-fluid" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-8 main" }, [
+            _c("div", { staticClass: "col-md-10 main" }, [
               _c(
                 "form",
                 {
@@ -41613,12 +41637,16 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("list"),
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-10 list" }, [_c("list")], 1)
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c(
           "div",
-          { staticClass: "col-md-8 trang justify-content-end" },
+          { staticClass: "col-md-10 trang justify-content-end" },
           [
             _c("paginate", {
               attrs: { last_pages: _vm.listData.last_page },
@@ -41662,7 +41690,7 @@ var render = function() {
       _c("section", { staticClass: "content" }, [
         _c("div", { staticClass: "container-fluid" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-8 main" }, [
+            _c("div", { staticClass: "col-md-10 main" }, [
               _c(
                 "form",
                 {
@@ -41889,12 +41917,21 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("list", { on: { dataById: _vm.updateById } }),
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col-md-10 list" },
+            [_c("list", { on: { dataById: _vm.updateById } })],
+            1
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c(
           "div",
-          { staticClass: "col-md-8 trang justify-content-end" },
+          { staticClass: "col-md-10 trang justify-content-end" },
           [
             _c("paginate", {
               attrs: { last_pages: _vm.listData.last_page },
@@ -41930,73 +41967,64 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container-fluid" }, [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-8 list" }, [
-        _c("table", { staticClass: "table table-bordered" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.listData.data, function(list, index) {
-              return _c(
-                "tr",
-                {
-                  key: list.id,
-                  class: list.id == _vm.idEdit ? "tractive" : ""
-                },
-                [
-                  _c("td", [_vm._v(_vm._s(index + 1))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(list.name))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(list.display_name))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(list.key_code))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(list.chucNangCha.name))]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "btn btn-primary btn-sm",
-                          attrs: { to: "/chucnang/edit/" + list.id },
-                          nativeOn: {
-                            click: function($event) {
-                              return _vm.loadDataById()
-                            }
-                          }
-                        },
-                        [_vm._v("Sửa")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger btn-sm",
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              return _vm.deleteData(list.id)
-                            }
-                          }
-                        },
-                        [_vm._v("Xóa")]
-                      )
-                    ],
-                    1
-                  )
-                ]
-              )
-            }),
-            0
-          )
-        ])
-      ])
-    ])
+  return _c("table", { staticClass: "table table-bordered" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "tbody",
+      _vm._l(_vm.listData, function(list, index) {
+        return _c(
+          "tr",
+          { key: list.id, class: list.id == _vm.idEdit ? "tractive" : "" },
+          [
+            _c("td", [_vm._v(_vm._s(index + 1))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(list.name))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(list.display_name))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(list.key_code))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(list.chucnangcha))]),
+            _vm._v(" "),
+            _c(
+              "td",
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-primary btn-sm",
+                    attrs: { to: "/chucnang/edit/" + list.id },
+                    nativeOn: {
+                      click: function($event) {
+                        return _vm.loadDataById()
+                      }
+                    }
+                  },
+                  [_vm._v("Sửa")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger btn-sm",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.deleteData(list.id)
+                      }
+                    }
+                  },
+                  [_vm._v("Xóa")]
+                )
+              ],
+              1
+            )
+          ]
+        )
+      }),
+      0
+    )
   ])
 }
 var staticRenderFns = [
@@ -42099,7 +42127,7 @@ var render = function() {
       _c("section", { staticClass: "content" }, [
         _c("div", { staticClass: "container-fluid" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-8 main" }, [
+            _c("div", { staticClass: "col-md-10 main" }, [
               _c(
                 "form",
                 {
@@ -42417,12 +42445,16 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("list"),
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-10 list" }, [_c("list")], 1)
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c(
           "div",
-          { staticClass: "col-md-8 trang justify-content-end" },
+          { staticClass: "col-md-10 trang justify-content-end" },
           [
             _c("paginate", {
               attrs: { last_pages: _vm.listData.last_page },
@@ -42466,7 +42498,7 @@ var render = function() {
       _c("section", { staticClass: "content" }, [
         _c("div", { staticClass: "container-fluid" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-8 main" }, [
+            _c("div", { staticClass: "col-md-10 main" }, [
               _c(
                 "form",
                 {
@@ -42779,12 +42811,21 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("list", { on: { dataById: _vm.updateById } }),
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col-md-10 list" },
+            [_c("list", { on: { dataById: _vm.updateById } })],
+            1
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c(
           "div",
-          { staticClass: "col-md-8 trang justify-content-end" },
+          { staticClass: "col-md-10 trang justify-content-end" },
           [
             _c("paginate", {
               attrs: { last_pages: _vm.listData.last_page },
@@ -42820,79 +42861,68 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container-fluid" }, [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-8 list" }, [
-        _c("table", { staticClass: "table table-bordered" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.listData.data, function(list, index) {
-              return _c(
-                "tr",
-                {
-                  key: list.id,
-                  class: list.id == _vm.idEdit ? "tractive" : ""
-                },
-                [
-                  _c("td", [_vm._v(_vm._s(index + 1))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(list.ten_phong))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(list.ten_phong_full))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(list.ky_hieu))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(list.thu_tu))]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _vm._v(
-                      _vm._s(list.trang_thai == 1 ? "Sử dụng" : "Không sử dụng")
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "btn btn-primary btn-sm",
-                          attrs: { to: "/donvi/edit/" + list.id },
-                          nativeOn: {
-                            click: function($event) {
-                              return _vm.loadDataById()
-                            }
-                          }
-                        },
-                        [_vm._v("Sửa")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger btn-sm",
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              return _vm.deleteData(list.id)
-                            }
-                          }
-                        },
-                        [_vm._v("Xóa")]
-                      )
-                    ],
-                    1
-                  )
-                ]
-              )
-            }),
-            0
-          )
-        ])
-      ])
-    ])
+  return _c("table", { staticClass: "table table-bordered" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "tbody",
+      _vm._l(_vm.listData.data, function(list, index) {
+        return _c(
+          "tr",
+          { key: list.id, class: list.id == _vm.idEdit ? "tractive" : "" },
+          [
+            _c("td", [_vm._v(_vm._s(index + 1))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(list.ten_phong))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(list.ten_phong_full))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(list.ky_hieu))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(list.thu_tu))]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(_vm._s(list.trang_thai == 1 ? "Sử dụng" : "Không sử dụng"))
+            ]),
+            _vm._v(" "),
+            _c(
+              "td",
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-primary btn-sm",
+                    attrs: { to: "/donvi/edit/" + list.id },
+                    nativeOn: {
+                      click: function($event) {
+                        return _vm.loadDataById()
+                      }
+                    }
+                  },
+                  [_vm._v("Sửa")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger btn-sm",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.deleteData(list.id)
+                      }
+                    }
+                  },
+                  [_vm._v("Xóa")]
+                )
+              ],
+              1
+            )
+          ]
+        )
+      }),
+      0
+    )
   ])
 }
 var staticRenderFns = [
@@ -42948,7 +42978,7 @@ var render = function() {
       _c("section", { staticClass: "content" }, [
         _c("div", { staticClass: "container-fluid" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-8 main" }, [
+            _c("div", { staticClass: "col-md-10 main" }, [
               _c(
                 "form",
                 {
@@ -43193,12 +43223,16 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("list"),
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-10 list" }, [_c("list")], 1)
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c(
           "div",
-          { staticClass: "col-md-8 trang justify-content-end" },
+          { staticClass: "col-md-10 trang justify-content-end" },
           [
             _c("paginate", {
               attrs: { last_pages: _vm.listData.last_page },
@@ -43482,12 +43516,21 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("list", { on: { dataById: _vm.updateById } }),
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col-md-8 list" },
+            [_c("list", { on: { dataById: _vm.updateById } })],
+            1
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c(
           "div",
-          { staticClass: "col-md-8 trang justify-content-end" },
+          { staticClass: "col-md-10 trang justify-content-end" },
           [
             _c("paginate", {
               attrs: { last_pages: _vm.listData.last_page },
@@ -43523,79 +43566,68 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container-fluid" }, [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-8 list" }, [
-        _c("table", { staticClass: "table table-bordered" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.listData.data, function(list, index) {
-              return _c(
-                "tr",
-                {
-                  key: list.id,
-                  class: list.id == _vm.idEdit ? "tractive" : ""
-                },
-                [
-                  _c("td", [_vm._v(_vm._s(index + 1))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(list.ho_ten))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(list.cap_bac))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(list.chuc_vu))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(list.thu_tu))]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _vm._v(
-                      _vm._s(list.trang_thai == 1 ? "Sử dụng" : "Không sử dụng")
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "btn btn-primary btn-sm",
-                          attrs: { to: "/lanhdao/edit/" + list.id },
-                          nativeOn: {
-                            click: function($event) {
-                              return _vm.loadDataById()
-                            }
-                          }
-                        },
-                        [_vm._v("Sửa")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger btn-sm",
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              return _vm.deleteData(list.id)
-                            }
-                          }
-                        },
-                        [_vm._v("Xóa")]
-                      )
-                    ],
-                    1
-                  )
-                ]
-              )
-            }),
-            0
-          )
-        ])
-      ])
-    ])
+  return _c("table", { staticClass: "table table-bordered" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "tbody",
+      _vm._l(_vm.listData.data, function(list, index) {
+        return _c(
+          "tr",
+          { key: list.id, class: list.id == _vm.idEdit ? "tractive" : "" },
+          [
+            _c("td", [_vm._v(_vm._s(index + 1))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(list.ho_ten))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(list.cap_bac))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(list.chuc_vu))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(list.thu_tu))]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(_vm._s(list.trang_thai == 1 ? "Sử dụng" : "Không sử dụng"))
+            ]),
+            _vm._v(" "),
+            _c(
+              "td",
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-primary btn-sm",
+                    attrs: { to: "/lanhdao/edit/" + list.id },
+                    nativeOn: {
+                      click: function($event) {
+                        return _vm.loadDataById()
+                      }
+                    }
+                  },
+                  [_vm._v("Sửa")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger btn-sm",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.deleteData(list.id)
+                      }
+                    }
+                  },
+                  [_vm._v("Xóa")]
+                )
+              ],
+              1
+            )
+          ]
+        )
+      }),
+      0
+    )
   ])
 }
 var staticRenderFns = [

@@ -4,7 +4,7 @@
         <section class="content">
     		<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-8 main">
+					<div class="col-md-10 main">
 						<form method="post" @submit.prevent="edit">
 							<div class="form-row">
 								<div class="form-group col-md-5">
@@ -52,9 +52,15 @@
 				</div>
 			</div>
   		</section>
-		<list @dataById="updateById"></list>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-10 list">
+					<list @dataById="updateById"></list>
+				</div>
+			</div>
+		</div>
 		<div class="row">
-            <div class="col-md-8 trang justify-content-end">
+            <div class="col-md-10 trang justify-content-end">
                 <paginate :last_pages="listData.last_page" @loadData="loadData"></paginate>
             </div>
         </div>
@@ -149,5 +155,9 @@ export default {
 	font-size:0.8rem;
 	margin:0;
 }
-
+.list{
+    margin:0 auto;
+    margin-top:30px;
+    padding:0;
+}
 </style>
