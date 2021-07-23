@@ -50,9 +50,15 @@
 				</div>
 			</div>
   		</section>
-		<list @dataById="updateById"></list>
+		<div class="container-fluid">
+        	<div class="row">
+            	<div class="col-md-8 list">
+					<list @dataById="updateById"></list>
+				</div>
+			</div>
+		</div>
 		<div class="row">
-            <div class="col-md-8 trang justify-content-end">
+            <div class="col-md-10 trang justify-content-end">
                 <paginate :last_pages="listData.last_page" @loadData="loadData"></paginate>
             </div>
         </div>

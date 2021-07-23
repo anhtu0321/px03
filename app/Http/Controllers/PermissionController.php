@@ -9,10 +9,10 @@ class PermissionController extends Controller
 {
     public function index()
     {
-        return Permission::with('chucNangCha')->get();
+        return Permission::with('chucnangcha')->orderBy('parent_id','asc')->orderBy('id','asc')->paginate(30);
     }
     public function listCha(){
-        return Permission::where('parent_id','0')->get();
+        return Permission::with('chucnangcon')->where('parent_id','0')->get();
     }
     public function store(Request $request)
     {

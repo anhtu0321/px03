@@ -54,4 +54,11 @@ Route::get('/editChucNang/{id}','PermissionController@edit');
 Route::post('/updateChucNang/{id}','PermissionController@update');
 Route::get('/deleteChucNang/{id}','PermissionController@destroy');
 Route::get('/listChucNangCha','PermissionController@listCha');
+// phân quyền
+Route::post('/addPhanQuyen','RoleController@store');
+Route::get('/listPhanQuyen','RoleController@index');
+Route::get('/editPhanQuyen/{id}','RoleController@edit');
+Route::post('/updatePhanQuyen/{id}','RoleController@update');
+Route::get('/deletePhanQuyen/{id}','RoleController@destroy');
+// Route::get('/listPhanQuyenCha','RoleController@listCha');
 
