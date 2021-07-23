@@ -14,12 +14,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(list, index) in listData.data" :key="list.id" :class="list.id == idEdit? 'tractive':''">
+                        <tr v-for="(list, index) in listData" :key="list.id" :class="list.id == idEdit? 'tractive':''">
                             <td>{{index + 1}}</td>
                             <td>{{list.name}}</td>
                             <td>{{list.display_name}}</td>
                             <td>{{list.key_code}}</td>
-                            <td>{{list.chucNangCha.name}}</td>
+                            <td v-if="list.chucnangcha != 'null'">{{list.chucnangcha}}</td>
                             <td>
                                 <router-link class="btn btn-primary btn-sm" :to="`/chucnang/edit/${list.id}`" @click.native="loadDataById()">Sửa</router-link>
                                 <button class="btn btn-danger btn-sm" @click.prevent="deleteData(list.id)">Xóa</button>

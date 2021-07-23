@@ -41938,7 +41938,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.listData.data, function(list, index) {
+            _vm._l(_vm.listData, function(list, index) {
               return _c(
                 "tr",
                 {
@@ -41954,7 +41954,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(list.key_code))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(list.chucNangCha.name))]),
+                  list.chucnangcha != "null"
+                    ? _c("td", [_vm._v(_vm._s(list.chucnangcha))])
+                    : _vm._e(),
                   _vm._v(" "),
                   _c(
                     "td",
