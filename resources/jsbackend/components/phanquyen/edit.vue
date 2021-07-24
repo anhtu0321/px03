@@ -5,25 +5,23 @@
     		<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-10 main">
-						<!-- form -->
-						<form method="post" @submit.prevent="add">
-
+						<form method="post" @submit.prevent="edit">
 							<div class="form-row">
-								<div class="form-group col-md-4">
+								<div class="form-group col-md-5">
 									<label class="col-form-label col-form-label-sm">Tên chức năng</label>
 									<input type="text" class="form-control form-control-sm" 
 										:class="{'is-invalid' : (error && error.name)}" 
 										v-model="name">
 									<p class="thongbao" v-if="error && error.name">{{ error.name[0]}}</p>
 								</div>
-								<div class="form-group col-md-4">
+								<div class="form-group col-md-5">
 									<label class="col-form-label col-form-label-sm">Tên Đầy đủ</label>
 									<input type="text" class="form-control form-control-sm" 
 										:class="{'is-invalid' : (error && error.display_name)}" 
 										v-model="display_name">
 									<p class="thongbao" v-if="error && error.display_name">{{ error.display_name[0]}}</p>
 								</div>
-								<div class="form-group col-md-4">
+								<div class="form-group col-md-2">
 									<label class="col-form-label col-form-label-sm">Key Code</label>
 									<input type="text" class="form-control form-control-sm" 
 										:class="{'is-invalid' : (error && error.key_code)}" 
@@ -46,12 +44,10 @@
 								
 							</div>
 							<div class="form-group col-md-12 text-right">
-								<button type="submit" class="btn btn-primary btn-sm">Thêm chức năng</button>
-								<button type="submit" class="btn btn-warning btn-sm" @click.prevent="reloadData">Tải lại dữ liệu</button>
+								<button type="submit" class="btn btn-success btn-sm">Sửa loại văn bản</button>
+								<router-link to="/chucnang" class="btn btn-warning btn-sm">Quay lại</router-link>
 							</div>
-
 					</form>
-					<!-- end form -->
 					</div>
 				</div>
 			</div>
@@ -59,7 +55,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-10 list">
-					<list></list>
+					<list @dataById="updateById"></list>
 				</div>
 			</div>
 		</div>
@@ -80,12 +76,12 @@ import paginate from '../page.vue'
 export default {
 	data(){
 		return{
-			tieude:'THÊM CHỨC NĂNG',
-			link:'Thêm',
+			tieude:'SỬA PHÂN QUYỀN',
+			link:'Sửa',
 			name:'',
 			display_name:'',
 			key_code:'',
-			parent_id:0,
+			parent_id:'',
 			error:'',
 			chuc_nang_cha:'',
 		}
@@ -96,22 +92,17 @@ export default {
         },
         listData(){
             return this.$store.getters.getListChucNang;
-		},
-		
-    },
+        }
+	},
 	methods:{
-		add(){
+		edit(){
 			let data = new FormData;
 			data.append('name', this.name);
 			data.append('display_name', this.display_name);
 			data.append('key_code', this.key_code);
 			data.append('parent_id', this.parent_id);
-			axios.post('/px03/public/api/addChucNang', data)
+			axios.post(`/px03/public/api/updateChucNang/${this.$route.params.id}`, data)
 			.then(response=>{
-				this.name = '';
-				this.display_name = '';
-				this.key_code = '';
-				this.error = '';
 				this.list();
 				this.listChucNangCha();
 			})
@@ -128,21 +119,28 @@ export default {
 				this.chuc_nang_cha = response.data;
 			})
 		},
+		updateById(data){
+			this.name = data.data[0].name;
+			this.display_name = data.data[0].display_name;
+			this.key_code = data.data[0].key_code;
+			this.parent_id = data.data[0].parent_id;
+		},
 		loadData(){
 			this.list();
-		},
-		reloadData(){
-			this.$store.dispatch('acGetPage',1);
-			this.list();
-			this.listChucNangCha();
 		}
 	},
 	components:{contentHeader, list, paginate},
 	mounted(){
-		this.list();
+		// this.list();
+		axios.get(`/px03/public/api/editChucNang/${this.$route.params.id}`)
+        .then(response=>{
+            this.name = response.data[0].name;
+			this.display_name = response.data[0].display_name;
+			this.key_code = response.data[0].key_code;
+			this.parent_id = response.data[0].parent_id;
+		});
 		this.listChucNangCha();
-		
-	}
+	},
 }
 </script>
 

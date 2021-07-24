@@ -7,21 +7,21 @@
 					<div class="col-md-10 main">
 						<form method="post" @submit.prevent="edit">
 							<div class="form-row">
-								<div class="form-group col-md-5">
+								<div class="form-group col-md-4">
 									<label class="col-form-label col-form-label-sm">Tên chức năng</label>
 									<input type="text" class="form-control form-control-sm" 
 										:class="{'is-invalid' : (error && error.name)}" 
 										v-model="name">
 									<p class="thongbao" v-if="error && error.name">{{ error.name[0]}}</p>
 								</div>
-								<div class="form-group col-md-5">
+								<div class="form-group col-md-4">
 									<label class="col-form-label col-form-label-sm">Tên Đầy đủ</label>
 									<input type="text" class="form-control form-control-sm" 
 										:class="{'is-invalid' : (error && error.display_name)}" 
 										v-model="display_name">
 									<p class="thongbao" v-if="error && error.display_name">{{ error.display_name[0]}}</p>
 								</div>
-								<div class="form-group col-md-2">
+								<div class="form-group col-md-4">
 									<label class="col-form-label col-form-label-sm">Key Code</label>
 									<input type="text" class="form-control form-control-sm" 
 										:class="{'is-invalid' : (error && error.key_code)}" 
@@ -104,6 +104,7 @@ export default {
 			axios.post(`/px03/public/api/updateChucNang/${this.$route.params.id}`, data)
 			.then(response=>{
 				this.list();
+				this.listChucNangCha();
 			})
 			.catch(error=>{
 				this.error = error.response.data.errors;

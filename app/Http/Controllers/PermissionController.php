@@ -1,5 +1,24 @@
-ws='7'
-        $Permission = new Permi\\\\\\\\\\
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Permission;
+use Illuminate\Http\Request;
+
+class PermissionController extends Controller
+{
+    public function index()
+    {
+        return Permission::with('chucnangcha')->orderBy('parent_id','asc')->orderBy('id','asc')->paginate(30);
+    }
+    public function listCha(){
+        return Permission::with('chucnangcon')->where('parent_id','0')->get();
+    }
+    public function store(Request $request)
+    {
+        $this->validateForm($request);
+        $Permission = new Permission;
+        $Permission->name = $request->name;
         $Permission->display_name = $request->display_name;
         $Permission->key_code = $request->key_code;
         $Permission->parent_id = $request->parent_id;

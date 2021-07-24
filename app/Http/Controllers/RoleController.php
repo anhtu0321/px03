@@ -7,79 +7,50 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return Role::paginate(10);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function listCha(){
+        return Role::where('parent_id','0')->get();
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $this->validateForm($request);
+        $Role = new Role;
+        $Role->name = $request->name;
+        $Role->display_name = $request->display_name;
+        $Role->save();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Role $role)
+    public function edit(Role $Role, $id)
     {
-        //
+        return Role::where('id',$id)->get();
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Role $role)
+  
+    public function update(Request $request, Role $Role, $id)
     {
-        //
+        $Role = Role::find($id);
+        $Role->name = $request->name;
+        $Role->display_name = $request->display_name;
+        $Role->save();
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Role $role)
+    
+    public function destroy(Role $Role, $id)
     {
-        //
+        Role::destroy($id);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Role $role)
-    {
-        //
+    public function validateForm(Request $request){
+        return $request->validate([
+            'name'=>'required',	
+            'display_name'=>'required',
+        ], 
+        $messages = [
+            'required' => ':attribute không được để trống.',
+        ],
+        $attributes = [
+            'name'=>'Tên chức năng',	
+            'display_name'=>'Tên hiển thị',
+        ]);
     }
 }

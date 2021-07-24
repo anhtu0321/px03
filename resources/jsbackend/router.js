@@ -21,6 +21,9 @@ import suaDonVi from './components/donvi/edit.vue';
 // -Chức năng
 import themchucnang from './components/chucnang/add.vue';
 import suachucnang from './components/chucnang/edit.vue';
+// -Phân quyền
+import themphanquyen from './components/phanquyen/add.vue';
+import suaphanquyen from './components/phanquyen/edit.vue';
 
 const routes = [
     // router loai van ban
@@ -41,6 +44,9 @@ const routes = [
     // router chuc nang
     { path: '/chucnang', component: themchucnang },
     { path: '/chucnang/edit/:id', component: suachucnang },
+    // router phân quyền
+    { path: '/phanquyen', component: themphanquyen },
+    { path: '/phanquyen/edit/:id', component: suaphanquyen },
 
 ]
 

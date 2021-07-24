@@ -4,10 +4,8 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>Tên chức năng</th>
+                <th>Tên quyền</th>
                 <th>Tên đầy đủ</th>
-                <th>Key Code</th>
-                <th>Chức năng cha</th>
                 <th>Cập nhật</th>
             </tr>
         </thead>
@@ -16,11 +14,8 @@
                 <td>{{index + 1}}</td>
                 <td>{{list.name}}</td>
                 <td>{{list.display_name}}</td>
-                <td>{{list.key_code}}</td>
-                <td v-if="list.chucnangcha != null">{{list.chucnangcha.name}}</td>
-                <td v-else></td>
                 <td>
-                    <router-link class="btn btn-primary btn-sm" :to="`/chucnang/edit/${list.id}`" @click.native="loadDataById()">Sửa</router-link>
+                    <router-link class="btn btn-primary btn-sm" :to="`/phanquyen/edit/${list.id}`" @click.native="loadDataById()">Sửa</router-link>
                     <button class="btn btn-danger btn-sm" @click.prevent="deleteData(list.id)">Xóa</button>
                 </td>
             </tr>
@@ -41,24 +36,24 @@ export default {
             return this.$store.getters.getPage;
         },
         listData(){
-            return this.$store.getters.getListChucNang;
+            return this.$store.getters.getListPhanQuyen;
         },
     },
     methods:{
         loadDataById(){
             this.idEdit = this.$route.params.id;
-            axios.get(`/px03/public/api/editChucNang/${this.$route.params.id}`)
+            axios.get(`/px03/public/api/editPhanQuyen/${this.$route.params.id}`)
             .then(response=>{
                 this.$emit('dataById', response);
             })
         },
         deleteData(id){
             if(confirm('ban muon xoa that a ?') == true){
-                axios.get(`/px03/public/api/deleteChucNang/${id}`)
+                axios.get(`/px03/public/api/deletePhanQuyen/${id}`)
                 .then(reponse=>{
-                    this.$store.dispatch('acListChucNang',this.currentPage);
-                    if(this.$router.history.current.path !=='/chucnang'){
-                        this.$router.push('/chucnang');
+                    this.$store.dispatch('acListPhanQuyen',this.currentPage);
+                    if(this.$router.history.current.path !=='/phanquyen'){
+                        this.$router.push('/phanquyen');
                     }
                 })
             }
