@@ -1,24 +1,5 @@
-<?php
-
-namespace App\Http\Controllers;
-
-use App\Permission;
-use Illuminate\Http\Request;
-
-class PermissionController extends Controller
-{
-    public function index()
-    {
-        return Permission::with('chucnangcha')->get();
-    }
-    public function listCha(){
-        return Permission::where('parent_id','0')->get();
-    }
-    public function store(Request $request)
-    {
-        $this->validateForm($request);
-        $Permission = new Permission;
-        $Permission->name = $request->name;
+ws='7'
+        $Permission = new Permi\\\\\\\\\\
         $Permission->display_name = $request->display_name;
         $Permission->key_code = $request->key_code;
         $Permission->parent_id = $request->parent_id;
@@ -49,7 +30,7 @@ class PermissionController extends Controller
             'name'=>'required',	
             'display_name'=>'required',
             'key_code'=>'required',
-            'parent_id'=>'required',
+            'parent_id'=>'required',777
         ], 
         $messages = [
             'required' => ':attribute không được để trống.',
