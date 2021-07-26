@@ -4252,18 +4252,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _content_header_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../content_header.vue */ "./resources/jsbackend/components/content_header.vue");
 /* harmony import */ var _list_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./list.vue */ "./resources/jsbackend/components/phanquyen/list.vue");
 /* harmony import */ var _page_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../page.vue */ "./resources/jsbackend/components/page.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var _card_permission_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./card_permission.vue */ "./resources/jsbackend/components/phanquyen/card_permission.vue");
 //
 //
 //
@@ -4332,6 +4321,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4341,8 +4331,7 @@ __webpack_require__.r(__webpack_exports__);
       display_name: '',
       error: '',
       permissions: '',
-      check_all: false,
-      check_module: false
+      check_all: false
     };
   },
   computed: {
@@ -4399,23 +4388,69 @@ __webpack_require__.r(__webpack_exports__);
       for (var i = 0; i < checkConAll.length; i++) {
         checkConAll[i].checked = this.check_all;
       }
-    },
-    checkModule: function checkModule() {
-      var checkCon = this.parentNode.parentNode.parentNode.getElementsByClassName('check-con');
-
-      for (i = 0; i < checkCon.length; i++) {
-        checkCon[i].checked = true;
-      }
     }
   },
   components: {
     contentHeader: _content_header_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     list: _list_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    paginate: _page_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    paginate: _page_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    cardpermission: _card_permission_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   mounted: function mounted() {
     this.list();
     this.loadPermission();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/jsbackend/components/phanquyen/card_permission.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/jsbackend/components/phanquyen/card_permission.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      checker: false
+    };
+  },
+  props: ['per'],
+  computed: {
+    getper: function getper() {
+      return this.per;
+    }
+  },
+  methods: {
+    checkModule: function checkModule() {
+      var checkChaById = document.getElementById(this.per.id);
+      var checkCon = checkChaById.parentNode.parentNode.getElementsByClassName('check-con');
+
+      for (var i = 0; i < checkCon.length; i++) {
+        checkCon[i].checked = this.checker;
+      }
+    }
   }
 });
 
@@ -45947,75 +45982,9 @@ var render = function() {
                           "div",
                           { key: permission.id, staticClass: "col-sm-6" },
                           [
-                            _c(
-                              "div",
-                              { staticClass: "card border-info mb-4" },
-                              [
-                                _c("div", { staticClass: "card-header" }, [
-                                  _c("input", {
-                                    staticClass: "hovered check-cha",
-                                    attrs: {
-                                      type: "checkbox",
-                                      id: permission.id
-                                    },
-                                    on: { change: _vm.checkModule }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "label",
-                                    {
-                                      staticClass: "p-2 title-card hovered",
-                                      attrs: { for: permission.id }
-                                    },
-                                    [_vm._v(_vm._s(permission.name))]
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "card-body text-info" },
-                                  [
-                                    _c(
-                                      "div",
-                                      { staticClass: "row" },
-                                      _vm._l(permission.chucnangcon, function(
-                                        percon
-                                      ) {
-                                        return _c(
-                                          "div",
-                                          {
-                                            key: percon.id,
-                                            staticClass: "col-md-6"
-                                          },
-                                          [
-                                            _c("input", {
-                                              staticClass: "hovered check-con",
-                                              attrs: {
-                                                type: "checkbox",
-                                                id: percon.id
-                                              },
-                                              domProps: { value: percon.id }
-                                            }),
-                                            _vm._v(" "),
-                                            _c(
-                                              "label",
-                                              {
-                                                staticClass:
-                                                  "card-text p-2 hovered",
-                                                attrs: { for: percon.id }
-                                              },
-                                              [_vm._v(_vm._s(percon.name))]
-                                            )
-                                          ]
-                                        )
-                                      }),
-                                      0
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
-                          ]
+                            _c("cardpermission", { attrs: { per: permission } })
+                          ],
+                          1
                         )
                       })
                     ],
@@ -46080,6 +46049,104 @@ var render = function() {
     ],
     1
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/jsbackend/components/phanquyen/card_permission.vue?vue&type=template&id=239d0b2a&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/jsbackend/components/phanquyen/card_permission.vue?vue&type=template&id=239d0b2a& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card border-info mb-4" }, [
+    _c("div", { staticClass: "card-header" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.checker,
+            expression: "checker"
+          }
+        ],
+        staticClass: "hovered check-cha",
+        attrs: { type: "checkbox", id: _vm.per.id },
+        domProps: {
+          checked: Array.isArray(_vm.checker)
+            ? _vm._i(_vm.checker, null) > -1
+            : _vm.checker
+        },
+        on: {
+          change: [
+            function($event) {
+              var $$a = _vm.checker,
+                $$el = $event.target,
+                $$c = $$el.checked ? true : false
+              if (Array.isArray($$a)) {
+                var $$v = null,
+                  $$i = _vm._i($$a, $$v)
+                if ($$el.checked) {
+                  $$i < 0 && (_vm.checker = $$a.concat([$$v]))
+                } else {
+                  $$i > -1 &&
+                    (_vm.checker = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+                }
+              } else {
+                _vm.checker = $$c
+              }
+            },
+            _vm.checkModule
+          ]
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "label",
+        { staticClass: "p-2 title-card hovered", attrs: { for: _vm.per.id } },
+        [_vm._v(_vm._s(_vm.per.name))]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body text-info" }, [
+      _c(
+        "div",
+        { staticClass: "row" },
+        _vm._l(_vm.per.chucnangcon, function(percon) {
+          return _c("div", { key: percon.id, staticClass: "col-md-6" }, [
+            _c("input", {
+              staticClass: "hovered check-con",
+              attrs: { type: "checkbox", id: percon.id },
+              domProps: { value: percon.id }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "card-text p-2 hovered",
+                attrs: { for: percon.id }
+              },
+              [_vm._v(_vm._s(percon.name))]
+            )
+          ])
+        }),
+        0
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -65012,6 +65079,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_add_vue_vue_type_template_id_05224aae___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_add_vue_vue_type_template_id_05224aae___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/jsbackend/components/phanquyen/card_permission.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/jsbackend/components/phanquyen/card_permission.vue ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _card_permission_vue_vue_type_template_id_239d0b2a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./card_permission.vue?vue&type=template&id=239d0b2a& */ "./resources/jsbackend/components/phanquyen/card_permission.vue?vue&type=template&id=239d0b2a&");
+/* harmony import */ var _card_permission_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./card_permission.vue?vue&type=script&lang=js& */ "./resources/jsbackend/components/phanquyen/card_permission.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _card_permission_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _card_permission_vue_vue_type_template_id_239d0b2a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _card_permission_vue_vue_type_template_id_239d0b2a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/jsbackend/components/phanquyen/card_permission.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/jsbackend/components/phanquyen/card_permission.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/jsbackend/components/phanquyen/card_permission.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_card_permission_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./card_permission.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/jsbackend/components/phanquyen/card_permission.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_card_permission_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/jsbackend/components/phanquyen/card_permission.vue?vue&type=template&id=239d0b2a&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/jsbackend/components/phanquyen/card_permission.vue?vue&type=template&id=239d0b2a& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_card_permission_vue_vue_type_template_id_239d0b2a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./card_permission.vue?vue&type=template&id=239d0b2a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/jsbackend/components/phanquyen/card_permission.vue?vue&type=template&id=239d0b2a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_card_permission_vue_vue_type_template_id_239d0b2a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_card_permission_vue_vue_type_template_id_239d0b2a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

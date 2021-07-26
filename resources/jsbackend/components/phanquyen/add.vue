@@ -31,20 +31,8 @@
 									<label for="checkall" class="p-2 title-card hovered" >Chọn tất cả chức năng</label>
 								</div>
 								<div class="col-sm-6" v-for="permission in permissions" :key="permission.id">
-									<div class="card border-info mb-4">
-										<div class="card-header">
-											<input type="checkbox" class="hovered check-cha" :id="permission.id" @change="checkModule">
-											<label :for="permission.id" class="p-2 title-card hovered">{{permission.name}}</label>
-										</div>
-										<div class="card-body text-info">
-											<div class="row">
-												<div class="col-md-6" v-for="percon in permission.chucnangcon" :key="percon.id">
-													<input type="checkbox" :value="percon.id" :id="percon.id" class="hovered check-con">
-													<label :for="percon.id" class="card-text p-2 hovered">{{ percon.name }}</label>
-												</div>
-											</div>
-										</div>
-									</div>
+									<!-- {{ this.per= permission }} -->
+									<cardpermission v-bind:per="permission"></cardpermission>	
 								</div>
 							</div>
 							<div class="form-group col-md-12 text-right">
@@ -79,6 +67,7 @@
 import contentHeader from '../content_header.vue'
 import list from './list.vue'
 import paginate from '../page.vue'
+import cardpermission from './card_permission.vue'
 export default {
 	data(){
 		return{
@@ -89,7 +78,7 @@ export default {
 			error:'',
 			permissions:'',
 			check_all:false,
-			check_module:false,
+			
 		}
 	},
 	computed:{
@@ -139,15 +128,9 @@ export default {
 				checkConAll[i].checked = this.check_all;
 			}
 		},
-		checkModule(){
-			var checkCon = this.parentNode.parentNode.parentNode.getElementsByClassName('check-con');
-			for (i = 0; i < checkCon.length; i++) {
-				checkCon[i].checked = true;
-			}
-		}
 		
 	},
-	components:{contentHeader, list, paginate},
+	components:{contentHeader, list, paginate, cardpermission},
 	mounted(){
 		this.list();
 		this.loadPermission();
