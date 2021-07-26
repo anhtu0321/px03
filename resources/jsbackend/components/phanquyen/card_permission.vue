@@ -7,7 +7,7 @@
         <div class="card-body text-info">
             <div class="row">
                 <div class="col-md-6" v-for="percon in per.chucnangcon" :key="percon.id">
-                    <input type="checkbox" :value="percon.id" :id="percon.id" class="hovered check-con">
+                    <input type="checkbox" :value="percon.id" :id="percon.id" class="hovered check-con" v-model="mangchucnang">
                     <label :for="percon.id" class="card-text p-2 hovered">{{ percon.name }}</label>
                 </div>
             </div>
@@ -20,6 +20,7 @@ export default {
     data(){
         return{
             checker:false,
+            mangchucnang:[],
         }
     },
     props:['per'],

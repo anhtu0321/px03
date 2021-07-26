@@ -25,14 +25,27 @@
 								</div>
 								
 							</div>
-							<div class="row">
+							<div class="row"> 
+								<!-- row for permission -->
 								<div class="col-md-12 mb-4">
 									<input type="checkbox" class="hovered check-all" id="checkall" v-model="check_all" @change="checkAll">
 									<label for="checkall" class="p-2 title-card hovered" >Chọn tất cả chức năng</label>
 								</div>
 								<div class="col-sm-6" v-for="permission in permissions" :key="permission.id">
-									<!-- {{ this.per= permission }} -->
-									<cardpermission v-bind:per="permission"></cardpermission>	
+									<div class="card border-info mb-4">
+										<div class="card-header">
+											<input type="checkbox" class="hovered check-cha" :id="permission.id" @change="checkModule(permission.id)">
+											<label :for="permission.id" class="p-2 title-card hovered">{{permission.name}}</label>
+										</div>
+										<div class="card-body text-info">
+											<div class="row">
+												<div class="col-md-6" v-for="percon in permission.chucnangcon" :key="percon.id">
+													<input type="checkbox" :value="percon.id" :id="percon.id" class="hovered check-con" v-model="mangchucnang">
+													<label :for="percon.id" class="card-text p-2 hovered">{{ percon.name }}</label>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="form-group col-md-12 text-right">
@@ -67,7 +80,7 @@
 import contentHeader from '../content_header.vue'
 import list from './list.vue'
 import paginate from '../page.vue'
-import cardpermission from './card_permission.vue'
+// import cardpermission from './card_permission.vue'
 export default {
 	data(){
 		return{
@@ -78,7 +91,7 @@ export default {
 			error:'',
 			permissions:'',
 			check_all:false,
-			
+			mangchucnang:[],
 		}
 	},
 	computed:{
@@ -88,22 +101,32 @@ export default {
         listData(){ //để lấy số trang (last_page)
             return this.$store.getters.getListPhanQuyen;
 		},	
+		perChild(){
+			var arr = [];
+			for( var i in this.permissions){
+				for(var j in this.permissions[i].chucnangcon){
+					arr.push(this.permissions[i].chucnangcon[j].id);
+				}
+			}
+			return arr;
+		}
     },
 	methods:{
 		add(){ //thêm dữ liệu vào database
-			let data = new FormData;
-			data.append('name', this.name);
-			data.append('display_name', this.display_name);
-			axios.post('/px03/public/api/addPhanQuyen', data)
-			.then(response=>{
-				this.name = '';
-				this.display_name = '';
-				this.error = '';
-				this.list();
-			})
-			.catch(error=>{
-				this.error = error.response.data.errors;
-			});
+			// let data = new FormData;
+			// data.append('name', this.name);
+			// data.append('display_name', this.display_name);
+			// axios.post('/px03/public/api/addPhanQuyen', data)
+			// .then(response=>{
+			// 	this.name = '';
+			// 	this.display_name = '';
+			// 	this.error = '';
+			// 	this.list();
+			// })
+			// .catch(error=>{
+			// 	this.error = error.response.data.errors;
+			// });
+			console.log(this.perChild);
 		},
 		list(){ //sử dụng để lấy số trang cho list
 			this.$store.dispatch('acListPhanQuyen',this.currentPage);
@@ -123,14 +146,29 @@ export default {
 			})
 		},
 		checkAll(){
-			var checkConAll = document.getElementsByClassName('check-con');
-			for (var i = 0; i < checkConAll.length; i++) {
-				checkConAll[i].checked = this.check_all;
+			this.mangchucnang=[];
+			for (var i in this.perChild) {
+				if(this.check_all){
+					this.mangchucnang.push(this.perChild[i]);
+				}
 			}
+			console.log(this.mangchucnang);
 		},
-		
+		checkModule(id){
+			var checkCha = document.getElementById(id);
+			var checkCon = checkCha.parentNode.parentNode.getElementsByClassName('check-con');
+			for (var i = 0; i < checkCon.length; i++) {
+				if(checkCha.checked == true && this.mangchucnang.indexOf(parseInt(checkCon[i].value))== -1){
+					this.mangchucnang.push(parseInt(checkCon[i].value));
+				}
+				if(checkCha.checked == false){
+					this.mangchucnang.splice(this.mangchucnang.indexOf(parseInt(checkCon[i].value)),1);
+				}
+			}
+			console.log(this.mangchucnang);
+		}
 	},
-	components:{contentHeader, list, paginate, cardpermission},
+	components:{contentHeader, list, paginate},
 	mounted(){
 		this.list();
 		this.loadPermission();
