@@ -12,4 +12,8 @@ class Permission extends Model
     public function chucnangcon(){
         return $this->hasMany('App\Permission','parent_id','id');
     }
+   
+    public function roles(){
+        return $this->belongsToMany('App\Role', 'role_permissions', 'role_id', 'permission_id');
+    }
 }

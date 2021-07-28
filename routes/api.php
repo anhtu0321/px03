@@ -60,5 +60,10 @@ Route::get('/listPhanQuyen','RoleController@index');
 Route::get('/editPhanQuyen/{id}','RoleController@edit');
 Route::post('/updatePhanQuyen/{id}','RoleController@update');
 Route::get('/deletePhanQuyen/{id}','RoleController@destroy');
-// Route::get('/listPhanQuyenCha','RoleController@listCha');
+// Tài khoản
+Route::post('/addTaiKhoan','UserController@store');
+Route::get('/listTaiKhoan','UserController@index');
+Route::get('/editTaiKhoan/{id}','UserController@edit');
+Route::post('/updateTaiKhoan/{id}','UserController@update');
+Route::get('/deleteTaiKhoan/{id}','UserController@destroy');
 

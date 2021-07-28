@@ -4,7 +4,7 @@
         <section class="content">
     		<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-8 main">
+					<div class="col-md-10 main">
 						<form method="post" class="form-row" @submit.prevent="edit">
 						<div class="form-group col-md-3">
 							<label class="col-form-label col-form-label-sm">Họ tên</label>
@@ -52,7 +52,7 @@
   		</section>
 		<div class="container-fluid">
         	<div class="row">
-            	<div class="col-md-8 list">
+            	<div class="col-md-10 list">
 					<list @dataById="updateById"></list>
 				</div>
 			</div>
