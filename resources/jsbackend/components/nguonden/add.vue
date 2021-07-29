@@ -67,7 +67,7 @@ export default {
 			let data = new FormData;
 			data.append('ten_nguon', this.ten_nguon);
 			data.append('thu_tu', this.thu_tu);
-			axios.post('/px03/public/api/addNguonDen', data)
+			axios.post('/px03/public/addNguonDen', data)
 			.then(response=>{
 				this.ten_nguon = '';
 				this.thu_tu = '';

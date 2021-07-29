@@ -67,7 +67,7 @@ export default {
 			let data = new FormData;
 			data.append('ten_nguon', this.ten_nguon);
 			data.append('thu_tu', this.thu_tu);
-			axios.post(`/px03/public/api/updateNguonDen/${this.$route.params.id}`, data)
+			axios.post(`/px03/public/updateNguonDen/${this.$route.params.id}`, data)
 			.then(response=>{
 				this.list();
 			})
@@ -88,7 +88,7 @@ export default {
 	},
 	components:{contentHeader, list, paginate},
 	mounted(){
-        axios.get(`/px03/public/api/editNguonDen/${this.$route.params.id}`)
+        axios.get(`/px03/public/editNguonDen/${this.$route.params.id}`)
         .then(response=>{
             this.ten_nguon = response.data[0].ten_nguon;
 			this.thu_tu = response.data[0].thu_tu;

@@ -100,7 +100,7 @@ export default {
 			data.append('chuc_vu', this.chuc_vu);
 			data.append('thu_tu', this.thu_tu);
 			data.append('trang_thai', this.trang_thai);
-			axios.post('/px03/public/api/addLanhDao', data)
+			axios.post('/px03/public/addLanhDao', data)
 			.then(response=>{
 				this.ho_ten = '';
 				this.cap_bac = '';

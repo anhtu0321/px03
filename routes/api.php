@@ -18,11 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 // Loại Văn bản
-Route::post('/addLoaiVanBan','LoaiVanBanController@store');
-Route::get('/listLoaiVanBan','LoaiVanBanController@index');
-Route::get('/editLoaiVanBan/{id}','LoaiVanBanController@edit');
-Route::post('/updateLoaiVanBan/{id}','LoaiVanBanController@update');
-Route::get('/deleteLoaiVanBan/{id}','LoaiVanBanController@destroy');
+// Route::post('/addLoaiVanBan','LoaiVanBanController@store');
+// Route::get('/listLoaiVanBan','LoaiVanBanController@index');
+// Route::get('/editLoaiVanBan/{id}','LoaiVanBanController@edit');
+// Route::post('/updateLoaiVanBan/{id}','LoaiVanBanController@update');
+// Route::get('/deleteLoaiVanBan/{id}','LoaiVanBanController@destroy');
 // Nguồn đến
 Route::post('/addNguonDen','NguonDenController@store');
 Route::get('/listNguonDen','NguonDenController@index');

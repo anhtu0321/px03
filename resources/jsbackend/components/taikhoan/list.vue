@@ -42,14 +42,14 @@ export default {
     methods:{
         loadDataById(){
             this.idEdit = this.$route.params.id;
-            axios.get(`/px03/public/api/editTaiKhoan/${this.$route.params.id}`)
+            axios.get(`/px03/public/editTaiKhoan/${this.$route.params.id}`)
             .then(response=>{
                 this.$emit('dataById', response);
             })
         },
         deleteData(id){
             if(confirm('ban muon xoa that a ?') == true){
-                axios.get(`/px03/public/api/deleteTaiKhoan/${id}`)
+                axios.get(`/px03/public/deleteTaiKhoan/${id}`)
                 .then(reponse=>{
                     this.$store.dispatch('acListTaiKhoan',this.currentPage);
                     if(this.$router.history.current.path !=='/TaiKhoan'){

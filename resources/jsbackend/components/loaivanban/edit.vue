@@ -76,7 +76,7 @@ export default {
 			data.append('ten_loai', this.ten_loai);
 			data.append('thu_tu', this.thu_tu);
 			data.append('trang_thai', this.trang_thai);
-			axios.post(`/px03/public/api/updateLoaiVanBan/${this.$route.params.id}`, data)
+			axios.post(`/px03/public/updateLoaiVanBan/${this.$route.params.id}`, data)
 			.then(response=>{
 				this.list();
 			})
@@ -99,7 +99,7 @@ export default {
 	components:{contentHeader, list, paginate},
 	mounted(){
 		// this.list();
-		axios.get(`/px03/public/api/editLoaiVanBan/${this.$route.params.id}`)
+		axios.get(`/px03/public/editLoaiVanBan/${this.$route.params.id}`)
         .then(response=>{
             this.ten_loai = response.data[0].ten_loai;
 			this.thu_tu = response.data[0].thu_tu;

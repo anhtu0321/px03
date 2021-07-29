@@ -119,7 +119,7 @@ export default {
 			for(var i in this.mangchucnang){
 				data.append('mangchucnang[]', this.mangchucnang[i]);
 			}
-			axios.post('/px03/public/api/addPhanQuyen', data)
+			axios.post('/px03/public/addPhanQuyen', data)
 			.then(response=>{
 				this.name = '';
 				this.display_name = '';
@@ -144,7 +144,7 @@ export default {
 			this.list();
 		},
 		loadPermission(){ //tải dữ liệu permission
-			axios.get('/px03/public/api/listChucNangCha')
+			axios.get('/px03/public/listChucNangCha')
 			.then(response=>{
 				this.permissions = response.data;
 			})

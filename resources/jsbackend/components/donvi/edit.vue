@@ -120,7 +120,7 @@ export default {
 			data.append('khoi', this.khoi);
 			data.append('thu_tu', this.thu_tu);
 			data.append('trang_thai', this.trang_thai);
-			axios.post(`/px03/public/api/updateDonVi/${this.$route.params.id}`, data)
+			axios.post(`/px03/public/updateDonVi/${this.$route.params.id}`, data)
 			.then(response=>{
 				this.list();
 			})
@@ -146,7 +146,7 @@ export default {
 	components:{contentHeader, list, paginate},
 	mounted(){
 		// this.list();
-		axios.get(`/px03/public/api/editDonVi/${this.$route.params.id}`)
+		axios.get(`/px03/public/editDonVi/${this.$route.params.id}`)
         .then(response=>{
             this.ten_phong = response.data[0].ten_phong;
 			this.ten_phong_full = response.data[0].ten_phong_full;

@@ -42,14 +42,14 @@ export default {
     methods:{
         loadDataById(){
             this.idEdit = this.$route.params.id;
-            axios.get(`/px03/public/api/editPhanQuyen/${this.$route.params.id}`)
+            axios.get(`/px03/public/editPhanQuyen/${this.$route.params.id}`)
             .then(response=>{
                 this.$emit('dataById', response);
             })
         },
         deleteData(id){
             if(confirm('ban muon xoa that a ?') == true){
-                axios.get(`/px03/public/api/deletePhanQuyen/${id}`)
+                axios.get(`/px03/public/deletePhanQuyen/${id}`)
                 .then(reponse=>{
                     this.$store.dispatch('acListPhanQuyen',this.currentPage);
                     if(this.$router.history.current.path !=='/phanquyen'){

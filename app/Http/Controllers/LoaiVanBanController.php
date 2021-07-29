@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class LoaiVanBanController extends Controller
 {
-   
     public function index()
     {
         return LoaiVanBan::orderBy('thu_tu','asc')->paginate(10);

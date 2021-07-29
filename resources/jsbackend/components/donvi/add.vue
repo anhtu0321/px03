@@ -124,7 +124,7 @@ export default {
 			data.append('khoi', this.khoi);
 			data.append('thu_tu', this.thu_tu);
 			data.append('trang_thai', this.trang_thai);
-			axios.post('/px03/public/api/addDonVi', data)
+			axios.post('/px03/public/addDonVi', data)
 			.then(response=>{
 				this.ten_phong = '';
 				this.ten_phong_full = '';

@@ -106,7 +106,7 @@ export default {
 			data.append('display_name', this.display_name);
 			data.append('key_code', this.key_code);
 			data.append('parent_id', this.parent_id);
-			axios.post('/px03/public/api/addChucNang', data)
+			axios.post('/px03/public/addChucNang', data)
 			.then(response=>{
 				this.name = '';
 				this.display_name = '';
@@ -123,7 +123,7 @@ export default {
 			this.$store.dispatch('acListChucNang',this.currentPage);
 		},
 		listChucNangCha(){
-			axios.get('/px03/public/api/listChucNangCha')
+			axios.get('/px03/public/listChucNangCha')
 			.then(response=>{
 				this.chuc_nang_cha = response.data;
 			})

@@ -50,14 +50,14 @@ export default {
     methods:{
         loadDataById(){
             this.idEdit = this.$route.params.id;
-            axios.get(`/px03/public/api/editDonVi/${this.$route.params.id}`)
+            axios.get(`/px03/public/editDonVi/${this.$route.params.id}`)
             .then(response=>{
                 this.$emit('dataById', response);
             })
         },
         deleteData(id){
             if(confirm('ban muon xoa that a ?') == true){
-                axios.get(`/px03/public/api/deleteDonVi/${id}`)
+                axios.get(`/px03/public/deleteDonVi/${id}`)
                 .then(reponse=>{
                     this.$store.dispatch('acListDonVi',this.currentPage);
                     if(this.$router.history.current.path !=='/DonVi'){

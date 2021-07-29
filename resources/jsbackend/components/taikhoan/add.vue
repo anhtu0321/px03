@@ -105,7 +105,7 @@ export default {
 			for(var i in this.roles){
 				data.append('roles[]', this.roles[i]);
 			}
-			axios.post('/px03/public/api/addTaiKhoan', data)
+			axios.post('/px03/public/addTaiKhoan', data)
 			.then(response=>{
 				this.fullname = '';
 				this.username = '';

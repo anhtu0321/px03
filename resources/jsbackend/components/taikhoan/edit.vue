@@ -101,7 +101,7 @@ export default {
 			for(var i in this.roles){
 				data.append('roles[]', this.roles[i]);
 			}
-			axios.post(`/px03/public/api/updateTaiKhoan/${this.$route.params.id}`, data)
+			axios.post(`/px03/public/updateTaiKhoan/${this.$route.params.id}`, data)
 			.then(response=>{
 				this.list();
 				alert('Đã cập nhật !')
@@ -125,7 +125,7 @@ export default {
 	components:{contentHeader, list, paginate, vSelect},
 	mounted(){
 		// this.list();
-		axios.get(`/px03/public/api/editTaiKhoan/${this.$route.params.id}`)
+		axios.get(`/px03/public/editTaiKhoan/${this.$route.params.id}`)
         .then(data=>{
             this.fullname = data.data[0].fullname;
 			this.username = data.data[0].username;

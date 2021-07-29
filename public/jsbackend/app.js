@@ -2066,7 +2066,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('display_name', this.display_name);
       data.append('key_code', this.key_code);
       data.append('parent_id', this.parent_id);
-      axios.post('/px03/public/api/addChucNang', data).then(function (response) {
+      axios.post('/px03/public/addChucNang', data).then(function (response) {
         _this.name = '';
         _this.display_name = '';
         _this.key_code = '';
@@ -2085,7 +2085,7 @@ __webpack_require__.r(__webpack_exports__);
     listChucNangCha: function listChucNangCha() {
       var _this2 = this;
 
-      axios.get('/px03/public/api/listChucNangCha').then(function (response) {
+      axios.get('/px03/public/listChucNangCha').then(function (response) {
         _this2.chuc_nang_cha = response.data;
       });
     },
@@ -2227,7 +2227,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('display_name', this.display_name);
       data.append('key_code', this.key_code);
       data.append('parent_id', this.parent_id);
-      axios.post("/px03/public/api/updateChucNang/".concat(this.$route.params.id), data).then(function (response) {
+      axios.post("/px03/public/updateChucNang/".concat(this.$route.params.id), data).then(function (response) {
         _this.list();
 
         _this.listChucNangCha();
@@ -2241,7 +2241,7 @@ __webpack_require__.r(__webpack_exports__);
     listChucNangCha: function listChucNangCha() {
       var _this2 = this;
 
-      axios.get('/px03/public/api/listChucNangCha').then(function (response) {
+      axios.get('/px03/public/listChucNangCha').then(function (response) {
         _this2.chuc_nang_cha = response.data;
       });
     },
@@ -2335,7 +2335,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.idEdit = this.$route.params.id;
-      axios.get("/px03/public/api/editChucNang/".concat(this.$route.params.id)).then(function (response) {
+      axios.get("/px03/public/editChucNang/".concat(this.$route.params.id)).then(function (response) {
         _this.$emit('dataById', response);
       });
     },
@@ -2343,7 +2343,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       if (confirm('ban muon xoa that a ?') == true) {
-        axios.get("/px03/public/api/deleteChucNang/".concat(id)).then(function (reponse) {
+        axios.get("/px03/public/deleteChucNang/".concat(id)).then(function (reponse) {
           _this2.$store.dispatch('acListChucNang', _this2.currentPage);
 
           if (_this2.$router.history.current.path !== '/chucnang') {
@@ -2532,7 +2532,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('khoi', this.khoi);
       data.append('thu_tu', this.thu_tu);
       data.append('trang_thai', this.trang_thai);
-      axios.post('/px03/public/api/addDonVi', data).then(function (response) {
+      axios.post('/px03/public/addDonVi', data).then(function (response) {
         _this.ten_phong = '';
         _this.ten_phong_full = '';
         _this.ky_hieu = '';
@@ -2702,7 +2702,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('khoi', this.khoi);
       data.append('thu_tu', this.thu_tu);
       data.append('trang_thai', this.trang_thai);
-      axios.post("/px03/public/api/updateDonVi/".concat(this.$route.params.id), data).then(function (response) {
+      axios.post("/px03/public/updateDonVi/".concat(this.$route.params.id), data).then(function (response) {
         _this.list();
       })["catch"](function (error) {
         _this.error = error.response.data.errors;
@@ -2732,7 +2732,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this2 = this;
 
     // this.list();
-    axios.get("/px03/public/api/editDonVi/".concat(this.$route.params.id)).then(function (response) {
+    axios.get("/px03/public/editDonVi/".concat(this.$route.params.id)).then(function (response) {
       _this2.ten_phong = response.data[0].ten_phong;
       _this2.ten_phong_full = response.data[0].ten_phong_full;
       _this2.ky_hieu = response.data[0].ky_hieu;
@@ -2807,7 +2807,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.idEdit = this.$route.params.id;
-      axios.get("/px03/public/api/editDonVi/".concat(this.$route.params.id)).then(function (response) {
+      axios.get("/px03/public/editDonVi/".concat(this.$route.params.id)).then(function (response) {
         _this.$emit('dataById', response);
       });
     },
@@ -2815,7 +2815,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       if (confirm('ban muon xoa that a ?') == true) {
-        axios.get("/px03/public/api/deleteDonVi/".concat(id)).then(function (reponse) {
+        axios.get("/px03/public/deleteDonVi/".concat(id)).then(function (reponse) {
           _this2.$store.dispatch('acListDonVi', _this2.currentPage);
 
           if (_this2.$router.history.current.path !== '/DonVi') {
@@ -2947,7 +2947,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('chuc_vu', this.chuc_vu);
       data.append('thu_tu', this.thu_tu);
       data.append('trang_thai', this.trang_thai);
-      axios.post('/px03/public/api/addLanhDao', data).then(function (response) {
+      axios.post('/px03/public/addLanhDao', data).then(function (response) {
         _this.ho_ten = '';
         _this.cap_bac = '';
         _this.chuc_vu = '';
@@ -3097,7 +3097,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('chuc_vu', this.chuc_vu);
       data.append('thu_tu', this.thu_tu);
       data.append('trang_thai', this.trang_thai);
-      axios.post("/px03/public/api/updateLanhDao/".concat(this.$route.params.id), data).then(function (response) {
+      axios.post("/px03/public/updateLanhDao/".concat(this.$route.params.id), data).then(function (response) {
         _this.list();
       })["catch"](function (error) {
         _this.error = error.response.data.errors;
@@ -3126,7 +3126,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this2 = this;
 
     // this.list();
-    axios.get("/px03/public/api/editLanhDao/".concat(this.$route.params.id)).then(function (response) {
+    axios.get("/px03/public/editLanhDao/".concat(this.$route.params.id)).then(function (response) {
       _this2.ho_ten = response.data[0].ho_ten;
       _this2.cap_bac = response.data[0].cap_bac;
       _this2.chuc_vu = response.data[0].chuc_vu;
@@ -3198,7 +3198,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.idEdit = this.$route.params.id;
-      axios.get("/px03/public/api/editLanhDao/".concat(this.$route.params.id)).then(function (response) {
+      axios.get("/px03/public/editLanhDao/".concat(this.$route.params.id)).then(function (response) {
         _this.$emit('dataById', response);
       });
     },
@@ -3206,7 +3206,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       if (confirm('ban muon xoa that a ?') == true) {
-        axios.get("/px03/public/api/deleteLanhDao/".concat(id)).then(function (reponse) {
+        axios.get("/px03/public/deleteLanhDao/".concat(id)).then(function (reponse) {
           _this2.$store.dispatch('acListLanhDao', _this2.currentPage);
 
           if (_this2.$router.history.current.path !== '/lanhdao') {
@@ -3314,7 +3314,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('ten_loai', this.ten_loai);
       data.append('thu_tu', this.thu_tu);
       data.append('trang_thai', this.trang_thai);
-      axios.post('/px03/public/api/addLoaiVanBan', data).then(function (response) {
+      axios.post('/px03/public/addLoaiVanBan', data).then(function (response) {
         _this.ten_loai = '';
         _this.thu_tu = '';
         _this.error = '';
@@ -3322,6 +3322,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.list();
       })["catch"](function (error) {
         _this.error = error.response.data.errors;
+        console.log(error.response.data.message);
       });
     },
     list: function list() {
@@ -3438,7 +3439,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('ten_loai', this.ten_loai);
       data.append('thu_tu', this.thu_tu);
       data.append('trang_thai', this.trang_thai);
-      axios.post("/px03/public/api/updateLoaiVanBan/".concat(this.$route.params.id), data).then(function (response) {
+      axios.post("/px03/public/updateLoaiVanBan/".concat(this.$route.params.id), data).then(function (response) {
         _this.list();
       })["catch"](function (error) {
         _this.error = error.response.data.errors;
@@ -3465,7 +3466,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this2 = this;
 
     // this.list();
-    axios.get("/px03/public/api/editLoaiVanBan/".concat(this.$route.params.id)).then(function (response) {
+    axios.get("/px03/public/editLoaiVanBan/".concat(this.$route.params.id)).then(function (response) {
       _this2.ten_loai = response.data[0].ten_loai;
       _this2.thu_tu = response.data[0].thu_tu;
       _this2.trang_thai = response.data[0].trang_thai;
@@ -3535,7 +3536,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.idEdit = this.$route.params.id;
-      axios.get("/px03/public/api/editLoaiVanBan/".concat(this.$route.params.id)).then(function (response) {
+      axios.get("/px03/public/editLoaiVanBan/".concat(this.$route.params.id)).then(function (response) {
         _this.$emit('dataById', response);
       });
     },
@@ -3543,7 +3544,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       if (confirm('ban muon xoa that a ?') == true) {
-        axios.get("/px03/public/api/deleteLoaiVanBan/".concat(id)).then(function (reponse) {
+        axios.get("/px03/public/deleteLoaiVanBan/".concat(id)).then(function (reponse) {
           _this2.$store.dispatch('acListLoai', _this2.currentPage);
 
           if (_this2.$router.history.current.path !== '/loaivanban') {
@@ -3642,7 +3643,7 @@ __webpack_require__.r(__webpack_exports__);
       var data = new FormData();
       data.append('ten_nguon', this.ten_nguon);
       data.append('thu_tu', this.thu_tu);
-      axios.post('/px03/public/api/addNguonDen', data).then(function (response) {
+      axios.post('/px03/public/addNguonDen', data).then(function (response) {
         _this.ten_nguon = '';
         _this.thu_tu = '';
         _this.error = '';
@@ -3757,7 +3758,7 @@ __webpack_require__.r(__webpack_exports__);
       var data = new FormData();
       data.append('ten_nguon', this.ten_nguon);
       data.append('thu_tu', this.thu_tu);
-      axios.post("/px03/public/api/updateNguonDen/".concat(this.$route.params.id), data).then(function (response) {
+      axios.post("/px03/public/updateNguonDen/".concat(this.$route.params.id), data).then(function (response) {
         _this.list();
       })["catch"](function (error) {
         _this.error = error.response.data.errors;
@@ -3782,7 +3783,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this2 = this;
 
-    axios.get("/px03/public/api/editNguonDen/".concat(this.$route.params.id)).then(function (response) {
+    axios.get("/px03/public/editNguonDen/".concat(this.$route.params.id)).then(function (response) {
       _this2.ten_nguon = response.data[0].ten_nguon;
       _this2.thu_tu = response.data[0].thu_tu;
     });
@@ -3849,7 +3850,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.idEdit = this.$route.params.id;
-      axios.get("/px03/public/api/editNguonDen/".concat(this.$route.params.id)).then(function (response) {
+      axios.get("/px03/public/editNguonDen/".concat(this.$route.params.id)).then(function (response) {
         _this.$emit('dataById', response);
       });
     },
@@ -3857,7 +3858,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       if (confirm('ban muon xoa that a ?') == true) {
-        axios.get("/px03/public/api/deleteNguonDen/".concat(id)).then(function (reponse) {
+        axios.get("/px03/public/deleteNguonDen/".concat(id)).then(function (reponse) {
           _this2.$store.dispatch('acListNguonDen', _this2.currentPage);
 
           if (_this2.$router.history.current.path !== '/nguonden') {
@@ -3956,7 +3957,7 @@ __webpack_require__.r(__webpack_exports__);
       var data = new FormData();
       data.append('ten_nguon', this.ten_nguon);
       data.append('thu_tu', this.thu_tu);
-      axios.post('/px03/public/api/addNguonDi', data).then(function (response) {
+      axios.post('/px03/public/addNguonDi', data).then(function (response) {
         _this.ten_nguon = '';
         _this.thu_tu = '';
         _this.error = '';
@@ -4071,7 +4072,7 @@ __webpack_require__.r(__webpack_exports__);
       var data = new FormData();
       data.append('ten_nguon', this.ten_nguon);
       data.append('thu_tu', this.thu_tu);
-      axios.post("/px03/public/api/updateNguonDi/".concat(this.$route.params.id), data).then(function (response) {
+      axios.post("/px03/public/updateNguonDi/".concat(this.$route.params.id), data).then(function (response) {
         _this.list();
       })["catch"](function (error) {
         _this.error = error.response.data.errors;
@@ -4096,7 +4097,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this2 = this;
 
-    axios.get("/px03/public/api/editNguonDi/".concat(this.$route.params.id)).then(function (response) {
+    axios.get("/px03/public/editNguonDi/".concat(this.$route.params.id)).then(function (response) {
       _this2.ten_nguon = response.data[0].ten_nguon;
       _this2.thu_tu = response.data[0].thu_tu;
     });
@@ -4163,7 +4164,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.idEdit = this.$route.params.id;
-      axios.get("/px03/public/api/editNguonDi/".concat(this.$route.params.id)).then(function (response) {
+      axios.get("/px03/public/editNguonDi/".concat(this.$route.params.id)).then(function (response) {
         _this.$emit('dataById', response);
       });
     },
@@ -4171,7 +4172,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       if (confirm('ban muon xoa that a ?') == true) {
-        axios.get("/px03/public/api/deleteNguonDi/".concat(id)).then(function (reponse) {
+        axios.get("/px03/public/deleteNguonDi/".concat(id)).then(function (reponse) {
           _this2.$store.dispatch('acListNguonDi', _this2.currentPage);
 
           if (_this2.$router.history.current.path !== '/nguondi') {
@@ -4426,7 +4427,7 @@ __webpack_require__.r(__webpack_exports__);
         data.append('mangchucnang[]', this.mangchucnang[i]);
       }
 
-      axios.post('/px03/public/api/addPhanQuyen', data).then(function (response) {
+      axios.post('/px03/public/addPhanQuyen', data).then(function (response) {
         _this.name = '';
         _this.display_name = '';
         _this.mangchucnang = [];
@@ -4454,7 +4455,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       //tải dữ liệu permission
-      axios.get('/px03/public/api/listChucNangCha').then(function (response) {
+      axios.get('/px03/public/listChucNangCha').then(function (response) {
         _this2.permissions = response.data;
       });
     },
@@ -4635,7 +4636,7 @@ __webpack_require__.r(__webpack_exports__);
         data.append('mangchucnang[]', this.mangchucnang[i]);
       }
 
-      axios.post('/px03/public/api/updatePhanQuyen/' + this.$route.params.id, data).then(function (response) {
+      axios.post('/px03/public/updatePhanQuyen/' + this.$route.params.id, data).then(function (response) {
         _this.list();
 
         alert("Sửa thành công !");
@@ -4668,7 +4669,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       //tải dữ liệu permission
-      axios.get('/px03/public/api/listChucNangCha').then(function (response) {
+      axios.get('/px03/public/listChucNangCha').then(function (response) {
         _this2.permissions = response.data;
       });
     },
@@ -4710,7 +4711,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.loadPermission(); //Lấy dữ liệu đổ vào các module chức năng
 
-    axios.get("/px03/public/api/editPhanQuyen/".concat(this.$route.params.id)) //Lấy thông tin dữ liệu sửa khi chuyển từ trang add sang
+    axios.get("/px03/public/editPhanQuyen/".concat(this.$route.params.id)) //Lấy thông tin dữ liệu sửa khi chuyển từ trang add sang
     .then(function (response) {
       _this3.name = response.data[0].name;
       _this3.display_name = response.data[0].display_name;
@@ -4777,7 +4778,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.idEdit = this.$route.params.id;
-      axios.get("/px03/public/api/editPhanQuyen/".concat(this.$route.params.id)).then(function (response) {
+      axios.get("/px03/public/editPhanQuyen/".concat(this.$route.params.id)).then(function (response) {
         _this.$emit('dataById', response);
       });
     },
@@ -4785,7 +4786,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       if (confirm('ban muon xoa that a ?') == true) {
-        axios.get("/px03/public/api/deletePhanQuyen/".concat(id)).then(function (reponse) {
+        axios.get("/px03/public/deletePhanQuyen/".concat(id)).then(function (reponse) {
           _this2.$store.dispatch('acListPhanQuyen', _this2.currentPage);
 
           if (_this2.$router.history.current.path !== '/phanquyen') {
@@ -4928,7 +4929,7 @@ __webpack_require__.r(__webpack_exports__);
         data.append('roles[]', this.roles[i]);
       }
 
-      axios.post('/px03/public/api/addTaiKhoan', data).then(function (response) {
+      axios.post('/px03/public/addTaiKhoan', data).then(function (response) {
         _this.fullname = '';
         _this.username = '';
         _this.password = '';
@@ -5084,7 +5085,7 @@ __webpack_require__.r(__webpack_exports__);
         data.append('roles[]', this.roles[i]);
       }
 
-      axios.post("/px03/public/api/updateTaiKhoan/".concat(this.$route.params.id), data).then(function (response) {
+      axios.post("/px03/public/updateTaiKhoan/".concat(this.$route.params.id), data).then(function (response) {
         _this.list();
 
         alert('Đã cập nhật !');
@@ -5114,7 +5115,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this2 = this;
 
     // this.list();
-    axios.get("/px03/public/api/editTaiKhoan/".concat(this.$route.params.id)).then(function (data) {
+    axios.get("/px03/public/editTaiKhoan/".concat(this.$route.params.id)).then(function (data) {
       _this2.fullname = data.data[0].fullname;
       _this2.username = data.data[0].username;
       _this2.roles = data.data[0].roles.map(function (role) {
@@ -5181,7 +5182,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.idEdit = this.$route.params.id;
-      axios.get("/px03/public/api/editTaiKhoan/".concat(this.$route.params.id)).then(function (response) {
+      axios.get("/px03/public/editTaiKhoan/".concat(this.$route.params.id)).then(function (response) {
         _this.$emit('dataById', response);
       });
     },
@@ -5189,7 +5190,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       if (confirm('ban muon xoa that a ?') == true) {
-        axios.get("/px03/public/api/deleteTaiKhoan/".concat(id)).then(function (reponse) {
+        axios.get("/px03/public/deleteTaiKhoan/".concat(id)).then(function (reponse) {
           _this2.$store.dispatch('acListTaiKhoan', _this2.currentPage);
 
           if (_this2.$router.history.current.path !== '/TaiKhoan') {
@@ -67118,42 +67119,42 @@ var storeInfo = {
       context.commit('muGetPage', page);
     },
     acListLoai: function acListLoai(context, page) {
-      axios.get('/px03/public/api/listLoaiVanBan?page=' + page).then(function (response) {
+      axios.get('/px03/public/listLoaiVanBan?page=' + page).then(function (response) {
         context.commit('muListLoai', response.data);
       });
     },
     acListNguonDen: function acListNguonDen(context, page) {
-      axios.get('/px03/public/api/listNguonDen?page=' + page).then(function (response) {
+      axios.get('/px03/public/listNguonDen?page=' + page).then(function (response) {
         context.commit('muListNguonDen', response.data);
       });
     },
     acListNguonDi: function acListNguonDi(context, page) {
-      axios.get('/px03/public/api/listNguonDi?page=' + page).then(function (response) {
+      axios.get('/px03/public/listNguonDi?page=' + page).then(function (response) {
         context.commit('muListNguonDi', response.data);
       });
     },
     acListLanhDao: function acListLanhDao(context, page) {
-      axios.get('/px03/public/api/listLanhDao?page=' + page).then(function (response) {
+      axios.get('/px03/public/listLanhDao?page=' + page).then(function (response) {
         context.commit('muListLanhDao', response.data);
       });
     },
     acListDonVi: function acListDonVi(context, page) {
-      axios.get('/px03/public/api/listDonVi?page=' + page).then(function (response) {
+      axios.get('/px03/public/listDonVi?page=' + page).then(function (response) {
         context.commit('muListDonVi', response.data);
       });
     },
     acListChucNang: function acListChucNang(context, page) {
-      axios.get('/px03/public/api/listChucNang?page=' + page).then(function (response) {
+      axios.get('/px03/public/listChucNang?page=' + page).then(function (response) {
         context.commit('muListChucNang', response.data);
       });
     },
     acListPhanQuyen: function acListPhanQuyen(context, page) {
-      axios.get('/px03/public/api/listPhanQuyen?page=' + page).then(function (response) {
+      axios.get('/px03/public/listPhanQuyen?page=' + page).then(function (response) {
         context.commit('muListPhanQuyen', response.data);
       });
     },
     acListTaiKhoan: function acListTaiKhoan(context, page) {
-      axios.get('/px03/public/api/listTaiKhoan?page=' + page).then(function (response) {
+      axios.get('/px03/public/listTaiKhoan?page=' + page).then(function (response) {
         context.commit('muListTaiKhoan', response.data);
       });
     }

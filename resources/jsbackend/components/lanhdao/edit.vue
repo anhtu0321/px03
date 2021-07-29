@@ -100,7 +100,7 @@ export default {
 			data.append('chuc_vu', this.chuc_vu);
 			data.append('thu_tu', this.thu_tu);
 			data.append('trang_thai', this.trang_thai);
-			axios.post(`/px03/public/api/updateLanhDao/${this.$route.params.id}`, data)
+			axios.post(`/px03/public/updateLanhDao/${this.$route.params.id}`, data)
 			.then(response=>{
 				this.list();
 			})
@@ -125,7 +125,7 @@ export default {
 	components:{contentHeader, list, paginate},
 	mounted(){
 		// this.list();
-		axios.get(`/px03/public/api/editLanhDao/${this.$route.params.id}`)
+		axios.get(`/px03/public/editLanhDao/${this.$route.params.id}`)
         .then(response=>{
             this.ho_ten = response.data[0].ho_ten;
             this.cap_bac = response.data[0].cap_bac;

@@ -46,14 +46,14 @@ export default {
     methods:{
         loadListNguonDi(){
             this.idEdit = this.$route.params.id;
-            axios.get(`/px03/public/api/editNguonDi/${this.$route.params.id}`)
+            axios.get(`/px03/public/editNguonDi/${this.$route.params.id}`)
             .then(response=>{
                 this.$emit('dataById', response);
             })
         },
         deleteNguonDi(id){
             if(confirm('ban muon xoa that a ?') == true){
-                axios.get(`/px03/public/api/deleteNguonDi/${id}`)
+                axios.get(`/px03/public/deleteNguonDi/${id}`)
                 .then(reponse=>{
                     this.$store.dispatch('acListNguonDi',this.currentPage);
                     if(this.$router.history.current.path !=='/nguondi'){

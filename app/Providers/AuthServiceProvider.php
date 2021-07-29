@@ -24,7 +24,18 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        //
+        // Gate Loại văn bản
+        Gate::define('loaivanban_xem', function($user){
+            return $user->ktphanquyen('loaivanban_xem');
+        });
+        Gate::define('loaivanban_them', function($user){
+            return $user->ktphanquyen('loaivanban_them');
+        });
+        Gate::define('loaivanban_sua', function($user){
+            return $user->ktphanquyen('loaivanban_sua');
+        });
+        Gate::define('loaivanban_xoa', function($user){
+            return $user->ktphanquyen('loaivanban_xoa');
+        });
     }
 }

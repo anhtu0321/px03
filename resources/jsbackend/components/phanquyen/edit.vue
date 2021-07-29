@@ -119,7 +119,7 @@ export default {
 			for(var i in this.mangchucnang){
 				data.append('mangchucnang[]', this.mangchucnang[i]);
 			}
-			axios.post('/px03/public/api/updatePhanQuyen/'+this.$route.params.id, data)
+			axios.post('/px03/public/updatePhanQuyen/'+this.$route.params.id, data)
 			.then(response=>{
 				this.list();
 				alert("Sửa thành công !")
@@ -146,7 +146,7 @@ export default {
 			this.list();
 		},
 		loadPermission(){ //tải dữ liệu permission
-			axios.get('/px03/public/api/listChucNangCha')
+			axios.get('/px03/public/listChucNangCha')
 			.then(response=>{
 				this.permissions = response.data;
 			})
@@ -176,7 +176,7 @@ export default {
 	mounted(){
 		this.list(); //Gọi danh sách dữ liệu đưa vào component list
 		this.loadPermission(); //Lấy dữ liệu đổ vào các module chức năng
-		axios.get(`/px03/public/api/editPhanQuyen/${this.$route.params.id}`) //Lấy thông tin dữ liệu sửa khi chuyển từ trang add sang
+		axios.get(`/px03/public/editPhanQuyen/${this.$route.params.id}`) //Lấy thông tin dữ liệu sửa khi chuyển từ trang add sang
         .then(response=>{
             this.name = response.data[0].name;
 			this.display_name = response.data[0].display_name;

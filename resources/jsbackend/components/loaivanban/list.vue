@@ -48,14 +48,14 @@ export default {
     methods:{
         loadListLoai(){
             this.idEdit = this.$route.params.id;
-            axios.get(`/px03/public/api/editLoaiVanBan/${this.$route.params.id}`)
+            axios.get(`/px03/public/editLoaiVanBan/${this.$route.params.id}`)
             .then(response=>{
                 this.$emit('dataById', response);
             })
         },
         deleteLoai(id){
             if(confirm('ban muon xoa that a ?') == true){
-                axios.get(`/px03/public/api/deleteLoaiVanBan/${id}`)
+                axios.get(`/px03/public/deleteLoaiVanBan/${id}`)
                 .then(reponse=>{
                     this.$store.dispatch('acListLoai',this.currentPage);
                     if(this.$router.history.current.path !=='/loaivanban'){

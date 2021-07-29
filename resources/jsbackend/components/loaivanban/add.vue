@@ -76,7 +76,7 @@ export default {
 			data.append('ten_loai', this.ten_loai);
 			data.append('thu_tu', this.thu_tu);
 			data.append('trang_thai', this.trang_thai);
-			axios.post('/px03/public/api/addLoaiVanBan', data)
+			axios.post('/px03/public/addLoaiVanBan', data)
 			.then(response=>{
 				this.ten_loai = '';
 				this.thu_tu = '';
@@ -85,6 +85,7 @@ export default {
 			})
 			.catch(error=>{
 				this.error = error.response.data.errors;
+				console.log(error.response.data.message);
 			});
 		},
 		list(){
