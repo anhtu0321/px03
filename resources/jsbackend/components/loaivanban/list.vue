@@ -19,8 +19,8 @@
                             <td>{{list.thu_tu}}</td>
                             <td>{{list.trang_thai == 1? "Sử dụng" : "Không sử dụng"}}</td>
                             <td>
-                                <router-link class="btn btn-primary btn-sm" :to="`/loaivanban/edit/${list.id}`" @click.native="loadListLoai()">Sửa</router-link>
-                                <button class="btn btn-danger btn-sm" @click.prevent="deleteLoai(list.id)">Xóa</button>
+                                <router-link class="btn btn-primary btn-sm" :to="`/loaivanban/edit/${list.id}`" @click.native="loadListLoai()" v-if="ktquyen('loaivanban_sua')">Sửa</router-link>
+                                <button class="btn btn-danger btn-sm" @click.prevent="deleteLoai(list.id)" v-if="ktquyen('loaivanban_xoa')">Xóa</button>
                             </td>
                         </tr>
                     </tbody>
@@ -44,6 +44,9 @@ export default {
         listData(){
             return this.$store.getters.getListLoai;
         },
+        listPermissionOfUser(){
+			return this.$store.getters.getlistPermissionOfUser;
+        }
     },
     methods:{
         loadListLoai(){
@@ -63,7 +66,15 @@ export default {
                     }
                 })
             }
-        }
+        },
+        ktquyen(key_code){
+			for(var i in this.listPermissionOfUser){
+				if(this.listPermissionOfUser[i].key_code == key_code){
+					return true;
+				}
+			}
+			return false;
+		}
     },
     mounted(){
         this.idEdit = this.$route.params.id;

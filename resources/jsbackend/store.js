@@ -12,6 +12,7 @@ const storeInfo = {
         listChucNang: '',
         listPhanQuyen: '',
         listTaiKhoan: '',
+        listPermissionOfUser: '',
     },
     getters: {
         getPage(state) {
@@ -40,6 +41,9 @@ const storeInfo = {
         },
         getListTaiKhoan(state) {
             return state.listTaiKhoan;
+        },
+        getlistPermissionOfUser(state) {
+            return state.listPermissionOfUser;
         }
     },
     actions: {
@@ -94,6 +98,12 @@ const storeInfo = {
                     context.commit('muListTaiKhoan', response.data);
                 })
         },
+        aclistPermissionOfUser(context) {
+            axios.get('/px03/public/listPermissionOfUser')
+                .then(response => {
+                    context.commit('mulistPermissionOfUser', response.data);
+                })
+        },
     },
     mutations: {
         muGetPage(state, page) {
@@ -122,6 +132,9 @@ const storeInfo = {
         },
         muListTaiKhoan(state, response) {
             state.listTaiKhoan = response;
+        },
+        mulistPermissionOfUser(state, response) {
+            state.listPermissionOfUser = response;
         },
     },
 }

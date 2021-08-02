@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-if="ktquyen('donvi_xem')">
 		<content-header :tieude="tieude" :link="link"></content-header>
         <section class="content">
     		<div class="container-fluid">
@@ -60,7 +60,7 @@
 								</div>
 							</div>
 							<div class="form-group col-md-12 text-right">
-								<button type="submit" class="btn btn-success btn-sm">Sửa loại văn bản</button>
+								<button type="submit" class="btn btn-success btn-sm" v-if="ktquyen('donvi_sua')">Sửa loại văn bản</button>
 								<router-link to="/donvi" class="btn btn-warning btn-sm">Quay lại</router-link>
 							</div>
 					</form>
@@ -81,7 +81,16 @@
             </div>
         </div>
 	</div>
-	
+	<div v-else>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="mt-2 mr-2 alert" style="font-size:2rem; color:red">
+					Bạn không có quyền xem mục này !
+				</div>
+			</div>
+		</div>
+	</div>
+
 </template>
 
 <script>
@@ -109,6 +118,9 @@ export default {
         },
         listData(){
             return this.$store.getters.getListDonVi;
+        },
+		listPermissionOfUser(){
+			return this.$store.getters.getlistPermissionOfUser;
         }
 	},
 	methods:{
@@ -141,6 +153,14 @@ export default {
 		},
 		loadData(){
 			this.list();
+		},
+		ktquyen(key_code){
+			for(var i in this.listPermissionOfUser){
+				if(this.listPermissionOfUser[i].key_code == key_code){
+					return true;
+				}
+			}
+			return false;
 		}
 	},
 	components:{contentHeader, list, paginate},

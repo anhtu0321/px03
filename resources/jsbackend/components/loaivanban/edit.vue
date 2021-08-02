@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-if="ktquyen('loaivanban_xem')">
 		<content-header :tieude="tieude" :link="link"></content-header>
         <section class="content">
     		<div class="container-fluid">
@@ -28,8 +28,8 @@
 							</select>
 						</div>
 						<div class="form-group col-md-12 text-right">
-							<button type="submit" class="btn btn-success btn-sm">Sửa loại văn bản</button>
-							<router-link to="/loaivanban" class="btn btn-warning btn-sm">Quay lại</router-link>
+							<button type="submit" class="btn btn-success btn-sm" v-if="ktquyen('loaivanban_sua')">Sửa loại văn bản</button>
+							<router-link to="/loaivanban" class="btn btn-warning btn-sm" v-if="ktquyen('loaivanban_xoa')">Quay lại</router-link>
 						</div>
 					</form>
 					</div>
@@ -42,6 +42,15 @@
                 <paginate :last_pages="listData.last_page" @loadData="loadDataLoai"></paginate>
             </div>
         </div>
+	</div>
+	<div v-else>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="mt-2 mr-2 alert mx-auto" style="font-size:2rem; color:red">
+					Bạn không có quyền xem mục này !
+				</div>
+			</div>
+		</div>
 	</div>
 	
 </template>
@@ -68,6 +77,9 @@ export default {
         },
         listData(){
             return this.$store.getters.getListLoai;
+		},
+		listPermissionOfUser(){
+			return this.$store.getters.getlistPermissionOfUser;
         }
 	},
 	methods:{
@@ -94,6 +106,14 @@ export default {
 		},
 		loadDataLoai(){
 			this.list();
+		},
+		ktquyen(key_code){
+			for(var i in this.listPermissionOfUser){
+				if(this.listPermissionOfUser[i].key_code == key_code){
+					return true;
+				}
+			}
+			return false;
 		}
 	},
 	components:{contentHeader, list, paginate},

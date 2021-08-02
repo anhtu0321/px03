@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-if="ktquyen('taikhoan_xem')">
 		<content-header :tieude="tieude" :link="link"></content-header>
         <section class="content">
     		<div class="container-fluid">
@@ -38,7 +38,7 @@
 							</div>
 
 							<div class="form-group col-md-12 text-right">
-								<button type="submit" class="btn btn-success btn-sm">Sửa loại văn bản</button>
+								<button type="submit" class="btn btn-success btn-sm" v-if="ktquyen('taikhoan_sua')">Sửa loại văn bản</button>
 								<router-link to="/taikhoan" class="btn btn-warning btn-sm">Quay lại</router-link>
 							</div>
 					</form>
@@ -58,6 +58,15 @@
                 <paginate :last_pages="listData.last_page" @loadData="loadData"></paginate>
             </div>
         </div>
+	</div>
+	<div v-else>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="mt-2 mr-2 alert" style="font-size:2rem; color:red">
+					Bạn không có quyền xem mục này !
+				</div>
+			</div>
+		</div>
 	</div>
 	
 </template>
@@ -90,6 +99,9 @@ export default {
 		},
 		listRoles(){
             return this.$store.getters.getListPhanQuyen;
+        },
+		listPermissionOfUser(){
+			return this.$store.getters.getlistPermissionOfUser;
         }
 	},
 	methods:{
@@ -104,7 +116,8 @@ export default {
 			axios.post(`/px03/public/updateTaiKhoan/${this.$route.params.id}`, data)
 			.then(response=>{
 				this.list();
-				alert('Đã cập nhật !')
+				this.$store.dispatch('aclistPermissionOfUser');
+				alert('Đã cập nhật !');
 			})
 			.catch(error=>{
 				this.error = error.response.data.errors;
@@ -120,6 +133,14 @@ export default {
 		},
 		loadData(){
 			this.list();
+		},
+		ktquyen(key_code){
+			for(var i in this.listPermissionOfUser){
+				if(this.listPermissionOfUser[i].key_code == key_code){
+					return true;
+				}
+			}
+			return false;
 		}
 	},
 	components:{contentHeader, list, paginate, vSelect},
@@ -132,6 +153,7 @@ export default {
 			this.roles = data.data[0].roles.map(role=>role.id);
 		});
 		this.$store.dispatch('acListPhanQuyen',1);
+		this.$store.dispatch('aclistPermissionOfUser');
 	},
 }
 </script>

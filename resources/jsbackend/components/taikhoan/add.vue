@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-if="ktquyen('taikhoan_xem')">
 		<content-header :tieude="tieude" :link="link"></content-header>
         <section class="content">
     		<div class="container-fluid">
@@ -40,7 +40,7 @@
 							</div>
 
 							<div class="form-group col-md-12 text-right">
-								<button type="submit" class="btn btn-primary btn-sm">Thêm tài khoản</button>
+								<button type="submit" class="btn btn-primary btn-sm" v-if="ktquyen('taikhoan_them')">Thêm tài khoản</button>
 								<button type="submit" class="btn btn-warning btn-sm" @click.prevent="reloadData">Tải lại dữ liệu</button>
 							</div>
 
@@ -62,6 +62,15 @@
                 <paginate :last_pages="listData.last_page" @loadData="loadData"></paginate>
             </div>
         </div>
+	</div>
+	<div v-else>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="mt-2 mr-2 alert" style="font-size:2rem; color:red">
+					Bạn không có quyền xem mục này !
+				</div>
+			</div>
+		</div>
 	</div>
 	
 </template>
@@ -94,6 +103,9 @@ export default {
 		},
 		listRoles(){
             return this.$store.getters.getListPhanQuyen;
+        },
+		listPermissionOfUser(){
+			return this.$store.getters.getlistPermissionOfUser;
         }
     },
 	methods:{
@@ -112,6 +124,7 @@ export default {
 				this.password = '';
 				this.roles ='',
 				this.list();
+				this.$store.dispatch('aclistPermissionOfUser');
 			})
 			.catch(error=>{
 				this.error = error.response.data.errors;
@@ -128,6 +141,14 @@ export default {
 		reloadData(){
 			this.$store.dispatch('acGetPage',1);
 			this.list();
+		},
+		ktquyen(key_code){
+			for(var i in this.listPermissionOfUser){
+				if(this.listPermissionOfUser[i].key_code == key_code){
+					return true;
+				}
+			}
+			return false;
 		}
 	},
 	components:{contentHeader, list, paginate, vSelect},

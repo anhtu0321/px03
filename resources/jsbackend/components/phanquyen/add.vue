@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-if="ktquyen('phanquyen_xem')">
 		<content-header :tieude="tieude" :link="link"></content-header>
         <section class="content">
     		<div class="container-fluid">
@@ -49,7 +49,7 @@
 								</div>
 							</div>
 							<div class="form-group col-md-12 text-right">
-								<button type="submit" class="btn btn-primary btn-sm">Thêm Phân quyền</button>
+								<button type="submit" class="btn btn-primary btn-sm" v-if="ktquyen('phanquyen_them')">Thêm Phân quyền</button>
 								<button type="submit" class="btn btn-warning btn-sm" @click.prevent="reloadData">Tải lại dữ liệu</button>
 							</div>
 
@@ -71,6 +71,15 @@
                 <paginate :last_pages="listData.last_page" @loadData="loadData"></paginate>
             </div>
         </div>
+	</div>
+	<div v-else>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="mt-2 mr-2 alert" style="font-size:2rem; color:red">
+					Bạn không có quyền xem mục này !
+				</div>
+			</div>
+		</div>
 	</div>
 	
 </template>
@@ -109,7 +118,10 @@ export default {
 				}
 			}
 			return arr;
-		}
+		},
+		listPermissionOfUser(){
+			return this.$store.getters.getlistPermissionOfUser;
+        }
     },
 	methods:{
 		add(){ //thêm dữ liệu vào database
@@ -126,6 +138,7 @@ export default {
 				this.mangchucnang=[];
 				this.error = '';
 				this.list();
+				this.$store.dispatch('aclistPermissionOfUser');
 			})
 			.catch(error=>{
 				this.error = error.response.data.errors;
@@ -168,12 +181,21 @@ export default {
 					this.mangchucnang.splice(this.mangchucnang.indexOf(parseInt(checkCon[i].value)),1);
 				}
 			}
+		},
+		ktquyen(key_code){
+			for(var i in this.listPermissionOfUser){
+				if(this.listPermissionOfUser[i].key_code == key_code){
+					return true;
+				}
+			}
+			return false;
 		}
 	},
 	components:{contentHeader, list, paginate},
 	mounted(){
 		this.list();
 		this.loadPermission();
+		this.$store.dispatch('aclistPermissionOfUser');
 	}
 }
 </script>

@@ -10,7 +10,7 @@ class RoleController extends Controller
 {
     public function index()
     {
-        return Role::paginate(10);
+        return Role::paginate(50);
     }
     public function listCha(){
         return Role::where('parent_id','0')->get();

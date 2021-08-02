@@ -6,6 +6,7 @@
                 <th>#</th>
                 <th>Tên hiển thị</th>
                 <th>Tài khoản</th>
+                <th>Phân quyền</th>
                 <th>Cập nhật</th>
             </tr>
         </thead>
@@ -15,8 +16,11 @@
                 <td>{{list.fullname}}</td>
                 <td>{{list.username}}</td>
                 <td>
-                    <router-link class="btn btn-primary btn-sm" :to="`/taikhoan/edit/${list.id}`" @click.native="loadDataById()">Sửa</router-link>
-                    <button class="btn btn-danger btn-sm" @click.prevent="deleteData(list.id)">Xóa</button>
+                    <span v-for="role in list.roles" :key="role.id">{{ role.name }}, </span>
+                </td>
+                <td>
+                    <router-link class="btn btn-primary btn-sm" :to="`/taikhoan/edit/${list.id}`" @click.native="loadDataById()" v-if="ktquyen('taikhoan_sua')">Sửa</router-link>
+                    <button class="btn btn-danger btn-sm" @click.prevent="deleteData(list.id)" v-if="ktquyen('taikhoan_xoa')">Xóa</button>
                 </td>
             </tr>
         </tbody>
@@ -38,6 +42,9 @@ export default {
         listData(){
             return this.$store.getters.getListTaiKhoan;
         },
+		listPermissionOfUser(){
+			return this.$store.getters.getlistPermissionOfUser;
+        }
     },
     methods:{
         loadDataById(){
@@ -57,7 +64,15 @@ export default {
                     }
                 })
             }
-        }
+        },
+		ktquyen(key_code){
+			for(var i in this.listPermissionOfUser){
+				if(this.listPermissionOfUser[i].key_code == key_code){
+					return true;
+				}
+			}
+			return false;
+		}
     },
     mounted(){
         this.idEdit = this.$route.params.id;
