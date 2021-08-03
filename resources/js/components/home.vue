@@ -2,9 +2,9 @@
     <div class="container-fluid p-0 m-0">
         <header-component></header-component>
         <banner-component></banner-component>
-        <!-- <div id="menu" class="bg-success">menu</div>
-        <div id="content" class="bg-info">content</div>
-        <div id="footer" class="bg-warning">footer</div> -->
+        <menu-component></menu-component>
+        <content-component></content-component>
+        <div id="footer" class="bg-warning">footer</div>
     </div>
     
 </template>
@@ -12,9 +12,13 @@
 <script>
 import headerComponent from './includes/header.vue';
 import bannerComponent from './includes/banner.vue';
+import menuComponent from './includes/menu.vue';
+import contentComponent from './includes/content.vue';
+
+
 
 export default {
-    components:{headerComponent, bannerComponent},
+    components:{headerComponent, bannerComponent, menuComponent, contentComponent},
     mounted(){
         this.$store.dispatch('acUserDetails');
     }

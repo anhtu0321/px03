@@ -38,7 +38,7 @@
 							</div>
 
 							<div class="form-group col-md-12 text-right">
-								<button type="submit" class="btn btn-success btn-sm" v-if="ktquyen('taikhoan_sua')">Sửa loại văn bản</button>
+								<button type="submit" class="btn btn-success btn-sm" v-if="ktquyen('taikhoan_sua')">Sửa tài khoản</button>
 								<router-link to="/taikhoan" class="btn btn-warning btn-sm">Quay lại</router-link>
 							</div>
 					</form>

@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
 #banner{
-    height:250px;
+    height:240px;
     box-sizing: border-box;
     background-image: url('/px03/public/images/4.jpg');
     background-repeat: no-repeat;
@@ -41,16 +41,28 @@ export default {
     z-index:-1;
 }
 .banner__content{
+    position:relative;
     max-width:1200px;
     height:240px;
     margin:0 auto;
-    /* background:cornflowerblue; */
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
+    z-index: 1;
+}
+.banner__content::before{
+    position:absolute;
+    content:'';
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    background:#2073f0;
+    opacity: 0.2;
+    z-index: -1;
 }
 .banner__left{
-    width: 25%;
+    width: 20%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

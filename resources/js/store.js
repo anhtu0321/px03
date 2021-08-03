@@ -5,10 +5,14 @@ Vue.use(VueX);
 const storeInfo = {
     state: {
         userDetails: '',
+        link: '',
     },
     getters: {
         getUserDetails(state) {
             return state.userDetails;
+        },
+        getLink(state) {
+            return state.link;
         }
     },
     actions: {
@@ -17,11 +21,17 @@ const storeInfo = {
                 .then(responsive => {
                     contex.commit('muUserDetails', responsive);
                 })
+        },
+        acLink(contex, link) {
+            contex.commit('muLink', link);
         }
     },
     mutations: {
         muUserDetails(state, responsive) {
             state.userDetails = responsive.data;
+        },
+        muLink(state, data) {
+            state.link = data;
         }
     },
 }
