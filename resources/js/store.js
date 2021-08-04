@@ -5,7 +5,7 @@ Vue.use(VueX);
 const storeInfo = {
     state: {
         userDetails: '',
-        link: '',
+        link: 'vanbanden',
     },
     getters: {
         getUserDetails(state) {

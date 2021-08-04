@@ -57,7 +57,7 @@ export default {
     right:0;
     top:0;
     bottom:0;
-    background:#2073f0;
+    background:#e6e6e6;
     opacity: 0.2;
     z-index: -1;
 }

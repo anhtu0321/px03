@@ -28,7 +28,7 @@ export default {
 
 <style scoped>
     #header{
-        background: rgba(100, 115, 131,0.7);
+        background: #f9f9f9;
         height:50px;
     }
     .header-top{
@@ -44,7 +44,7 @@ export default {
     .header-top__name{
         font-size: 1.1rem;
         font-weight: 600;
-        color:snow;
+        color:#353535;
     }
     .header-top__login{
         width:35%;
@@ -55,7 +55,7 @@ export default {
     .header-top__login, .header-top__login a{
         font-size: 1.1rem;
         font-weight: 600;
-        color:snow;
+        color:#353535;
         text-decoration: none;
     }
     .header-top__alert{

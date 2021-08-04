@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="content__sub">
     day la van ban di
 </div>
    

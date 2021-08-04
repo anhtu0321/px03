@@ -4,7 +4,7 @@
         <banner-component></banner-component>
         <menu-component></menu-component>
         <content-component></content-component>
-        <div id="footer" class="bg-warning">footer</div>
+        <footer-component></footer-component>
     </div>
     
 </template>
@@ -14,11 +14,13 @@ import headerComponent from './includes/header.vue';
 import bannerComponent from './includes/banner.vue';
 import menuComponent from './includes/menu.vue';
 import contentComponent from './includes/content.vue';
+import footerComponent from './includes/footer.vue';
+
 
 
 
 export default {
-    components:{headerComponent, bannerComponent, menuComponent, contentComponent},
+    components:{headerComponent, bannerComponent, menuComponent, contentComponent, footerComponent},
     mounted(){
         this.$store.dispatch('acUserDetails');
     }

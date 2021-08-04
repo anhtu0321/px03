@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="content">
         <vanbanden v-if="getLink == 'vanbanden'"></vanbanden>
         <vanbandi v-if="getLink == 'vanbandi'"></vanbandi>
     </div> 
@@ -19,5 +19,13 @@ export default {
 </script>
 
 <style>
-
+#content{
+    background:#ffffff;
+    min-height:500px;
+}
+.content__sub{
+    max-width: 1200px;
+    margin:0 auto;
+    background: #FFFFFF; 
+}
 </style>
