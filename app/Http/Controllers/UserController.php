@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return User::with('roles')->paginate(10);
+        return User::with('roles')->paginate(50);
     }
     
     public function store(Request $request)

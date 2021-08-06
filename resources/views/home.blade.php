@@ -13,6 +13,7 @@
     </div>
 </body>
 <script src="{{ asset('js/app.js') }}"></script>
+
 </html>
 {{-- <a href="{{ route('logout') }}">Log out</a></br>
 <a href="{{ route('admin.home') }}">Trang quản trị</a> --}}

@@ -75,3 +75,5 @@ Route::get('/listPermissionOfUser','UserController@getPermissons');
 // ********************* DÀNH CHO FRONT END ********************//
 // Lấy thông tin user
 Route::get('/getUser', 'loginController@getUser');
+//Lấy thông tin Loại Văn bản
+Route::get('/listLoai','LoaiVanBanController@listLoai');
