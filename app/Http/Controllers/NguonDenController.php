@@ -9,7 +9,7 @@ class NguonDenController extends Controller
 {
     public function index()
     {
-        return NguonDen::orderBy('thu_tu','asc')->paginate(10);
+        return NguonDen::orderBy('thu_tu','asc')->paginate(30);
     }
     
     public function store(Request $request)

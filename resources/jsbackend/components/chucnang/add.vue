@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-if="ktquyen('chucnang_xem')">
 		<content-header :tieude="tieude" :link="link"></content-header>
         <section class="content">
     		<div class="container-fluid">
@@ -46,7 +46,7 @@
 								
 							</div>
 							<div class="form-group col-md-12 text-right">
-								<button type="submit" class="btn btn-primary btn-sm">Thêm chức năng</button>
+								<button type="submit" class="btn btn-primary btn-sm" v-if="ktquyen('chucnang_them')">Thêm chức năng</button>
 								<button type="submit" class="btn btn-warning btn-sm" @click.prevent="reloadData">Tải lại dữ liệu</button>
 							</div>
 
@@ -69,7 +69,16 @@
             </div>
         </div>
 	</div>
-	
+	<div v-else>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="mt-2 mr-2 alert" style="font-size:2rem; color:red">
+					Bạn không có quyền xem mục này !
+				</div>
+			</div>
+		</div>
+	</div>
+
 </template>
 
 <script>
@@ -97,7 +106,9 @@ export default {
         listData(){
             return this.$store.getters.getListChucNang;
 		},
-		
+		listPermissionOfUser(){
+			return this.$store.getters.getlistPermissionOfUser;
+        }
     },
 	methods:{
 		add(){
@@ -106,7 +117,7 @@ export default {
 			data.append('display_name', this.display_name);
 			data.append('key_code', this.key_code);
 			data.append('parent_id', this.parent_id);
-			axios.post('/px03/public/api/addChucNang', data)
+			axios.post('/px03/public/addChucNang', data)
 			.then(response=>{
 				this.name = '';
 				this.display_name = '';
@@ -123,7 +134,7 @@ export default {
 			this.$store.dispatch('acListChucNang',this.currentPage);
 		},
 		listChucNangCha(){
-			axios.get('/px03/public/api/listChucNangCha')
+			axios.get('/px03/public/listChucNangCha')
 			.then(response=>{
 				this.chuc_nang_cha = response.data;
 			})
@@ -135,6 +146,14 @@ export default {
 			this.$store.dispatch('acGetPage',1);
 			this.list();
 			this.listChucNangCha();
+		},
+		ktquyen(key_code){
+			for(var i in this.listPermissionOfUser){
+				if(this.listPermissionOfUser[i].key_code == key_code){
+					return true;
+				}
+			}
+			return false;
 		}
 	},
 	components:{contentHeader, list, paginate},

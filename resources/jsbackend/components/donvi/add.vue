@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-if="ktquyen('donvi_xem')">
 		<content-header :tieude="tieude" :link="link"></content-header>
         <section class="content">
     		<div class="container-fluid">
@@ -62,7 +62,7 @@
 								</div>
 							</div>
 							<div class="form-group col-md-12 text-right">
-								<button type="submit" class="btn btn-primary btn-sm">Thêm đơn vị</button>
+								<button type="submit" class="btn btn-primary btn-sm" v-if="ktquyen('donvi_them')">Thêm đơn vị</button>
 								<button type="submit" class="btn btn-warning btn-sm" @click.prevent="reloadData">Tải lại dữ liệu</button>
 							</div>
 
@@ -85,7 +85,16 @@
             </div>
         </div>
 	</div>
-	
+	<div v-else>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="mt-2 mr-2 alert" style="font-size:2rem; color:red">
+					Bạn không có quyền xem mục này !
+				</div>
+			</div>
+		</div>
+	</div>
+
 </template>
 
 <script>
@@ -113,6 +122,9 @@ export default {
         },
         listData(){
             return this.$store.getters.getListDonVi;
+        },
+		listPermissionOfUser(){
+			return this.$store.getters.getlistPermissionOfUser;
         }
     },
 	methods:{
@@ -124,7 +136,7 @@ export default {
 			data.append('khoi', this.khoi);
 			data.append('thu_tu', this.thu_tu);
 			data.append('trang_thai', this.trang_thai);
-			axios.post('/px03/public/api/addDonVi', data)
+			axios.post('/px03/public/addDonVi', data)
 			.then(response=>{
 				this.ten_phong = '';
 				this.ten_phong_full = '';
@@ -146,6 +158,14 @@ export default {
 		reloadData(){
 			this.$store.dispatch('acGetPage',1);
 			this.list();
+		},
+		ktquyen(key_code){
+			for(var i in this.listPermissionOfUser){
+				if(this.listPermissionOfUser[i].key_code == key_code){
+					return true;
+				}
+			}
+			return false;
 		}
 	},
 	components:{contentHeader, list, paginate},

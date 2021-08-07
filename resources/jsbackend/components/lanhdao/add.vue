@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-if="ktquyen('lanhdao_xem')">
 		<content-header :tieude="tieude" :link="link"></content-header>
         <section class="content">
     		<div class="container-fluid">
@@ -42,7 +42,7 @@
 							</select>
 						</div>
 						<div class="form-group col-md-12 text-right">
-							<button type="submit" class="btn btn-primary btn-sm">Thêm lãnh đạo</button>
+							<button type="submit" class="btn btn-primary btn-sm" v-if="ktquyen('lanhdao_them')">Thêm lãnh đạo</button>
 							<button type="submit" class="btn btn-warning btn-sm" @click.prevent="reloadData">Tải lại dữ liệu</button>
 						</div>
 					</form>
@@ -62,6 +62,15 @@
                 <paginate :last_pages="listData.last_page" @loadData="loadData"></paginate>
             </div>
         </div>
+	</div>
+	<div v-else>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="mt-2 mr-2 alert" style="font-size:2rem; color:red">
+					Bạn không có quyền xem mục này !
+				</div>
+			</div>
+		</div>
 	</div>
 	
 </template>
@@ -90,6 +99,9 @@ export default {
         },
         listData(){
             return this.$store.getters.getListLanhDao;
+        },
+		listPermissionOfUser(){
+			return this.$store.getters.getlistPermissionOfUser;
         }
     },
 	methods:{
@@ -100,7 +112,7 @@ export default {
 			data.append('chuc_vu', this.chuc_vu);
 			data.append('thu_tu', this.thu_tu);
 			data.append('trang_thai', this.trang_thai);
-			axios.post('/px03/public/api/addLanhDao', data)
+			axios.post('/px03/public/addLanhDao', data)
 			.then(response=>{
 				this.ho_ten = '';
 				this.cap_bac = '';
@@ -122,6 +134,14 @@ export default {
 		reloadData(){
 			this.$store.dispatch('acGetPage',1);
 			this.list();
+		},
+		ktquyen(key_code){
+			for(var i in this.listPermissionOfUser){
+				if(this.listPermissionOfUser[i].key_code == key_code){
+					return true;
+				}
+			}
+			return false;
 		}
 	},
 	components:{contentHeader, list, paginate},

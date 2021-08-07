@@ -11,6 +11,8 @@ const storeInfo = {
         listDonVi: '',
         listChucNang: '',
         listPhanQuyen: '',
+        listTaiKhoan: '',
+        listPermissionOfUser: '',
     },
     getters: {
         getPage(state) {
@@ -36,6 +38,12 @@ const storeInfo = {
         },
         getListPhanQuyen(state) {
             return state.listPhanQuyen;
+        },
+        getListTaiKhoan(state) {
+            return state.listTaiKhoan;
+        },
+        getlistPermissionOfUser(state) {
+            return state.listPermissionOfUser;
         }
     },
     actions: {
@@ -43,45 +51,57 @@ const storeInfo = {
             context.commit('muGetPage', page);
         },
         acListLoai(context, page) {
-            axios.get('/px03/public/api/listLoaiVanBan?page=' + page)
+            axios.get('/px03/public/listLoaiVanBan?page=' + page)
                 .then(response => {
                     context.commit('muListLoai', response.data);
                 })
         },
         acListNguonDen(context, page) {
-            axios.get('/px03/public/api/listNguonDen?page=' + page)
+            axios.get('/px03/public/listNguonDen?page=' + page)
                 .then(response => {
                     context.commit('muListNguonDen', response.data);
                 })
         },
         acListNguonDi(context, page) {
-            axios.get('/px03/public/api/listNguonDi?page=' + page)
+            axios.get('/px03/public/listNguonDi?page=' + page)
                 .then(response => {
                     context.commit('muListNguonDi', response.data);
                 })
         },
         acListLanhDao(context, page) {
-            axios.get('/px03/public/api/listLanhDao?page=' + page)
+            axios.get('/px03/public/listLanhDao?page=' + page)
                 .then(response => {
                     context.commit('muListLanhDao', response.data);
                 })
         },
         acListDonVi(context, page) {
-            axios.get('/px03/public/api/listDonVi?page=' + page)
+            axios.get('/px03/public/listDonVi?page=' + page)
                 .then(response => {
                     context.commit('muListDonVi', response.data);
                 })
         },
         acListChucNang(context, page) {
-            axios.get('/px03/public/api/listChucNang?page=' + page)
+            axios.get('/px03/public/listChucNang?page=' + page)
                 .then(response => {
                     context.commit('muListChucNang', response.data);
                 })
         },
         acListPhanQuyen(context, page) {
-            axios.get('/px03/public/api/listPhanQuyen?page=' + page)
+            axios.get('/px03/public/listPhanQuyen?page=' + page)
                 .then(response => {
                     context.commit('muListPhanQuyen', response.data);
+                })
+        },
+        acListTaiKhoan(context, page) {
+            axios.get('/px03/public/listTaiKhoan?page=' + page)
+                .then(response => {
+                    context.commit('muListTaiKhoan', response.data);
+                })
+        },
+        aclistPermissionOfUser(context) {
+            axios.get('/px03/public/listPermissionOfUser')
+                .then(response => {
+                    context.commit('mulistPermissionOfUser', response.data);
                 })
         },
     },
@@ -109,6 +129,12 @@ const storeInfo = {
         },
         muListPhanQuyen(state, response) {
             state.listPhanQuyen = response;
+        },
+        muListTaiKhoan(state, response) {
+            state.listTaiKhoan = response;
+        },
+        mulistPermissionOfUser(state, response) {
+            state.listPermissionOfUser = response;
         },
     },
 }

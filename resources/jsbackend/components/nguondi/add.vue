@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-if="ktquyen('nguondi_xem')">
 		<content-header :tieude="tieude" :link="link"></content-header>
         <section class="content">
     		<div class="container-fluid">
@@ -21,7 +21,7 @@
 							<p class="thongbao" v-if="error && error.thu_tu">{{ error.thu_tu[0]}}</p>
 						</div>
 						<div class="form-group col-md-12 text-right">
-							<button type="submit" class="btn btn-primary btn-sm">Thêm nguồn</button>
+							<button type="submit" class="btn btn-primary btn-sm" v-if="ktquyen('nguondi_them')">Thêm nguồn</button>
 							<button type="submit" class="btn btn-warning btn-sm" @click.prevent="reloadData">Tải lại dữ liệu</button>
 						</div>
 					</form>
@@ -35,6 +35,15 @@
                 <paginate :last_pages="listData.last_page" @loadData="loadDataNguonDi"></paginate>
             </div>
         </div>
+	</div>
+	<div v-else>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="mt-2 mr-2 alert" style="font-size:2rem; color:red">
+					Bạn không có quyền xem mục này !
+				</div>
+			</div>
+		</div>
 	</div>
 	
 </template>
@@ -60,6 +69,9 @@ export default {
 		},
         listData(){
             return this.$store.getters.getListNguonDi;
+        },
+		listPermissionOfUser(){
+			return this.$store.getters.getlistPermissionOfUser;
         }
     },
 	methods:{
@@ -67,7 +79,7 @@ export default {
 			let data = new FormData;
 			data.append('ten_nguon', this.ten_nguon);
 			data.append('thu_tu', this.thu_tu);
-			axios.post('/px03/public/api/addNguonDi', data)
+			axios.post('/px03/public/addNguonDi', data)
 			.then(response=>{
 				this.ten_nguon = '';
 				this.thu_tu = '';
@@ -87,6 +99,14 @@ export default {
 		reloadData(){
 			this.$store.dispatch('acGetPage',1);
 			this.list();
+		},
+		ktquyen(key_code){
+			for(var i in this.listPermissionOfUser){
+				if(this.listPermissionOfUser[i].key_code == key_code){
+					return true;
+				}
+			}
+			return false;
 		}
 	},
 	components:{contentHeader, list, paginate},

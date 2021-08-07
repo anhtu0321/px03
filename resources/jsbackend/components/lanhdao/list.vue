@@ -21,8 +21,8 @@
                 <td>{{list.thu_tu}}</td>
                 <td>{{list.trang_thai == 1? "Sử dụng" : "Không sử dụng"}}</td>
                 <td>
-                    <router-link class="btn btn-primary btn-sm" :to="`/lanhdao/edit/${list.id}`" @click.native="loadDataById()">Sửa</router-link>
-                    <button class="btn btn-danger btn-sm" @click.prevent="deleteData(list.id)">Xóa</button>
+                    <router-link class="btn btn-primary btn-sm" :to="`/lanhdao/edit/${list.id}`" @click.native="loadDataById()" v-if="ktquyen('lanhdao_xoa')">Sửa</router-link>
+                    <button class="btn btn-danger btn-sm" @click.prevent="deleteData(list.id)" v-if="ktquyen('lanhdao_xoa')">Xóa</button>
                 </td>
             </tr>
         </tbody>
@@ -44,18 +44,21 @@ export default {
         listData(){
             return this.$store.getters.getListLanhDao;
         },
+		listPermissionOfUser(){
+			return this.$store.getters.getlistPermissionOfUser;
+        }
     },
     methods:{
         loadDataById(){
             this.idEdit = this.$route.params.id;
-            axios.get(`/px03/public/api/editLanhDao/${this.$route.params.id}`)
+            axios.get(`/px03/public/editLanhDao/${this.$route.params.id}`)
             .then(response=>{
                 this.$emit('dataById', response);
             })
         },
         deleteData(id){
             if(confirm('ban muon xoa that a ?') == true){
-                axios.get(`/px03/public/api/deleteLanhDao/${id}`)
+                axios.get(`/px03/public/deleteLanhDao/${id}`)
                 .then(reponse=>{
                     this.$store.dispatch('acListLanhDao',this.currentPage);
                     if(this.$router.history.current.path !=='/lanhdao'){
@@ -63,7 +66,15 @@ export default {
                     }
                 })
             }
-        }
+        },
+		ktquyen(key_code){
+			for(var i in this.listPermissionOfUser){
+				if(this.listPermissionOfUser[i].key_code == key_code){
+					return true;
+				}
+			}
+			return false;
+		}
     },
     mounted(){
         this.idEdit = this.$route.params.id;

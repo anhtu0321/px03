@@ -17,8 +17,8 @@
                             <td>{{list.ten_nguon}}</td>
                             <td>{{list.thu_tu}}</td>
                             <td>
-                                <router-link class="btn btn-primary btn-sm" :to="`/nguondi/edit/${list.id}`" @click.native="loadListNguonDi()">Sửa</router-link>
-                                <button class="btn btn-danger btn-sm" @click="deleteNguonDi(list.id)">Xóa</button>
+                                <router-link class="btn btn-primary btn-sm" :to="`/nguondi/edit/${list.id}`" @click.native="loadListNguonDi()" v-if="ktquyen('nguondi_sua')">Sửa</router-link>
+                                <button class="btn btn-danger btn-sm" @click="deleteNguonDi(list.id)" v-if="ktquyen('nguondi_xoa')">Xóa</button>
                             </td>
                         </tr>
                     </tbody>
@@ -41,19 +41,22 @@ export default {
 		},
         listData(){
             return this.$store.getters.getListNguonDi;
+        },
+		listPermissionOfUser(){
+			return this.$store.getters.getlistPermissionOfUser;
         }
     },
     methods:{
         loadListNguonDi(){
             this.idEdit = this.$route.params.id;
-            axios.get(`/px03/public/api/editNguonDi/${this.$route.params.id}`)
+            axios.get(`/px03/public/editNguonDi/${this.$route.params.id}`)
             .then(response=>{
                 this.$emit('dataById', response);
             })
         },
         deleteNguonDi(id){
             if(confirm('ban muon xoa that a ?') == true){
-                axios.get(`/px03/public/api/deleteNguonDi/${id}`)
+                axios.get(`/px03/public/deleteNguonDi/${id}`)
                 .then(reponse=>{
                     this.$store.dispatch('acListNguonDi',this.currentPage);
                     if(this.$router.history.current.path !=='/nguondi'){
@@ -61,7 +64,15 @@ export default {
                     }
                 })
             }
-        }
+        },
+		ktquyen(key_code){
+			for(var i in this.listPermissionOfUser){
+				if(this.listPermissionOfUser[i].key_code == key_code){
+					return true;
+				}
+			}
+			return false;
+		}
     },
     mounted(){
         this.idEdit = this.$route.params.id;

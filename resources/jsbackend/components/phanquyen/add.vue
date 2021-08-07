@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-if="ktquyen('phanquyen_xem')">
 		<content-header :tieude="tieude" :link="link"></content-header>
         <section class="content">
     		<div class="container-fluid">
@@ -25,22 +25,22 @@
 								</div>
 								
 							</div>
-							<!-- Row show permissions -->
-							<div class="row">
+							<div class="row"> 
+								<!-- row for permission -->
 								<div class="col-md-12 mb-4">
 									<input type="checkbox" class="hovered check-all" id="checkall" v-model="check_all" @change="checkAll">
 									<label for="checkall" class="p-2 title-card hovered" >Chọn tất cả chức năng</label>
 								</div>
-								<div class="col-sm-6" v-for="permission in permissions" :key="permission.id" >
+								<div class="col-sm-3" v-for="permission in permissions" :key="permission.id">
 									<div class="card border-info mb-4">
 										<div class="card-header">
-											<input type="checkbox" class="hovered check-cha" :id="permission.id" @change="checkModule" v-model="check_module">
+											<input type="checkbox" class="hovered check-cha" :id="permission.id" @change="checkModule(permission.id)">
 											<label :for="permission.id" class="p-2 title-card hovered">{{permission.name}}</label>
 										</div>
 										<div class="card-body text-info">
 											<div class="row">
 												<div class="col-md-6" v-for="percon in permission.chucnangcon" :key="percon.id">
-													<input type="checkbox" :value="percon.id" :id="percon.id" class="hovered check-con" v-model="check_module">
+													<input type="checkbox" :value="percon.id" :id="percon.id" class="hovered check-con" v-model="mangchucnang">
 													<label :for="percon.id" class="card-text p-2 hovered">{{ percon.name }}</label>
 												</div>
 											</div>
@@ -50,7 +50,7 @@
 							</div>
 							<!-- end row permission -->
 							<div class="form-group col-md-12 text-right">
-								<button type="submit" class="btn btn-primary btn-sm">Thêm chức năng</button>
+								<button type="submit" class="btn btn-primary btn-sm" v-if="ktquyen('phanquyen_them')">Thêm Phân quyền</button>
 								<button type="submit" class="btn btn-warning btn-sm" @click.prevent="reloadData">Tải lại dữ liệu</button>
 							</div>
 
@@ -73,6 +73,15 @@
             </div>
         </div>
 	</div>
+	<div v-else>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="mt-2 mr-2 alert" style="font-size:2rem; color:red">
+					Bạn không có quyền xem mục này !
+				</div>
+			</div>
+		</div>
+	</div>
 	
 </template>
 
@@ -81,6 +90,7 @@
 import contentHeader from '../content_header.vue'
 import list from './list.vue'
 import paginate from '../page.vue'
+
 export default {
 	data(){
 		return{
@@ -91,7 +101,7 @@ export default {
 			error:'',
 			permissions:'',
 			check_all:false,
-			check_module:false,
+			mangchucnang:[],
 		}
 	},
 	computed:{
@@ -101,22 +111,40 @@ export default {
         listData(){ //để lấy số trang (last_page)
             return this.$store.getters.getListPhanQuyen;
 		},	
+		perChild(){
+			var arr = [];
+			for( var i in this.permissions){
+				for(var j in this.permissions[i].chucnangcon){
+					arr.push(this.permissions[i].chucnangcon[j].id);
+				}
+			}
+			return arr;
+		},
+		listPermissionOfUser(){
+			return this.$store.getters.getlistPermissionOfUser;
+        }
     },
 	methods:{
 		add(){ //thêm dữ liệu vào database
 			let data = new FormData;
 			data.append('name', this.name);
 			data.append('display_name', this.display_name);
-			axios.post('/px03/public/api/addPhanQuyen', data)
+			for(var i in this.mangchucnang){
+				data.append('mangchucnang[]', this.mangchucnang[i]);
+			}
+			axios.post('/px03/public/addPhanQuyen', data)
 			.then(response=>{
 				this.name = '';
 				this.display_name = '';
+				this.mangchucnang=[];
 				this.error = '';
 				this.list();
+				this.$store.dispatch('aclistPermissionOfUser');
 			})
 			.catch(error=>{
 				this.error = error.response.data.errors;
 			});
+			// console.log(this.mangchucnang);
 		},
 		list(){ //sử dụng để lấy số trang cho list
 			this.$store.dispatch('acListPhanQuyen',this.currentPage);
@@ -130,29 +158,45 @@ export default {
 			this.list();
 		},
 		loadPermission(){ //tải dữ liệu permission
-			axios.get('/px03/public/api/listChucNangCha')
+			axios.get('/px03/public/listChucNangCha')
 			.then(response=>{
 				this.permissions = response.data;
 			})
 		},
 		checkAll(){
-			var checkConAll = document.getElementsByClassName('check-con');
-			for (var i = 0; i < checkConAll.length; i++) {
-				checkConAll[i].checked = this.check_all;
+			this.mangchucnang=[];
+			for (var i in this.perChild) {
+				if(this.check_all){
+					this.mangchucnang.push(this.perChild[i]);
+				}
 			}
 		},
-		checkModule(){
-			var checkCon = this.parentNode.parentNode.parentNode.getElementsByClassName('check-con');
-			for (i = 0; i < checkCon.length; i++) {
-				checkCon[i].checked = true;
+		checkModule(id){
+			var checkCha = document.getElementById(id);
+			var checkCon = checkCha.parentNode.parentNode.getElementsByClassName('check-con');
+			for (var i = 0; i < checkCon.length; i++) {
+				if(checkCha.checked == true && this.mangchucnang.indexOf(parseInt(checkCon[i].value)) == -1){
+					this.mangchucnang.push(parseInt(checkCon[i].value));
+				}
+				if(checkCha.checked == false && this.mangchucnang.indexOf(parseInt(checkCon[i].value)) != -1){
+					this.mangchucnang.splice(this.mangchucnang.indexOf(parseInt(checkCon[i].value)),1);
+				}
 			}
+		},
+		ktquyen(key_code){
+			for(var i in this.listPermissionOfUser){
+				if(this.listPermissionOfUser[i].key_code == key_code){
+					return true;
+				}
+			}
+			return false;
 		}
-		
 	},
 	components:{contentHeader, list, paginate},
 	mounted(){
 		this.list();
 		this.loadPermission();
+		this.$store.dispatch('aclistPermissionOfUser');
 	}
 }
 </script>

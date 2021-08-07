@@ -20,3 +20,60 @@ Route::get('/home', 'HomeController@index')->name('home');
 route::group(['prefix'=>'admin'],function(){
     route::get('/','adminController@getHome')->name('admin.home');
 });
+// Loại văn bản
+Route::post('/addLoaiVanBan','LoaiVanBanController@store')->middleware('can:loaivanban_them');
+Route::get('/listLoaiVanBan','LoaiVanBanController@index')->middleware('can:loaivanban_xem');
+Route::get('/editLoaiVanBan/{id}','LoaiVanBanController@edit')->middleware('can:loaivanban_sua');
+Route::post('/updateLoaiVanBan/{id}','LoaiVanBanController@update')->middleware('can:loaivanban_sua');
+Route::get('/deleteLoaiVanBan/{id}','LoaiVanBanController@destroy')->middleware('can:loaivanban_xoa');
+// Nguồn đến
+Route::post('/addNguonDen','NguonDenController@store')->middleware('can:nguonden_them');
+Route::get('/listNguonDen','NguonDenController@index')->middleware('can:nguonden_xem');
+Route::get('/editNguonDen/{id}','NguonDenController@edit')->middleware('can:nguonden_sua');
+Route::post('/updateNguonDen/{id}','NguonDenController@update')->middleware('can:nguonden_sua');
+Route::get('/deleteNguonDen/{id}','NguonDenController@destroy')->middleware('can:nguonden_xoa');
+// Nguồn đi
+Route::post('/addNguonDi','NguonDiController@store')->middleware('can:nguondi_them');
+Route::get('/listNguonDi','NguonDiController@index')->middleware('can:nguondi_xem');
+Route::get('/editNguonDi/{id}','NguonDiController@edit')->middleware('can:nguondi_sua');
+Route::post('/updateNguonDi/{id}','NguonDiController@update')->middleware('can:nguondi_sua');
+Route::get('/deleteNguonDi/{id}','NguonDiController@destroy')->middleware('can:nguondi_xoa');
+// Lãnh đạo
+Route::post('/addLanhDao','LanhDaoController@store')->middleware('can:lanhdao_them');
+Route::get('/listLanhDao','LanhDaoController@index')->middleware('can:lanhdao_xem');
+Route::get('/editLanhDao/{id}','LanhDaoController@edit')->middleware('can:lanhdao_sua');
+Route::post('/updateLanhDao/{id}','LanhDaoController@update')->middleware('can:lanhdao_sua');
+Route::get('/deleteLanhDao/{id}','LanhDaoController@destroy')->middleware('can:lanhdao_xoa');
+// Đơn vị
+Route::post('/addDonVi','DonViController@store')->middleware('can:donvi_them');
+Route::get('/listDonVi','DonViController@index')->middleware('can:donvi_xem');
+Route::get('/editDonVi/{id}','DonViController@edit')->middleware('can:donvi_sua');
+Route::post('/updateDonVi/{id}','DonViController@update')->middleware('can:donvi_sua');
+Route::get('/deleteDonVi/{id}','DonViController@destroy')->middleware('can:donvi_xoa');
+// Chức năng
+Route::post('/addChucNang','PermissionController@store')->middleware('can:chucnang_them');
+Route::get('/listChucNang','PermissionController@index')->middleware('can:chucnang_xem');
+Route::get('/editChucNang/{id}','PermissionController@edit')->middleware('can:chucnang_sua');
+Route::post('/updateChucNang/{id}','PermissionController@update')->middleware('can:chucnang_sua');
+Route::get('/deleteChucNang/{id}','PermissionController@destroy')->middleware('can:chucnang_xoa');
+Route::get('/listChucNangCha','PermissionController@listCha');
+// phân quyền
+Route::post('/addPhanQuyen','RoleController@store')->middleware('can:phanquyen_them');
+Route::get('/listPhanQuyen','RoleController@index')->middleware('can:phanquyen_xem');
+Route::get('/editPhanQuyen/{id}','RoleController@edit')->middleware('can:phanquyen_sua');
+Route::post('/updatePhanQuyen/{id}','RoleController@update')->middleware('can:phanquyen_sua');
+Route::get('/deletePhanQuyen/{id}','RoleController@destroy')->middleware('can:phanquyen_xoa');
+// Tài khoản
+Route::post('/addTaiKhoan','UserController@store')->middleware('can:taikhoan_them');
+Route::get('/listTaiKhoan','UserController@index')->middleware('can:taikhoan_xem');
+Route::get('/editTaiKhoan/{id}','UserController@edit')->middleware('can:taikhoan_sua');
+Route::post('/updateTaiKhoan/{id}','UserController@update')->middleware('can:taikhoan_sua');
+Route::get('/deleteTaiKhoan/{id}','UserController@destroy')->middleware('can:taikhoan_xoa');
+// Lấy danh sách quyền của User login
+Route::get('/listPermissionOfUser','UserController@getPermissons');
+
+// ********************* DÀNH CHO FRONT END ********************//
+// Lấy thông tin user
+Route::get('/getUser', 'loginController@getUser');
+//Lấy thông tin Loại Văn bản
+Route::get('/listLoai','LoaiVanBanController@listLoai');
