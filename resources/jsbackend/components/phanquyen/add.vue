@@ -25,21 +25,22 @@
 								</div>
 								
 							</div>
+							<!-- Row show permissions -->
 							<div class="row">
 								<div class="col-md-12 mb-4">
 									<input type="checkbox" class="hovered check-all" id="checkall" v-model="check_all" @change="checkAll">
 									<label for="checkall" class="p-2 title-card hovered" >Chọn tất cả chức năng</label>
 								</div>
-								<div class="col-sm-6" v-for="permission in permissions" :key="permission.id">
+								<div class="col-sm-6" v-for="permission in permissions" :key="permission.id" >
 									<div class="card border-info mb-4">
 										<div class="card-header">
-											<input type="checkbox" class="hovered check-cha" :id="permission.id" @change="checkModule">
+											<input type="checkbox" class="hovered check-cha" :id="permission.id" @change="checkModule" v-model="check_module">
 											<label :for="permission.id" class="p-2 title-card hovered">{{permission.name}}</label>
 										</div>
 										<div class="card-body text-info">
 											<div class="row">
 												<div class="col-md-6" v-for="percon in permission.chucnangcon" :key="percon.id">
-													<input type="checkbox" :value="percon.id" :id="percon.id" class="hovered check-con">
+													<input type="checkbox" :value="percon.id" :id="percon.id" class="hovered check-con" v-model="check_module">
 													<label :for="percon.id" class="card-text p-2 hovered">{{ percon.name }}</label>
 												</div>
 											</div>
@@ -47,6 +48,7 @@
 									</div>
 								</div>
 							</div>
+							<!-- end row permission -->
 							<div class="form-group col-md-12 text-right">
 								<button type="submit" class="btn btn-primary btn-sm">Thêm chức năng</button>
 								<button type="submit" class="btn btn-warning btn-sm" @click.prevent="reloadData">Tải lại dữ liệu</button>

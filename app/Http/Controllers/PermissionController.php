@@ -49,7 +49,7 @@ class PermissionController extends Controller
             'name'=>'required',	
             'display_name'=>'required',
             'key_code'=>'required',
-            'parent_id'=>'required',777
+            'parent_id'=>'required',
         ], 
         $messages = [
             'required' => ':attribute không được để trống.',

@@ -4328,6 +4328,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 // import các components
 
 
@@ -45953,12 +45955,51 @@ var render = function() {
                               [
                                 _c("div", { staticClass: "card-header" }, [
                                   _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.check_module,
+                                        expression: "check_module"
+                                      }
+                                    ],
                                     staticClass: "hovered check-cha",
                                     attrs: {
                                       type: "checkbox",
                                       id: permission.id
                                     },
-                                    on: { change: _vm.checkModule }
+                                    domProps: {
+                                      checked: Array.isArray(_vm.check_module)
+                                        ? _vm._i(_vm.check_module, null) > -1
+                                        : _vm.check_module
+                                    },
+                                    on: {
+                                      change: [
+                                        function($event) {
+                                          var $$a = _vm.check_module,
+                                            $$el = $event.target,
+                                            $$c = $$el.checked ? true : false
+                                          if (Array.isArray($$a)) {
+                                            var $$v = null,
+                                              $$i = _vm._i($$a, $$v)
+                                            if ($$el.checked) {
+                                              $$i < 0 &&
+                                                (_vm.check_module = $$a.concat([
+                                                  $$v
+                                                ]))
+                                            } else {
+                                              $$i > -1 &&
+                                                (_vm.check_module = $$a
+                                                  .slice(0, $$i)
+                                                  .concat($$a.slice($$i + 1)))
+                                            }
+                                          } else {
+                                            _vm.check_module = $$c
+                                          }
+                                        },
+                                        _vm.checkModule
+                                      ]
+                                    }
                                   }),
                                   _vm._v(" "),
                                   _c(
@@ -45989,12 +46030,58 @@ var render = function() {
                                           },
                                           [
                                             _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.check_module,
+                                                  expression: "check_module"
+                                                }
+                                              ],
                                               staticClass: "hovered check-con",
                                               attrs: {
                                                 type: "checkbox",
                                                 id: percon.id
                                               },
-                                              domProps: { value: percon.id }
+                                              domProps: {
+                                                value: percon.id,
+                                                checked: Array.isArray(
+                                                  _vm.check_module
+                                                )
+                                                  ? _vm._i(
+                                                      _vm.check_module,
+                                                      percon.id
+                                                    ) > -1
+                                                  : _vm.check_module
+                                              },
+                                              on: {
+                                                change: function($event) {
+                                                  var $$a = _vm.check_module,
+                                                    $$el = $event.target,
+                                                    $$c = $$el.checked
+                                                      ? true
+                                                      : false
+                                                  if (Array.isArray($$a)) {
+                                                    var $$v = percon.id,
+                                                      $$i = _vm._i($$a, $$v)
+                                                    if ($$el.checked) {
+                                                      $$i < 0 &&
+                                                        (_vm.check_module = $$a.concat(
+                                                          [$$v]
+                                                        ))
+                                                    } else {
+                                                      $$i > -1 &&
+                                                        (_vm.check_module = $$a
+                                                          .slice(0, $$i)
+                                                          .concat(
+                                                            $$a.slice($$i + 1)
+                                                          ))
+                                                    }
+                                                  } else {
+                                                    _vm.check_module = $$c
+                                                  }
+                                                }
+                                              }
                                             }),
                                             _vm._v(" "),
                                             _c(
