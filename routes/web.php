@@ -77,3 +77,9 @@ Route::get('/listPermissionOfUser','UserController@getPermissons');
 Route::get('/getUser', 'loginController@getUser');
 //Lấy thông tin Loại Văn bản
 Route::get('/listLoai','LoaiVanBanController@listLoai');
+// Thêm mới văn bản đến
+Route::post('/addvanbanden','VanBanDenController@store')->middleware('can:vanbanden_them');
+Route::get('/listvanbanden','VanBanDenController@index')->middleware('can:vanbanden_xem');
+Route::get('/editvanbanden/{id}','VanBanDenController@edit')->middleware('can:vanbanden_sua');
+Route::post('/updatevanbanden/{id}','VanBanDenController@update')->middleware('can:vanbanden_sua');
+Route::get('/deletevanbanden/{id}','VanBanDenController@destroy')->middleware('can:vanbanden_xoa');

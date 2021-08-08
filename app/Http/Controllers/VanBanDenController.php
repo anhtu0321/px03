@@ -7,79 +7,59 @@ use Illuminate\Http\Request;
 
 class VanBanDenController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return VanBanDen::orderBy('thu_tu','asc')->paginate(30);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+        $this->validateForm($request);
+        $VanBanDen = new VanBanDen;
+        $VanBanDen->id_nguon_den = $request->id_nguon_den;
+        $VanBanDen->so = $request->so;
+        $VanBanDen->ngay = $request->ngay;
+        $VanBanDen->id_loai = $request->id_loai;
+        $VanBanDen->trich_yeu = $request->trich_yeu;
+        $VanBanDen->do_mat = $request->do_mat;
+        $VanBanDen->nguoi_ky = $request->nguoi_ky;
+        // $VanBanDen->file = $request->file;
+        $VanBanDen->phe_duyet = $request->phe_duyet;
+        $VanBanDen->id_user_xu_ly = $request->id_user_xu_ly;
+        $VanBanDen->han_xu_ly = $request->han_xu_ly;
+        $VanBanDen->ghi_chu = $request->ghi_chu; 
+        $VanBanDen->save();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\VanBanDen  $vanBanDen
-     * @return \Illuminate\Http\Response
-     */
-    public function show(VanBanDen $vanBanDen)
+    public function edit(VanBanDen $VanBanDen, $id)
     {
-        //
+        return VanBanDen::where('id',$id)->get();
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\VanBanDen  $vanBanDen
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(VanBanDen $vanBanDen)
+  
+    public function update(Request $request, VanBanDen $VanBanDen, $id)
     {
-        //
+        $VanBanDen = VanBanDen::find($id);
+        $VanBanDen->ten_nguon = $request->ten_nguon;
+        $VanBanDen->thu_tu = $request->thu_tu;
+        $VanBanDen->save();
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\VanBanDen  $vanBanDen
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, VanBanDen $vanBanDen)
+    
+    public function destroy(VanBanDen $VanBanDen, $id)
     {
-        //
+        VanBanDen::destroy($id);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\VanBanDen  $vanBanDen
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(VanBanDen $vanBanDen)
-    {
-        //
+    public function validateForm(Request $request){
+        return $request->validate([
+            'trich_yeu' => 'required',
+            // 'thu_tu' => 'required|numeric',
+        ], 
+        $messages = [
+            'required' => ':attribute không được để trống.',
+            // 'numeric' => ':attribute phải là ký tự số.'
+        ],
+        $attributes = [
+            'trich_yeu' => 'Tên nguồn',
+            // 'thu_tu' => 'Thứ tự'
+        ]);
     }
 }

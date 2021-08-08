@@ -79,7 +79,7 @@
                         THÊM VĂN BẢN ĐẾN
                     </div>
                     
-                    <form style="position:relative" method="post" enctype="multipart/form-data">
+                    <form style="position:relative" method="post" enctype="multipart/form-data" @submit.prevent="add">
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <label>Cơ quan ban hành</label>
@@ -142,7 +142,7 @@
                             </div>
                             <div class="col-md-5 mb-3">
                                 <label>File đính kèm</label>
-                                <input type="file" class="form-control form-control-sm">
+                                <input type="file" class="form-control form-control-sm" @change="getFile">
                             </div>
                             <div class="col-md-7 mb-3">
                                 <label>Phê duyệt của lãnh đạo</label>
@@ -195,6 +195,7 @@ export default {
             trich_yeu:'',
             do_mat:'',
             nguoi_ky:'',
+            file:'',
             phe_duyet:'',
             id_user_xu_ly:'',
             han_xu_ly:'',
@@ -232,6 +233,30 @@ export default {
                 setTimeout(()=>{this.classexpand='active'},200);
             }
         },
+        // lay thong tin file dinh kem vao bien file
+        getFile(e){
+            this.file = e.target.files[0];
+        },
+        // Luu van ban den vao co so du lieu
+        add(){
+            var data = new FormData();
+            data.append('id_nguon_den', this.id_nguon_den);
+            data.append('so', this.so);
+            data.append('ngay', this.ngay);
+            data.append('id_loai', this.id_loai);
+            data.append('trich_yeu', this.trich_yeu);
+            data.append('do_mat', this.do_mat);
+            data.append('nguoi_ky', this.nguoi_ky);
+            data.append('file', this.file);
+            data.append('phe_duyet', this.phe_duyet);
+            data.append('id_user_xu_ly', this.id_user_xu_ly);
+            data.append('han_xu_ly', this.han_xu_ly);
+            data.append('ghi_chu', this.ghi_chu);
+            axios.post('/px03/public/addvanbanden', data)
+            then(response=>{
+                console.log(response);
+            })
+        }
     },
     components:{editor},
     mounted(){
