@@ -10,6 +10,7 @@ const storeInfo = {
         listUser: '',
         listNguonDen: '',
         listLoai: '',
+        listVanBanDen: '',
     },
     getters: {
         getUserDetails(state) {
@@ -26,6 +27,9 @@ const storeInfo = {
         },
         getListLoai(state) {
             return state.listLoai;
+        },
+        getListVanBanDen(state) {
+            return state.listVanBanDen;
         }
     },
     actions: {
@@ -55,6 +59,12 @@ const storeInfo = {
                 .then(response => {
                     contex.commit('muListLoai', response);
                 })
+        },
+        acListVanBanDen(contex, page) {
+            axios.get('/px03/public/listvanbanden?page=' + page)
+                .then(response => {
+                    contex.commit('muListVanBanDen', response);
+                })
         }
     },
     mutations: {
@@ -72,6 +82,9 @@ const storeInfo = {
         },
         muListLoai(state, data) {
             state.listLoai = data.data;
+        },
+        muListVanBanDen(state, data) {
+            state.listVanBanDen = data.data;
         }
     },
 }

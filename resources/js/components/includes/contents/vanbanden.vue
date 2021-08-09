@@ -169,15 +169,18 @@
                                 <button class="btn btn-primary">Thêm Văn bản</button>
                             </div>
                         </div>
-                      
                     </form>
                 </div>
+        </div>
+        <div class="content__list mb-3 mt-3">
+            <listcomponent></listcomponent>
         </div>
     </div>
 </template>
 
 <script>
-import editor from '@tinymce/tinymce-vue'
+import editor from '@tinymce/tinymce-vue';
+import listcomponent from './vanbanden/list.vue';
 export default {
     data(){
         return{
@@ -253,12 +256,26 @@ export default {
             data.append('han_xu_ly', this.han_xu_ly);
             data.append('ghi_chu', this.ghi_chu);
             axios.post('/px03/public/addvanbanden', data)
-            then(response=>{
-                console.log(response);
+            .then(response=>{
+                this.id_nguon_den='';
+                this.so='';
+                this.ngay='';
+                this.id_loai='';
+                this.trich_yeu='';
+                this.do_mat='';
+                this.nguoi_ky='';
+                this.file='';
+                this.phe_duyet='';
+                this.id_user_xu_ly='';
+                this.han_xu_ly='';
+                this.ghi_chu='';
             })
         }
     },
-    components:{editor},
+    components:{
+        editor, 
+        listcomponent,
+    },
     mounted(){
         this.$store.dispatch('acListUser');
         this.$store.dispatch('acListNguonDen');
@@ -299,6 +316,11 @@ export default {
     color: #ffffff;
     font-weight: bold;
 }
-
+.content__list{
+    width: 100%;
+    border:1px solid #ebebeb;
+    border-radius:5px;
+    padding:10px;
+}
 
 </style>

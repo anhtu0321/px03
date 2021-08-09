@@ -135,5 +135,31 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('taikhoan_xoa', function($user){
             return $user->ktphanquyen('taikhoan_xoa');
         });
+        // Gate Văn bản đến
+        Gate::define('vanbanden_xem', function($user){
+            return $user->ktphanquyen('vanbanden_xem');
+        });
+        Gate::define('vanbanden_them', function($user){
+            return $user->ktphanquyen('vanbanden_them');
+        });
+        Gate::define('vanbanden_sua', function($user){
+            return $user->ktphanquyen('vanbanden_sua');
+        });
+        Gate::define('vanbanden_xoa', function($user){
+            return $user->ktphanquyen('vanbanden_xoa');
+        });
+        // Gate Văn bản đi
+        Gate::define('vanbandi_xem', function($user){
+            return $user->ktphanquyen('vanbandi_xem');
+        });
+        Gate::define('vanbandi_them', function($user){
+            return $user->ktphanquyen('vanbandi_them');
+        });
+        Gate::define('vanbandi_sua', function($user){
+            return $user->ktphanquyen('vanbandi_sua');
+        });
+        Gate::define('vanbandi_xoa', function($user){
+            return $user->ktphanquyen('vanbandi_xoa');
+        });
     }
 }

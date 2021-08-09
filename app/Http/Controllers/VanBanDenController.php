@@ -4,17 +4,31 @@ namespace App\Http\Controllers;
 
 use App\VanBanDen;
 use Illuminate\Http\Request;
+use Auth;
+use App\traits\ConvertString;
 
 class VanBanDenController extends Controller
 {
+    use ConvertString;
     public function index()
     {
-        return VanBanDen::orderBy('thu_tu','asc')->paginate(30);
+        return VanBanDen::orderBy('id','desc')->paginate(30);
     }
     
     public function store(Request $request)
     {
         $this->validateForm($request);
+        $file_url="";
+        if($request->file !=''){
+            $file_size = $request->file->getSize();
+            $thumucluu = public_path('vanbandenupload/');
+            $tenfile = $request->file->getClientOriginalName();
+            $tenduoi = $request->file->getClientOriginalExtension();
+            $tenfile = $this->convertString($tenfile);
+            $tenfile = time().'_'.$file_size.'_'.$tenfile.'.'.$tenduoi;
+            $file_url = $tenfile;
+            $request->file->move($thumucluu, $tenfile);
+        }
         $VanBanDen = new VanBanDen;
         $VanBanDen->id_nguon_den = $request->id_nguon_den;
         $VanBanDen->so = $request->so;
@@ -23,11 +37,12 @@ class VanBanDenController extends Controller
         $VanBanDen->trich_yeu = $request->trich_yeu;
         $VanBanDen->do_mat = $request->do_mat;
         $VanBanDen->nguoi_ky = $request->nguoi_ky;
-        // $VanBanDen->file = $request->file;
+        $VanBanDen->file = $file_url;
         $VanBanDen->phe_duyet = $request->phe_duyet;
         $VanBanDen->id_user_xu_ly = $request->id_user_xu_ly;
         $VanBanDen->han_xu_ly = $request->han_xu_ly;
         $VanBanDen->ghi_chu = $request->ghi_chu; 
+        $VanBanDen->nguoi_nhap = Auth::user()->id; 
         $VanBanDen->save();
     }
 
@@ -58,7 +73,7 @@ class VanBanDenController extends Controller
             // 'numeric' => ':attribute phải là ký tự số.'
         ],
         $attributes = [
-            'trich_yeu' => 'Tên nguồn',
+            'trich_yeu' => 'Trích yếu',
             // 'thu_tu' => 'Thứ tự'
         ]);
     }
