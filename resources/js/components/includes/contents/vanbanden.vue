@@ -217,10 +217,14 @@ export default {
         }
     },
     methods:{
-        showAdd(){ //ẩn hiện form thêm
+        async showAdd(){ //ẩn hiện form thêm
+            
             if(this.show == false){
                 this.show = true;
-                setTimeout(()=>{this.classadd='active'},200);
+                await setTimeout(()=>{this.classadd='active'},200);
+                await this.$store.dispatch('acListUser');
+                await this.$store.dispatch('acListNguonDen');
+                await this.$store.dispatch('acListLoai');
             }else{
                 this.classadd = '';
                 setTimeout(()=>{this.show = false},500);
@@ -256,7 +260,7 @@ export default {
             data.append('han_xu_ly', this.han_xu_ly);
             data.append('ghi_chu', this.ghi_chu);
             axios.post('/px03/public/addvanbanden', data)
-            .then(response=>{
+            .then(async response=>{
                 this.id_nguon_den='';
                 this.so='';
                 this.ngay='';
@@ -269,6 +273,7 @@ export default {
                 this.id_user_xu_ly='';
                 this.han_xu_ly='';
                 this.ghi_chu='';
+                await this.$store.dispatch('acListVanBanDen', 1);
             })
         }
     },
@@ -276,11 +281,7 @@ export default {
         editor, 
         listcomponent,
     },
-    mounted(){
-        this.$store.dispatch('acListUser');
-        this.$store.dispatch('acListNguonDen');
-        this.$store.dispatch('acListLoai');   
-    }
+
 }
 </script>
 

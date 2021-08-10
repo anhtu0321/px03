@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\VanBanDen;
 use Illuminate\Http\Request;
 use Auth;
+use DB;
 use App\traits\ConvertString;
 
 class VanBanDenController extends Controller
@@ -12,13 +13,26 @@ class VanBanDenController extends Controller
     use ConvertString;
     public function index()
     {
-        return VanBanDen::orderBy('id','desc')->paginate(30);
+        // return VanBanDen::orderBy('id','desc')->paginate(30);
+        $vanbanden = DB::table('van_ban_den')
+        ->leftjoin('nguon_den','van_ban_den.id_nguon_den', '=', 'nguon_den.id')
+        ->leftjoin('loai_van_ban','van_ban_den.id_loai', '=', 'loai_van_ban.id')
+        ->select('van_ban_den.so','van_ban_den.ngay','van_ban_den.trich_yeu','van_ban_den.ghi_chu','van_ban_den.trang_thai','van_ban_den.file','van_ban_den.duoi_file', 'nguon_den.ten_nguon', 'loai_van_ban.ten_loai')
+        ->orderBy('van_ban_den.id','desc')
+        ->paginate(30);
+        return $vanbanden;
+
+        // >join('contacts', 'users.id', '=', 'contacts.user_id')
+        //     ->join('orders', 'users.id', '=', 'orders.user_id')
+        //     ->select('users.*', 'contacts.phone', 'orders.price')
+        //     ->get();
     }
     
     public function store(Request $request)
     {
         $this->validateForm($request);
         $file_url="";
+        $duoi_file="";
         if($request->file !=''){
             $file_size = $request->file->getSize();
             $thumucluu = public_path('vanbandenupload/');
@@ -27,6 +41,7 @@ class VanBanDenController extends Controller
             $tenfile = $this->convertString($tenfile);
             $tenfile = time().'_'.$file_size.'_'.$tenfile.'.'.$tenduoi;
             $file_url = $tenfile;
+            $duoi_file = $tenduoi;
             $request->file->move($thumucluu, $tenfile);
         }
         $VanBanDen = new VanBanDen;
@@ -38,10 +53,12 @@ class VanBanDenController extends Controller
         $VanBanDen->do_mat = $request->do_mat;
         $VanBanDen->nguoi_ky = $request->nguoi_ky;
         $VanBanDen->file = $file_url;
+        $VanBanDen->duoi_file = $duoi_file;
         $VanBanDen->phe_duyet = $request->phe_duyet;
         $VanBanDen->id_user_xu_ly = $request->id_user_xu_ly;
         $VanBanDen->han_xu_ly = $request->han_xu_ly;
         $VanBanDen->ghi_chu = $request->ghi_chu; 
+        $VanBanDen->trang_thai = "Chưa xử lý"; 
         $VanBanDen->nguoi_nhap = Auth::user()->id; 
         $VanBanDen->save();
     }
