@@ -2709,6 +2709,186 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2732,7 +2912,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       phe_duyet: '',
       id_user_xu_ly: '',
       han_xu_ly: '',
-      ghi_chu: ''
+      ghi_chu: '',
+      // Dữ liệu sửa văn bản
+      e_id: '',
+      e_id_nguon_den: '',
+      e_so: '',
+      e_ngay: '',
+      e_id_loai: '',
+      e_trich_yeu: '',
+      e_do_mat: '',
+      e_nguoi_ky: '',
+      e_file: '',
+      e_phe_duyet: '',
+      e_id_user_xu_ly: '',
+      e_han_xu_ly: '',
+      e_ghi_chu: '',
+      // Dữ liệu xem văn bản
+      v_ten_nguon: '',
+      v_so: '',
+      v_ngay: '',
+      v_ten_loai: '',
+      v_trich_yeu: '',
+      v_do_mat: '',
+      v_nguoi_ky: '',
+      v_file: '',
+      v_phe_duyet: '',
+      v_user_xu_ly: '',
+      v_han_xu_ly: '',
+      v_ghi_chu: '',
+      v_luu_tru: '',
+      v_nguoi_nhap: ''
     };
   },
   computed: {
@@ -2814,7 +3023,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // lay thong tin file dinh kem vao bien file
     getFile: function getFile(e) {
-      this.file = e.target.files[0];
+      if (e.target.files[0] != undefined) {
+        this.file = e.target.files[0];
+      } else {
+        this.file = '';
+      }
+    },
+    getFileEdit: function getFileEdit(e) {
+      if (e.target.files[0] != undefined) {
+        this.e_file = e.target.files[0];
+      } else {
+        this.e_file = '';
+      }
     },
     // Luu van ban den vao co so du lieu
     add: function add() {
@@ -2866,6 +3086,77 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           return _ref.apply(this, arguments);
         };
       }());
+    },
+    // Luu van ban den vao co so du lieu
+    edit: function edit() {
+      var _this4 = this;
+
+      // console.log(this.e_id);
+      var data = new FormData();
+      data.append('id_nguon_den', this.e_id_nguon_den);
+      data.append('so', this.e_so);
+      data.append('ngay', this.e_ngay);
+      data.append('id_loai', this.e_id_loai);
+      data.append('trich_yeu', this.e_trich_yeu);
+      data.append('do_mat', this.e_do_mat);
+      data.append('nguoi_ky', this.e_nguoi_ky);
+      data.append('file', this.e_file);
+      data.append('phe_duyet', this.e_phe_duyet);
+      data.append('id_user_xu_ly', this.e_id_user_xu_ly);
+      data.append('han_xu_ly', this.e_han_xu_ly);
+      data.append('ghi_chu', this.e_ghi_chu);
+      axios.post('/px03/public/updatevanbanden/' + this.e_id, data).then( /*#__PURE__*/function () {
+        var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(response) {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+            while (1) {
+              switch (_context3.prev = _context3.next) {
+                case 0:
+                  alert('Update thành công !');
+                  _context3.next = 3;
+                  return _this4.$store.dispatch('acListVanBanDen', 1);
+
+                case 3:
+                case "end":
+                  return _context3.stop();
+              }
+            }
+          }, _callee3);
+        }));
+
+        return function (_x2) {
+          return _ref2.apply(this, arguments);
+        };
+      }());
+    },
+    // Load dữ liệu sau khi ấn sửa
+    loadDataById: function loadDataById(data) {
+      if (data.data[0].id) this.e_id = data.data[0].id;
+      if (data.data[0].id_nguon_den) this.e_id_nguon_den = data.data[0].id_nguon_den;
+      if (data.data[0].so) this.e_so = data.data[0].so;
+      if (data.data[0].ngay) this.e_ngay = data.data[0].ngay;
+      if (data.data[0].id_loai) this.e_id_loai = data.data[0].id_loai;
+      if (data.data[0].trich_yeu) this.e_trich_yeu = data.data[0].trich_yeu;
+      if (data.data[0].do_mat) this.e_do_mat = data.data[0].do_mat;
+      if (data.data[0].nguoi_ky) this.e_nguoi_ky = data.data[0].nguoi_ky;
+      if (data.data[0].phe_duyet) this.e_phe_duyet = data.data[0].phe_duyet;
+      if (data.data[0].id_user_xu_ly) this.e_id_user_xu_ly = data.data[0].id_user_xu_ly;
+      if (data.data[0].han_xu_ly) this.e_han_xu_ly = data.data[0].han_xu_ly;
+      if (data.data[0].ghi_chu) this.e_ghi_chu = data.data[0].ghi_chu;
+    },
+    loadViewDataById: function loadViewDataById(data) {
+      this.v_ten_nguon = data.data[0].ten_nguon;
+      this.v_so = data.data[0].so;
+      this.v_ngay = data.data[0].ngay;
+      this.v_ten_loai = data.data[0].ten_loai;
+      this.v_trich_yeu = data.data[0].trich_yeu;
+      this.v_do_mat = data.data[0].do_mat;
+      this.v_nguoi_ky = data.data[0].nguoi_ky;
+      this.v_phe_duyet = data.data[0].phe_duyet;
+      this.v_user_xu_ly = data.data[0].fullname;
+      this.v_han_xu_ly = data.data[0].han_xu_ly;
+      this.v_ghi_chu = data.data[0].ghi_chu;
+      this.v_luu_tru = data.data[0].luu_tru;
+      this.v_nguoi_nhap = data.data[0].nguoi_nhap;
     }
   },
   components: {
@@ -2885,6 +3176,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
 //
 //
 //
@@ -2945,17 +3245,66 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
   },
+  props: ['id'],
   computed: {
     listVanBanDen: function listVanBanDen() {
       return this.$store.getters.getListVanBanDen;
     }
   },
   methods: {
-    aa: function aa() {
-      console.log(this.listVanBanDen);
+    getVanBanDenById: function getVanBanDenById(id) {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this.$store.dispatch('acListUser');
+
+              case 2:
+                _context.next = 4;
+                return _this.$store.dispatch('acListNguonDen');
+
+              case 4:
+                _context.next = 6;
+                return _this.$store.dispatch('acListLoai');
+
+              case 6:
+                _context.next = 8;
+                return axios.get('/px03/public/editvanbanden/' + id).then(function (response) {
+                  _this.$emit('dataById', response);
+                });
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     },
-    subStr: function subStr(string) {
-      return string.substring(string.lastIndexOf('.'), string.length);
+    viewVanBanDenById: function viewVanBanDenById(id) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.get('/px03/public/viewvanbanden/' + id).then(function (response) {
+                  _this2.$emit('viewDataById', response);
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     }
   },
   mounted: function mounted() {
@@ -7647,6 +7996,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 // module
 exports.push([module.i, "\n.content__search{\r\n    width:100%;\r\n    border:1px solid #ebebeb;\r\n    border-radius:5px;\r\n    padding:10px;\n}\n.content__add{\r\n    width:100%;\r\n    border:1px solid #ebebeb;\r\n    border-radius:5px;\r\n    padding:10px;\n}\n.content__form-expand{\r\n    opacity: 0;\r\n    margin-top: -138px;\r\n    transition: all 0.5s ease;\n}\n.content__form-add{\r\n    opacity: 0;\r\n    margin-top: -120px;\r\n    transition: all 0.5s ease;\n}\n.active{\r\n    opacity:1;\r\n    margin-top:0;\n}\n.tieude{\r\n    font-size: 1.2rem;\r\n    color: #ffffff;\r\n    font-weight: bold;\n}\n.content__list{\r\n    width: 100%;\r\n    border:1px solid #ebebeb;\r\n    border-radius:5px;\r\n    padding:10px;\n}\r\n\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/includes/contents/vanbanden/list.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/includes/contents/vanbanden/list.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.tractive, .tractive:hover{\r\n    background:rgb(171, 204, 178);\n}\r\n", ""]);
 
 // exports
 
@@ -39805,6 +40173,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/includes/contents/vanbanden/list.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/includes/contents/vanbanden/list.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader??ref--5-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--5-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./list.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/includes/contents/vanbanden/list.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/includes/footer.vue?vue&type=style&index=0&lang=css&":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/includes/footer.vue?vue&type=style&index=0&lang=css& ***!
@@ -41162,9 +41560,892 @@ var render = function() {
     _c(
       "div",
       { staticClass: "content__list mb-3 mt-3" },
-      [_c("listcomponent")],
+      [
+        _c("listcomponent", {
+          attrs: { id: _vm.e_id },
+          on: { dataById: _vm.loadDataById, viewDataById: _vm.loadViewDataById }
+        })
+      ],
       1
-    )
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "content__modal-edit" }, [
+      _c(
+        "div",
+        {
+          staticClass: "modal fade bd-example-modal-lg",
+          attrs: {
+            id: "suavanbanden",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-lg",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(10),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c(
+                    "form",
+                    {
+                      staticStyle: { position: "relative" },
+                      attrs: { method: "post", enctype: "multipart/form-data" },
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.edit.apply(null, arguments)
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "form-row" }, [
+                        _c("div", { staticClass: "col-md-4 mb-3" }, [
+                          _c("label", [_vm._v("Cơ quan ban hành")]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.e_id_nguon_den,
+                                  expression: "e_id_nguon_den"
+                                }
+                              ],
+                              staticClass: "form-control form-control-sm",
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.e_id_nguon_den = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "" } }, [
+                                _vm._v("--- Chọn cơ quan, đơn vị ban hành ---")
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.listNguonDen.data, function(nguonden) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: nguonden.id,
+                                    domProps: { value: nguonden.id }
+                                  },
+                                  [_vm._v(_vm._s(nguonden.ten_nguon))]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-2 mb-3" }, [
+                          _c("label", [_vm._v("Số văn bản")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.e_so,
+                                expression: "e_so"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.e_so },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.e_so = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-2 mb-3" }, [
+                          _c("label", [_vm._v("Ngày văn bản")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.e_ngay,
+                                expression: "e_ngay"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "date" },
+                            domProps: { value: _vm.e_ngay },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.e_ngay = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-4 mb-3" }, [
+                          _c("label", [_vm._v("Loại văn bản")]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.e_id_loai,
+                                  expression: "e_id_loai"
+                                }
+                              ],
+                              staticClass: "form-control form-control-sm",
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.e_id_loai = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "" } }, [
+                                _vm._v("--- Chọn Loại văn bản ---")
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.listLoai, function(loai) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: loai.id,
+                                    domProps: { value: loai.id }
+                                  },
+                                  [_vm._v(_vm._s(loai.ten_loai))]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-12 mb-3" }, [
+                          _c("label", [_vm._v("Trích yếu")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.e_trich_yeu,
+                                expression: "e_trich_yeu"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.e_trich_yeu },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.e_trich_yeu = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-4 mb-3" }, [
+                          _c("label", [_vm._v("Độ mật")]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.e_do_mat,
+                                  expression: "e_do_mat"
+                                }
+                              ],
+                              staticClass: "form-control form-control-sm",
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.e_do_mat = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "0" } }, [
+                                _vm._v("--- Chọn độ mật ---")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "1" } }, [
+                                _vm._v("Mật")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "2" } }, [
+                                _vm._v("Tối Mật")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "3" } }, [
+                                _vm._v("Tuyệt Mật")
+                              ])
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-3 mb-3" }, [
+                          _c("label", [_vm._v("Người ký")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.e_nguoi_ky,
+                                expression: "e_nguoi_ky"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.e_nguoi_ky },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.e_nguoi_ky = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-5 mb-3" }, [
+                          _c("label", [_vm._v("File đính kèm")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "file" },
+                            on: { change: _vm.getFileEdit }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-7 mb-3" }, [
+                          _c("label", [_vm._v("Phê duyệt của lãnh đạo")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.e_phe_duyet,
+                                expression: "e_phe_duyet"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.e_phe_duyet },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.e_phe_duyet = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-3 mb-3" }, [
+                          _c("label", [_vm._v("Cán bộ xử lý")]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.e_id_user_xu_ly,
+                                  expression: "e_id_user_xu_ly"
+                                }
+                              ],
+                              staticClass: "form-control form-control-sm",
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.e_id_user_xu_ly = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "" } }, [
+                                _vm._v("--- Chọn Cán bộ xử lý ---")
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.listUser.data, function(user) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: user.id,
+                                    domProps: { value: user.id }
+                                  },
+                                  [_vm._v(_vm._s(user.fullname))]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-2 mb-3" }, [
+                          _c("label", [_vm._v("Hạn xử lý")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.e_han_xu_ly,
+                                expression: "e_han_xu_ly"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "date" },
+                            domProps: { value: _vm.e_han_xu_ly },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.e_han_xu_ly = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-12 mb-3" }, [
+                          _c("label", [_vm._v("Ghi chú")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.e_ghi_chu,
+                                expression: "e_ghi_chu"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.e_ghi_chu },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.e_ghi_chu = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(11)
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(12)
+              ])
+            ]
+          )
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "content__modal-edit" }, [
+      _c(
+        "div",
+        {
+          staticClass: "modal fade bd-example-modal-lg",
+          attrs: {
+            id: "xemvanbanden",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-lg",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(13),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c(
+                    "form",
+                    {
+                      staticStyle: { position: "relative" },
+                      attrs: { method: "post", enctype: "multipart/form-data" },
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.edit.apply(null, arguments)
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "form-row" }, [
+                        _c("div", { staticClass: "col-md-4 mb-3" }, [
+                          _c("label", [_vm._v("Cơ quan ban hành")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.v_ten_nguon,
+                                expression: "v_ten_nguon"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.v_ten_nguon },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.v_ten_nguon = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-2 mb-3" }, [
+                          _c("label", [_vm._v("Số văn bản")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.v_so,
+                                expression: "v_so"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.v_so },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.v_so = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-2 mb-3" }, [
+                          _c("label", [_vm._v("Ngày văn bản")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.v_ngay,
+                                expression: "v_ngay"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "date" },
+                            domProps: { value: _vm.v_ngay },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.v_ngay = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-4 mb-3" }, [
+                          _c("label", [_vm._v("Loại văn bản")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.v_ten_loai,
+                                expression: "v_ten_loai"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.v_ten_loai },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.v_ten_loai = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-12 mb-3" }, [
+                          _c("label", [_vm._v("Trích yếu")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.v_trich_yeu,
+                                expression: "v_trich_yeu"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.v_trich_yeu },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.v_trich_yeu = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-4 mb-3" }, [
+                          _c("label", [_vm._v("Độ mật")]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.v_do_mat,
+                                  expression: "v_do_mat"
+                                }
+                              ],
+                              staticClass: "form-control form-control-sm",
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.v_do_mat = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "0" } }, [
+                                _vm._v("--- Chọn độ mật ---")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "1" } }, [
+                                _vm._v("Mật")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "2" } }, [
+                                _vm._v("Tối Mật")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "3" } }, [
+                                _vm._v("Tuyệt Mật")
+                              ])
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-3 mb-3" }, [
+                          _c("label", [_vm._v("Người ký")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.v_nguoi_ky,
+                                expression: "v_nguoi_ky"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.v_nguoi_ky },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.v_nguoi_ky = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-5 mb-3" }, [
+                          _c("label", [_vm._v("File đính kèm")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "file" },
+                            on: { change: _vm.getFileEdit }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-7 mb-3" }, [
+                          _c("label", [_vm._v("Phê duyệt của lãnh đạo")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.v_phe_duyet,
+                                expression: "v_phe_duyet"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.v_phe_duyet },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.v_phe_duyet = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-3 mb-3" }, [
+                          _c("label", [_vm._v("Cán bộ xử lý")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.v_user_xu_ly,
+                                expression: "v_user_xu_ly"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.v_user_xu_ly },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.v_user_xu_ly = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-2 mb-3" }, [
+                          _c("label", [_vm._v("Hạn xử lý")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.v_han_xu_ly,
+                                expression: "v_han_xu_ly"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "date" },
+                            domProps: { value: _vm.v_han_xu_ly },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.v_han_xu_ly = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-12 mb-3" }, [
+                          _c("label", [_vm._v("Ghi chú")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.v_ghi_chu,
+                                expression: "v_ghi_chu"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.v_ghi_chu },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.v_ghi_chu = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-12 mb-3" }, [
+                          _c("label", [_vm._v("Người nhập")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.v_nguoi_nhap,
+                                expression: "v_nguoi_nhap"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.v_nguoi_nhap },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.v_nguoi_nhap = $event.target.value
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-12 mb-3" }, [
+                          _c("label", [_vm._v("Lưu trữ")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.v_luu_tru,
+                                expression: "v_luu_tru"
+                              }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.v_luu_tru },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.v_luu_tru = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(14)
+              ])
+            ]
+          )
+        ]
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -41330,6 +42611,92 @@ var staticRenderFns = [
         ])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Sửa Văn bản đến")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "col-md-12 mb-3 text-right" }, [
+        _c("button", { staticClass: "btn btn-primary" }, [
+          _vm._v("Cập nhật Văn bản")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_c("i", { staticClass: "far fa-window-close" }), _vm._v(" Close")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v("Chi tiết Văn bản đến")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_c("i", { staticClass: "far fa-window-close" }), _vm._v(" Close")]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -41353,16 +42720,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "table",
-    { staticClass: "table table-bordered table-striped table-sm" },
-    [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "tbody",
-        _vm._l(_vm.listVanBanDen.data, function(list, index) {
-          return _c("tr", { key: list.id }, [
+  return _c("table", { staticClass: "table table-bordered table-sm" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "tbody",
+      _vm._l(_vm.listVanBanDen.data, function(list, index) {
+        return _c(
+          "tr",
+          { key: list.id, class: list.id == _vm.id ? "tractive" : "" },
+          [
             _c("td", [_vm._v(_vm._s(index + 1))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(list.ten_nguon))]),
@@ -41457,13 +42824,51 @@ var render = function() {
                   )
                 ]),
             _vm._v(" "),
-            _vm._m(1, true)
-          ])
-        }),
-        0
-      )
-    ]
-  )
+            _c("td", [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-success btn-sm",
+                  attrs: {
+                    href: "#",
+                    "data-toggle": "modal",
+                    "data-target": "#xemvanbanden"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.viewVanBanDenById(list.id)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-binoculars" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-info btn-sm",
+                  attrs: {
+                    href: "#",
+                    "data-toggle": "modal",
+                    "data-target": "#suavanbanden"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.getVanBanDenById(list.id)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "far fa-edit" })]
+              ),
+              _vm._v(" "),
+              _vm._m(1, true)
+            ])
+          ]
+        )
+      }),
+      0
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -41496,14 +42901,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { staticClass: "btn btn-info btn-sm", attrs: { href: "#" } }, [
-        _c("i", { staticClass: "far fa-edit" })
-      ]),
-      _vm._v(" "),
-      _c("button", { staticClass: "btn btn-warning btn-sm" }, [
-        _c("i", { staticClass: "far fa-trash-alt" })
-      ])
+    return _c("button", { staticClass: "btn btn-warning btn-sm" }, [
+      _c("i", { staticClass: "far fa-trash-alt" })
     ])
   }
 ]
@@ -58841,7 +60240,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _list_vue_vue_type_template_id_87ee88f0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./list.vue?vue&type=template&id=87ee88f0& */ "./resources/js/components/includes/contents/vanbanden/list.vue?vue&type=template&id=87ee88f0&");
 /* harmony import */ var _list_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./list.vue?vue&type=script&lang=js& */ "./resources/js/components/includes/contents/vanbanden/list.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _list_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./list.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/includes/contents/vanbanden/list.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -58849,7 +60250,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _list_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _list_vue_vue_type_template_id_87ee88f0___WEBPACK_IMPORTED_MODULE_0__["render"],
   _list_vue_vue_type_template_id_87ee88f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -58878,6 +60279,22 @@ component.options.__file = "resources/js/components/includes/contents/vanbanden/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./list.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/includes/contents/vanbanden/list.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/includes/contents/vanbanden/list.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/includes/contents/vanbanden/list.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader!../../../../../../node_modules/css-loader??ref--5-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--5-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./list.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/includes/contents/vanbanden/list.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
 
 /***/ }),
 

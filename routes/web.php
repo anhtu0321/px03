@@ -81,5 +81,6 @@ Route::get('/listLoai','LoaiVanBanController@listLoai');
 Route::post('/addvanbanden','VanBanDenController@store')->middleware('can:vanbanden_them');
 Route::get('/listvanbanden','VanBanDenController@index')->middleware('can:vanbanden_xem');
 Route::get('/editvanbanden/{id}','VanBanDenController@edit')->middleware('can:vanbanden_sua');
+Route::get('/viewvanbanden/{id}','VanBanDenController@view')->middleware('can:vanbanden_xem');
 Route::post('/updatevanbanden/{id}','VanBanDenController@update')->middleware('can:vanbanden_sua');
 Route::get('/deletevanbanden/{id}','VanBanDenController@destroy')->middleware('can:vanbanden_xoa');
