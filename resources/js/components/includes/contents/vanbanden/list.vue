@@ -1,71 +1,80 @@
 <template>
-    <table class="table table-bordered table-sm">
-        <thead class="thead-light">
-            <th>#</th>
-            <th>Cơ quan ban hành</th>
-            <th>Loại</th>
-            <th>Số</th>
-            <th>Ngày</th>
-            <th>Trích yếu</th>
-            <th>Ghi chú</th>
-            <th>Trạng thái</th>
-            <th>File</th>
-            <th>Cập nhật</th>
-        </thead>
-        <tbody>
-            <tr v-for="(list, index) in listVanBanDen.data" :key="list.id" :class="list.id == id ? 'tractive':''">
-                <td>{{ index + 1}}</td>
-                <td>{{ list.ten_nguon }}</td>
-                <td>{{ list.ten_loai }}</td>
-                <td>{{ list.so }}</td>
-                <td>{{ list.ngay }}</td>
-                <td>{{ list.trich_yeu }}</td>
-                <td>{{ list.ghi_chu }}</td>
-                <td>{{ list.trang_thai }}</td>
-                <td v-if="['doc', 'docx', 'xls', 'xlsx'].includes(list.duoi_file)">
-                    <a :href="`/px03/public/vanbandenupload/${ list.file }`">
-                        <img width="25px" src="/px03/public/images/word-icon.png">
-                    </a>
-                </td>
-                <td v-else-if="['pdf'].includes(list.duoi_file)">
-                    <a :href="`/px03/public/vanbandenupload/${ list.file }`">
-                        <img width="25px" src="/px03/public/images/pdf-icon.png">
-                    </a>
-                </td>
-                <td v-else-if="['jpg', 'jpeg', 'png'].includes(list.duoi_file)">
-                    <a :href="`/px03/public/vanbandenupload/${ list.file }`">
-                        <img width="25px" src="/px03/public/images/img-icon.png">
-                    </a>
-                </td>
-                <td v-else-if="(list.file == '') || (list.file == null) "></td>
-                <td v-else>
-                    <a :href="`/px03/public/vanbandenupload/${ list.file }`">
-                        <img width="25px" src="/px03/public/images/blank-file-icon.png">
-                    </a>
-                </td>
+<div>
+    <div class="content__list mb-3 mt-3">
+        <table class="table table-bordered table-sm">
+            <thead class="thead-light">
+                <th>#</th>
+                <th>Cơ quan ban hành</th>
+                <th>Loại</th>
+                <th>Số</th>
+                <th>Ngày</th>
+                <th>Trích yếu</th>
+                <th>Ghi chú</th>
+                <th>Trạng thái</th>
+                <th>File</th>
+                <th>Cập nhật</th>
+            </thead>
+            <tbody>
+                <tr v-for="(list, index) in listVanBanDen.data" :key="list.id" :class="list.id == id ? 'tractive':''">
+                    <td>{{ index + 1}}</td>
+                    <td>{{ list.ten_nguon }}</td>
+                    <td>{{ list.ten_loai }}</td>
+                    <td>{{ list.so }}</td>
+                    <td>{{ list.ngay }}</td>
+                    <td>{{ list.trich_yeu }}</td>
+                    <td>{{ list.ghi_chu }}</td>
+                    <td :class="trang_thai_color(xuLyTrangThai(list.trang_thai, list.han_xu_ly))">{{ xuLyTrangThai(list.trang_thai, list.han_xu_ly) }}</td>
+                    <td v-if="['doc', 'docx', 'xls', 'xlsx'].includes(list.duoi_file)">
+                        <a :href="`/px03/public/vanbandenupload/${ list.file }`">
+                            <img width="25px" src="/px03/public/images/word-icon.png">
+                        </a>
+                    </td>
+                    <td v-else-if="['pdf'].includes(list.duoi_file)">
+                        <a :href="`/px03/public/vanbandenupload/${ list.file }`">
+                            <img width="25px" src="/px03/public/images/pdf-icon.png">
+                        </a>
+                    </td>
+                    <td v-else-if="['jpg', 'jpeg', 'png'].includes(list.duoi_file)">
+                        <a :href="`/px03/public/vanbandenupload/${ list.file }`">
+                            <img width="25px" src="/px03/public/images/img-icon.png">
+                        </a>
+                    </td>
+                    <td v-else-if="(list.file == '') || (list.file == null) "></td>
+                    <td v-else>
+                        <a :href="`/px03/public/vanbandenupload/${ list.file }`">
+                            <img width="25px" src="/px03/public/images/blank-file-icon.png">
+                        </a>
+                    </td>
 
-                <td>
-                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#xemvanbanden" @click="viewVanBanDenById(list.id)"><i class="fas fa-binoculars"></i></a>
-                    <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#suavanbanden" @click="getVanBanDenById(list.id)"><i class="far fa-edit"></i></a>
-                    <button class="btn btn-warning btn-sm"><i class="far fa-trash-alt"></i></button>
-                </td>
+                    <td>
+                        <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#xemvanbanden" @click="viewVanBanDenById(list.id)"><i class="fas fa-binoculars"></i></a>
+                        <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#suavanbanden" @click="getVanBanDenById(list.id)"><i class="far fa-edit"></i></a>
+                        <button class="btn btn-warning btn-sm" @click="deleteData(list.id)"><i class="far fa-trash-alt"></i></button>
+                    </td>
 
-            </tr>
-        </tbody>
-    </table>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+    <page :last_pages="listVanBanDen.last_page" @getPage="setPage"></page>
+</div>  
+
 </template>
 
 <script>
+import page from './page.vue';
 export default {
     data(){
         return{
+            page:1,
         }
     },
     props:['id'],
     computed:{
         listVanBanDen(){
             return this.$store.getters.getListVanBanDen;
-        },
+        }
     },
     methods: {
         async getVanBanDenById(id){
@@ -82,15 +91,70 @@ export default {
             .then(response=>{
                 this.$emit('viewDataById', response);
             })
+        },
+        trang_thai_color(value){
+            switch (value) {
+                case 'Chưa xử lý':
+                    return "text-warning";
+                    break;
+                case 'Đang xử lý':
+                    return "text-info";
+                    break;
+                case 'Hoàn thành':
+                    return "text-success";
+                    break;
+                case 'Thất bại':
+                    return "text-danger";
+                    break;
+                case 'Quá hạn':
+                    return "text-danger";
+                    break;
+                default:
+                    break;
+            }  
+        },
+        xuLyTrangThai(trangthai, hanxuly){
+            let d = new Date();
+            let today = new Date(d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate());
+            // today = today.getTime(); -> hàm này để chuyển ngày sang miniseconds
+            if(hanxuly != undefined) {
+                let date = new Date(hanxuly);
+                if((['Chưa xử lý', 'Đang xử lý'].includes(trangthai) == true) && (today > date)){
+                    return "Quá hạn";
+                }
+            }
+            return trangthai;
+        },
+        deleteData(id){
+            if(confirm('ban muon xoa that a ?') == true){
+                axios.get(`/px03/public/deletevanbanden/${id}`)
+                .then(async reponse=>{
+                    await this.$store.dispatch('acListVanBanDen', this.page);
+                })
+            }
+        },
+        setPage(page){
+            this.page = page;
+            this.$emit('getPage',page);
         }
     },
+    components:{
+        page,
+    },
     mounted(){
-        this.$store.dispatch('acListVanBanDen', 1);
+        this.$store.dispatch('acListVanBanDen', page);
     }
 }
 </script>
 
 <style>
+
+.content__list{
+    width: 100%;
+    border:1px solid #ebebeb;
+    border-radius:5px;
+    padding:10px;
+}
 .tractive, .tractive:hover{
     background:rgb(171, 204, 178);
 }

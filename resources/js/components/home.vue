@@ -21,8 +21,8 @@ import footerComponent from './includes/footer.vue';
 
 export default {
     components:{headerComponent, bannerComponent, menuComponent, contentComponent, footerComponent},
-    mounted(){
-        this.$store.dispatch('acUserDetails');
+    async mounted(){
+        await this.$store.dispatch('acUserDetails');
     }
 }
 </script>
