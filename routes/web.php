@@ -84,3 +84,5 @@ Route::get('/editvanbanden/{id}','VanBanDenController@edit')->middleware('can:va
 Route::get('/viewvanbanden/{id}','VanBanDenController@view')->middleware('can:vanbanden_xem');
 Route::post('/updatevanbanden/{id}','VanBanDenController@update')->middleware('can:vanbanden_sua');
 Route::get('/deletevanbanden/{id}','VanBanDenController@destroy')->middleware('can:vanbanden_xoa');
+// Tìm kiếm văn bản đến
+Route::post('/search','VanBanDenController@search')->middleware('can:vanbanden_xem');

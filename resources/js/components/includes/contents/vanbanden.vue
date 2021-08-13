@@ -1,9 +1,9 @@
 <template>
     <div class="content__sub mt-3">
         
-        <search-component></search-component>
-        <add-component></add-component>
-        <listcomponent @dataById="loadDataById" @viewDataById="loadViewDataById" :id="e_id" @getPage="setPage"></listcomponent>
+        <search-component v-if="ktquyen('vanbanden_xem')"></search-component>
+        <add-component v-if="ktquyen('vanbanden_them')"></add-component>
+        <listcomponent @dataById="loadDataById" @viewDataById="loadViewDataById" :id="e_id" @getPage="setPage" v-if="ktquyen('vanbanden_xem')"></listcomponent>
         <!-- modal sửa văn bản đến -->
         <div class="content__modal-edit">
             <div class="modal fade bd-example-modal-lg" id="suavanbanden" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -47,7 +47,7 @@
                                     <div class="col-md-4 mb-3">
                                         <label>Độ mật</label>
                                         <select class="form-control form-control-sm" v-model="e_do_mat">
-                                            <option value="0">--- Chọn độ mật ---</option>
+                                            <option value="">Không mật</option>
                                             <option value="1">Mật</option>
                                             <option value="2">Tối Mật</option>
                                             <option value="3">Tuyệt Mật</option>
@@ -257,13 +257,13 @@ export default {
         listLoai(){
             return this.$store.getters.getListLoai;
         },
+		listPermissionOfUser(){
+			return this.$store.getters.getListPermissionOfUser;
+        }
     },
     methods:{
         getNameDoMat(domat){
             switch (domat) {
-                case 0:
-                    return "Không mật";
-                    break;
                 case 1:
                     return "Mật";
                     break;
@@ -274,6 +274,7 @@ export default {
                     return "Tuyệt mật";
                     break;
                 default:
+                    return "Không mật";
                     break;
             }
         },
@@ -387,7 +388,15 @@ export default {
         },
         setPage(page){
             this.page = page;
-        }
+        },
+		ktquyen(key_code){
+			for(var i in this.listPermissionOfUser){
+				if(this.listPermissionOfUser[i].key_code == key_code){
+					return true;
+				}
+			}
+			return false;
+		}
     },
     components:{
         editor, 

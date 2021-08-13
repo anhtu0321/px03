@@ -47,9 +47,9 @@
                     </td>
 
                     <td>
-                        <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#xemvanbanden" @click="viewVanBanDenById(list.id)"><i class="fas fa-binoculars"></i></a>
-                        <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#suavanbanden" @click="getVanBanDenById(list.id)"><i class="far fa-edit"></i></a>
-                        <button class="btn btn-warning btn-sm" @click="deleteData(list.id)"><i class="far fa-trash-alt"></i></button>
+                        <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#xemvanbanden" @click="viewVanBanDenById(list.id)" v-if="ktquyen('vanbanden_xem')"><i class="fas fa-binoculars"></i></a>
+                        <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#suavanbanden" @click="getVanBanDenById(list.id)" v-if="ktquyen('vanbanden_sua')"><i class="far fa-edit"></i></a>
+                        <button class="btn btn-warning btn-sm" @click="deleteData(list.id)" v-if="ktquyen('vanbanden_xoa')"><i class="far fa-trash-alt"></i></button>
                     </td>
 
                 </tr>
@@ -74,6 +74,9 @@ export default {
     computed:{
         listVanBanDen(){
             return this.$store.getters.getListVanBanDen;
+        },
+		listPermissionOfUser(){
+			return this.$store.getters.getListPermissionOfUser;
         }
     },
     methods: {
@@ -136,13 +139,21 @@ export default {
         setPage(page){
             this.page = page;
             this.$emit('getPage',page);
-        }
+        },
+		ktquyen(key_code){
+			for(var i in this.listPermissionOfUser){
+				if(this.listPermissionOfUser[i].key_code == key_code){
+					return true;
+				}
+			}
+			return false;
+		}
     },
     components:{
         page,
     },
-    mounted(){
-        this.$store.dispatch('acListVanBanDen', page);
+    async created(){
+        await this.$store.dispatch('acListVanBanDen', page);
     }
 }
 </script>

@@ -62,7 +62,7 @@
                     <div class="col-md-4 mb-3">
                         <label>Độ mật</label>
                         <select class="form-control form-control-sm" v-model="do_mat">
-                            <option value="0">--- Chọn độ mật ---</option>
+                            <option value="">Không mật</option>
                             <option value="1">Mật</option>
                             <option value="2">Tối Mật</option>
                             <option value="3">Tuyệt Mật</option>

@@ -3,8 +3,8 @@
         <div class="col-sm-12 footer-bar"></div>
         <div class="footer__sub">
             <p>CÔNG AN TỈNH HƯNG YÊN</p>
-            <p>PHẦN MỀM QUẢN LÝ VĂN BẢN</p> 
             <p>Số 45 Hải Thượng Lãn Ông -Thành Phố Hưng Yên</p>
+            <p>PHẦN MỀM QUẢN LÝ VĂN BẢN</p> 
             <p>Bản quyền thuộc - PX03</p>
             <p>Điện thoại: 069.2849...</p>
         </div>

@@ -2413,19 +2413,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _includes_header_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./includes/header.vue */ "./resources/js/components/includes/header.vue");
-/* harmony import */ var _includes_banner_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./includes/banner.vue */ "./resources/js/components/includes/banner.vue");
-/* harmony import */ var _includes_menu_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./includes/menu.vue */ "./resources/js/components/includes/menu.vue");
-/* harmony import */ var _includes_content_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./includes/content.vue */ "./resources/js/components/includes/content.vue");
-/* harmony import */ var _includes_footer_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./includes/footer.vue */ "./resources/js/components/includes/footer.vue");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var _includes_header_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./includes/header.vue */ "./resources/js/components/includes/header.vue");
+/* harmony import */ var _includes_banner_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./includes/banner.vue */ "./resources/js/components/includes/banner.vue");
+/* harmony import */ var _includes_menu_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./includes/menu.vue */ "./resources/js/components/includes/menu.vue");
+/* harmony import */ var _includes_content_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./includes/content.vue */ "./resources/js/components/includes/content.vue");
+/* harmony import */ var _includes_footer_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./includes/footer.vue */ "./resources/js/components/includes/footer.vue");
 //
 //
 //
@@ -2444,30 +2436,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    headerComponent: _includes_header_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    bannerComponent: _includes_banner_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    menuComponent: _includes_menu_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    contentComponent: _includes_content_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    footerComponent: _includes_footer_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _this.$store.dispatch('acUserDetails');
-
-            case 2:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
+    headerComponent: _includes_header_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    bannerComponent: _includes_banner_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    menuComponent: _includes_menu_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    contentComponent: _includes_content_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    footerComponent: _includes_footer_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
 });
 
@@ -2509,8 +2482,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _contents_vanbanden_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./contents/vanbanden.vue */ "./resources/js/components/includes/contents/vanbanden.vue");
-/* harmony import */ var _contents_vanbandi_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./contents/vanbandi.vue */ "./resources/js/components/includes/contents/vanbandi.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _contents_vanbanden_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./contents/vanbanden.vue */ "./resources/js/components/includes/contents/vanbanden.vue");
+/* harmony import */ var _contents_vanbandi_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./contents/vanbandi.vue */ "./resources/js/components/includes/contents/vanbandi.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2527,8 +2508,31 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   components: {
-    vanbanden: _contents_vanbanden_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    vanbandi: _contents_vanbandi_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    vanbanden: _contents_vanbanden_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    vanbandi: _contents_vanbandi_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  created: function created() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this.$store.dispatch('acUserDetails');
+
+            case 2:
+              _context.next = 4;
+              return _this.$store.dispatch('acListPermissionOfUser');
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   }
 });
 
@@ -2811,15 +2815,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     listLoai: function listLoai() {
       return this.$store.getters.getListLoai;
+    },
+    listPermissionOfUser: function listPermissionOfUser() {
+      return this.$store.getters.getListPermissionOfUser;
     }
   },
   methods: {
     getNameDoMat: function getNameDoMat(domat) {
       switch (domat) {
-        case 0:
-          return "Không mật";
-          break;
-
         case 1:
           return "Mật";
           break;
@@ -2833,6 +2836,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           break;
 
         default:
+          return "Không mật";
           break;
       }
     },
@@ -2972,6 +2976,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     setPage: function setPage(page) {
       this.page = page;
+    },
+    ktquyen: function ktquyen(key_code) {
+      for (var i in this.listPermissionOfUser) {
+        if (this.listPermissionOfUser[i].key_code == key_code) {
+          return true;
+        }
+      }
+
+      return false;
     }
   },
   components: {
@@ -3348,6 +3361,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     listVanBanDen: function listVanBanDen() {
       return this.$store.getters.getListVanBanDen;
+    },
+    listPermissionOfUser: function listPermissionOfUser() {
+      return this.$store.getters.getListPermissionOfUser;
     }
   },
   methods: {
@@ -3475,13 +3491,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     setPage: function setPage(page) {
       this.page = page;
       this.$emit('getPage', page);
+    },
+    ktquyen: function ktquyen(key_code) {
+      for (var i in this.listPermissionOfUser) {
+        if (this.listPermissionOfUser[i].key_code == key_code) {
+          return true;
+        }
+      }
+
+      return false;
     }
   },
   components: {
     page: _page_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  mounted: function mounted() {
-    this.$store.dispatch('acListVanBanDen', _page_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
+  created: function created() {
+    var _this4 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return _this4.$store.dispatch('acListVanBanDen', _page_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+            case 2:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }))();
   }
 });
 
@@ -3592,6 +3633,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
 //
 //
 //
@@ -3666,25 +3716,81 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       expand: false,
-      classexpand: ''
+      classexpand: '',
+      // Dữ liệu tìm kiếm
+      date_begin: '',
+      date_end: '',
+      trich_yeu: '',
+      so: '',
+      id_nguon_den: '',
+      id_loai: '',
+      do_mat: ''
     };
+  },
+  computed: {
+    listNguonDen: function listNguonDen() {
+      return this.$store.getters.getListNguonDen;
+    },
+    listLoai: function listLoai() {
+      return this.$store.getters.getListLoai;
+    }
   },
   methods: {
     showExpand: function showExpand() {
       var _this = this;
 
-      //ẩn hiện tìm kiếm
-      if (this.expand == true) {
-        this.classexpand = '';
-        setTimeout(function () {
-          _this.expand = !_this.expand;
-        }, 500);
-      } else {
-        this.expand = !this.expand;
-        setTimeout(function () {
-          _this.classexpand = 'active';
-        }, 200);
-      }
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!(_this.expand == true)) {
+                  _context.next = 5;
+                  break;
+                }
+
+                _this.classexpand = '';
+                setTimeout(function () {
+                  _this.expand = !_this.expand;
+                }, 500);
+                _context.next = 12;
+                break;
+
+              case 5:
+                _context.next = 7;
+                return setTimeout(function () {
+                  _this.classexpand = 'active';
+                }, 200);
+
+              case 7:
+                _context.next = 9;
+                return _this.$store.dispatch('acListNguonDen');
+
+              case 9:
+                _context.next = 11;
+                return _this.$store.dispatch('acListLoai');
+
+              case 11:
+                _this.expand = !_this.expand;
+
+              case 12:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    search: function search() {
+      var data = new FormData();
+      data.append('date_begin', this.date_begin);
+      data.append('date_end', this.date_end);
+      data.append('trich_yeu', this.trich_yeu);
+      data.append('so', this.so);
+      data.append('id_nguon_den', this.id_nguon_den);
+      data.append('id_loai', this.id_loai);
+      data.append('do_mat', this.do_mat);
+      this.$store.dispatch('acSearch', data);
     }
   }
 });
@@ -41517,18 +41623,20 @@ var render = function() {
     "div",
     { staticClass: "content__sub mt-3" },
     [
-      _c("search-component"),
+      _vm.ktquyen("vanbanden_xem") ? _c("search-component") : _vm._e(),
       _vm._v(" "),
-      _c("add-component"),
+      _vm.ktquyen("vanbanden_them") ? _c("add-component") : _vm._e(),
       _vm._v(" "),
-      _c("listcomponent", {
-        attrs: { id: _vm.e_id },
-        on: {
-          dataById: _vm.loadDataById,
-          viewDataById: _vm.loadViewDataById,
-          getPage: _vm.setPage
-        }
-      }),
+      _vm.ktquyen("vanbanden_xem")
+        ? _c("listcomponent", {
+            attrs: { id: _vm.e_id },
+            on: {
+              dataById: _vm.loadDataById,
+              viewDataById: _vm.loadViewDataById,
+              getPage: _vm.setPage
+            }
+          })
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "content__modal-edit" }, [
         _c(
@@ -41791,8 +41899,8 @@ var render = function() {
                                 }
                               },
                               [
-                                _c("option", { attrs: { value: "0" } }, [
-                                  _vm._v("--- Chọn độ mật ---")
+                                _c("option", { attrs: { value: "" } }, [
+                                  _vm._v("Không mật")
                                 ]),
                                 _vm._v(" "),
                                 _c("option", { attrs: { value: "1" } }, [
@@ -42650,8 +42758,8 @@ var render = function() {
                       }
                     },
                     [
-                      _c("option", { attrs: { value: "0" } }, [
-                        _vm._v("--- Chọn độ mật ---")
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("Không mật")
                       ]),
                       _vm._v(" "),
                       _c("option", { attrs: { value: "1" } }, [_vm._v("Mật")]),
@@ -42995,54 +43103,60 @@ var render = function() {
                       ]),
                   _vm._v(" "),
                   _c("td", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-success btn-sm",
-                        attrs: {
-                          href: "#",
-                          "data-toggle": "modal",
-                          "data-target": "#xemvanbanden"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.viewVanBanDenById(list.id)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-binoculars" })]
-                    ),
+                    _vm.ktquyen("vanbanden_xem")
+                      ? _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-success btn-sm",
+                            attrs: {
+                              href: "#",
+                              "data-toggle": "modal",
+                              "data-target": "#xemvanbanden"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.viewVanBanDenById(list.id)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-binoculars" })]
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-info btn-sm",
-                        attrs: {
-                          href: "#",
-                          "data-toggle": "modal",
-                          "data-target": "#suavanbanden"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.getVanBanDenById(list.id)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "far fa-edit" })]
-                    ),
+                    _vm.ktquyen("vanbanden_sua")
+                      ? _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-info btn-sm",
+                            attrs: {
+                              href: "#",
+                              "data-toggle": "modal",
+                              "data-target": "#suavanbanden"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.getVanBanDenById(list.id)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "far fa-edit" })]
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-warning btn-sm",
-                        on: {
-                          click: function($event) {
-                            return _vm.deleteData(list.id)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "far fa-trash-alt" })]
-                    )
+                    _vm.ktquyen("vanbanden_xoa")
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-warning btn-sm",
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteData(list.id)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "far fa-trash-alt" })]
+                        )
+                      : _vm._e()
                   ])
                 ]
               )
@@ -43199,208 +43313,335 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "content__search" }, [
-    _c("form", [
-      _vm._m(0),
-      _vm._v(" "),
-      _vm.expand
-        ? _c(
-            "div",
-            {
-              staticClass: "form-row content__form-expand",
-              class: _vm.classexpand
-            },
-            [
-              _vm._m(1),
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.search.apply(null, arguments)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "form-row" }, [
+          _c("div", { staticClass: "col-md-4 mb-3" }, [
+            _c("label", [_vm._v("Ngày văn bản")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-6 d-flex align-items-center" }, [
+                _c("span", { staticClass: "mr-2" }, [_vm._v("Từ ")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.date_begin,
+                      expression: "date_begin"
+                    }
+                  ],
+                  staticClass: "form-control form-control-sm",
+                  attrs: { type: "date" },
+                  domProps: { value: _vm.date_begin },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.date_begin = $event.target.value
+                    }
+                  }
+                })
+              ]),
               _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _vm._m(4),
-              _vm._v(" "),
-              _vm._m(5),
-              _vm._v(" "),
-              _vm._m(6),
-              _vm._v(" "),
-              _vm._m(7)
-            ]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row" }, [
-        _vm._m(8),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6 mb-3 text-right" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-default",
+              _c("div", { staticClass: "col-md-6 d-flex align-items-center" }, [
+                _c("span", { staticClass: "mr-2" }, [_vm._v("Đến ")]),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.date_end,
+                      expression: "date_end"
+                    }
+                  ],
+                  staticClass: "form-control form-control-sm",
+                  attrs: { type: "date" },
+                  domProps: { value: _vm.date_end },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.date_end = $event.target.value
+                    }
+                  }
+                })
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-8 mb-3" }, [
+            _c("label", [_vm._v("Trích yếu")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.trich_yeu,
+                  expression: "trich_yeu"
+                }
+              ],
+              staticClass: "form-control form-control-sm",
+              attrs: { type: "text" },
+              domProps: { value: _vm.trich_yeu },
               on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.showExpand.apply(null, arguments)
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.trich_yeu = $event.target.value
                 }
               }
-            },
-            [
-              _vm.expand
-                ? _c("div", [
-                    _c("i", { staticClass: "fas fa-search-minus" }),
-                    _vm._v(" Tìm đơn giản "),
-                    _c("i", { staticClass: "fas fa-caret-up" })
-                  ])
-                : _c("div", [
-                    _c("i", { staticClass: "fas fa-search-plus" }),
-                    _vm._v(" Tìm kiếm nâng cao "),
-                    _c("i", { staticClass: "fas fa-caret-down" })
-                  ])
-            ]
-          )
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.expand
+          ? _c(
+              "div",
+              {
+                staticClass: "form-row content__form-expand",
+                class: _vm.classexpand
+              },
+              [
+                _c("div", { staticClass: "col-md-4 mb-3" }, [
+                  _c("label", { attrs: { for: "validationCustom03" } }, [
+                    _vm._v("Cơ quan ban hành")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.id_nguon_den,
+                          expression: "id_nguon_den"
+                        }
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.id_nguon_den = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("--- Chọn cơ quan, đơn vị ban hành ---")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.listNguonDen.data, function(nguonden) {
+                        return _c(
+                          "option",
+                          {
+                            key: nguonden.id,
+                            domProps: { value: nguonden.id }
+                          },
+                          [_vm._v(_vm._s(nguonden.ten_nguon))]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-3 mb-3" }, [
+                  _c("label", { attrs: { for: "validationCustom03" } }, [
+                    _vm._v("Loại Văn bản")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.id_loai,
+                          expression: "id_loai"
+                        }
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.id_loai = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("--- Chọn Loại văn bản ---")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.listLoai, function(loai) {
+                        return _c(
+                          "option",
+                          { key: loai.id, domProps: { value: loai.id } },
+                          [_vm._v(_vm._s(loai.ten_loai))]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-3 mb-3" }, [
+                  _c("label", { attrs: { for: "validationCustom03" } }, [
+                    _vm._v("Số Văn bản")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.so,
+                        expression: "so"
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.so },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.so = $event.target.value
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-2 mb-3" }, [
+                  _c("label", { attrs: { for: "validationCustom03" } }, [
+                    _vm._v("Độ mật")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.do_mat,
+                          expression: "do_mat"
+                        }
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.do_mat = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("-- Tất cả --")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "-1" } }, [
+                        _vm._v("Không mật")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "1" } }, [_vm._v("Mật")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "2" } }, [
+                        _vm._v("Tối Mật")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "3" } }, [
+                        _vm._v("Tuyệt Mật")
+                      ])
+                    ]
+                  )
+                ])
+              ]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-row" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6 mb-3 text-right" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-default",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.showExpand.apply(null, arguments)
+                  }
+                }
+              },
+              [
+                _vm.expand
+                  ? _c("div", [
+                      _c("i", { staticClass: "fas fa-search-minus" }),
+                      _vm._v(" Tìm đơn giản "),
+                      _c("i", { staticClass: "fas fa-caret-up" })
+                    ])
+                  : _c("div", [
+                      _c("i", { staticClass: "fas fa-search-plus" }),
+                      _vm._v(" Tìm kiếm nâng cao "),
+                      _c("i", { staticClass: "fas fa-caret-down" })
+                    ])
+              ]
+            )
+          ])
         ])
-      ])
-    ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "col-md-4 mb-3" }, [
-        _c("label", [_vm._v("Ngày văn bản")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-6 d-flex align-items-center" }, [
-            _c("span", { staticClass: "mr-2" }, [_vm._v("Từ ")]),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control form-control-sm",
-              attrs: { type: "date" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-6 d-flex align-items-center" }, [
-            _c("span", { staticClass: "mr-2" }, [_vm._v("Đến ")]),
-            _c("input", {
-              staticClass: "form-control form-control-sm",
-              attrs: { type: "date" }
-            })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-8 mb-3" }, [
-        _c("label", [_vm._v("Trích yếu")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control form-control-sm",
-          attrs: { type: "text" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-2 mb-3" }, [
-      _c("label", { attrs: { for: "validationCustom03" } }, [
-        _vm._v("Số Văn bản")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control form-control-sm",
-        attrs: { type: "text" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4 mb-3" }, [
-      _c("label", { attrs: { for: "validationCustom03" } }, [
-        _vm._v("Loại Văn bản")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control form-control-sm",
-        attrs: { type: "text" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4 mb-3" }, [
-      _c("label", { attrs: { for: "validationCustom03" } }, [
-        _vm._v("Nguồn văn bản")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control form-control-sm",
-        attrs: { type: "text" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-2 mb-3" }, [
-      _c("label", { attrs: { for: "validationCustom03" } }, [_vm._v("Độ mật")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control form-control-sm",
-        attrs: { type: "text" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4 mb-3" }, [
-      _c("label", { attrs: { for: "validationCustom03" } }, [
-        _vm._v("Loại Văn bản")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control form-control-sm",
-        attrs: { type: "text" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4 mb-3" }, [
-      _c("label", { attrs: { for: "validationCustom03" } }, [
-        _vm._v("Nguồn văn bản")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control form-control-sm",
-        attrs: { type: "text" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-2 mb-3" }, [
-      _c("label", { attrs: { for: "validationCustom03" } }, [_vm._v("Độ mật")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control form-control-sm",
-        attrs: { type: "text" }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -43474,9 +43715,9 @@ var staticRenderFns = [
       _c("div", { staticClass: "footer__sub" }, [
         _c("p", [_vm._v("CÔNG AN TỈNH HƯNG YÊN")]),
         _vm._v(" "),
-        _c("p", [_vm._v("PHẦN MỀM QUẢN LÝ VĂN BẢN")]),
-        _vm._v(" "),
         _c("p", [_vm._v("Số 45 Hải Thượng Lãn Ông -Thành Phố Hưng Yên")]),
+        _vm._v(" "),
+        _c("p", [_vm._v("PHẦN MỀM QUẢN LÝ VĂN BẢN")]),
         _vm._v(" "),
         _c("p", [_vm._v("Bản quyền thuộc - PX03")]),
         _vm._v(" "),
@@ -61463,7 +61704,8 @@ var storeInfo = {
     listUser: '',
     listNguonDen: '',
     listLoai: '',
-    listVanBanDen: ''
+    listVanBanDen: '',
+    listPermissionOfUser: ''
   },
   getters: {
     getUserDetails: function getUserDetails(state) {
@@ -61483,6 +61725,9 @@ var storeInfo = {
     },
     getListVanBanDen: function getListVanBanDen(state) {
       return state.listVanBanDen;
+    },
+    getListPermissionOfUser: function getListPermissionOfUser(state) {
+      return state.listPermissionOfUser;
     }
   },
   actions: {
@@ -61513,6 +61758,16 @@ var storeInfo = {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/px03/public/listvanbanden?page=' + page).then(function (response) {
         contex.commit('muListVanBanDen', response);
       });
+    },
+    acListPermissionOfUser: function acListPermissionOfUser(contex) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/px03/public/listPermissionOfUser').then(function (response) {
+        contex.commit('muListPermissionOfUser', response);
+      });
+    },
+    acSearch: function acSearch(contex, data) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/px03/public/search', data).then(function (response) {
+        contex.commit('muSearch', response);
+      });
     }
   },
   mutations: {
@@ -61532,6 +61787,12 @@ var storeInfo = {
       state.listLoai = data.data;
     },
     muListVanBanDen: function muListVanBanDen(state, data) {
+      state.listVanBanDen = data.data;
+    },
+    muListPermissionOfUser: function muListPermissionOfUser(state, data) {
+      state.listPermissionOfUser = data.data;
+    },
+    muSearch: function muSearch(state, data) {
       state.listVanBanDen = data.data;
     }
   }

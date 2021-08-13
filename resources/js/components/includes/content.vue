@@ -14,7 +14,11 @@ export default {
             return this.$store.getters.getLink;
         } 
     },
-    components:{vanbanden, vanbandi}
+    components:{vanbanden, vanbandi},
+    async created(){
+        await this.$store.dispatch('acUserDetails');
+        await this.$store.dispatch('acListPermissionOfUser');
+    }
 }
 </script>
 

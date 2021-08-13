@@ -19,7 +19,7 @@ class VanBanDenController extends Controller
         ->leftjoin('loai_van_ban','van_ban_den.id_loai', '=', 'loai_van_ban.id')
         ->select('van_ban_den.id','van_ban_den.so','van_ban_den.ngay','van_ban_den.trich_yeu','van_ban_den.ghi_chu','van_ban_den.han_xu_ly','van_ban_den.trang_thai','van_ban_den.file','van_ban_den.duoi_file', 'nguon_den.ten_nguon', 'loai_van_ban.ten_loai')
         ->orderBy('van_ban_den.id','desc')
-        ->paginate(10);
+        ->paginate(30);
         return $vanbanden;
 
         // >join('contacts', 'users.id', '=', 'contacts.user_id')
@@ -144,6 +144,38 @@ class VanBanDenController extends Controller
             }
         }
     }
+
+    public function search(Request $request){
+        $vanbanden = DB::table('van_ban_den')
+        ->leftjoin('nguon_den','van_ban_den.id_nguon_den', '=', 'nguon_den.id')
+        ->leftjoin('loai_van_ban','van_ban_den.id_loai', '=', 'loai_van_ban.id')
+        ->select('van_ban_den.id','van_ban_den.so','van_ban_den.ngay','van_ban_den.trich_yeu','van_ban_den.ghi_chu','van_ban_den.han_xu_ly','van_ban_den.trang_thai','van_ban_den.file','van_ban_den.duoi_file', 'nguon_den.ten_nguon', 'loai_van_ban.ten_loai')
+        ->where('van_ban_den.trich_yeu','LIKE', '%'.$request->trich_yeu.'%')
+        ->where(function($query) use ($request){
+            if(($request->date_begin != '') and ($request->date_end != '')){
+                $query->whereBetween('van_ban_den.ngay',[$request->date_begin, $request->date_end]);
+            }
+            if($request->id_nguon_den != ''){
+                $query->where('van_ban_den.id_nguon_den','=', $request->id_nguon_den);
+            }
+            if($request->id_loai != ''){
+                $query->where('van_ban_den.id_loai','=', $request->id_loai);
+            }
+            if($request->so != ''){
+                $query->where('van_ban_den.so','LIKE', '%'.$request->so.'%');
+            }
+            if($request->do_mat == '-1'){
+                $query->whereNotIn('van_ban_den.do_mat',[1,2,3]);
+            }
+            if($request->do_mat != '-1'){
+                $query->where('van_ban_den.do_mat','LIKE', '%'.$request->do_mat.'%');
+            }
+        })
+        ->orderBy('van_ban_den.id','desc')
+        ->paginate(30);
+        return $vanbanden;
+    }
+
     public function validateForm(Request $request){
         return $request->validate([
             'trich_yeu' => 'required',

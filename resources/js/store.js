@@ -11,6 +11,7 @@ const storeInfo = {
         listNguonDen: '',
         listLoai: '',
         listVanBanDen: '',
+        listPermissionOfUser: '',
     },
     getters: {
         getUserDetails(state) {
@@ -30,7 +31,10 @@ const storeInfo = {
         },
         getListVanBanDen(state) {
             return state.listVanBanDen;
-        }
+        },
+        getListPermissionOfUser(state) {
+            return state.listPermissionOfUser;
+        },
     },
     actions: {
         acUserDetails(contex) {
@@ -65,6 +69,18 @@ const storeInfo = {
                 .then(response => {
                     contex.commit('muListVanBanDen', response);
                 })
+        },
+        acListPermissionOfUser(contex) {
+            axios.get('/px03/public/listPermissionOfUser')
+                .then(response => {
+                    contex.commit('muListPermissionOfUser', response);
+                })
+        },
+        acSearch(contex, data) {
+            axios.post('/px03/public/search', data)
+                .then(response => {
+                    contex.commit('muSearch', response);
+                })
         }
     },
     mutations: {
@@ -84,6 +100,12 @@ const storeInfo = {
             state.listLoai = data.data;
         },
         muListVanBanDen(state, data) {
+            state.listVanBanDen = data.data;
+        },
+        muListPermissionOfUser(state, data) {
+            state.listPermissionOfUser = data.data;
+        },
+        muSearch(state, data) {
             state.listVanBanDen = data.data;
         }
     },
