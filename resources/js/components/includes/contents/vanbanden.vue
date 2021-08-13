@@ -259,6 +259,9 @@ export default {
         },
 		listPermissionOfUser(){
 			return this.$store.getters.getListPermissionOfUser;
+        },
+        dataRequestSearch(){
+            return this.$store.getters.getDataRequestSearch;
         }
     },
     methods:{
@@ -304,7 +307,7 @@ export default {
             axios.post('/px03/public/updatevanbanden/'+this.e_id, data)
             .then(async response=>{
                 alert('Update thành công !');
-                await this.$store.dispatch('acListVanBanDen', this.page);
+                await this.$store.dispatch('acSearch', {data:this.dataRequestSearch, page:this.page});
             })
         },
         // Load dữ liệu sau khi ấn sửa

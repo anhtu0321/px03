@@ -2413,11 +2413,19 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _includes_header_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./includes/header.vue */ "./resources/js/components/includes/header.vue");
-/* harmony import */ var _includes_banner_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./includes/banner.vue */ "./resources/js/components/includes/banner.vue");
-/* harmony import */ var _includes_menu_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./includes/menu.vue */ "./resources/js/components/includes/menu.vue");
-/* harmony import */ var _includes_content_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./includes/content.vue */ "./resources/js/components/includes/content.vue");
-/* harmony import */ var _includes_footer_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./includes/footer.vue */ "./resources/js/components/includes/footer.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _includes_header_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./includes/header.vue */ "./resources/js/components/includes/header.vue");
+/* harmony import */ var _includes_banner_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./includes/banner.vue */ "./resources/js/components/includes/banner.vue");
+/* harmony import */ var _includes_menu_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./includes/menu.vue */ "./resources/js/components/includes/menu.vue");
+/* harmony import */ var _includes_content_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./includes/content.vue */ "./resources/js/components/includes/content.vue");
+/* harmony import */ var _includes_footer_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./includes/footer.vue */ "./resources/js/components/includes/footer.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2436,11 +2444,30 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    headerComponent: _includes_header_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    bannerComponent: _includes_banner_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    menuComponent: _includes_menu_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    contentComponent: _includes_content_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    footerComponent: _includes_footer_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    headerComponent: _includes_header_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    bannerComponent: _includes_banner_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    menuComponent: _includes_menu_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    contentComponent: _includes_content_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    footerComponent: _includes_footer_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+  },
+  created: function created() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this.$store.dispatch('acUserDetails');
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   }
 });
 
@@ -2511,7 +2538,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     vanbanden: _contents_vanbanden_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     vanbandi: _contents_vanbandi_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  created: function created() {
+  mounted: function mounted() {
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -2520,13 +2547,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _this.$store.dispatch('acUserDetails');
-
-            case 2:
-              _context.next = 4;
               return _this.$store.dispatch('acListPermissionOfUser');
 
-            case 4:
+            case 2:
             case "end":
               return _context.stop();
           }
@@ -2818,6 +2841,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     listPermissionOfUser: function listPermissionOfUser() {
       return this.$store.getters.getListPermissionOfUser;
+    },
+    dataRequestSearch: function dataRequestSearch() {
+      return this.$store.getters.getDataRequestSearch;
     }
   },
   methods: {
@@ -2873,7 +2899,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 case 0:
                   alert('Update thành công !');
                   _context.next = 3;
-                  return _this.$store.dispatch('acListVanBanDen', _this.page);
+                  return _this.$store.dispatch('acSearch', {
+                    data: _this.dataRequestSearch,
+                    page: _this.page
+                  });
 
                 case 3:
                 case "end":
@@ -3240,7 +3269,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this2.han_xu_ly = '';
                   _this2.ghi_chu = '';
                   _context2.next = 14;
-                  return _this2.$store.dispatch('acListVanBanDen', 1);
+                  return _this2.$store.dispatch('acSearch', {
+                    data: _this2.dataRequestSearch,
+                    page: 1
+                  });
 
                 case 14:
                 case "end":
@@ -3350,6 +3382,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3364,6 +3399,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     listPermissionOfUser: function listPermissionOfUser() {
       return this.$store.getters.getListPermissionOfUser;
+    },
+    dataRequestSearch: function dataRequestSearch() {
+      return this.$store.getters.getDataRequestSearch;
     }
   },
   methods: {
@@ -3472,7 +3510,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 switch (_context3.prev = _context3.next) {
                   case 0:
                     _context3.next = 2;
-                    return _this3.$store.dispatch('acListVanBanDen', _this3.page);
+                    return _this3.$store.dispatch('acSearch', {
+                      data: _this3.dataRequestSearch,
+                      page: _this3.page
+                    });
 
                   case 2:
                   case "end":
@@ -3500,7 +3541,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return false;
-    }
+    } // getNameDoMat(domat){
+    //     switch (domat) {
+    //         case 1:
+    //             return "Mật";
+    //             break;
+    //         case 2:
+    //             return "Tối mật";
+    //             break;
+    //         case 3:
+    //             return "Tuyệt mật";
+    //             break;
+    //         default:
+    //             return "Không mật";
+    //             break;
+    //     }
+    // },
+
   },
   components: {
     page: _page_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -3514,7 +3571,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context4.prev = _context4.next) {
             case 0:
               _context4.next = 2;
-              return _this4.$store.dispatch('acListVanBanDen', _page_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
+              return _this4.$store.dispatch('acSearch', {
+                data: _this4.dataRequestSearch,
+                page: _page_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+              });
 
             case 2:
             case "end":
@@ -3597,25 +3657,37 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return pagesArray;
+    },
+    dataRequestSearch: function dataRequestSearch() {
+      return this.$store.getters.getDataRequestSearch;
     }
   },
   methods: {
     setPage: function setPage(newPage) {
+      this.$store.dispatch('acSearch', {
+        data: this.dataRequestSearch,
+        page: newPage
+      });
       this.currentPage = newPage;
-      this.$store.dispatch('acListVanBanDen', this.currentPage);
-      this.$emit('getPage', this.currentPage);
+      this.$emit('getPage', newPage);
     },
     prev: function prev() {
       if (this.currentPage > 1) {
         this.currentPage--;
-        this.$store.dispatch('acListVanBanDen', this.currentPage);
+        this.$store.dispatch('acSearch', {
+          data: this.dataRequestSearch,
+          page: this.currentPage
+        });
         this.$emit('getPage', this.currentPage);
       }
     },
     next: function next() {
       if (this.currentPage < this.last_page) {
         this.currentPage++;
-        this.$store.dispatch('acListVanBanDen', this.currentPage);
+        this.$store.dispatch('acSearch', {
+          data: this.dataRequestSearch,
+          page: this.currentPage
+        });
         this.$emit('getPage', this.currentPage);
       }
     }
@@ -3790,7 +3862,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       data.append('id_nguon_den', this.id_nguon_den);
       data.append('id_loai', this.id_loai);
       data.append('do_mat', this.do_mat);
-      this.$store.dispatch('acSearch', data);
+      this.$store.dispatch('acSearch', {
+        data: data,
+        page: 1
+      });
+      this.$store.dispatch('acRequestSearch', data);
     }
   }
 });
@@ -8504,7 +8580,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.content__add{\r\n    width:100%;\r\n    border:1px solid #ebebeb;\r\n    border-radius:5px;\r\n    padding:10px;\n}\n.content__form-add{\r\n    opacity: 0;\r\n    margin-top: -120px;\r\n    transition: all 0.5s ease;\n}\r\n", ""]);
+exports.push([module.i, "\n.content__add{\r\n    width:100%;\r\n    border:1px solid #ebebeb;\r\n    border-radius:5px;\r\n    padding:10px;\n}\n.content__form-add{\r\n    opacity: 0;\r\n    margin-top: -436px;\r\n    transition: all 0.5s ease;\n}\r\n", ""]);
 
 // exports
 
@@ -8542,7 +8618,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.content__form-expand{\r\n    opacity: 0;\r\n    margin-top: -138px;\r\n    transition: all 0.5s ease;\n}\n.content__search{\r\n    width:100%;\r\n    border:1px solid #ebebeb;\r\n    border-radius:5px;\r\n    padding:10px;\n}\r\n", ""]);
+exports.push([module.i, "\n.content__form-expand{\r\n    opacity: 0;\r\n    margin-top: -62px;\r\n    transition: all 0.5s ease;\n}\n.content__search{\r\n    width:100%;\r\n    border:1px solid #ebebeb;\r\n    border-radius:5px;\r\n    padding:10px;\n}\r\n", ""]);
 
 // exports
 
@@ -61705,7 +61781,8 @@ var storeInfo = {
     listNguonDen: '',
     listLoai: '',
     listVanBanDen: '',
-    listPermissionOfUser: ''
+    listPermissionOfUser: '',
+    dataRequestSearch: ''
   },
   getters: {
     getUserDetails: function getUserDetails(state) {
@@ -61728,6 +61805,9 @@ var storeInfo = {
     },
     getListPermissionOfUser: function getListPermissionOfUser(state) {
       return state.listPermissionOfUser;
+    },
+    getDataRequestSearch: function getDataRequestSearch(state) {
+      return state.dataRequestSearch;
     }
   },
   actions: {
@@ -61754,20 +61834,18 @@ var storeInfo = {
         contex.commit('muListLoai', response);
       });
     },
-    acListVanBanDen: function acListVanBanDen(contex, page) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/px03/public/listvanbanden?page=' + page).then(function (response) {
-        contex.commit('muListVanBanDen', response);
-      });
-    },
     acListPermissionOfUser: function acListPermissionOfUser(contex) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/px03/public/listPermissionOfUser').then(function (response) {
         contex.commit('muListPermissionOfUser', response);
       });
     },
     acSearch: function acSearch(contex, data) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/px03/public/search', data).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/px03/public/search?page=' + data.page, data.data).then(function (response) {
         contex.commit('muSearch', response);
       });
+    },
+    acRequestSearch: function acRequestSearch(contex, data) {
+      contex.commit('muRequestSearch', data);
     }
   },
   mutations: {
@@ -61786,14 +61864,14 @@ var storeInfo = {
     muListLoai: function muListLoai(state, data) {
       state.listLoai = data.data;
     },
-    muListVanBanDen: function muListVanBanDen(state, data) {
-      state.listVanBanDen = data.data;
-    },
     muListPermissionOfUser: function muListPermissionOfUser(state, data) {
       state.listPermissionOfUser = data.data;
     },
     muSearch: function muSearch(state, data) {
       state.listVanBanDen = data.data;
+    },
+    muRequestSearch: function muRequestSearch(state, data) {
+      state.dataRequestSearch = data;
     }
   }
 };

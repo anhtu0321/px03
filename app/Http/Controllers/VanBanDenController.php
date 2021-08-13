@@ -13,7 +13,6 @@ class VanBanDenController extends Controller
     use ConvertString;
     public function index()
     {
-        // return VanBanDen::orderBy('id','desc')->paginate(30);
         $vanbanden = DB::table('van_ban_den')
         ->leftjoin('nguon_den','van_ban_den.id_nguon_den', '=', 'nguon_den.id')
         ->leftjoin('loai_van_ban','van_ban_den.id_loai', '=', 'loai_van_ban.id')
@@ -22,10 +21,6 @@ class VanBanDenController extends Controller
         ->paginate(30);
         return $vanbanden;
 
-        // >join('contacts', 'users.id', '=', 'contacts.user_id')
-        //     ->join('orders', 'users.id', '=', 'orders.user_id')
-        //     ->select('users.*', 'contacts.phone', 'orders.price')
-        //     ->get();
     }
     
     public function store(Request $request)
@@ -104,17 +99,7 @@ class VanBanDenController extends Controller
             $duoi_file = $tenduoi;
             $request->file->move($thumucluu, $tenfile);
         }
-        // else{
-        //     // Xóa file cũ nếu có
-        //     if($file_url !=''){
-        //         $path = public_path('vanbandenupload/'.$file_url);
-        //         if(file_exists($path)){
-        //             unlink($path);
-        //         }
-        //     }
-        //     $file_url="";
-        //     $duoi_file="";
-        // }
+        // lưu
         $VanBanDen->id_nguon_den = $request->id_nguon_den;
         $VanBanDen->so = $request->so;
         $VanBanDen->ngay = $request->ngay;
@@ -149,7 +134,7 @@ class VanBanDenController extends Controller
         $vanbanden = DB::table('van_ban_den')
         ->leftjoin('nguon_den','van_ban_den.id_nguon_den', '=', 'nguon_den.id')
         ->leftjoin('loai_van_ban','van_ban_den.id_loai', '=', 'loai_van_ban.id')
-        ->select('van_ban_den.id','van_ban_den.so','van_ban_den.ngay','van_ban_den.trich_yeu','van_ban_den.ghi_chu','van_ban_den.han_xu_ly','van_ban_den.trang_thai','van_ban_den.file','van_ban_den.duoi_file', 'nguon_den.ten_nguon', 'loai_van_ban.ten_loai')
+        ->select('van_ban_den.id','van_ban_den.so','van_ban_den.ngay','van_ban_den.trich_yeu','van_ban_den.do_mat','van_ban_den.ghi_chu','van_ban_den.han_xu_ly','van_ban_den.trang_thai','van_ban_den.file','van_ban_den.duoi_file', 'nguon_den.ten_nguon', 'loai_van_ban.ten_loai')
         ->where('van_ban_den.trich_yeu','LIKE', '%'.$request->trich_yeu.'%')
         ->where(function($query) use ($request){
             if(($request->date_begin != '') and ($request->date_end != '')){
@@ -165,10 +150,11 @@ class VanBanDenController extends Controller
                 $query->where('van_ban_den.so','LIKE', '%'.$request->so.'%');
             }
             if($request->do_mat == '-1'){
-                $query->whereNotIn('van_ban_den.do_mat',[1,2,3]);
+                $query->whereNotIn('van_ban_den.do_mat',[1,2,3])
+                      ->orWhere('van_ban_den.do_mat', null);
             }
-            if($request->do_mat != '-1'){
-                $query->where('van_ban_den.do_mat','LIKE', '%'.$request->do_mat.'%');
+            if(($request->do_mat != '-1') and ($request->do_mat != '')){
+                $query->where('van_ban_den.do_mat','=', $request->do_mat);
             }
         })
         ->orderBy('van_ban_den.id','desc')

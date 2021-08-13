@@ -51,25 +51,27 @@ export default {
                 }
                 return pagesArray;
             },
-			
+        	dataRequestSearch(){
+           		return this.$store.getters.getDataRequestSearch;
+        	}
         },
 	methods:{
 		setPage(newPage){
+			this.$store.dispatch('acSearch', {data:this.dataRequestSearch, page:newPage});
 			this.currentPage = newPage;
-			this.$store.dispatch('acListVanBanDen', this.currentPage);
-			this.$emit('getPage', this.currentPage);	
+			this.$emit('getPage', newPage);	
 		},
 		prev(){
 			if(this.currentPage > 1){
 				this.currentPage--;
-				this.$store.dispatch('acListVanBanDen', this.currentPage);
+				this.$store.dispatch('acSearch', {data:this.dataRequestSearch, page:this.currentPage});
 				this.$emit('getPage', this.currentPage);	
 			}
 		},
 		next(){
 			if(this.currentPage < this.last_page){
 				this.currentPage++;
-				this.$store.dispatch('acListVanBanDen', this.currentPage);
+				this.$store.dispatch('acSearch', {data:this.dataRequestSearch, page:this.currentPage});
 				this.$emit('getPage', this.currentPage);		
 			}
 		}

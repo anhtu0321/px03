@@ -115,7 +115,8 @@ export default {
             data.append('id_nguon_den', this.id_nguon_den);
             data.append('id_loai', this.id_loai);
             data.append('do_mat', this.do_mat);
-            this.$store.dispatch('acSearch', data);
+            this.$store.dispatch('acSearch', {data:data, page:1});
+            this.$store.dispatch('acRequestSearch', data);
         }
     }, 
     
@@ -125,7 +126,7 @@ export default {
 <style>
 .content__form-expand{
     opacity: 0;
-    margin-top: -138px;
+    margin-top: -62px;
     transition: all 0.5s ease;
 }
 .content__search{

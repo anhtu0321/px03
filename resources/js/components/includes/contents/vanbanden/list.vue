@@ -9,6 +9,7 @@
                 <th>Số</th>
                 <th>Ngày</th>
                 <th>Trích yếu</th>
+                <!-- <th>Độ mật</th> -->
                 <th>Ghi chú</th>
                 <th>Trạng thái</th>
                 <th>File</th>
@@ -22,6 +23,8 @@
                     <td>{{ list.so }}</td>
                     <td>{{ list.ngay }}</td>
                     <td>{{ list.trich_yeu }}</td>
+                    <!-- <td>{{ getNameDoMat(list.do_mat) }}</td> -->
+                    
                     <td>{{ list.ghi_chu }}</td>
                     <td :class="trang_thai_color(xuLyTrangThai(list.trang_thai, list.han_xu_ly))">{{ xuLyTrangThai(list.trang_thai, list.han_xu_ly) }}</td>
                     <td v-if="['doc', 'docx', 'xls', 'xlsx'].includes(list.duoi_file)">
@@ -77,6 +80,9 @@ export default {
         },
 		listPermissionOfUser(){
 			return this.$store.getters.getListPermissionOfUser;
+        },
+        dataRequestSearch(){
+            return this.$store.getters.getDataRequestSearch;
         }
     },
     methods: {
@@ -132,7 +138,7 @@ export default {
             if(confirm('ban muon xoa that a ?') == true){
                 axios.get(`/px03/public/deletevanbanden/${id}`)
                 .then(async reponse=>{
-                    await this.$store.dispatch('acListVanBanDen', this.page);
+                    await this.$store.dispatch('acSearch', {data:this.dataRequestSearch, page:this.page});
                 })
             }
         },
@@ -147,13 +153,29 @@ export default {
 				}
 			}
 			return false;
-		}
+        },
+        // getNameDoMat(domat){
+        //     switch (domat) {
+        //         case 1:
+        //             return "Mật";
+        //             break;
+        //         case 2:
+        //             return "Tối mật";
+        //             break;
+        //         case 3:
+        //             return "Tuyệt mật";
+        //             break;
+        //         default:
+        //             return "Không mật";
+        //             break;
+        //     }
+        // },
     },
     components:{
         page,
     },
     async created(){
-        await this.$store.dispatch('acListVanBanDen', page);
+        await this.$store.dispatch('acSearch', {data:this.dataRequestSearch, page:page});
     }
 }
 </script>

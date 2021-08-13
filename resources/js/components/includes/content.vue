@@ -15,8 +15,7 @@ export default {
         } 
     },
     components:{vanbanden, vanbandi},
-    async created(){
-        await this.$store.dispatch('acUserDetails');
+    async mounted(){
         await this.$store.dispatch('acListPermissionOfUser');
     }
 }

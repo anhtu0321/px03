@@ -181,7 +181,7 @@ export default {
                 this.id_user_xu_ly='';
                 this.han_xu_ly='';
                 this.ghi_chu='';
-                await this.$store.dispatch('acListVanBanDen', 1);
+                await this.$store.dispatch('acSearch', {data:this.dataRequestSearch, page:1});
             })
         },
         // lay thong tin file dinh kem vao bien file
@@ -205,7 +205,7 @@ export default {
 }
 .content__form-add{
     opacity: 0;
-    margin-top: -120px;
+    margin-top: -436px;
     transition: all 0.5s ease;
 }
 </style>
