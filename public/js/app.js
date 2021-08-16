@@ -3294,6 +3294,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       } else {
         this.file = '';
       }
+    },
+    test: function test(e) {
+      console.log(e.target.ClassName);
     }
   }
 });
@@ -3946,11 +3949,120 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      showDropdown: false,
+      id: 'dropdownUser',
+      oldpass: '',
+      newpass: '',
+      renewpass: '',
+      error: '',
+      alertChangePass: ''
+    };
+  },
   computed: {
     userDetails: function userDetails() {
       return this.$store.state.userDetails;
     }
+  },
+  methods: {
+    hideDropdown: function hideDropdown() {
+      this.showDropdown = false;
+    },
+    clickBenNgoai: function clickBenNgoai(e) {
+      if (!document.getElementById(this.id).contains(event.target)) {
+        this.showDropdown = false;
+      }
+    },
+    doimatkhau: function doimatkhau() {
+      var _this = this;
+
+      if (this.newpass != this.renewpass) {
+        this.error = {
+          renewpass: ['Nhập lại mật khẩu mới không khớp !']
+        };
+        return;
+      }
+
+      var data = new FormData();
+      data.append('oldpass', this.oldpass);
+      data.append('newpass', this.newpass);
+      data.append('renewpass', this.renewpass);
+      axios.post('/px03/public/doimatkhau', data).then(function (response) {
+        _this.alertChangePass = 'Đổi mật khẩu thành công !';
+      })["catch"](function (error) {
+        _this.error = _this.error = error.response.data.errors;
+        console.log(error);
+      });
+    },
+    removeErr: function removeErr() {
+      this.error = '';
+    }
+  },
+  created: function created() {
+    window.addEventListener('click', this.clickBenNgoai);
+  },
+  beforeDestroy: function beforeDestroy() {
+    window.removeEventListener('click', this.clickBenNgoai);
   }
 });
 
@@ -8656,7 +8768,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#header[data-v-37d0cc56]{\n    background: #f9f9f9;\n    height:50px;\n}\n.header-top[data-v-37d0cc56]{\n    max-width: 1200px;\n    height:50px;\n    margin:0 auto;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    /* background: black;\n    opacity: 0.2; */\n}\n.header-top__name[data-v-37d0cc56]{\n    font-size: 1.1rem;\n    font-weight: 600;\n    color:#353535;\n}\n.header-top__login[data-v-37d0cc56]{\n    width:35%;\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-end;\n}\n.header-top__login[data-v-37d0cc56], .header-top__login a[data-v-37d0cc56]{\n    font-size: 1.1rem;\n    font-weight: 600;\n    color:#353535;\n    text-decoration: none;\n}\n.header-top__alert[data-v-37d0cc56]{\n    margin-left:30px;\n}\n", ""]);
+exports.push([module.i, "\n#header[data-v-37d0cc56]{\n        background: #f9f9f9;\n        height:50px;\n}\n.header-top[data-v-37d0cc56]{\n        max-width: 1200px;\n        height:50px;\n        margin:0 auto;\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        /* background: black;\n        opacity: 0.2; */\n}\n.header-top__name[data-v-37d0cc56]{\n        font-size: 1.1rem;\n        font-weight: 600;\n        color:#353535;\n}\n.header-top__login[data-v-37d0cc56]{\n        width:35%;\n        display: flex;\n        flex-direction: row;\n        justify-content: flex-end;\n}\n.header-top__login[data-v-37d0cc56], .header-top__login a[data-v-37d0cc56]{\n        font-size: 1.1rem;\n        font-weight: 600;\n        color:#353535;\n        text-decoration: none;\n}\n.header-top__alert[data-v-37d0cc56]{\n        margin-left:30px;\n}\n.header-top__login .dropdown-vue[data-v-37d0cc56]{\n        position: relative;\n}\n.header-top__login .dropdown-vue:hover > div > div > i[data-v-37d0cc56], .header-top__login .dropdown-vue:hover > div > div > a[data-v-37d0cc56]{\n        color:tomato;\n}\n.header-top__login .dropdown-vue__content[data-v-37d0cc56]{\n        position: absolute;\n        top:35px;\n        right:0;\n        z-index: 2;\n        background: rgb(252, 251, 251);\n        color:rgb(1, 1, 46);\n        box-shadow: 2px 3px 8px 2px rgb(67, 67, 68);\n        min-width: 230px;\n}\n.header-top__login .dropdown-vue__content[data-v-37d0cc56]::before{\n        content:'';\n        position: absolute;\n        right: 20px;\n        top:-20px;\n        border:10px solid transparent;\n        border-bottom: 10px solid white;\n        z-index: 3;\n}\n.dropdown-vue__content ul[data-v-37d0cc56]{\n        list-style: none;\n}\n.dropdown-vue__content ul li[data-v-37d0cc56]{\n        padding:5px 10px;\n}\n.dropdown-vue__content ul li a[data-v-37d0cc56]{\n        display: block;\n}\n.dropdown-vue__content ul li[data-v-37d0cc56]:hover{\n        background:tomato;\n}\n.dropdown-vue__content ul li:hover a[data-v-37d0cc56]{\n        color: yellow;\n}\n.thongbao[data-v-37d0cc56]{\n\tcolor:crimson;\n\tfont-size:0.8rem;\n\tmargin-top: 5px;\n}\n", ""]);
 
 // exports
 
@@ -43003,6 +43115,7 @@ var render = function() {
                     attrs: { type: "text" },
                     domProps: { value: _vm.ghi_chu },
                     on: {
+                      click: _vm.test,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -43830,22 +43943,222 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "header-top__login" }, [
+        _c("div", { staticClass: "dropdown-vue", attrs: { id: _vm.id } }, [
+          _c(
+            "div",
+            {
+              on: {
+                click: function($event) {
+                  _vm.showDropdown = !_vm.showDropdown
+                }
+              }
+            },
+            [
+              _c("div", [
+                _c("i", { staticClass: "fas fa-user" }),
+                _vm._v(" "),
+                _c("a", { attrs: { href: "#" } }, [
+                  _vm._v(_vm._s(_vm.userDetails.fullname) + " "),
+                  _c("i", { staticClass: "fas fa-angle-down" })
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _vm.showDropdown
+            ? _c("div", { staticClass: "dropdown-vue__content" }, [
+                _c("ul", [
+                  _c("li", { on: { click: _vm.hideDropdown } }, [_vm._m(0)]),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      attrs: {
+                        "data-toggle": "modal",
+                        "data-target": "#doimatkhau"
+                      },
+                      on: { click: _vm.hideDropdown }
+                    },
+                    [_vm._m(2)]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(3)
+                ])
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _vm._m(4)
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "doimatkhau",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
         _c(
           "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
-            _c("i", { staticClass: "fas fa-user" }),
-            _vm._v(" "),
-            _c("router-link", { attrs: { to: "/" } }, [
-              _vm._v(_vm._s(_vm.userDetails.fullname) + " "),
-              _c("i", { staticClass: "fas fa-angle-down" })
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(5),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "form",
+                  {
+                    staticStyle: { position: "relative" },
+                    attrs: { method: "post", enctype: "multipart/form-data" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.doimatkhau.apply(null, arguments)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "form-row" }, [
+                      _c("div", { staticClass: "col-md-12 mb-3" }, [
+                        _c("label", [_vm._v("Mật khẩu cũ")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.oldpass,
+                              expression: "oldpass"
+                            }
+                          ],
+                          staticClass: "form-control form-control-sm",
+                          class: {
+                            "is-invalid": _vm.error && _vm.error.oldpass
+                          },
+                          attrs: { type: "password" },
+                          domProps: { value: _vm.oldpass },
+                          on: {
+                            focus: _vm.removeErr,
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.oldpass = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.error && _vm.error.oldpass
+                          ? _c("p", { staticClass: "thongbao" }, [
+                              _vm._v(_vm._s(_vm.error.oldpass[0]))
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-12 mb-3" }, [
+                        _c("label", [_vm._v("Mật khẩu mới")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.newpass,
+                              expression: "newpass"
+                            }
+                          ],
+                          staticClass: "form-control form-control-sm",
+                          class: {
+                            "is-invalid": _vm.error && _vm.error.newpass
+                          },
+                          attrs: { type: "password" },
+                          domProps: { value: _vm.newpass },
+                          on: {
+                            focus: _vm.removeErr,
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.newpass = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.error && _vm.error.newpass
+                          ? _c("p", { staticClass: "thongbao" }, [
+                              _vm._v(_vm._s(_vm.error.newpass[0]))
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-12 mb-3" }, [
+                        _c("label", [_vm._v("Nhập lại mật khẩu mới")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.renewpass,
+                              expression: "renewpass"
+                            }
+                          ],
+                          staticClass: "form-control form-control-sm",
+                          class: {
+                            "is-invalid": _vm.error && _vm.error.renewpass
+                          },
+                          attrs: { type: "password" },
+                          domProps: { value: _vm.renewpass },
+                          on: {
+                            focus: _vm.removeErr,
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.renewpass = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.error && _vm.error.renewpass
+                          ? _c("p", { staticClass: "thongbao" }, [
+                              _vm._v(_vm._s(_vm.error.renewpass[0]))
+                            ])
+                          : _vm._e()
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _vm.alertChangePass != ""
+                      ? _c("div", { staticClass: "form-row" }, [
+                          _c("div", { staticClass: "col-md-12 mb-3 " }, [
+                            _c("div", { staticClass: "alert alert-success" }, [
+                              _vm._v(_vm._s(_vm.alertChangePass))
+                            ])
+                          ])
+                        ])
+                      : _vm._e()
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(7)
             ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _vm._m(0)
-      ])
-    ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -43853,8 +44166,97 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "ádasds" } }, [
+      _c("i", { staticClass: "fas fa-list-ul" }),
+      _vm._v(" Danh sách Văn bản xử lý")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/px03/public/admin" } }, [
+        _c("i", { staticClass: "fas fa-cogs" }),
+        _vm._v(" Trang quản trị")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "#" } }, [
+      _c("i", { staticClass: "fas fa-key" }),
+      _vm._v(" Đổi mật khẩu")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/px03/public/logout" } }, [
+        _c("i", { staticClass: "fas fa-sign-out-alt" }),
+        _vm._v(" Đăng xuất")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "header-top__alert" }, [
       _c("i", { staticClass: "fas fa-bell" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Đổi mật khẩu")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "col-md-12 mb-3 text-right" }, [
+        _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+          _c("i", { staticClass: "fas fa-key" }),
+          _vm._v(" Đổi mật khẩu")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary btn-sm",
+          attrs: { type: "submit", "data-dismiss": "modal" }
+        },
+        [_c("i", { staticClass: "far fa-window-close" }), _vm._v(" Close")]
+      )
     ])
   }
 ]

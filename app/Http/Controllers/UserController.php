@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use DB;
 use Auth;
+use Hash;
 class UserController extends Controller
 {
     public function index()
@@ -96,5 +97,28 @@ class UserController extends Controller
         ->where('user_roles.user_id',$id)
         ->get();
         return $permissions;
+    }
+    public function doiMatKhau(Request $request){
+        return $request->validate([
+            'oldpass'=>'required',	
+            'newpass'=>'required',
+            'renewpass'=>'required',
+        ], 
+        $messages = [
+            'required' => ':attribute không được để trống.',
+        ],
+        $attributes = [
+            'oldpass'=>'Mật khẩu cũ',	
+            'newpass'=>'Mật khẩu mới',
+            'renewpass'=>'Nhập lại Mật khẩu',
+        ]);
+        if(!Hash::check($request->oldpass, Auth::user()->password)){
+           return response()->json([
+            'message' => 'Mật khẩu không chính xác !'
+        ], 404);
+            
+        }else{
+            return 'Mat khau dung';
+        }
     }
 }

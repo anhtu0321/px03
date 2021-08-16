@@ -99,7 +99,7 @@ export default {
 			})
 			.catch(error=>{
 				this.error = error.response.data.errors;
-				console.log(error.response.data.message);
+				// console.log(error.response.data.message);
 			});
 		},
 		list(){

@@ -93,7 +93,7 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label>Ghi chú</label>
-                        <input type="text" class="form-control form-control-sm" v-model="ghi_chu">
+                        <input type="text" class="form-control form-control-sm" v-model="ghi_chu" @click="test">
                     </div>
                 </div>
                 <div class="form-row">
@@ -192,6 +192,9 @@ export default {
                 this.file = '';
             }
         },
+        test(e){
+             console.log(e.target.ClassName);
+        }
     }
 }
 </script>
