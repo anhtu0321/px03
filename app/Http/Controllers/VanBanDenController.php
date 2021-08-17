@@ -173,4 +173,15 @@ class VanBanDenController extends Controller
             'trich_yeu' => 'Trích yếu',
         ]);
     }
+
+    public function vanbanxuly(){
+        $id_user = Auth::user()->id;
+        $vanbanden = DB::table('van_ban_den')
+        ->select('id','so','ngay','trich_yeu','han_xu_ly','trang_thai','file','duoi_file')
+        ->orderBy('trang_thai','desc')
+        ->orderBy('han_xu_ly','asc')
+        ->where('id_user_xu_ly','=',$id_user)
+        ->paginate(30);
+        return $vanbanden;
+    }
 }

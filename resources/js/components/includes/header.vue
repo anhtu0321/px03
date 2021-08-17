@@ -12,7 +12,7 @@
                     </div>
                     <div class="dropdown-vue__content" v-if="showDropdown">
                         <ul>
-                            <li><router-link to='/vanbanxuly'><i class="fas fa-list-ul"></i> Danh sách Văn bản xử lý</router-link></li>
+                            <li @click="hideDropdown"><router-link to='/vanbanxuly'><i class="fas fa-list-ul"></i> Danh sách Văn bản xử lý</router-link></li>
                             <li><a href="/px03/public/admin"><i class="fas fa-cogs"></i> Trang quản trị</a></li>
                             <li @click="hideDropdown" data-toggle="modal" data-target="#doimatkhau"><a href="#"><i class="fas fa-key"></i> Đổi mật khẩu</a></li>
                             <li><a href="/px03/public/logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>

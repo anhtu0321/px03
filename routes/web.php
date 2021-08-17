@@ -88,3 +88,7 @@ Route::get('/deletevanbanden/{id}','VanBanDenController@destroy')->middleware('c
 Route::post('/search','VanBanDenController@search')->middleware('can:vanbanden_xem');
 // Đổi mật khẩu
 Route::post('/doimatkhau','UserController@doiMatKhau');
+// Danh sach van ban xu ly
+Route::get('/vanbanxuly','VanBanDenController@vanbanxuly');
+
+

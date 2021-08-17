@@ -3891,7 +3891,111 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      listData: ''
+    };
+  },
+  methods: {
+    trang_thai_color: function trang_thai_color(value) {
+      switch (value) {
+        case 'Chưa xử lý':
+          return "text-warning";
+          break;
+
+        case 'Đang xử lý':
+          return "text-info";
+          break;
+
+        case 'Hoàn thành':
+          return "text-success";
+          break;
+
+        case 'Thất bại':
+          return "text-danger";
+          break;
+
+        case 'Quá hạn':
+          return "text-danger";
+          break;
+
+        default:
+          break;
+      }
+    },
+    xuLyTrangThai: function xuLyTrangThai(trangthai, hanxuly) {
+      var d = new Date();
+      var today = new Date(d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()); // today = today.getTime(); -> hàm này để chuyển ngày sang miniseconds
+
+      if (hanxuly != undefined) {
+        var date = new Date(hanxuly);
+
+        if (['Chưa xử lý', 'Đang xử lý'].includes(trangthai) == true && today > date) {
+          return "Quá hạn";
+        }
+      }
+
+      return trangthai;
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/px03/public/vanbanxuly').then(function (response) {
+      _this.listData = response.data.data;
+    })["catch"]();
+  }
+});
 
 /***/ }),
 
@@ -43923,9 +44027,150 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("day la van ban xu ly")])
+  return _c("div", { staticClass: "content__sub mt-3" }, [
+    _c("div", { staticClass: "content__list mb-3 mt-3" }, [
+      _c("table", { staticClass: "table table-bordered table-sm" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.listData, function(list, index) {
+            return _c("tr", { key: list.id }, [
+              _c("td", [_vm._v(_vm._s(index + 1))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(list.so))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(list.ngay))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(list.trich_yeu))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(list.han_xu_ly))]),
+              _vm._v(" "),
+              _c(
+                "td",
+                {
+                  class: _vm.trang_thai_color(
+                    _vm.xuLyTrangThai(list.trang_thai, list.han_xu_ly)
+                  )
+                },
+                [
+                  _vm._v(
+                    _vm._s(_vm.xuLyTrangThai(list.trang_thai, list.han_xu_ly))
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              ["doc", "docx", "xls", "xlsx"].includes(list.duoi_file)
+                ? _c("td", [
+                    _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: "/px03/public/vanbandenupload/" + list.file
+                        }
+                      },
+                      [
+                        _c("img", {
+                          attrs: {
+                            width: "25px",
+                            src: "/px03/public/images/word-icon.png"
+                          }
+                        })
+                      ]
+                    )
+                  ])
+                : ["pdf"].includes(list.duoi_file)
+                ? _c("td", [
+                    _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: "/px03/public/vanbandenupload/" + list.file
+                        }
+                      },
+                      [
+                        _c("img", {
+                          attrs: {
+                            width: "25px",
+                            src: "/px03/public/images/pdf-icon.png"
+                          }
+                        })
+                      ]
+                    )
+                  ])
+                : ["jpg", "jpeg", "png"].includes(list.duoi_file)
+                ? _c("td", [
+                    _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: "/px03/public/vanbandenupload/" + list.file
+                        }
+                      },
+                      [
+                        _c("img", {
+                          attrs: {
+                            width: "25px",
+                            src: "/px03/public/images/img-icon.png"
+                          }
+                        })
+                      ]
+                    )
+                  ])
+                : list.file == "" || list.file == null
+                ? _c("td")
+                : _c("td", [
+                    _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: "/px03/public/vanbandenupload/" + list.file
+                        }
+                      },
+                      [
+                        _c("img", {
+                          attrs: {
+                            width: "25px",
+                            src: "/px03/public/images/blank-file-icon.png"
+                          }
+                        })
+                      ]
+                    )
+                  ]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Cập nhật")])
+            ])
+          }),
+          0
+        )
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-light" }, [
+      _c("th", [_vm._v("#")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Số")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Ngày")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Trích yếu")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Hạn xử lý")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Trạng thái")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("File")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Cập nhật")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -44026,6 +44271,7 @@ var render = function() {
                 _c("ul", [
                   _c(
                     "li",
+                    { on: { click: _vm.hideDropdown } },
                     [
                       _c("router-link", { attrs: { to: "/vanbanxuly" } }, [
                         _c("i", { staticClass: "fas fa-list-ul" }),
