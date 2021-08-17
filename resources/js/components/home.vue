@@ -17,9 +17,6 @@ import contentComponent from './includes/content.vue';
 import footerComponent from './includes/footer.vue';
 export default {
     components:{headerComponent, bannerComponent, menuComponent, contentComponent, footerComponent},
-    async created(){
-        await this.$store.dispatch('acUserDetails');
-    }
 }
 </script>
 

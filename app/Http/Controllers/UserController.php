@@ -99,26 +99,44 @@ class UserController extends Controller
         return $permissions;
     }
     public function doiMatKhau(Request $request){
-        return $request->validate([
-            'oldpass'=>'required',	
-            'newpass'=>'required',
-            'renewpass'=>'required',
-        ], 
-        $messages = [
-            'required' => ':attribute không được để trống.',
-        ],
-        $attributes = [
-            'oldpass'=>'Mật khẩu cũ',	
-            'newpass'=>'Mật khẩu mới',
-            'renewpass'=>'Nhập lại Mật khẩu',
-        ]);
-        if(!Hash::check($request->oldpass, Auth::user()->password)){
-           return response()->json([
-            'message' => 'Mật khẩu không chính xác !'
-        ], 404);
-            
-        }else{
-            return 'Mat khau dung';
+        $error = array();
+        $oldpass = array();
+        $newpass = array();
+        $renewpass = array();
+        $checkError = true;
+        if($request->oldpass == ''){
+            $oldpass[] ="Mật khẩu cũ không được để trống !";
+            $checkError = false;
         }
+        if($request->newpass == ''){
+            $newpass[] = "Mật khẩu mới không được để trống !";
+            $checkError = false;
+        }
+        if($request->renewpass == ''){
+            $renewpass[] = "Nhập lại mật khẩu không được để trống !";
+            $checkError = false;
+        }
+        if(!Hash::check($request->oldpass, Auth::user()->password)){
+            $oldpass[] = "Mật khẩu cũ không đúng !"; 
+            $checkError = false;
+        }
+        if($oldpass != []){$error[0]['oldpass'] = $oldpass;}
+        if($newpass != []){$error[0]['newpass'] = $newpass;}
+        if($renewpass != []){$error[0]['renewpass'] = $renewpass;}
+        
+        if($checkError == false){
+            return response()->json([
+                'message' =>'Dữ liệu không hợp lệ !',
+                'errors' => $error[0],
+            ], 422);
+        }else{
+            $User = Auth::user();
+            // dd($User);
+            $User->password = bcrypt($request->newpass);
+            $User->save();
+        }
+        
+        
+        
     }
 }

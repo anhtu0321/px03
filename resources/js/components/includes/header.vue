@@ -12,7 +12,7 @@
                     </div>
                     <div class="dropdown-vue__content" v-if="showDropdown">
                         <ul>
-                            <li @click="hideDropdown"><a href="ádasds"><i class="fas fa-list-ul"></i> Danh sách Văn bản xử lý</a></li>
+                            <li><router-link to='/vanbanxuly'><i class="fas fa-list-ul"></i> Danh sách Văn bản xử lý</router-link></li>
                             <li><a href="/px03/public/admin"><i class="fas fa-cogs"></i> Trang quản trị</a></li>
                             <li @click="hideDropdown" data-toggle="modal" data-target="#doimatkhau"><a href="#"><i class="fas fa-key"></i> Đổi mật khẩu</a></li>
                             <li><a href="/px03/public/logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
@@ -115,19 +115,20 @@ export default {
             data.append('renewpass', this.renewpass);
             axios.post('/px03/public/doimatkhau', data)
             .then(response=>{
-                this.alertChangePass = 'Đổi mật khẩu thành công !'
+                this.alertChangePass = 'Đổi mật khẩu thành công !';
             })
             .catch(error=>{
-                this.error = this.error = error.response.data.errors;
-                console.log(error);
+                this.error = error.response.data.errors;
+                this.alertChangePass = '';
             });
         },
         removeErr(){
             this.error ='';
         }
     },
-    created(){
-        window.addEventListener('click', this.clickBenNgoai);
+    async created(){
+        await this.$store.dispatch('acUserDetails');
+        await window.addEventListener('click', this.clickBenNgoai);
     },
     beforeDestroy(){
         window.removeEventListener('click', this.clickBenNgoai);

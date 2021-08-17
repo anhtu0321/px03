@@ -122,7 +122,7 @@ export default {
 		}
 	},
 	components:{contentHeader, list, paginate},
-	mounted(){
+	created(){
 		this.list();
 	}
 }

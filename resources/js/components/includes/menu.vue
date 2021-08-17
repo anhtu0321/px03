@@ -3,13 +3,13 @@
         <div class="menu__sub">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link" :class="{'active':getLink=='home'}" @click="setLink('home')">Home</a>
+                    <router-link to='/home' class="nav-link" active-class="active">Home</router-link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" :class="{'active': getLink=='vanbanden'}" @click="setLink('vanbanden')">Văn bản đến</a>
+                    <router-link to='/vanbanden' class="nav-link" active-class="active">Văn bản đến</router-link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" :class="{'active': getLink=='vanbandi'}" @click="setLink('vanbandi')">Văn bản đi</a>
+                    <router-link to='/vanbandi' class="nav-link" active-class="active">Văn bản đi</router-link>
                 </li>
             </ul>
         </div>
@@ -23,16 +23,7 @@ export default {
 
         }
     },
-    computed:{
-        getLink(){
-            return this.$store.getters.getLink;
-        }
-    },
-    methods:{
-        setLink(link){
-            this.$store.dispatch('acLink', link);
-        },
-    }
+   
 }
 </script>
 
