@@ -9,7 +9,7 @@ class LanhDaoController extends Controller
 {
     public function index()
     {
-        return LanhDao::orderBy('thu_tu','asc')->paginate(10);
+        return LanhDao::orderBy('thu_tu','asc')->paginate(30);
     }
     
     public function store(Request $request)

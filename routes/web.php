@@ -86,9 +86,23 @@ Route::post('/updatevanbanden/{id}','VanBanDenController@update')->middleware('c
 Route::get('/deletevanbanden/{id}','VanBanDenController@destroy')->middleware('can:vanbanden_xoa');
 // Tìm kiếm văn bản đến
 Route::post('/search','VanBanDenController@search')->middleware('can:vanbanden_xem');
+
+// Thêm mới văn bản đi
+Route::post('/addvanbandi','VanBanDiController@store')->middleware('can:vanbandi_them');
+Route::get('/listvanbandi','VanBanDiController@index')->middleware('can:vanbandi_xem');
+Route::get('/editvanbandi/{id}','VanBanDiController@edit')->middleware('can:vanbandi_sua');
+Route::get('/viewvanbandi/{id}','VanBanDiController@view')->middleware('can:vanbandi_xem');
+Route::post('/updatevanbandi/{id}','VanBanDiController@update')->middleware('can:vanbandi_sua');
+Route::get('/deletevanbandi/{id}','VanBanDiController@destroy')->middleware('can:vanbandi_xoa');
+// Tìm kiếm văn bản đến
+Route::post('/search','VanBanDiController@search')->middleware('can:vanbandi_xem');
+
 // Đổi mật khẩu
 Route::post('/doimatkhau','UserController@doiMatKhau');
 // Danh sach van ban xu ly
 Route::get('/vanbanxuly','VanBanDenController@vanbanxuly');
-
+// Danh sach van ban chua xu ly
+Route::get('/chuaxuly','VanBanDenController@chuaxuly');
+// Cập nhật trạng thái xử lý
+Route::post('/capnhattrangthai','VanBanDenController@capnhattrangthai');
 

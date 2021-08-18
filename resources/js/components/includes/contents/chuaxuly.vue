@@ -166,9 +166,10 @@ export default {
             })
         }, 
         loadData(){
-            axios.get('/px03/public/vanbanxuly?page=' + this.currentPage)
+            axios.get('/px03/public/chuaxuly?page=' + this.currentPage)
             .then(response=>{
                 this.listData = response.data;
+                this.$store.dispatch('acLengthBarAlert', response.data.total);
             })
         },
         setPage(newPage){

@@ -19,9 +19,10 @@
                         </ul>
                     </div>
                 </div>
-                <div class="header-top__alert">
+                <router-link to='/chuaxuly'><div class="header-top__alert">
                     <i class="fas fa-bell"></i>
-                </div>
+                    <div class="bar-alert">{{ lengthBarAlert }}</div>
+                </div></router-link>
             </div>
         </div> 
         <!-- Modal Đổi mật khẩu -->
@@ -90,6 +91,9 @@ export default {
     computed:{
         userDetails(){
             return this.$store.state.userDetails;
+        },
+        lengthBarAlert(){
+            return this.$store.state.lengthBarAlert;
         }
     },
     methods:{
@@ -124,10 +128,17 @@ export default {
         },
         removeErr(){
             this.error ='';
-        }
+        },
+        loadData(){
+            axios.get('/px03/public/chuaxuly')
+            .then(response=>{
+                this.$store.dispatch('acLengthBarAlert', response.data.total);
+            })
+        },
     },
     async created(){
         await this.$store.dispatch('acUserDetails');
+        await this.loadData();
         await window.addEventListener('click', this.clickBenNgoai);
     },
     beforeDestroy(){
@@ -170,7 +181,24 @@ export default {
         text-decoration: none;
     }
     .header-top__alert{
-        margin-left:30px;
+        margin-left:40px;
+        margin-right:10px;
+        position: relative;
+    }
+    .header-top__alert:hover {
+        color:tomato;
+    }
+    .header-top__alert .bar-alert{
+        border-radius:50%;
+        background: red;
+        color:white;
+        position: absolute;
+        top: -2px;
+        left: 9px;
+        width:15px;
+        font-size: 0.8rem;
+        text-align: center;
+        font-weight: normal;
     }
     .header-top__login .dropdown-vue{
         position: relative;

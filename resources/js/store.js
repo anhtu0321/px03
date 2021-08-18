@@ -13,6 +13,10 @@ const storeInfo = {
         listVanBanDen: '',
         listPermissionOfUser: '',
         dataRequestSearch: '',
+        lengthBarAlert: '',
+
+        listNguonDi: '',
+        listLanhDao: '',
     },
     getters: {
         getUserDetails(state) {
@@ -39,6 +43,12 @@ const storeInfo = {
         getDataRequestSearch(state) {
             return state.dataRequestSearch;
         },
+        getListNguonDi(state) {
+            return state.listNguonDi;
+        },
+        // getListLanhDao(state) {
+        //     return state.listLanhDao;
+        // },
     },
     actions: {
         acUserDetails(contex) {
@@ -82,8 +92,22 @@ const storeInfo = {
         },
         acRequestSearch(contex, data) {
             contex.commit('muRequestSearch', data);
-
-        }
+        },
+        acLengthBarAlert(contex, data) {
+            contex.commit('muLengthBarAlert', data);
+        },
+        acListNguonDi(contex) {
+            axios.get('/px03/public/listNguonDi')
+                .then(response => {
+                    contex.commit('muListNguonDi', response);
+                })
+        },
+        acListLanhDao(contex) {
+            axios.get('/px03/public/listLanhDao')
+                .then(response => {
+                    contex.commit('muListLanhDao', response);
+                })
+        },
     },
     mutations: {
         muUserDetails(state, responsive) {
@@ -109,6 +133,15 @@ const storeInfo = {
         },
         muRequestSearch(state, data) {
             state.dataRequestSearch = data;
+        },
+        muLengthBarAlert(state, data) {
+            state.lengthBarAlert = data;
+        },
+        muListNguonDi(state, data) {
+            state.listNguonDi = data.data;
+        },
+        muListLanhDao(state, data) {
+            state.listLanhDao = data.data;
         }
     },
 }

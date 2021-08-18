@@ -177,11 +177,33 @@ class VanBanDenController extends Controller
     public function vanbanxuly(){
         $id_user = Auth::user()->id;
         $vanbanden = DB::table('van_ban_den')
-        ->select('id','so','ngay','trich_yeu','han_xu_ly','trang_thai','file','duoi_file')
+        ->select('id','so','ngay','trich_yeu','han_xu_ly','trang_thai','file','duoi_file','luu_tru')
         ->orderBy('trang_thai','desc')
         ->orderBy('han_xu_ly','asc')
         ->where('id_user_xu_ly','=',$id_user)
+        ->where('trang_thai','=','Hoàn thành')
+        ->orWhere('trang_thai','=','Thất bại')
         ->paginate(30);
         return $vanbanden;
+    }
+
+    public function chuaxuly(){
+        $id_user = Auth::user()->id;
+        $vanbanden = DB::table('van_ban_den')
+        ->select('id','so','ngay','trich_yeu','han_xu_ly','trang_thai','file','duoi_file','luu_tru')
+        ->orderBy('trang_thai','desc')
+        ->orderBy('han_xu_ly','asc')
+        ->where('id_user_xu_ly','=',$id_user)
+        ->where('trang_thai','!=','Hoàn thành')
+        ->where('trang_thai','!=','Thất bại')
+        ->paginate(30);
+        return $vanbanden;
+    }
+    
+    public function capnhattrangthai(Request $request){
+        $VanBanDen = VanBanDen::find($request->id);
+        $VanBanDen->trang_thai = $request->trang_thai;
+        $VanBanDen->luu_tru = $request->luu_tru;
+        $VanBanDen->save();
     }
 }
