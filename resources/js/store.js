@@ -17,6 +17,7 @@ const storeInfo = {
 
         listNguonDi: '',
         listLanhDao: '',
+        listDonVi: '',
     },
     getters: {
         getUserDetails(state) {
@@ -46,9 +47,7 @@ const storeInfo = {
         getListNguonDi(state) {
             return state.listNguonDi;
         },
-        // getListLanhDao(state) {
-        //     return state.listLanhDao;
-        // },
+
     },
     actions: {
         acUserDetails(contex) {
@@ -67,13 +66,13 @@ const storeInfo = {
                 })
         },
         acListNguonDen(contex) {
-            axios.get('/px03/public/listNguonDen')
+            axios.get('/px03/public/api/listNguonDen')
                 .then(response => {
                     contex.commit('muListNguonDen', response);
                 })
         },
         acListLoai(contex) {
-            axios.get('/px03/public/listLoai')
+            axios.get('/px03/public/api/listLoai')
                 .then(response => {
                     contex.commit('muListLoai', response);
                 })
@@ -97,17 +96,26 @@ const storeInfo = {
             contex.commit('muLengthBarAlert', data);
         },
         acListNguonDi(contex) {
-            axios.get('/px03/public/listNguonDi')
+            axios.get('/px03/public/api/listNguonDi')
                 .then(response => {
                     contex.commit('muListNguonDi', response);
                 })
         },
         acListLanhDao(contex) {
-            axios.get('/px03/public/listLanhDao')
+            axios.get('/px03/public/api/listLanhDao')
                 .then(response => {
                     contex.commit('muListLanhDao', response);
                 })
         },
+        acListDonVi(contex) {
+            axios.get('/px03/public/api/listDonViNoPaginate')
+                .then(response => {
+                    contex.commit('muListDonVi', response);
+                })
+        },
+        acChangeListDonVi(contex, data) {
+            contex.commit('muListDonVi', data);
+        }
     },
     mutations: {
         muUserDetails(state, responsive) {
@@ -142,7 +150,11 @@ const storeInfo = {
         },
         muListLanhDao(state, data) {
             state.listLanhDao = data.data;
+        },
+        muListDonVi(state, data) {
+            state.listDonVi = data.data;
         }
+
     },
 }
 

@@ -79,14 +79,28 @@
                         <label>File đính kèm</label>
                         <input type="file" class="form-control form-control-sm" @change="getFile">
                     </div>
-                    <div class="col-md-7 mb-3">
+                    <div class="col-md-12 mb-3">
                         <label>Đơn vị nhận</label>
-                        <input type="text" class="form-control form-control-sm" v-model="phe_duyet">
+                        <div class="form-row">
+                            <select class="form-control form-control-sm col-md-5" v-model="don_vi_nhan" multiple>
+                                <option v-for="donvi in listDonVi" :key="donvi.id" :value="donvi.id">{{ donvi.ten_phong }}</option>
+                            </select>
+                            <div class="col-md-2 d-flex flex-column justify-content-center align-items-center">
+                                <button class="btn mb-3 btn-info" style="width:50px" @click.prevent="addListOneDV">></button>
+                                <button class="btn mb-3 btn-info" style="width:50px" @click.prevent="addListAllDV">>></button>
+                                <button class="btn mb-3 btn-warning" style="width:50px" @click.prevent="removeListOneDV"><</button>
+                                <button class="btn mb-3 btn-warning" style="width:50px" @click.prevent="removeListAllDV"><<</button>
+                            </div>
+                            <select class="form-control form-control-sm col-md-5" v-model="don_vi_nhan_ed" multiple>
+                                <option v-for="donvi in listDonViEd" :key="donvi.id" :value="donvi.id">{{ donvi.ten_phong }}</option>
+                            </select>
+                        </div>
+                        
                     </div>
                     
                     <div class="col-md-12 mb-3">
                         <label>Ghi chú</label>
-                        <input type="text" class="form-control form-control-sm" v-model="ghi_chu" @click="test">
+                        <input type="text" class="form-control form-control-sm" v-model="ghi_chu">
                     </div>
                 </div>
                 <div class="form-row">
@@ -115,11 +129,12 @@ export default {
             trich_yeu:'',
             do_mat:'',
             id_lanh_dao:'',
+            don_vi_nhan:[],
+            don_vi_nhan_ed:[],
             file:'',
-            phe_duyet:'',
-            id_user_xu_ly:'',
-            han_xu_ly:'',
             ghi_chu:'',
+            // mang don vi nhan
+            listDonViEd:[],
         }
     },
     computed:{
@@ -134,6 +149,9 @@ export default {
         },
         listLanhDao(){
             return this.$store.state.listLanhDao;
+        },
+        listDonVi(){
+            return this.$store.state.listDonVi;
         }
     },
     methods:{
@@ -144,6 +162,7 @@ export default {
                 await this.$store.dispatch('acListNguonDi');
                 await this.$store.dispatch('acListLoai');
                 await this.$store.dispatch('acListLanhDao');
+                await this.$store.dispatch('acListDonVi');
             }else{
                 this.classadd = '';
                 setTimeout(()=>{this.show = false},500);
@@ -151,35 +170,41 @@ export default {
         },
         // Luu van ban den vao co so du lieu
         add(){
-            var data = new FormData();
-            data.append('id_nguon_den', this.id_nguon_den);
-            data.append('so', this.so);
-            data.append('ngay', this.ngay);
-            data.append('id_loai', this.id_loai);
-            data.append('trich_yeu', this.trich_yeu);
-            data.append('do_mat', this.do_mat);
-            data.append('nguoi_ky', this.nguoi_ky);
-            data.append('file', this.file);
-            data.append('phe_duyet', this.phe_duyet);
-            data.append('id_user_xu_ly', this.id_user_xu_ly);
-            data.append('han_xu_ly', this.han_xu_ly);
-            data.append('ghi_chu', this.ghi_chu);
-            axios.post('/px03/public/addvanbanden', data)
-            .then(async response=>{
-                this.id_nguon_den='';
-                this.so='';
-                this.ngay='';
-                this.id_loai='';
-                this.trich_yeu='';
-                this.do_mat='';
-                this.nguoi_ky='';
-                this.file='';
-                this.phe_duyet='';
-                this.id_user_xu_ly='';
-                this.han_xu_ly='';
-                this.ghi_chu='';
-                await this.$store.dispatch('acSearch', {data:this.dataRequestSearch, page:1});
-            })
+            var listNameDonVi = this.listDonViEd.map( e=>{
+                return e.ky_hieu;
+            });
+            var donViNhan = listNameDonVi.join(', ');
+            console.log(donViNhan);
+            // var data = new FormData();
+            // data.append('id_nguon_den', this.id_nguon_den);
+            // data.append('so', this.so);
+            // data.append('ngay', this.ngay);
+            // data.append('id_loai', this.id_loai);
+            // data.append('trich_yeu', this.trich_yeu);
+            // data.append('do_mat', this.do_mat);
+            // data.append('nguoi_ky', this.nguoi_ky);
+            // data.append('file', this.file);
+            // data.append('phe_duyet', this.phe_duyet);
+            // data.append('id_user_xu_ly', this.id_user_xu_ly);
+            // data.append('han_xu_ly', this.han_xu_ly);
+            // data.append('ghi_chu', this.ghi_chu);
+
+            // axios.post('/px03/public/addvanbanden', data)
+            // .then(async response=>{
+            //     this.id_nguon_den='';
+            //     this.so='';
+            //     this.ngay='';
+            //     this.id_loai='';
+            //     this.trich_yeu='';
+            //     this.do_mat='';
+            //     this.nguoi_ky='';
+            //     this.file='';
+            //     this.phe_duyet='';
+            //     this.id_user_xu_ly='';
+            //     this.han_xu_ly='';
+            //     this.ghi_chu='';
+            //     await this.$store.dispatch('acSearch', {data:this.dataRequestSearch, page:1});
+            // })
         },
         // lay thong tin file dinh kem vao bien file
         getFile(e){
@@ -189,13 +214,44 @@ export default {
                 this.file = '';
             }
         },
-        test(e){
-             console.log(e.target.ClassName);
-        }
+        addListOneDV(){
+            var listChon = this.listDonVi.filter(list=>{
+                return this.don_vi_nhan.includes(list.id);
+            });
+            var listConLai = this.listDonVi.filter(list =>{
+                return this.don_vi_nhan.includes(list.id) == false;
+            });
+            this.listDonViEd = this.listDonViEd.concat(listChon);
+            this.$store.dispatch('acChangeListDonVi', {'data':listConLai});
+        },
+        async addListAllDV(){
+            if(this.listDonVi.length != 0){
+                this.listDonViEd = await this.listDonVi.concat(this.listDonViEd);
+            }
+            await this.$store.dispatch('acChangeListDonVi', {'data':[]});
+        },
+        removeListOneDV(){
+            // xử lý các đơn vị chưa được chọn
+            var listChon = this.listDonViEd.filter(list=>{
+                return this.don_vi_nhan_ed.includes(list.id);
+            });
+            var listConLai = this.listDonVi.concat(listChon);
+            this.$store.dispatch('acChangeListDonVi', {'data':listConLai});
+            // xử lý các đơn vị được chọn
+            this.listDonViEd = this.listDonViEd.filter(list=>{
+                return this.don_vi_nhan_ed.includes(list.id) == false;
+            });
+        },
+        removeListAllDV(){
+            var listConLai = this.listDonVi.concat(this.listDonViEd);
+            this.$store.dispatch('acChangeListDonVi', {'data':listConLai});
+            this.listDonViEd = [];
+        },
     },
     components:{
         'editor': Editor
-    }
+    }, 
+   
 }
 </script>
 

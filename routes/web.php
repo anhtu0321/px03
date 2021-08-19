@@ -75,8 +75,7 @@ Route::get('/listPermissionOfUser','UserController@getPermissons');
 // ********************* DÀNH CHO FRONT END ********************//
 // Lấy thông tin user
 Route::get('/getUser', 'loginController@getUser');
-//Lấy thông tin Loại Văn bản
-Route::get('/listLoai','LoaiVanBanController@listLoai');
+
 // Thêm mới văn bản đến
 Route::post('/addvanbanden','VanBanDenController@store')->middleware('can:vanbanden_them');
 Route::get('/listvanbanden','VanBanDenController@index')->middleware('can:vanbanden_xem');

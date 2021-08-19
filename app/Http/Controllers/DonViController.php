@@ -11,7 +11,10 @@ class DonViController extends Controller
     {
         return DonVi::orderBy('khoi','asc')->orderBy('thu_tu','asc')->paginate(10);
     }
-    
+    public function listNoPaginate()
+    {
+        return DonVi::orderBy('khoi','asc')->orderBy('thu_tu','asc')->get();
+    }
     public function store(Request $request)
     {
         $this->validateForm($request);
