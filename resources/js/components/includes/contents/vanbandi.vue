@@ -1,16 +1,15 @@
 <template>
     <div class="content__sub mt-3">
-        
         <search-component v-if="ktquyen('vanbandi_xem')"></search-component>
         <add-component v-if="ktquyen('vanbandi_them')"></add-component>
         <listcomponent @dataById="loadDataById" @viewDataById="loadViewDataById" :id="e_id" @getPage="setPage" v-if="ktquyen('vanbandi_xem')"></listcomponent>
-        <!-- modal sửa văn bản đến -->
+        <!-- modal sửa văn bản đi -->
         <div class="content__modal-edit">
             <div class="modal fade bd-example-modal-lg" id="suavanbandi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Sửa Văn bản đến</h5>
+                            <h5 class="modal-title">Sửa Văn bản đi</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -20,20 +19,20 @@
                                 <div class="form-row">
                                     <div class="col-md-4 mb-3">
                                         <label>Cơ quan ban hành</label>
-                                        <select v-model="e_id_nguon_den" class="form-control form-control-sm">
+                                        <select v-model="e_id_nguon_di" class="form-control form-control-sm">
                                             <option value="">--- Chọn cơ quan, đơn vị ban hành ---</option>
-                                            <option v-for="nguonden in listNguonDen.data" :key="nguonden.id" :value="nguonden.id">{{ nguonden.ten_nguon }}</option>
+                                            <option v-for="nguondi in listNguonDi.data" :key="nguondi.id" :value="nguondi.id">{{ nguondi.ten_nguon }}</option>
                                         </select>
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label>Số văn bản</label>
                                         <input type="text" v-model="e_so" class="form-control form-control-sm">
                                     </div>
-                                    <div class="col-md-2 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label>Ngày văn bản</label>
                                         <input type="date" v-model="e_ngay" class="form-control form-control-sm">
                                     </div>
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label>Loại văn bản</label>
                                         <select class="form-control form-control-sm" v-model="e_id_loai">
                                             <option value="">--- Chọn Loại văn bản ---</option>
@@ -42,9 +41,31 @@
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label>Trích yếu</label>
-                                        <input type="text" class="form-control form-control-sm" v-model="e_trich_yeu">
+                                        <input type="text" class="form-control form-control-sm" v-model="e_trich_yeu" :class="{'is-invalid':(error && error.trich_yeu)}" @focus="removeErr">
+                                        <p class="thongbao" v-if="error && error.trich_yeu">{{ error.trich_yeu[0] }}</p>
                                     </div>
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-12 mb-3">
+                                        <label>Nội dung</label>
+                                        <editor 
+                                            v-model="e_noi_dung"
+                                            api-key="qp0azz3bxgs5kvvmhnnh0fno0i1pmcnbfaty2wgefpgvmojc"
+                                            :init="{
+                                                height: 250,
+                                                menubar: false,
+                                                plugins: [
+                                                'advlist autolink lists link image charmap print preview anchor',
+                                                'searchreplace visualblocks code fullscreen',
+                                                'insertdatetime media table paste code help wordcount'
+                                                ],
+                                                toolbar:
+                                                'undo redo | formatselect | bold italic backcolor | \
+                                                alignleft aligncenter alignright alignjustify | \
+                                                bullist numlist outdent indent | removeformat | help'
+                                            }">
+                                        </editor>
+                                        
+                                    </div>
+                                    <div class="col-md-3 mb-3">
                                         <label>Độ mật</label>
                                         <select class="form-control form-control-sm" v-model="e_do_mat">
                                             <option value="">Không mật</option>
@@ -53,28 +74,42 @@
                                             <option value="3">Tuyệt Mật</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label>Người ký</label>
-                                        <input type="text" class="form-control form-control-sm" v-model="e_nguoi_ky">
+                                    <div class="col-md-4 mb-3">
+                                        <label>Lãnh đạo ký</label>
+                                        <select class="form-control form-control-sm" v-model="e_id_lanh_dao">
+                                            <option value="">--- Chọn Lãnh đạo ký ---</option>
+                                            <option v-for="lanhdao in listLanhDao.data" :key="lanhdao.id" :value="lanhdao.id">{{ lanhdao.cap_bac }} {{ lanhdao.ho_ten }}</option>
+                                        </select>
                                     </div>
                                     <div class="col-md-5 mb-3">
                                         <label>File đính kèm</label>
                                         <input type="file" class="form-control form-control-sm" @change="getFileEdit">
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label>Phê duyệt của lãnh đạo</label>
-                                        <input type="text" class="form-control form-control-sm" v-model="e_phe_duyet">
+                                    <div class="col-md-12 mb-3">
+                                        <label>Đơn vị nhận</label>
+                                        <div class="form-row">
+                                            <select class="form-control form-control-sm col-md-5" v-model="e_don_vi_nhan" multiple>
+                                                <option v-for="donvi in listDonVi" :key="donvi.id" :value="donvi.id">{{ donvi.ten_phong }}</option>
+                                            </select>
+                                            <div class="col-md-2 d-flex flex-column justify-content-center align-items-center">
+                                                <button class="btn mb-3 btn-info" style="width:50px" @click.prevent="addListOneDV">></button>
+                                                <button class="btn mb-3 btn-info" style="width:50px" @click.prevent="addListAllDV">>></button>
+                                                <button class="btn mb-3 btn-warning" style="width:50px" @click.prevent="removeListOneDV"><</button>
+                                                <button class="btn mb-3 btn-warning" style="width:50px" @click.prevent="removeListAllDV"><<</button>
+                                            </div>
+                                            <select class="form-control form-control-sm col-md-5" v-model="e_don_vi_nhan_ed" multiple>
+                                                <option v-for="donvi in e_listDonViEd" :key="donvi.id" :value="donvi.id">{{ donvi.ten_phong }}</option>
+                                            </select>
+                                        </div>
+                                        
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <label>Cán bộ xử lý</label>
-                                        <select class="form-control form-control-sm" v-model="e_id_user_xu_ly">
-                                            <option value="">--- Chọn Cán bộ xử lý ---</option>
-                                            <option v-for="user in listUser.data" :key="user.id" :value="user.id">{{ user.fullname }}</option>
-                                        </select>
+                                        <label>Cán bộ tham mưu</label>
+                                        <input type="text" class="form-control form-control-sm" v-model="e_can_bo_tham_muu">
                                     </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label>Hạn xử lý</label>
-                                        <input type="date" class="form-control form-control-sm" v-model="e_han_xu_ly">
+                                    <div class="col-md-9 mb-3">
+                                        <label>Lưu trữ</label>
+                                        <input type="text" class="form-control form-control-sm" v-model="e_luu_tru">
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label>Ghi chú</label>
@@ -83,7 +118,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-12 mb-3 text-right">
-                                        <button class="btn btn-primary">Cập nhật Văn bản</button>
+                                        <button class="btn btn-primary">Sửa Văn bản</button>
                                     </div>
                                 </div>
                             </form>
@@ -96,7 +131,7 @@
             </div>
         </div>
         <!-- modal Xem chi tiết văn bản đến -->
-        <div class="content__modal-edit">
+        <!-- <div class="content__modal-edit">
             <div class="modal fade bd-example-modal-lg" id="xemvanbandi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
@@ -200,7 +235,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -215,53 +250,60 @@ export default {
             page:1,
             // Dữ liệu sửa văn bản
             e_id:'',
-            e_id_nguon_den:'',
+            e_id_nguon_di:'',
             e_so:'',
             e_ngay:'',
             e_id_loai:'',
             e_trich_yeu:'',
+            e_noi_dung:'',
             e_do_mat:'',
-            e_nguoi_ky:'',
-            e_file:'',
-            e_phe_duyet:'',
-            e_id_user_xu_ly:'',
-            e_han_xu_ly:'',
+            e_id_lanh_dao:'',
+            e_don_vi_nhan:[],
+            e_don_vi_nhan_ed:[],
+            e_can_bo_tham_muu:'',
+            e_luu_tru:'',
             e_ghi_chu:'',
+            e_listDonViEd:'',
              // Dữ liệu xem văn bản
            
-            v_ten_nguon:'',
+            v_id:'',
+            v_id_nguon_di:'',
             v_so:'',
             v_ngay:'',
-            v_ten_loai:'',
+            v_id_loai:'',
             v_trich_yeu:'',
+            v_noi_dung:'',
             v_do_mat:'',
-            v_nguoi_ky:'',
-            v_file:'',
-            v_duoi_file:'',
-            v_phe_duyet:'',
-            v_user_xu_ly:'',
-            v_han_xu_ly:'',
-            v_ghi_chu:'',
+            v_id_lanh_dao:'',
+            v_don_vi_nhan:[],
+            v_don_vi_nhan_ed:[],
+            v_can_bo_tham_muu:'',
             v_luu_tru:'',
-            v_nguoi_nhap:'',
-            v_trang_thai:'',
+            v_ghi_chu:'',
+            v_listDonViEd:'',
+            // Bắt lỗi
+            error:'',
         }
     },
     computed:{
-        listUser(){
-            return this.$store.getters.getListUser;
-        },
-        listNguonDen(){
-            return this.$store.getters.getListNguonDen;
+       
+        listNguonDi(){
+            return this.$store.getters.getListNguonDi;
         },
         listLoai(){
             return this.$store.getters.getListLoai;
         },
+        listLanhDao(){
+            return this.$store.state.listLanhDao;
+        },
+        listDonVi(){
+            return this.$store.state.listDonVi;
+        },
 		listPermissionOfUser(){
 			return this.$store.getters.getListPermissionOfUser;
         },
-        dataRequestSearch(){
-            return this.$store.getters.getDataRequestSearch;
+        dataRequestSearchDi(){
+            return this.$store.state.dataRequestSearchDi;
         }
     },
     methods:{
@@ -307,35 +349,40 @@ export default {
             axios.post('/px03/public/updatevanbandi/'+this.e_id, data)
             .then(async response=>{
                 alert('Update thành công !');
-                await this.$store.dispatch('acSearch', {data:this.dataRequestSearch, page:this.page});
+                await this.$store.dispatch('acSearch', {data:this.dataRequestSearchDi, page:this.page});
             })
         },
         // Load dữ liệu sau khi ấn sửa
-        loadDataById(data){
+        loadDataById(data){     
             this.e_id='';
-            this.e_id_nguon_den='';
+            this.e_id_nguon_di='';
             this.e_so='';
             this.e_ngay='';
             this.e_id_loai='';
             this.e_trich_yeu='';
+            this.e_noi_dung='';
             this.e_do_mat='';
-            this.e_nguoi_ky='';
-            this.e_file='';
-            this.e_phe_duyet='';
-            this.e_id_user_xu_ly='';
-            this.e_han_xu_ly='';
+            this.e_id_lanh_dao='';
+            this.e_don_vi_nhan=[];
+            this.e_don_vi_nhan_ed=[];
+            this.e_can_bo_tham_muu='';
+            this.e_luu_tru='';
             this.e_ghi_chu='';
+            this.e_listDonViEd='';
             if(data.data[0].id) this.e_id = data.data[0].id;
-            if(data.data[0].id_nguon_den) this.e_id_nguon_den = data.data[0].id_nguon_den;
+            if(data.data[0].id_nguon_di) this.e_id_nguon_di = data.data[0].id_nguon_di;
             if(data.data[0].so) this.e_so = data.data[0].so;
             if(data.data[0].ngay) this.e_ngay = data.data[0].ngay;
             if(data.data[0].id_loai) this.e_id_loai = data.data[0].id_loai;
             if(data.data[0].trich_yeu) this.e_trich_yeu = data.data[0].trich_yeu;
+            if(data.data[0].noi_dung) this.e_noi_dung = data.data[0].noi_dung;
             if(data.data[0].do_mat) this.e_do_mat = data.data[0].do_mat;
-            if(data.data[0].nguoi_ky) this.e_nguoi_ky = data.data[0].nguoi_ky;
-            if(data.data[0].phe_duyet)this.e_phe_duyet = data.data[0].phe_duyet;
-            if(data.data[0].id_user_xu_ly) this.e_id_user_xu_ly = data.data[0].id_user_xu_ly;
-            if(data.data[0].han_xu_ly) this.e_han_xu_ly = data.data[0].han_xu_ly;
+            if(data.data[0].id_lanh_dao) this.e_id_lanh_dao = data.data[0].id_lanh_dao;
+
+            // if(data.data[0].don_vi_nhan) this.e_don_vi_nhan = data.data[0].don_vi_nhan;
+
+            if(data.data[0].can_bo_tham_muu)this.e_can_bo_tham_muu = data.data[0].can_bo_tham_muu;
+            if(data.data[0].luu_tru) this.e_luu_tru = data.data[0].luu_tru;
             if(data.data[0].ghi_chu) this.e_ghi_chu = data.data[0].ghi_chu;
         },
         loadViewDataById(data){
@@ -399,7 +446,10 @@ export default {
 				}
 			}
 			return false;
-		}
+        },
+        removeErr(){
+            this.error ='';
+        },
     },
     components:{
         editor, 

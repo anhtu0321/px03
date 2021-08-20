@@ -37,11 +37,13 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label>Trích yếu</label>
-                        <input type="text" class="form-control form-control-sm" v-model="trich_yeu">
+                        <input type="text" class="form-control form-control-sm" v-model="trich_yeu" :class="{'is-invalid':(error && error.trich_yeu)}" @focus="removeErr">
+                        <p class="thongbao" v-if="error && error.trich_yeu">{{ error.trich_yeu[0] }}</p>
                     </div>
                     <div class="col-md-12 mb-3">
                         <label>Nội dung</label>
                         <editor 
+                            v-model="noi_dung"
                             api-key="qp0azz3bxgs5kvvmhnnh0fno0i1pmcnbfaty2wgefpgvmojc"
                             :init="{
                                 height: 250,
@@ -97,7 +99,14 @@
                         </div>
                         
                     </div>
-                    
+                    <div class="col-md-3 mb-3">
+                        <label>Cán bộ tham mưu</label>
+                        <input type="text" class="form-control form-control-sm" v-model="can_bo_tham_muu">
+                    </div>
+                    <div class="col-md-9 mb-3">
+                        <label>Lưu trữ</label>
+                        <input type="text" class="form-control form-control-sm" v-model="luu_tru">
+                    </div>
                     <div class="col-md-12 mb-3">
                         <label>Ghi chú</label>
                         <input type="text" class="form-control form-control-sm" v-model="ghi_chu">
@@ -127,14 +136,19 @@ export default {
             ngay:'',
             id_loai:'',
             trich_yeu:'',
+            noi_dung:'',
             do_mat:'',
             id_lanh_dao:'',
-            don_vi_nhan:[],
-            don_vi_nhan_ed:[],
             file:'',
+            listDonViEd:[],
+            can_bo_tham_muu:'',
+            luu_tru:'',
             ghi_chu:'',
             // mang don vi nhan
-            listDonViEd:[],
+            don_vi_nhan:[],
+            don_vi_nhan_ed:[],
+            // bắt lỗi
+            error:'',
         }
     },
     computed:{
@@ -159,10 +173,10 @@ export default {
             if(this.show == false){
                 this.show = true;
                 await setTimeout(()=>{this.classadd='active'},200);
-                await this.$store.dispatch('acListNguonDi');
-                await this.$store.dispatch('acListLoai');
-                await this.$store.dispatch('acListLanhDao');
-                await this.$store.dispatch('acListDonVi');
+                if(this.listNguonDi=='') await this.$store.dispatch('acListNguonDi');
+                if(this.listLoai=='') await this.$store.dispatch('acListLoai');
+                if(this.listLanhDao=='') await this.$store.dispatch('acListLanhDao');
+                if(this.listDonVi=='') await this.$store.dispatch('acListDonVi');
             }else{
                 this.classadd = '';
                 setTimeout(()=>{this.show = false},500);
@@ -174,37 +188,42 @@ export default {
                 return e.ky_hieu;
             });
             var donViNhan = listNameDonVi.join(', ');
-            console.log(donViNhan);
-            // var data = new FormData();
-            // data.append('id_nguon_den', this.id_nguon_den);
-            // data.append('so', this.so);
-            // data.append('ngay', this.ngay);
-            // data.append('id_loai', this.id_loai);
-            // data.append('trich_yeu', this.trich_yeu);
-            // data.append('do_mat', this.do_mat);
-            // data.append('nguoi_ky', this.nguoi_ky);
-            // data.append('file', this.file);
-            // data.append('phe_duyet', this.phe_duyet);
-            // data.append('id_user_xu_ly', this.id_user_xu_ly);
-            // data.append('han_xu_ly', this.han_xu_ly);
-            // data.append('ghi_chu', this.ghi_chu);
+            var data = new FormData();
+            data.append('id_nguon_di', this.id_nguon_di);
+            data.append('so', this.so);
+            data.append('ngay', this.ngay);
+            data.append('id_loai', this.id_loai);
+            data.append('trich_yeu', this.trich_yeu);
+            data.append('noi_dung', this.noi_dung);
+            data.append('do_mat', this.do_mat);
+            data.append('id_lanh_dao', this.id_lanh_dao);
+            data.append('file', this.file);
+            data.append('don_vi_nhan', donViNhan);
+            data.append('can_bo_tham_muu', this.can_bo_tham_muu);
+            data.append('luu_tru', this.luu_tru);
+            data.append('ghi_chu', this.ghi_chu);
 
-            // axios.post('/px03/public/addvanbanden', data)
-            // .then(async response=>{
-            //     this.id_nguon_den='';
-            //     this.so='';
-            //     this.ngay='';
-            //     this.id_loai='';
-            //     this.trich_yeu='';
-            //     this.do_mat='';
-            //     this.nguoi_ky='';
-            //     this.file='';
-            //     this.phe_duyet='';
-            //     this.id_user_xu_ly='';
-            //     this.han_xu_ly='';
-            //     this.ghi_chu='';
-            //     await this.$store.dispatch('acSearch', {data:this.dataRequestSearch, page:1});
-            // })
+            axios.post('/px03/public/addvanbandi', data)
+            .then(async response=>{
+                this.id_nguon_den='';
+                this.so='';
+                this.ngay='';
+                this.id_loai='';
+                this.trich_yeu='';
+                this.noi_dung=' ';
+                this.do_mat='';
+                this.id_lanh_dao='';
+                this.file='';
+                this.removeListAllDV();
+                this.can_bo_tham_muu='';
+                this.luu_tru='';
+                this.ghi_chu='';
+                await this.$store.dispatch('acSearch', {data:this.dataRequestSearch, page:1});
+            })
+            .catch(error=>{
+                this.error = error.response.data.errors;
+                console.log(this.error);
+            })
         },
         // lay thong tin file dinh kem vao bien file
         getFile(e){
@@ -247,6 +266,9 @@ export default {
             this.$store.dispatch('acChangeListDonVi', {'data':listConLai});
             this.listDonViEd = [];
         },
+        removeErr(){
+            this.error ='';
+        },
     },
     components:{
         'editor': Editor
@@ -266,5 +288,10 @@ export default {
     opacity: 0;
     margin-top: -436px;
     transition: all 0.5s ease;
+}
+.thongbao{
+	color:crimson;
+	font-size:0.8rem;
+	margin-top: 5px;
 }
 </style>

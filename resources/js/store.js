@@ -14,10 +14,11 @@ const storeInfo = {
         listPermissionOfUser: '',
         dataRequestSearch: '',
         lengthBarAlert: '',
-
         listNguonDi: '',
         listLanhDao: '',
         listDonVi: '',
+        listVanBanDi: '',
+        dataRequestSearchDi: '',
     },
     getters: {
         getUserDetails(state) {
@@ -115,7 +116,16 @@ const storeInfo = {
         },
         acChangeListDonVi(contex, data) {
             contex.commit('muListDonVi', data);
-        }
+        },
+        acSearchDi(contex, data) {
+            axios.post('/px03/public/searchdi?page=' + data.page, data.data)
+                .then(response => {
+                    contex.commit('muSearchDi', response);
+                })
+        },
+        acRequestSearchDi(contex, data) {
+            contex.commit('muRequestSearchDi', data);
+        },
     },
     mutations: {
         muUserDetails(state, responsive) {
@@ -153,6 +163,12 @@ const storeInfo = {
         },
         muListDonVi(state, data) {
             state.listDonVi = data.data;
+        },
+        muSearchDi(state, data) {
+            state.listVanBanDi = data.data;
+        },
+        muRequestSearchDi(state, data) {
+            state.dataRequestSearchDi = data;
         }
 
     },

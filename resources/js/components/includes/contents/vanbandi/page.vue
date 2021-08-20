@@ -52,26 +52,26 @@ export default {
                 return pagesArray;
             },
         	dataRequestSearch(){
-           		return this.$store.getters.getDataRequestSearch;
+           		return this.$store.state.dataRequestSearchDi;
         	}
         },
 	methods:{
 		setPage(newPage){
-			this.$store.dispatch('acSearch', {data:this.dataRequestSearch, page:newPage});
+			this.$store.dispatch('acSearchDi', {data:this.dataRequestSearch, page:newPage});
 			this.currentPage = newPage;
 			this.$emit('getPage', newPage);	
 		},
 		prev(){
 			if(this.currentPage > 1){
 				this.currentPage--;
-				this.$store.dispatch('acSearch', {data:this.dataRequestSearch, page:this.currentPage});
+				this.$store.dispatch('acSearchDi', {data:this.dataRequestSearch, page:this.currentPage});
 				this.$emit('getPage', this.currentPage);	
 			}
 		},
 		next(){
 			if(this.currentPage < this.last_page){
 				this.currentPage++;
-				this.$store.dispatch('acSearch', {data:this.dataRequestSearch, page:this.currentPage});
+				this.$store.dispatch('acSearchDi', {data:this.dataRequestSearch, page:this.currentPage});
 				this.$emit('getPage', this.currentPage);		
 			}
 		}

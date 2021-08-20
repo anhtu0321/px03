@@ -94,7 +94,7 @@ Route::get('/viewvanbandi/{id}','VanBanDiController@view')->middleware('can:vanb
 Route::post('/updatevanbandi/{id}','VanBanDiController@update')->middleware('can:vanbandi_sua');
 Route::get('/deletevanbandi/{id}','VanBanDiController@destroy')->middleware('can:vanbandi_xoa');
 // Tìm kiếm văn bản đến
-Route::post('/search','VanBanDiController@search')->middleware('can:vanbandi_xem');
+Route::post('/searchdi','VanBanDiController@search')->middleware('can:vanbandi_xem');
 
 // Đổi mật khẩu
 Route::post('/doimatkhau','UserController@doiMatKhau');

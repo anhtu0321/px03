@@ -37,28 +37,9 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label>Trích yếu</label>
-                        <input type="text" class="form-control form-control-sm" v-model="trich_yeu">
+                        <input type="text" class="form-control form-control-sm" v-model="trich_yeu" :class="{'is-invalid':(error && error.trich_yeu)}" @focus="removeErr">
+                        <p class="thongbao" v-if="error && error.trich_yeu">{{ error.trich_yeu[0] }}</p>
                     </div>
-                    <!-- <div class="col-md-12 mb-3">
-                        <label>Nội dung</label>
-                        <editor 
-                            api-key="qp0azz3bxgs5kvvmhnnh0fno0i1pmcnbfaty2wgefpgvmojc"
-                            :init="{
-                                height: 250,
-                                menubar: false,
-                                plugins: [
-                                'advlist autolink lists link image charmap print preview anchor',
-                                'searchreplace visualblocks code fullscreen',
-                                'insertdatetime media table paste code help wordcount'
-                                ],
-                                toolbar:
-                                'undo redo | formatselect | bold italic backcolor | \
-                                alignleft aligncenter alignright alignjustify | \
-                                bullist numlist outdent indent | removeformat | help'
-                            }">
-                        </editor>
-                        
-                    </div> -->
                     <div class="col-md-4 mb-3">
                         <label>Độ mật</label>
                         <select class="form-control form-control-sm" v-model="do_mat">
@@ -93,7 +74,7 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label>Ghi chú</label>
-                        <input type="text" class="form-control form-control-sm" v-model="ghi_chu" @click="test">
+                        <input type="text" class="form-control form-control-sm" v-model="ghi_chu">
                     </div>
                 </div>
                 <div class="form-row">
@@ -126,6 +107,8 @@ export default {
             id_user_xu_ly:'',
             han_xu_ly:'',
             ghi_chu:'',
+            // bắt lỗi
+            error:'',
         }
     },
     computed:{
@@ -183,6 +166,9 @@ export default {
                 this.ghi_chu='';
                 await this.$store.dispatch('acSearch', {data:this.dataRequestSearch, page:1});
             })
+            .catch(error=>{
+                this.error = error.response.data.errors;
+            })
         },
         // lay thong tin file dinh kem vao bien file
         getFile(e){
@@ -192,9 +178,9 @@ export default {
                 this.file = '';
             }
         },
-        test(e){
-             console.log(e.target.ClassName);
-        }
+        removeErr(){
+            this.error ='';
+        },
     }
 }
 </script>
@@ -210,5 +196,10 @@ export default {
     opacity: 0;
     margin-top: -436px;
     transition: all 0.5s ease;
+}
+.thongbao{
+	color:crimson;
+	font-size:0.8rem;
+	margin-top: 5px;
 }
 </style>

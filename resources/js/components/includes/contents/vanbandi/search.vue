@@ -22,9 +22,9 @@
             <div class="form-row content__form-expand" :class="classexpand" v-if="expand">
                 <div class="col-md-4 mb-3">
                     <label for="validationCustom03">Cơ quan ban hành</label>
-                    <select v-model="id_nguon_den" class="form-control form-control-sm">
+                    <select v-model="id_nguon_di" class="form-control form-control-sm">
                         <option value="">--- Chọn cơ quan, đơn vị ban hành ---</option>
-                        <option v-for="nguonden in listNguonDen.data" :key="nguonden.id" :value="nguonden.id">{{ nguonden.ten_nguon }}</option>
+                        <option v-for="nguondi in listNguonDi.data" :key="nguondi.id" :value="nguondi.id">{{ nguondi.ten_nguon }}</option>
                     </select>
                 </div>
                 <div class="col-md-3 mb-3">
@@ -47,6 +47,18 @@
                         <option value="2">Tối Mật</option>
                         <option value="3">Tuyệt Mật</option>
                     </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Nội dung</label>
+                    <input type="text" class="form-control form-control-sm" v-model="noi_dung">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Đơn vị nhận</label>
+                    <input type="text" class="form-control form-control-sm" v-model="don_vi_nhan">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Cán bộ tham mưu</label>
+                    <input type="text" class="form-control form-control-sm" v-model="can_bo_tham_muu">
                 </div>
       
             </div>
@@ -80,14 +92,17 @@ export default {
             date_end:'',
             trich_yeu:'',
             so:'',
-            id_nguon_den:'',
+            id_nguon_di:'',
             id_loai:'',
             do_mat:'',
+            noi_dung:'',
+            don_vi_nhan:'',
+            can_bo_tham_muu:'',
         }
     },
     computed:{
-        listNguonDen(){
-            return this.$store.getters.getListNguonDen;
+        listNguonDi(){
+            return this.$store.getters.getListNguonDi;
         },
         listLoai(){
             return this.$store.getters.getListLoai;
@@ -101,8 +116,8 @@ export default {
                 
             }else{
                 await setTimeout(()=>{this.classexpand='active'},200);
-                await this.$store.dispatch('acListNguonDen');
-                await this.$store.dispatch('acListLoai');
+                if(this.listNguonDi =='') await this.$store.dispatch('acListNguonDi');
+                if(this.listLoai=='') await this.$store.dispatch('acListLoai');
                 this.expand = !this.expand;
             }
         },
@@ -112,11 +127,14 @@ export default {
             data.append('date_end', this.date_end);
             data.append('trich_yeu', this.trich_yeu);
             data.append('so', this.so);
-            data.append('id_nguon_den', this.id_nguon_den);
+            data.append('id_nguon_di', this.id_nguon_di);
             data.append('id_loai', this.id_loai);
             data.append('do_mat', this.do_mat);
-            this.$store.dispatch('acSearch', {data:data, page:1});
-            this.$store.dispatch('acRequestSearch', data);
+            data.append('noi_dung', this.noi_dung);
+            data.append('don_vi_nhan', this.don_vi_nhan);
+            data.append('can_bo_tham_muu', this.can_bo_tham_muu);
+            this.$store.dispatch('acSearchDi', {data:data, page:1});
+            this.$store.dispatch('acRequestSearchDi', data);
         }
     }, 
     

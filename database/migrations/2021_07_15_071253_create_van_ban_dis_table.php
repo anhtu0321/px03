@@ -16,13 +16,13 @@ class CreateVanBanDisTable extends Migration
         Schema::create('van_ban_di', function (Blueprint $table) {
             $table->id();
             $table->string('so');
-            $table->string('ngay');
+            $table->date('ngay');
             $table->string('trich_yeu', 450);
             $table->integer('id_loai');
             $table->string('noi_dung');
             $table->integer('id_lanh_dao');
             $table->integer('do_mat');
-            $table->integer('can_bo_tham_muu');
+            $table->string('can_bo_tham_muu',50);
             $table->string('file',150);
             $table->string('ghi_chu',350);
             $table->string('luu_tru',200);
