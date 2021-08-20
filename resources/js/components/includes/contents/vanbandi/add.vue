@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label>Nội dung</label>
-                        <editor 
+                        <!-- <editor 
                             v-model="noi_dung"
                             api-key="qp0azz3bxgs5kvvmhnnh0fno0i1pmcnbfaty2wgefpgvmojc"
                             :init="{
@@ -58,7 +58,7 @@
                                 alignleft aligncenter alignright alignjustify | \
                                 bullist numlist outdent indent | removeformat | help'
                             }">
-                        </editor>
+                        </editor> -->
                         
                     </div>
                     <div class="col-md-3 mb-3">
@@ -123,7 +123,7 @@
 </template>
 
 <script>
-import Editor from '@tinymce/tinymce-vue'
+// import Editor from '@tinymce/tinymce-vue'
 export default {
     data(){
         return{
@@ -271,7 +271,7 @@ export default {
         },
     },
     components:{
-        'editor': Editor
+        // 'editor': Editor
     }, 
    
 }

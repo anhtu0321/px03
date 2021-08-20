@@ -384,6 +384,10 @@ export default {
                 this.e_listDonViEd = this.listDonVi.filter( e=>{
                     return don_vi_nhan.includes(e.ky_hieu);
                 });
+                var listConLai = this.listDonVi.filter( e=>{
+                    return don_vi_nhan.includes(e.ky_hieu) == false;
+                });
+                this.$store.dispatch('acChangeListDonVi', {'data':listConLai});
             }
 
             if(data.data[0].can_bo_tham_muu)this.e_can_bo_tham_muu = data.data[0].can_bo_tham_muu;
