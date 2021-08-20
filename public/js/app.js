@@ -3375,7 +3375,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 if (!(_this.show == false)) {
-                  _context.next = 12;
+                  _context.next = 15;
                   break;
                 }
 
@@ -3386,28 +3386,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }, 200);
 
               case 4:
-                _context.next = 6;
+                if (!(_this.listUser == '')) {
+                  _context.next = 7;
+                  break;
+                }
+
+                _context.next = 7;
                 return _this.$store.dispatch('acListUser');
 
-              case 6:
-                _context.next = 8;
+              case 7:
+                if (!(_this.listNguonDen == '')) {
+                  _context.next = 10;
+                  break;
+                }
+
+                _context.next = 10;
                 return _this.$store.dispatch('acListNguonDen');
 
-              case 8:
-                _context.next = 10;
+              case 10:
+                if (!(_this.listLoai == '')) {
+                  _context.next = 13;
+                  break;
+                }
+
+                _context.next = 13;
                 return _this.$store.dispatch('acListLoai');
 
-              case 10:
-                _context.next = 14;
+              case 13:
+                _context.next = 17;
                 break;
 
-              case 12:
+              case 15:
                 _this.classadd = '';
                 setTimeout(function () {
                   _this.show = false;
                 }, 500);
 
-              case 14:
+              case 17:
               case "end":
                 return _context.stop();
             }
@@ -4012,7 +4027,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 setTimeout(function () {
                   _this.expand = !_this.expand;
                 }, 500);
-                _context.next = 12;
+                _context.next = 14;
                 break;
 
               case 5:
@@ -4022,17 +4037,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }, 200);
 
               case 7:
-                _context.next = 9;
+                if (!(_this.listNguonDen == '')) {
+                  _context.next = 10;
+                  break;
+                }
+
+                _context.next = 10;
                 return _this.$store.dispatch('acListNguonDen');
 
-              case 9:
-                _context.next = 11;
+              case 10:
+                if (!(_this.listLoai == '')) {
+                  _context.next = 13;
+                  break;
+                }
+
+                _context.next = 13;
                 return _this.$store.dispatch('acListLoai');
 
-              case 11:
+              case 13:
                 _this.expand = !_this.expand;
 
-              case 12:
+              case 14:
               case "end":
                 return _context.stop();
             }

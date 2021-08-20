@@ -101,8 +101,8 @@ export default {
                 
             }else{
                 await setTimeout(()=>{this.classexpand='active'},200);
-                await this.$store.dispatch('acListNguonDen');
-                await this.$store.dispatch('acListLoai');
+                if(this.listNguonDen =='') await this.$store.dispatch('acListNguonDen');
+                if(this.listLoai=='') await this.$store.dispatch('acListLoai');
                 this.expand = !this.expand;
             }
         },

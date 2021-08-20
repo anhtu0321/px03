@@ -127,9 +127,10 @@ export default {
             if(this.show == false){
                 this.show = true;
                 await setTimeout(()=>{this.classadd='active'},200);
-                await this.$store.dispatch('acListUser');
-                await this.$store.dispatch('acListNguonDen');
-                await this.$store.dispatch('acListLoai');
+                if(this.listUser=='') await this.$store.dispatch('acListUser');
+                if(this.listNguonDen=='') await this.$store.dispatch('acListNguonDen');
+                if(this.listLoai=='') await this.$store.dispatch('acListLoai');
+                
             }else{
                 this.classadd = '';
                 setTimeout(()=>{this.show = false},500);
