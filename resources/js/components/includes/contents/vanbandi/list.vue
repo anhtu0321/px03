@@ -137,13 +137,16 @@ export default {
                     break;
             }
         },
+        loadData(){
+            this.$store.dispatch('acSearchDi', {data:this.dataRequestSearch, page:page});
+        }
         
     },
     components:{
         page,
     },
-    async created(){
-        await this.$store.dispatch('acSearchDi', {data:this.dataRequestSearch, page:page});
+    created(){
+        this.loadData();
     }
 }
 </script>

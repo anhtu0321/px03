@@ -218,7 +218,7 @@ export default {
                 this.can_bo_tham_muu='';
                 this.luu_tru='';
                 this.ghi_chu='';
-                await this.$store.dispatch('acSearch', {data:this.dataRequestSearch, page:1});
+                this.$store.dispatch('acSearchDi', {data:this.dataRequestSearch, page:1});
             })
             .catch(error=>{
                 this.error = error.response.data.errors;

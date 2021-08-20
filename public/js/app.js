@@ -4096,10 +4096,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _tinymce_tinymce_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tinymce/tinymce-vue */ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/index.js");
-/* harmony import */ var _vanbandi_list_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./vanbandi/list.vue */ "./resources/js/components/includes/contents/vanbandi/list.vue");
-/* harmony import */ var _vanbandi_add_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./vanbandi/add.vue */ "./resources/js/components/includes/contents/vanbandi/add.vue");
-/* harmony import */ var _vanbandi_search_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./vanbandi/search.vue */ "./resources/js/components/includes/contents/vanbandi/search.vue");
+/* harmony import */ var _vanbandi_list_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./vanbandi/list.vue */ "./resources/js/components/includes/contents/vanbandi/list.vue");
+/* harmony import */ var _vanbandi_add_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./vanbandi/add.vue */ "./resources/js/components/includes/contents/vanbandi/add.vue");
+/* harmony import */ var _vanbandi_search_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./vanbandi/search.vue */ "./resources/js/components/includes/contents/vanbandi/search.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -4347,7 +4346,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-
+// import editor from '@tinymce/tinymce-vue';
 
 
 
@@ -4507,7 +4506,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (data.data[0].trich_yeu) this.e_trich_yeu = data.data[0].trich_yeu;
       if (data.data[0].noi_dung) this.e_noi_dung = data.data[0].noi_dung;
       if (data.data[0].do_mat) this.e_do_mat = data.data[0].do_mat;
-      if (data.data[0].id_lanh_dao) this.e_id_lanh_dao = data.data[0].id_lanh_dao; // if(data.data[0].don_vi_nhan) this.e_don_vi_nhan = data.data[0].don_vi_nhan;
+      if (data.data[0].id_lanh_dao) this.e_id_lanh_dao = data.data[0].id_lanh_dao;
+
+      if (data.data[0].don_vi_nhan) {
+        var don_vi_nhan = data.data[0].don_vi_nhan.replace(/, /g, ',').split(',');
+        this.e_listDonViEd = this.listDonVi.filter(function (e) {
+          return don_vi_nhan.includes(e.ky_hieu);
+        });
+      }
 
       if (data.data[0].can_bo_tham_muu) this.e_can_bo_tham_muu = data.data[0].can_bo_tham_muu;
       if (data.data[0].luu_tru) this.e_luu_tru = data.data[0].luu_tru;
@@ -4585,13 +4591,83 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     removeErr: function removeErr() {
       this.error = '';
+    },
+    addListOneDV: function addListOneDV() {
+      var _this2 = this;
+
+      var listChon = this.listDonVi.filter(function (list) {
+        return _this2.don_vi_nhan.includes(list.id);
+      });
+      var listConLai = this.listDonVi.filter(function (list) {
+        return _this2.don_vi_nhan.includes(list.id) == false;
+      });
+      this.listDonViEd = this.listDonViEd.concat(listChon);
+      this.$store.dispatch('acChangeListDonVi', {
+        'data': listConLai
+      });
+    },
+    addListAllDV: function addListAllDV() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (!(_this3.listDonVi.length != 0)) {
+                  _context2.next = 4;
+                  break;
+                }
+
+                _context2.next = 3;
+                return _this3.listDonVi.concat(_this3.listDonViEd);
+
+              case 3:
+                _this3.listDonViEd = _context2.sent;
+
+              case 4:
+                _context2.next = 6;
+                return _this3.$store.dispatch('acChangeListDonVi', {
+                  'data': []
+                });
+
+              case 6:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    removeListOneDV: function removeListOneDV() {
+      var _this4 = this;
+
+      // xử lý các đơn vị chưa được chọn
+      var listChon = this.listDonViEd.filter(function (list) {
+        return _this4.don_vi_nhan_ed.includes(list.id);
+      });
+      var listConLai = this.listDonVi.concat(listChon);
+      this.$store.dispatch('acChangeListDonVi', {
+        'data': listConLai
+      }); // xử lý các đơn vị được chọn
+
+      this.listDonViEd = this.listDonViEd.filter(function (list) {
+        return _this4.don_vi_nhan_ed.includes(list.id) == false;
+      });
+    },
+    removeListAllDV: function removeListAllDV() {
+      var listConLai = this.listDonVi.concat(this.listDonViEd);
+      this.$store.dispatch('acChangeListDonVi', {
+        'data': listConLai
+      });
+      this.listDonViEd = [];
     }
   },
   components: {
-    editor: _tinymce_tinymce_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    listcomponent: _vanbandi_list_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    searchComponent: _vanbandi_search_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    addComponent: _vanbandi_add_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    // editor, 
+    listcomponent: _vanbandi_list_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    searchComponent: _vanbandi_search_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    addComponent: _vanbandi_add_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 
@@ -4901,13 +4977,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this2.can_bo_tham_muu = '';
                   _this2.luu_tru = '';
                   _this2.ghi_chu = '';
-                  _context2.next = 15;
-                  return _this2.$store.dispatch('acSearch', {
+
+                  _this2.$store.dispatch('acSearchDi', {
                     data: _this2.dataRequestSearch,
                     page: 1
                   });
 
-                case 15:
+                case 14:
                 case "end":
                   return _context2.stop();
               }
@@ -5253,32 +5329,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           return "-";
           break;
       }
+    },
+    loadData: function loadData() {
+      this.$store.dispatch('acSearchDi', {
+        data: this.dataRequestSearch,
+        page: _page_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+      });
     }
   },
   components: {
     page: _page_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   created: function created() {
-    var _this4 = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              _context4.next = 2;
-              return _this4.$store.dispatch('acSearchDi', {
-                data: _this4.dataRequestSearch,
-                page: _page_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
-              });
-
-            case 2:
-            case "end":
-              return _context4.stop();
-          }
-        }
-      }, _callee4);
-    }))();
+    this.loadData();
   }
 });
 
@@ -46715,41 +46778,7 @@ var render = function() {
                               : _vm._e()
                           ]),
                           _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "col-md-12 mb-3" },
-                            [
-                              _c("label", [_vm._v("Nội dung")]),
-                              _vm._v(" "),
-                              _c("editor", {
-                                attrs: {
-                                  "api-key":
-                                    "qp0azz3bxgs5kvvmhnnh0fno0i1pmcnbfaty2wgefpgvmojc",
-                                  init: {
-                                    height: 250,
-                                    menubar: false,
-                                    plugins: [
-                                      "advlist autolink lists link image charmap print preview anchor",
-                                      "searchreplace visualblocks code fullscreen",
-                                      "insertdatetime media table paste code help wordcount"
-                                    ],
-                                    toolbar:
-                                      "undo redo | formatselect | bold italic backcolor | \
-                                            alignleft aligncenter alignright alignjustify | \
-                                            bullist numlist outdent indent | removeformat | help"
-                                  }
-                                },
-                                model: {
-                                  value: _vm.e_noi_dung,
-                                  callback: function($$v) {
-                                    _vm.e_noi_dung = $$v
-                                  },
-                                  expression: "e_noi_dung"
-                                }
-                              })
-                            ],
-                            1
-                          ),
+                          _vm._m(1),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-3 mb-3" }, [
                             _c("label", [_vm._v("Độ mật")]),
@@ -47130,12 +47159,12 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _vm._m(1)
+                        _vm._m(2)
                       ]
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(2)
+                  _vm._m(3)
                 ])
               ]
             )
@@ -47166,6 +47195,14 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12 mb-3" }, [
+      _c("label", [_vm._v("Nội dung")])
     ])
   },
   function() {

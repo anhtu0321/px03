@@ -46,7 +46,7 @@
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label>Nội dung</label>
-                                        <editor 
+                                        <!-- <editor 
                                             v-model="e_noi_dung"
                                             api-key="qp0azz3bxgs5kvvmhnnh0fno0i1pmcnbfaty2wgefpgvmojc"
                                             :init="{
@@ -62,7 +62,7 @@
                                                 alignleft aligncenter alignright alignjustify | \
                                                 bullist numlist outdent indent | removeformat | help'
                                             }">
-                                        </editor>
+                                        </editor> -->
                                         
                                     </div>
                                     <div class="col-md-3 mb-3">
@@ -240,7 +240,7 @@
 </template>
 
 <script>
-import editor from '@tinymce/tinymce-vue';
+// import editor from '@tinymce/tinymce-vue';
 import listcomponent from './vanbandi/list.vue';
 import addComponent from './vanbandi/add.vue';
 import searchComponent from './vanbandi/search.vue';
@@ -379,7 +379,12 @@ export default {
             if(data.data[0].do_mat) this.e_do_mat = data.data[0].do_mat;
             if(data.data[0].id_lanh_dao) this.e_id_lanh_dao = data.data[0].id_lanh_dao;
 
-            // if(data.data[0].don_vi_nhan) this.e_don_vi_nhan = data.data[0].don_vi_nhan;
+            if(data.data[0].don_vi_nhan) {
+                var don_vi_nhan = data.data[0].don_vi_nhan.replace(/, /g, ',').split(',');
+                this.e_listDonViEd = this.listDonVi.filter( e=>{
+                    return don_vi_nhan.includes(e.ky_hieu);
+                });
+            }
 
             if(data.data[0].can_bo_tham_muu)this.e_can_bo_tham_muu = data.data[0].can_bo_tham_muu;
             if(data.data[0].luu_tru) this.e_luu_tru = data.data[0].luu_tru;
@@ -450,9 +455,42 @@ export default {
         removeErr(){
             this.error ='';
         },
+        addListOneDV(){
+            var listChon = this.listDonVi.filter(list=>{
+                return this.don_vi_nhan.includes(list.id);
+            });
+            var listConLai = this.listDonVi.filter(list =>{
+                return this.don_vi_nhan.includes(list.id) == false;
+            });
+            this.listDonViEd = this.listDonViEd.concat(listChon);
+            this.$store.dispatch('acChangeListDonVi', {'data':listConLai});
+        },
+        async addListAllDV(){
+            if(this.listDonVi.length != 0){
+                this.listDonViEd = await this.listDonVi.concat(this.listDonViEd);
+            }
+            await this.$store.dispatch('acChangeListDonVi', {'data':[]});
+        },
+        removeListOneDV(){
+            // xử lý các đơn vị chưa được chọn
+            var listChon = this.listDonViEd.filter(list=>{
+                return this.don_vi_nhan_ed.includes(list.id);
+            });
+            var listConLai = this.listDonVi.concat(listChon);
+            this.$store.dispatch('acChangeListDonVi', {'data':listConLai});
+            // xử lý các đơn vị được chọn
+            this.listDonViEd = this.listDonViEd.filter(list=>{
+                return this.don_vi_nhan_ed.includes(list.id) == false;
+            });
+        },
+        removeListAllDV(){
+            var listConLai = this.listDonVi.concat(this.listDonViEd);
+            this.$store.dispatch('acChangeListDonVi', {'data':listConLai});
+            this.listDonViEd = [];
+        },
     },
     components:{
-        editor, 
+        // editor, 
         listcomponent,
         searchComponent,
         addComponent,
