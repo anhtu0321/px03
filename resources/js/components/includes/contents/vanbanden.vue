@@ -205,7 +205,6 @@
 </template>
 
 <script>
-import editor from '@tinymce/tinymce-vue';
 import listcomponent from './vanbanden/list.vue';
 import addComponent from './vanbanden/add.vue';
 import searchComponent from './vanbanden/search.vue';
@@ -402,7 +401,6 @@ export default {
 		}
     },
     components:{
-        editor, 
         listcomponent,
         searchComponent,
         addComponent,

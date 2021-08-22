@@ -98,435 +98,6 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/
 
 /***/ }),
 
-/***/ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/ScriptLoader.js":
-/*!******************************************************************************!*\
-  !*** ./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/ScriptLoader.js ***!
-  \******************************************************************************/
-/*! exports provided: ScriptLoader */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ScriptLoader", function() { return ScriptLoader; });
-/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Utils */ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/Utils.js");
-/**
- * Copyright (c) 2018-present, Ephox, Inc.
- *
- * This source code is licensed under the Apache 2 license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-var createState = function () {
-    return {
-        listeners: [],
-        scriptId: Object(_Utils__WEBPACK_IMPORTED_MODULE_0__["uuid"])('tiny-script'),
-        scriptLoaded: false
-    };
-};
-var CreateScriptLoader = function () {
-    var state = createState();
-    var injectScriptTag = function (scriptId, doc, url, callback) {
-        var scriptTag = doc.createElement('script');
-        scriptTag.referrerPolicy = 'origin';
-        scriptTag.type = 'application/javascript';
-        scriptTag.id = scriptId;
-        scriptTag.src = url;
-        var handler = function () {
-            scriptTag.removeEventListener('load', handler);
-            callback();
-        };
-        scriptTag.addEventListener('load', handler);
-        if (doc.head) {
-            doc.head.appendChild(scriptTag);
-        }
-    };
-    var load = function (doc, url, callback) {
-        if (state.scriptLoaded) {
-            callback();
-        }
-        else {
-            state.listeners.push(callback);
-            if (!doc.getElementById(state.scriptId)) {
-                injectScriptTag(state.scriptId, doc, url, function () {
-                    state.listeners.forEach(function (fn) { return fn(); });
-                    state.scriptLoaded = true;
-                });
-            }
-        }
-    };
-    // Only to be used by tests.
-    var reinitialize = function () {
-        state = createState();
-    };
-    return {
-        load: load,
-        reinitialize: reinitialize
-    };
-};
-var ScriptLoader = CreateScriptLoader();
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/TinyMCE.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/TinyMCE.js ***!
-  \*************************************************************************/
-/*! exports provided: getTinymce */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTinymce", function() { return getTinymce; });
-/**
- * Copyright (c) 2018-present, Ephox, Inc.
- *
- * This source code is licensed under the Apache 2 license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-var getGlobal = function () { return (typeof window !== 'undefined' ? window : global); };
-var getTinymce = function () {
-    var global = getGlobal();
-    return global && global.tinymce ? global.tinymce : null;
-};
-
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
-
-/***/ }),
-
-/***/ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/Utils.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/Utils.js ***!
-  \***********************************************************************/
-/*! exports provided: bindHandlers, bindModelHandlers, initEditor, isValidKey, uuid, isTextarea, mergePlugins, isNullOrUndefined */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bindHandlers", function() { return bindHandlers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bindModelHandlers", function() { return bindModelHandlers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initEditor", function() { return initEditor; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isValidKey", function() { return isValidKey; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uuid", function() { return uuid; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isTextarea", function() { return isTextarea; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mergePlugins", function() { return mergePlugins; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNullOrUndefined", function() { return isNullOrUndefined; });
-/**
- * Copyright (c) 2018-present, Ephox, Inc.
- *
- * This source code is licensed under the Apache 2 license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-var validEvents = [
-    'onActivate',
-    'onAddUndo',
-    'onBeforeAddUndo',
-    'onBeforeExecCommand',
-    'onBeforeGetContent',
-    'onBeforeRenderUI',
-    'onBeforeSetContent',
-    'onBeforePaste',
-    'onBlur',
-    'onChange',
-    'onClearUndos',
-    'onClick',
-    'onContextMenu',
-    'onCopy',
-    'onCut',
-    'onDblclick',
-    'onDeactivate',
-    'onDirty',
-    'onDrag',
-    'onDragDrop',
-    'onDragEnd',
-    'onDragGesture',
-    'onDragOver',
-    'onDrop',
-    'onExecCommand',
-    'onFocus',
-    'onFocusIn',
-    'onFocusOut',
-    'onGetContent',
-    'onHide',
-    'onInit',
-    'onKeyDown',
-    'onKeyPress',
-    'onKeyUp',
-    'onLoadContent',
-    'onMouseDown',
-    'onMouseEnter',
-    'onMouseLeave',
-    'onMouseMove',
-    'onMouseOut',
-    'onMouseOver',
-    'onMouseUp',
-    'onNodeChange',
-    'onObjectResizeStart',
-    'onObjectResized',
-    'onObjectSelected',
-    'onPaste',
-    'onPostProcess',
-    'onPostRender',
-    'onPreProcess',
-    'onProgressState',
-    'onRedo',
-    'onRemove',
-    'onReset',
-    'onSaveContent',
-    'onSelectionChange',
-    'onSetAttrib',
-    'onSetContent',
-    'onShow',
-    'onSubmit',
-    'onUndo',
-    'onVisualAid'
-];
-var isValidKey = function (key) { return validEvents.map(function (event) { return event.toLowerCase(); }).indexOf(key.toLowerCase()) !== -1; };
-var bindHandlers = function (initEvent, listeners, editor) {
-    Object.keys(listeners)
-        .filter(isValidKey)
-        .forEach(function (key) {
-        var handler = listeners[key];
-        if (typeof handler === 'function') {
-            if (key === 'onInit') {
-                handler(initEvent, editor);
-            }
-            else {
-                editor.on(key.substring(2), function (e) { return handler(e, editor); });
-            }
-        }
-    });
-};
-var bindModelHandlers = function (ctx, editor) {
-    var modelEvents = ctx.$props.modelEvents ? ctx.$props.modelEvents : null;
-    var normalizedEvents = Array.isArray(modelEvents) ? modelEvents.join(' ') : modelEvents;
-    editor.on(normalizedEvents ? normalizedEvents : 'change input undo redo', function () {
-        ctx.$emit('input', editor.getContent({ format: ctx.$props.outputFormat }));
-    });
-};
-var initEditor = function (initEvent, ctx, editor) {
-    var value = ctx.$props.value ? ctx.$props.value : '';
-    var initialValue = ctx.$props.initialValue ? ctx.$props.initialValue : '';
-    editor.setContent(value || (ctx.initialized ? ctx.cache : initialValue));
-    // Always bind the value listener in case users use :value instead of v-model
-    ctx.$watch('value', function (val, prevVal) {
-        if (editor && typeof val === 'string' && val !== prevVal && val !== editor.getContent({ format: ctx.$props.outputFormat })) {
-            editor.setContent(val);
-        }
-    });
-    // checks if the v-model shorthand is used (which sets an v-on:input listener) and then binds either
-    // specified the events or defaults to "change keyup" event and emits the editor content on that event
-    if (ctx.$listeners.input) {
-        bindModelHandlers(ctx, editor);
-    }
-    bindHandlers(initEvent, ctx.$listeners, editor);
-    ctx.initialized = true;
-};
-var unique = 0;
-var uuid = function (prefix) {
-    var time = Date.now();
-    var random = Math.floor(Math.random() * 1000000000);
-    unique++;
-    return prefix + '_' + random + unique + String(time);
-};
-var isTextarea = function (element) {
-    return element !== null && element.tagName.toLowerCase() === 'textarea';
-};
-var normalizePluginArray = function (plugins) {
-    if (typeof plugins === 'undefined' || plugins === '') {
-        return [];
-    }
-    return Array.isArray(plugins) ? plugins : plugins.split(' ');
-};
-var mergePlugins = function (initPlugins, inputPlugins) {
-    return normalizePluginArray(initPlugins).concat(normalizePluginArray(inputPlugins));
-};
-var isNullOrUndefined = function (value) { return value === null || value === undefined; };
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/components/Editor.js":
-/*!***********************************************************************************!*\
-  !*** ./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/components/Editor.js ***!
-  \***********************************************************************************/
-/*! exports provided: Editor */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Editor", function() { return Editor; });
-/* harmony import */ var _ScriptLoader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ScriptLoader */ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/ScriptLoader.js");
-/* harmony import */ var _TinyMCE__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TinyMCE */ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/TinyMCE.js");
-/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Utils */ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/Utils.js");
-/* harmony import */ var _EditorPropTypes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EditorPropTypes */ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/components/EditorPropTypes.js");
-/**
- * Copyright (c) 2018-present, Ephox, Inc.
- *
- * This source code is licensed under the Apache 2 license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-var __assign = (undefined && undefined.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-
-
-
-
-var renderInline = function (h, id, tagName) {
-    return h(tagName ? tagName : 'div', {
-        attrs: { id: id }
-    });
-};
-var renderIframe = function (h, id) {
-    return h('textarea', {
-        attrs: { id: id },
-        style: { visibility: 'hidden' }
-    });
-};
-var initialise = function (ctx) { return function () {
-    var finalInit = __assign(__assign({}, ctx.$props.init), { readonly: ctx.$props.disabled, selector: "#" + ctx.elementId, plugins: Object(_Utils__WEBPACK_IMPORTED_MODULE_2__["mergePlugins"])(ctx.$props.init && ctx.$props.init.plugins, ctx.$props.plugins), toolbar: ctx.$props.toolbar || (ctx.$props.init && ctx.$props.init.toolbar), inline: ctx.inlineEditor, setup: function (editor) {
-            ctx.editor = editor;
-            editor.on('init', function (e) { return Object(_Utils__WEBPACK_IMPORTED_MODULE_2__["initEditor"])(e, ctx, editor); });
-            if (ctx.$props.init && typeof ctx.$props.init.setup === 'function') {
-                ctx.$props.init.setup(editor);
-            }
-        } });
-    if (Object(_Utils__WEBPACK_IMPORTED_MODULE_2__["isTextarea"])(ctx.element)) {
-        ctx.element.style.visibility = '';
-        ctx.element.style.display = '';
-    }
-    Object(_TinyMCE__WEBPACK_IMPORTED_MODULE_1__["getTinymce"])().init(finalInit);
-}; };
-var Editor = {
-    props: _EditorPropTypes__WEBPACK_IMPORTED_MODULE_3__["editorProps"],
-    created: function () {
-        this.elementId = this.$props.id || Object(_Utils__WEBPACK_IMPORTED_MODULE_2__["uuid"])('tiny-vue');
-        this.inlineEditor = (this.$props.init && this.$props.init.inline) || this.$props.inline;
-        this.initialized = false;
-    },
-    watch: {
-        disabled: function () {
-            this.editor.setMode(this.disabled ? 'readonly' : 'design');
-        }
-    },
-    mounted: function () {
-        this.element = this.$el;
-        if (Object(_TinyMCE__WEBPACK_IMPORTED_MODULE_1__["getTinymce"])() !== null) {
-            initialise(this)();
-        }
-        else if (this.element && this.element.ownerDocument) {
-            var channel = this.$props.cloudChannel ? this.$props.cloudChannel : '5';
-            var apiKey = this.$props.apiKey ? this.$props.apiKey : 'no-api-key';
-            var scriptSrc = Object(_Utils__WEBPACK_IMPORTED_MODULE_2__["isNullOrUndefined"])(this.$props.tinymceScriptSrc) ?
-                "https://cdn.tiny.cloud/1/" + apiKey + "/tinymce/" + channel + "/tinymce.min.js" :
-                this.$props.tinymceScriptSrc;
-            _ScriptLoader__WEBPACK_IMPORTED_MODULE_0__["ScriptLoader"].load(this.element.ownerDocument, scriptSrc, initialise(this));
-        }
-    },
-    beforeDestroy: function () {
-        if (Object(_TinyMCE__WEBPACK_IMPORTED_MODULE_1__["getTinymce"])() !== null) {
-            Object(_TinyMCE__WEBPACK_IMPORTED_MODULE_1__["getTinymce"])().remove(this.editor);
-        }
-    },
-    deactivated: function () {
-        var _a;
-        if (!this.inlineEditor) {
-            this.cache = this.editor.getContent();
-            (_a = Object(_TinyMCE__WEBPACK_IMPORTED_MODULE_1__["getTinymce"])()) === null || _a === void 0 ? void 0 : _a.remove(this.editor);
-        }
-    },
-    activated: function () {
-        if (!this.inlineEditor && this.initialized) {
-            initialise(this)();
-        }
-    },
-    render: function (h) {
-        return this.inlineEditor ? renderInline(h, this.elementId, this.$props.tagName) : renderIframe(h, this.elementId);
-    }
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/components/EditorPropTypes.js":
-/*!********************************************************************************************!*\
-  !*** ./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/components/EditorPropTypes.js ***!
-  \********************************************************************************************/
-/*! exports provided: editorProps */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editorProps", function() { return editorProps; });
-/**
- * Copyright (c) 2018-present, Ephox, Inc.
- *
- * This source code is licensed under the Apache 2 license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-var editorProps = {
-    apiKey: String,
-    cloudChannel: String,
-    id: String,
-    init: Object,
-    initialValue: String,
-    inline: Boolean,
-    modelEvents: [String, Array],
-    plugins: [String, Array],
-    tagName: String,
-    toolbar: [String, Array],
-    value: String,
-    disabled: Boolean,
-    tinymceScriptSrc: String,
-    outputFormat: {
-        type: String,
-        validator: function (prop) { return prop === 'html' || prop === 'text'; }
-    },
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/index.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/index.js ***!
-  \***********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Editor */ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/components/Editor.js");
-/**
- * Copyright (c) 2018-present, Ephox, Inc.
- *
- * This source code is licensed under the Apache 2 license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-/* harmony default export */ __webpack_exports__["default"] = (_components_Editor__WEBPACK_IMPORTED_MODULE_0__["Editor"]);
-
-
-/***/ }),
-
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -2771,10 +2342,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _tinymce_tinymce_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tinymce/tinymce-vue */ "./node_modules/@tinymce/tinymce-vue/lib/es2015/main/ts/index.js");
-/* harmony import */ var _vanbanden_list_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./vanbanden/list.vue */ "./resources/js/components/includes/contents/vanbanden/list.vue");
-/* harmony import */ var _vanbanden_add_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./vanbanden/add.vue */ "./resources/js/components/includes/contents/vanbanden/add.vue");
-/* harmony import */ var _vanbanden_search_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./vanbanden/search.vue */ "./resources/js/components/includes/contents/vanbanden/search.vue");
+/* harmony import */ var _vanbanden_list_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./vanbanden/list.vue */ "./resources/js/components/includes/contents/vanbanden/list.vue");
+/* harmony import */ var _vanbanden_add_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./vanbanden/add.vue */ "./resources/js/components/includes/contents/vanbanden/add.vue");
+/* harmony import */ var _vanbanden_search_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./vanbanden/search.vue */ "./resources/js/components/includes/contents/vanbanden/search.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2987,7 +2557,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-
 
 
 
@@ -3216,10 +2785,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   components: {
-    editor: _tinymce_tinymce_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    listcomponent: _vanbanden_list_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    searchComponent: _vanbanden_search_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    addComponent: _vanbanden_add_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    listcomponent: _vanbanden_list_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    searchComponent: _vanbanden_search_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    addComponent: _vanbanden_add_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 
@@ -4326,27 +3894,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// import editor from '@tinymce/tinymce-vue';
 
 
 
@@ -4372,20 +3919,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       e_listDonViEd: '',
       // Dữ liệu xem văn bản
       v_id: '',
-      v_id_nguon_di: '',
+      v_ten_nguon: '',
       v_so: '',
       v_ngay: '',
-      v_id_loai: '',
+      v_ten_loai: '',
       v_trich_yeu: '',
       v_noi_dung: '',
       v_do_mat: '',
-      v_id_lanh_dao: '',
-      v_don_vi_nhan: [],
-      v_don_vi_nhan_ed: [],
+      v_cap_bac_ld: '',
+      v_ho_ten_ld: '',
+      v_don_vi_nhan: '',
       v_can_bo_tham_muu: '',
+      v_file: '',
+      v_duoi_file: '',
       v_luu_tru: '',
       v_ghi_chu: '',
-      v_listDonViEd: '',
+      v_nguoi_nhap: '',
       // Bắt lỗi
       error: ''
     };
@@ -4437,23 +3986,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.e_file = '';
       }
     },
-    // Luu van ban den vao co so du lieu
+    // Luu van ban di vao co so du lieu
     edit: function edit() {
       var _this = this;
 
-      // console.log(this.e_id);
+      // Xử lý đơn vị nhận
+      var don_vi_nhan_arr = this.e_listDonViEd.map(function (e) {
+        return e.ky_hieu;
+      });
+      var don_vi_nhan = don_vi_nhan_arr.join(', '); // end
+
       var data = new FormData();
-      data.append('id_nguon_den', this.e_id_nguon_den);
+      data.append('id_nguon_di', this.e_id_nguon_di);
       data.append('so', this.e_so);
       data.append('ngay', this.e_ngay);
       data.append('id_loai', this.e_id_loai);
       data.append('trich_yeu', this.e_trich_yeu);
+      data.append('noi_dung', this.e_noi_dung);
       data.append('do_mat', this.e_do_mat);
-      data.append('nguoi_ky', this.e_nguoi_ky);
+      data.append('id_lanh_dao', this.e_id_lanh_dao);
+      data.append('don_vi_nhan', don_vi_nhan);
       data.append('file', this.e_file);
-      data.append('phe_duyet', this.e_phe_duyet);
-      data.append('id_user_xu_ly', this.e_id_user_xu_ly);
-      data.append('han_xu_ly', this.e_han_xu_ly);
+      data.append('can_bo_tham_muu', this.e_can_bo_tham_muu);
+      data.append('luu_tru', this.e_luu_tru);
       data.append('ghi_chu', this.e_ghi_chu);
       axios.post('/px03/public/updatevanbandi/' + this.e_id, data).then( /*#__PURE__*/function () {
         var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(response) {
@@ -4463,7 +4018,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 case 0:
                   alert('Update thành công !');
                   _context.next = 3;
-                  return _this.$store.dispatch('acSearch', {
+                  return _this.$store.dispatch('acSearchDi', {
                     data: _this.dataRequestSearchDi,
                     page: _this.page
                   });
@@ -4506,7 +4061,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (data.data[0].trich_yeu) this.e_trich_yeu = data.data[0].trich_yeu;
       if (data.data[0].noi_dung) this.e_noi_dung = data.data[0].noi_dung;
       if (data.data[0].do_mat) this.e_do_mat = data.data[0].do_mat;
-      if (data.data[0].id_lanh_dao) this.e_id_lanh_dao = data.data[0].id_lanh_dao;
+      if (data.data[0].id_lanh_dao) this.e_id_lanh_dao = data.data[0].id_lanh_dao; // Xử lý đơn vị nhận
 
       if (data.data[0].don_vi_nhan) {
         var don_vi_nhan = data.data[0].don_vi_nhan.replace(/, /g, ',').split(',');
@@ -4531,57 +4086,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.v_ngay = data.data[0].ngay;
       this.v_ten_loai = data.data[0].ten_loai;
       this.v_trich_yeu = data.data[0].trich_yeu;
+      this.v_noi_dung = data.data[0].noi_dung;
       this.v_do_mat = data.data[0].do_mat;
       this.v_file = data.data[0].file;
       this.v_duoi_file = data.data[0].duoi_file;
-      this.v_nguoi_ky = data.data[0].nguoi_ky;
-      this.v_phe_duyet = data.data[0].phe_duyet;
-      this.v_user_xu_ly = data.data[0].fullname;
-      this.v_han_xu_ly = data.data[0].han_xu_ly;
+      this.v_cap_bac_ld = data.data[0].cap_bac;
+      this.v_ho_ten_ld = data.data[0].ho_ten;
+      this.v_don_vi_nhan = data.data[0].don_vi_nhan;
+      this.v_can_bo_tham_muu = data.data[0].can_bo_tham_muu;
+      this.v_luu_tru = data.data[0].luu_tru;
       this.v_ghi_chu = data.data[0].ghi_chu;
       this.v_nguoi_nhap = data.data[0].nguoi_nhap;
-      this.v_luu_tru = data.data[0].luu_tru;
-      this.v_trang_thai = data.data[0].trang_thai;
-    },
-    trang_thai_color: function trang_thai_color(value) {
-      switch (value) {
-        case 'Chưa xử lý':
-          return "text-warning";
-          break;
-
-        case 'Đang xử lý':
-          return "text-info";
-          break;
-
-        case 'Hoàn thành':
-          return "text-success";
-          break;
-
-        case 'Thất bại':
-          return "text-danger";
-          break;
-
-        case 'Quá hạn':
-          return "text-danger";
-          break;
-
-        default:
-          break;
-      }
-    },
-    xuLyTrangThai: function xuLyTrangThai(trangthai, hanxuly) {
-      var d = new Date();
-      var today = new Date(d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()); // today = today.getTime(); -> hàm này để chuyển ngày sang miniseconds
-
-      if (hanxuly != undefined) {
-        var date = new Date(hanxuly);
-
-        if (['Chưa xử lý', 'Đang xử lý'].includes(trangthai) == true && today > date) {
-          return "Quá hạn";
-        }
-      }
-
-      return trangthai;
     },
     setPage: function setPage(page) {
       this.page = page;
@@ -4602,12 +4117,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       var listChon = this.listDonVi.filter(function (list) {
-        return _this2.don_vi_nhan.includes(list.id);
+        return _this2.e_don_vi_nhan.includes(list.id);
       });
       var listConLai = this.listDonVi.filter(function (list) {
-        return _this2.don_vi_nhan.includes(list.id) == false;
+        return _this2.e_don_vi_nhan.includes(list.id) == false;
       });
-      this.listDonViEd = this.listDonViEd.concat(listChon);
+
+      if (this.e_listDonViEd != []) {
+        this.e_listDonViEd = this.e_listDonViEd.concat(listChon);
+      } else {
+        this.e_listDonViEd = listChon;
+      }
+
       this.$store.dispatch('acChangeListDonVi', {
         'data': listConLai
       });
@@ -4626,10 +4147,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }
 
                 _context2.next = 3;
-                return _this3.listDonVi.concat(_this3.listDonViEd);
+                return _this3.listDonVi.concat(_this3.e_listDonViEd);
 
               case 3:
-                _this3.listDonViEd = _context2.sent;
+                _this3.e_listDonViEd = _context2.sent;
 
               case 4:
                 _context2.next = 6;
@@ -4649,28 +4170,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this4 = this;
 
       // xử lý các đơn vị chưa được chọn
-      var listChon = this.listDonViEd.filter(function (list) {
-        return _this4.don_vi_nhan_ed.includes(list.id);
+      var listChon = this.e_listDonViEd.filter(function (list) {
+        return _this4.e_don_vi_nhan_ed.includes(list.id);
       });
       var listConLai = this.listDonVi.concat(listChon);
       this.$store.dispatch('acChangeListDonVi', {
         'data': listConLai
       }); // xử lý các đơn vị được chọn
 
-      this.listDonViEd = this.listDonViEd.filter(function (list) {
-        return _this4.don_vi_nhan_ed.includes(list.id) == false;
+      this.e_listDonViEd = this.e_listDonViEd.filter(function (list) {
+        return _this4.e_don_vi_nhan_ed.includes(list.id) == false;
       });
     },
     removeListAllDV: function removeListAllDV() {
-      var listConLai = this.listDonVi.concat(this.listDonViEd);
+      var listConLai = this.listDonVi.concat(this.e_listDonViEd);
       this.$store.dispatch('acChangeListDonVi', {
         'data': listConLai
       });
-      this.listDonViEd = [];
+      this.e_listDonViEd = [];
     }
   },
   components: {
-    // editor, 
     listcomponent: _vanbandi_list_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     searchComponent: _vanbandi_search_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     addComponent: _vanbandi_add_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
@@ -4803,24 +4323,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// import Editor from '@tinymce/tinymce-vue'
+// import tiptap editor
+// end tiptap
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4863,7 +4367,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     listDonVi: function listDonVi() {
       return this.$store.state.listDonVi;
-    }
+    } // computed for quill
+
   },
   methods: {
     showAdd: function showAdd() {
@@ -5086,8 +4591,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.error = '';
     }
   },
-  components: {// 'editor': Editor
-  }
+  components: {}
 });
 
 /***/ }),
@@ -5229,21 +4733,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this.$store.dispatch('acListLanhDao');
 
               case 9:
-                if (!(_this.$store.state.listDonVi == '')) {
-                  _context.next = 12;
-                  break;
-                }
-
-                _context.next = 12;
+                _context.next = 11;
                 return _this.$store.dispatch('acListDonVi');
 
-              case 12:
-                _context.next = 14;
+              case 11:
+                _context.next = 13;
                 return axios.get('/px03/public/editvanbandi/' + id).then(function (response) {
                   _this.$emit('dataById', response);
                 });
 
-              case 14:
+              case 13:
               case "end":
                 return _context.stop();
             }
@@ -5251,7 +4750,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    viewVanBanDenById: function viewVanBanDenById(id) {
+    viewVanBanDiById: function viewVanBanDiById(id) {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
@@ -5260,7 +4759,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios.get('/px03/public/viewvanbanden/' + id).then(function (response) {
+                return axios.get('/px03/public/viewvanbandi/' + id).then(function (response) {
                   _this2.$emit('viewDataById', response);
                 });
 
@@ -5276,14 +4775,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this3 = this;
 
       if (confirm('ban muon xoa that a ?') == true) {
-        axios.get("/px03/public/deletevanbanden/".concat(id)).then( /*#__PURE__*/function () {
+        axios.get("/px03/public/deletevanbandi/".concat(id)).then( /*#__PURE__*/function () {
           var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(reponse) {
             return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
               while (1) {
                 switch (_context3.prev = _context3.next) {
                   case 0:
                     _context3.next = 2;
-                    return _this3.$store.dispatch('acSearch', {
+                    return _this3.$store.dispatch('acSearchDi', {
                       data: _this3.dataRequestSearch,
                       page: _this3.page
                     });
@@ -47174,6 +46673,270 @@ var render = function() {
             )
           ]
         )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "content__modal-edit" }, [
+        _c(
+          "div",
+          {
+            staticClass: "modal fade bd-example-modal-lg",
+            attrs: {
+              id: "xemvanbandi",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "exampleModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "modal-dialog modal-lg",
+                attrs: { role: "document" }
+              },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "form-row details" }, [
+                      _c("div", { staticClass: "col-md-3 mb-3" }, [
+                        _c("label", [_vm._v("Cơ quan ban hành")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-primary" }, [
+                          _vm._v(_vm._s(_vm.v_ten_nguon))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-3 mb-3" }, [
+                        _c("label", [_vm._v("Số văn bản")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-primary" }, [
+                          _vm._v(_vm._s(_vm.v_so))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-3 mb-3" }, [
+                        _c("label", [_vm._v("Ngày văn bản")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-primary" }, [
+                          _vm._v(_vm._s(_vm.v_ngay))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-3 mb-3" }, [
+                        _c("label", [_vm._v("Loại văn bản")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-primary" }, [
+                          _vm._v(_vm._s(_vm.v_ten_loai))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-12 mb-3" }, [
+                        _c("label", [_vm._v("Trích yếu")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-primary" }, [
+                          _vm._v(_vm._s(_vm.v_trich_yeu))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-12 mb-3" }, [
+                        _c("label", [_vm._v("Nội dung")]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "text-primary",
+                            staticStyle: { "max-height": "300px" }
+                          },
+                          [_vm._v(_vm._s(_vm.v_noi_dung))]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-3 mb-3" }, [
+                        _c("label", [_vm._v("Độ mật")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-primary" }, [
+                          _vm._v(" " + _vm._s(_vm.getNameDoMat(_vm.v_do_mat)))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-3 mb-3" }, [
+                        _c("label", [_vm._v("Người ký")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-primary" }, [
+                          _vm._v(
+                            _vm._s(_vm.v_cap_bac_ld) +
+                              " " +
+                              _vm._s(_vm.v_ho_ten_ld)
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6 mb-3" }, [
+                        _c("label", [_vm._v("File đính kèm")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-primary" }, [
+                          ["doc", "docx", "xls", "xlsx"].includes(
+                            _vm.v_duoi_file
+                          )
+                            ? _c("span", [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href:
+                                        "/px03/public/vanbandiupload/" +
+                                        _vm.v_file
+                                    }
+                                  },
+                                  [
+                                    _c("img", {
+                                      attrs: {
+                                        width: "25px",
+                                        src: "/px03/public/images/word-icon.png"
+                                      }
+                                    }),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(_vm.v_file) +
+                                        "\n                                            "
+                                    )
+                                  ]
+                                )
+                              ])
+                            : ["pdf"].includes(_vm.v_duoi_file)
+                            ? _c("span", [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href:
+                                        "/px03/public/vanbandiupload/" +
+                                        _vm.v_file
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(_vm.v_file) +
+                                        "\n                                                "
+                                    ),
+                                    _c("img", {
+                                      attrs: {
+                                        width: "25px",
+                                        src: "/px03/public/images/pdf-icon.png"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ])
+                            : ["jpg", "jpeg", "png"].includes(_vm.v_duoi_file)
+                            ? _c("span", [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href:
+                                        "/px03/public/vanbandiupload/" +
+                                        _vm.v_file
+                                    }
+                                  },
+                                  [
+                                    _c("img", {
+                                      attrs: {
+                                        width: "25px",
+                                        src: "/px03/public/images/img-icon.png"
+                                      }
+                                    }),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(_vm.v_file) +
+                                        "\n                                            "
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm.v_file == "" || _vm.v_file == null
+                            ? _c("span")
+                            : _c("span", [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href:
+                                        "/px03/public/vanbandiupload/" +
+                                        _vm.v_file
+                                    }
+                                  },
+                                  [
+                                    _c("img", {
+                                      attrs: {
+                                        width: "25px",
+                                        src:
+                                          "/px03/public/images/blank-file-icon.png"
+                                      }
+                                    }),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(_vm.v_file) +
+                                        "\n                                            "
+                                    )
+                                  ]
+                                )
+                              ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-12 mb-3" }, [
+                        _c("label", [_vm._v("Đơn vị nhận")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-primary" }, [
+                          _vm._v(_vm._s(_vm.v_don_vi_nhan))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4 mb-3" }, [
+                        _c("label", [_vm._v("Cán bộ tham mưu")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-primary" }, [
+                          _vm._v(_vm._s(_vm.v_can_bo_tham_muu))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8 mb-3" }, [
+                        _c("label", [_vm._v("Lưu trữ")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-primary" }, [
+                          _vm._v(_vm._s(_vm.v_luu_tru))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-12 mb-3" }, [
+                        _c("label", [_vm._v("Ghi chú")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-primary" }, [
+                          _vm._v(_vm._s(_vm.v_ghi_chu))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4 mb-3" }, [
+                        _c("label", [_vm._v("Người nhập")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-primary" }, [
+                          _vm._v(_vm._s(_vm.v_nguoi_nhap))
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(5)
+                ])
+              ]
+            )
+          ]
+        )
       ])
     ],
     1
@@ -47219,6 +46982,42 @@ var staticRenderFns = [
           _vm._v("Sửa Văn bản")
         ])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_c("i", { staticClass: "far fa-window-close" }), _vm._v(" Close")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Chi tiết Văn bản đi")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   },
   function() {
@@ -48009,7 +47808,7 @@ var render = function() {
                       ]),
                   _vm._v(" "),
                   _c("td", [
-                    _vm.ktquyen("vanbanden_xem")
+                    _vm.ktquyen("vanbandi_xem")
                       ? _c(
                           "a",
                           {
@@ -48021,7 +47820,7 @@ var render = function() {
                             },
                             on: {
                               click: function($event) {
-                                return _vm.viewVanBanDenById(list.id)
+                                return _vm.viewVanBanDiById(list.id)
                               }
                             }
                           },
@@ -48029,7 +47828,7 @@ var render = function() {
                         )
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.ktquyen("vanbanden_sua")
+                    _vm.ktquyen("vanbandi_sua")
                       ? _c(
                           "a",
                           {
@@ -48049,7 +47848,7 @@ var render = function() {
                         )
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.ktquyen("vanbanden_xoa")
+                    _vm.ktquyen("vanbandi_xoa")
                       ? _c(
                           "button",
                           {
@@ -67140,15 +66939,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************************!*\
   !*** ./resources/js/components/includes/contents/vanbandi.vue ***!
   \****************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _vanbandi_vue_vue_type_template_id_11019c2d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./vanbandi.vue?vue&type=template&id=11019c2d& */ "./resources/js/components/includes/contents/vanbandi.vue?vue&type=template&id=11019c2d&");
 /* harmony import */ var _vanbandi_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./vanbandi.vue?vue&type=script&lang=js& */ "./resources/js/components/includes/contents/vanbandi.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _vanbandi_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _vanbandi_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _vanbandi_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./vanbandi.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/includes/contents/vanbandi.vue?vue&type=style&index=0&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _vanbandi_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./vanbandi.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/includes/contents/vanbandi.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -67180,7 +66978,7 @@ component.options.__file = "resources/js/components/includes/contents/vanbandi.v
 /*!*****************************************************************************************!*\
   !*** ./resources/js/components/includes/contents/vanbandi.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

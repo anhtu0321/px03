@@ -42,23 +42,6 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label>Nội dung</label>
-                        <!-- <editor 
-                            v-model="noi_dung"
-                            api-key="qp0azz3bxgs5kvvmhnnh0fno0i1pmcnbfaty2wgefpgvmojc"
-                            :init="{
-                                height: 250,
-                                menubar: false,
-                                plugins: [
-                                'advlist autolink lists link image charmap print preview anchor',
-                                'searchreplace visualblocks code fullscreen',
-                                'insertdatetime media table paste code help wordcount'
-                                ],
-                                toolbar:
-                                'undo redo | formatselect | bold italic backcolor | \
-                                alignleft aligncenter alignright alignjustify | \
-                                bullist numlist outdent indent | removeformat | help'
-                            }">
-                        </editor> -->
                         
                     </div>
                     <div class="col-md-3 mb-3">
@@ -123,7 +106,10 @@
 </template>
 
 <script>
-// import Editor from '@tinymce/tinymce-vue'
+// import tiptap editor
+
+ 
+// end tiptap
 export default {
     data(){
         return{
@@ -149,6 +135,7 @@ export default {
             don_vi_nhan_ed:[],
             // bắt lỗi
             error:'',
+           
         }
     },
     computed:{
@@ -166,7 +153,9 @@ export default {
         },
         listDonVi(){
             return this.$store.state.listDonVi;
-        }
+        },
+        // computed for quill
+        
     },
     methods:{
         async showAdd(){ //ẩn hiện form thêm
@@ -269,11 +258,12 @@ export default {
         removeErr(){
             this.error ='';
         },
+        
     },
     components:{
-        // 'editor': Editor
+        
     }, 
-   
+    
 }
 </script>
 

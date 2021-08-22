@@ -13,7 +13,10 @@
     </div>
 </body>
 <script src="{{ asset('js/app.js') }}"></script>
-
+{{-- <script type="text/javascript" src="{{ asset('niceditor/nicEdit.js') }}"></script>
+<script type="text/javascript">
+	bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+</script> --}}
 </html>
 {{-- <a href="{{ route('logout') }}">Log out</a></br>
 <a href="{{ route('admin.home') }}">Trang quản trị</a> --}}

@@ -47,9 +47,9 @@
                     </td>
 
                     <td>
-                        <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#xemvanbandi" @click="viewVanBanDenById(list.id)" v-if="ktquyen('vanbanden_xem')"><i class="fas fa-binoculars"></i></a>
-                        <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#suavanbandi" @click="getVanBanDiById(list.id)" v-if="ktquyen('vanbanden_sua')"><i class="far fa-edit"></i></a>
-                        <button class="btn btn-warning btn-sm" @click="deleteData(list.id)" v-if="ktquyen('vanbanden_xoa')"><i class="far fa-trash-alt"></i></button>
+                        <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#xemvanbandi" @click="viewVanBanDiById(list.id)" v-if="ktquyen('vanbandi_xem')"><i class="fas fa-binoculars"></i></a>
+                        <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#suavanbandi" @click="getVanBanDiById(list.id)" v-if="ktquyen('vanbandi_sua')"><i class="far fa-edit"></i></a>
+                        <button class="btn btn-warning btn-sm" @click="deleteData(list.id)" v-if="ktquyen('vanbandi_xoa')"><i class="far fa-trash-alt"></i></button>
                     </td>
 
                 </tr>
@@ -88,14 +88,14 @@ export default {
             if(this.$store.getters.getListNguonDi == '') await this.$store.dispatch('acListNguonDi');
             if(this.$store.getters.getListLoai =='') await this.$store.dispatch('acListLoai');
             if(this.$store.state.listLanhDao=='') await this.$store.dispatch('acListLanhDao');
-            if(this.$store.state.listDonVi=='') await this.$store.dispatch('acListDonVi');
+            await this.$store.dispatch('acListDonVi');
             await axios.get('/px03/public/editvanbandi/'+id)
             .then(response=>{
                 this.$emit('dataById', response);
             })
         },
-        async viewVanBanDenById(id){
-            await axios.get('/px03/public/viewvanbanden/'+id)
+        async viewVanBanDiById(id){
+            await axios.get('/px03/public/viewvanbandi/'+id)
             .then(response=>{
                 this.$emit('viewDataById', response);
             })
@@ -103,9 +103,9 @@ export default {
        
         deleteData(id){
             if(confirm('ban muon xoa that a ?') == true){
-                axios.get(`/px03/public/deletevanbanden/${id}`)
+                axios.get(`/px03/public/deletevanbandi/${id}`)
                 .then(async reponse=>{
-                    await this.$store.dispatch('acSearch', {data:this.dataRequestSearch, page:this.page});
+                    await this.$store.dispatch('acSearchDi', {data:this.dataRequestSearch, page:this.page});
                 })
             }
         },
