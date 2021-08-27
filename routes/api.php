@@ -19,9 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/listNguonDen','NguonDenController@index');
-//Lấy thông tin Loại Văn bản
+//Lấy thông tin Loại Văn bản, nguon di, lanh dao, don vi
 Route::get('/listLoai','LoaiVanBanController@listLoai');
 Route::get('/listNguonDi','NguonDiController@index');
-Route::get('/listLanhDao','LanhDaoController@index');
+Route::get('/listLanhDao','LanhDaoController@listLanhDao');
 Route::get('/listDonViNoPaginate','DonViController@listNoPaginate');
+
+// Lấy thông tin thống kê cho trang chủ
+Route::get('/thongke','ThongKe@index');
 

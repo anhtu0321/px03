@@ -42,7 +42,7 @@
 								</select>
 							</div>
 							<div class="form-group col-md-12 text-right">
-								<button type="submit" class="btn btn-success btn-sm" v-if="ktquyen('lanhdao_sua')">Sửa loại văn bản</button>
+								<button type="submit" class="btn btn-success btn-sm" v-if="ktquyen('lanhdao_sua')">Sửa Lãnh đạo</button>
 								<router-link to="/lanhdao" class="btn btn-warning btn-sm">Quay lại</router-link>
 							</div>
 						</form>

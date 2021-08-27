@@ -131,12 +131,13 @@ class VanBanDenController extends Controller
     }
 
     public function search(Request $request){
+        $date = date("Y-m-d");
         $vanbanden = DB::table('van_ban_den')
         ->leftjoin('nguon_den','van_ban_den.id_nguon_den', '=', 'nguon_den.id')
         ->leftjoin('loai_van_ban','van_ban_den.id_loai', '=', 'loai_van_ban.id')
         ->select('van_ban_den.id','van_ban_den.so','van_ban_den.ngay','van_ban_den.trich_yeu','van_ban_den.do_mat','van_ban_den.ghi_chu','van_ban_den.han_xu_ly','van_ban_den.trang_thai','van_ban_den.file','van_ban_den.duoi_file', 'nguon_den.ten_nguon', 'loai_van_ban.ten_loai')
         ->where('van_ban_den.trich_yeu','LIKE', '%'.$request->trich_yeu.'%')
-        ->where(function($query) use ($request){
+        ->where(function($query) use ($request, $date){
             if(($request->date_begin != '') and ($request->date_end != '')){
                 $query->whereBetween('van_ban_den.ngay',[$request->date_begin, $request->date_end]);
             }
@@ -155,6 +156,25 @@ class VanBanDenController extends Controller
             }
             if(($request->do_mat != '-1') and ($request->do_mat != '')){
                 $query->where('van_ban_den.do_mat','=', $request->do_mat);
+            }
+            // if Thêm thông số để tìm kiếm theo trạng thái
+            if($request->trang_thai == 'Đang xử lý' || $request->trang_thai == 'Chưa xử lý'){
+                $query->where('van_ban_den.trang_thai','=',$request->trang_thai)
+                      ->where(function($query) use ($date){
+                            $query->where('van_ban_den.han_xu_ly','>=', $date)
+                                  ->orWhere('van_ban_den.han_xu_ly','=', null);
+                      });
+            }
+            if($request->trang_thai == 'Hoàn thành' || $request->trang_thai == 'Thất bại'){
+                $query->where('van_ban_den.trang_thai','=',$request->trang_thai);
+            }
+            if($request->trang_thai == 'Quá hạn'){
+                $query->where('van_ban_den.han_xu_ly','<>', null)
+                      ->where('van_ban_den.han_xu_ly','<', $date)
+                      ->where(function($query){
+                        $query->where('van_ban_den.trang_thai','=','Chưa xử lý')
+                              ->orWhere('van_ban_den.trang_thai','=','Đang xử lý');
+                      });
             }
         })
         ->orderBy('van_ban_den.id','desc')

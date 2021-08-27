@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="content__list mb-3 mt-3">
+    <div class="content__list mb-3 mt-3 bg-light">
         <table class="table table-bordered table-sm">
             <thead class="thead-light">
                 <th>#</th>
@@ -21,7 +21,7 @@
                     <td>{{ list.ten_nguon }}</td>
                     <td>{{ list.ten_loai }}</td>
                     <td>{{ list.so }}</td>
-                    <td>{{ list.ngay }}</td>
+                    <td>{{ xulyNgayThang(list.ngay) }}</td>
                     <td>{{ list.trich_yeu }}</td>
                     <!-- <td>{{ getNameDoMat(list.do_mat) }}</td> -->
                     
@@ -87,9 +87,9 @@ export default {
     },
     methods: {
         async getVanBanDenById(id){
-            await this.$store.dispatch('acListUser');
-            await this.$store.dispatch('acListNguonDen');
-            await this.$store.dispatch('acListLoai');
+            if(this.$store.getters.getListUser == '') await this.$store.dispatch('acListUser');
+            if(this.$store.getters.getListNguonDen == '') await this.$store.dispatch('acListNguonDen');
+            if(this.$store.getters.getListLoai == '') await this.$store.dispatch('acListLoai');
             await axios.get('/px03/public/editvanbanden/'+id)
             .then(response=>{
                 this.$emit('dataById', response);
@@ -154,22 +154,10 @@ export default {
 			}
 			return false;
         },
-        // getNameDoMat(domat){
-        //     switch (domat) {
-        //         case 1:
-        //             return "Mật";
-        //             break;
-        //         case 2:
-        //             return "Tối mật";
-        //             break;
-        //         case 3:
-        //             return "Tuyệt mật";
-        //             break;
-        //         default:
-        //             return "Không mật";
-        //             break;
-        //     }
-        // },
+        xulyNgayThang(date){
+            var d = new Date(date);
+            return d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
+        }
     },
     components:{
         page,

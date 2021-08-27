@@ -1,5 +1,6 @@
 <template>
     <div class="content__sub mt-3">
+        <div class="bg-info text-light col-md-12 mb-3 content__header">QUẢN LÝ VĂN BẢN ĐI</div>
         <search-component v-if="ktquyen('vanbandi_xem')"></search-component>
         <add-component v-if="ktquyen('vanbandi_them')"></add-component>
         <listcomponent @dataById="loadDataById" @viewDataById="loadViewDataById" :id="e_id" @getPage="setPage" v-if="ktquyen('vanbandi_xem')"></listcomponent>
@@ -46,8 +47,7 @@
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label>Nội dung</label>
-                                       
-                                        
+                                        <froala :tag="'textarea'" :config="config" v-model="e_noi_dung"></froala>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Độ mật</label>
@@ -73,7 +73,7 @@
                                         <label>Đơn vị nhận</label>
                                         <div class="form-row">
                                             <select class="form-control form-control-sm col-md-5" v-model="e_don_vi_nhan" multiple>
-                                                <option v-for="donvi in listDonVi" :key="donvi.id" :value="donvi.id">{{ donvi.ten_phong }}</option>
+                                                <option v-for="donvi in e_listDonVi" :key="donvi.id" :value="donvi.id">{{ donvi.ky_hieu }}</option>
                                             </select>
                                             <div class="col-md-2 d-flex flex-column justify-content-center align-items-center">
                                                 <button class="btn mb-3 btn-info" style="width:50px" @click.prevent="addListOneDV">></button>
@@ -82,7 +82,7 @@
                                                 <button class="btn mb-3 btn-warning" style="width:50px" @click.prevent="removeListAllDV"><<</button>
                                             </div>
                                             <select class="form-control form-control-sm col-md-5" v-model="e_don_vi_nhan_ed" multiple>
-                                                <option v-for="donvi in e_listDonViEd" :key="donvi.id" :value="donvi.id">{{ donvi.ten_phong }}</option>
+                                                <option v-for="donvi in e_listDonViEd" :key="donvi.id" :value="donvi.id">{{ donvi.ky_hieu }}</option>
                                             </select>
                                         </div>
                                         
@@ -138,7 +138,7 @@
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Ngày văn bản</label>
-                                        <div class="text-primary" >{{v_ngay}}</div>
+                                        <div class="text-primary" >{{xulyNgayThang(v_ngay)}}</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Loại văn bản</label>
@@ -150,7 +150,7 @@
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label>Nội dung</label>
-                                        <div class="text-primary" style="max-height:300px;">{{v_noi_dung}}</div>
+                                        <div class="text-primary noidung" style="max-height:300px;" v-html="v_noi_dung"></div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Độ mật</label>
@@ -239,9 +239,11 @@ export default {
             e_id_lanh_dao:'',
             e_don_vi_nhan:[],
             e_don_vi_nhan_ed:[],
+            e_file:'',
             e_can_bo_tham_muu:'',
             e_luu_tru:'',
             e_ghi_chu:'',
+            e_listDonVi:'',
             e_listDonViEd:'',
              // Dữ liệu xem văn bản
             v_id:'',
@@ -263,6 +265,14 @@ export default {
             v_nguoi_nhap:'',
             // Bắt lỗi
             error:'',
+            // trình soạn thảo
+            config: {
+                events: {
+                    'froalaEditor.initialized': function () {
+                    console.log('initialized')
+                    }
+                }
+            },
         }
     },
     computed:{
@@ -339,46 +349,58 @@ export default {
             })
         },
         // Load dữ liệu sau khi ấn sửa
-        loadDataById(data){     
-            this.e_id='';
-            this.e_id_nguon_di='';
-            this.e_so='';
-            this.e_ngay='';
-            this.e_id_loai='';
-            this.e_trich_yeu='';
-            this.e_noi_dung='';
-            this.e_do_mat='';
-            this.e_id_lanh_dao='';
-            this.e_don_vi_nhan=[];
-            this.e_don_vi_nhan_ed=[];
-            this.e_can_bo_tham_muu='';
-            this.e_luu_tru='';
-            this.e_ghi_chu='';
-            this.e_listDonViEd='';
-            if(data.data[0].id) this.e_id = data.data[0].id;
-            if(data.data[0].id_nguon_di) this.e_id_nguon_di = data.data[0].id_nguon_di;
-            if(data.data[0].so) this.e_so = data.data[0].so;
-            if(data.data[0].ngay) this.e_ngay = data.data[0].ngay;
-            if(data.data[0].id_loai) this.e_id_loai = data.data[0].id_loai;
-            if(data.data[0].trich_yeu) this.e_trich_yeu = data.data[0].trich_yeu;
-            if(data.data[0].noi_dung) this.e_noi_dung = data.data[0].noi_dung;
-            if(data.data[0].do_mat) this.e_do_mat = data.data[0].do_mat;
-            if(data.data[0].id_lanh_dao) this.e_id_lanh_dao = data.data[0].id_lanh_dao;
-            // Xử lý đơn vị nhận
-            if(data.data[0].don_vi_nhan) {
-                var don_vi_nhan = data.data[0].don_vi_nhan.replace(/, /g, ',').split(',');
-                this.e_listDonViEd = this.listDonVi.filter( e=>{
-                    return don_vi_nhan.includes(e.ky_hieu);
-                });
-                var listConLai = this.listDonVi.filter( e=>{
-                    return don_vi_nhan.includes(e.ky_hieu) == false;
-                });
-                this.$store.dispatch('acChangeListDonVi', {'data':listConLai});
-            }
-
-            if(data.data[0].can_bo_tham_muu)this.e_can_bo_tham_muu = data.data[0].can_bo_tham_muu;
-            if(data.data[0].luu_tru) this.e_luu_tru = data.data[0].luu_tru;
-            if(data.data[0].ghi_chu) this.e_ghi_chu = data.data[0].ghi_chu;
+        async loadDataById(id){   
+            if(this.$store.state.listDonVi =='') await this.$store.dispatch('acListDonVi');  
+            if(this.$store.getters.getListNguonDi == '') await this.$store.dispatch('acListNguonDi');
+            if(this.$store.getters.getListLoai =='') await this.$store.dispatch('acListLoai');
+            if(this.$store.state.listLanhDao =='') await this.$store.dispatch('acListLanhDao');
+            await Promise.all([
+                this.e_id='',
+                this.e_id_nguon_di='',
+                this.e_so='',
+                this.e_ngay='',
+                this.e_id_loai='',
+                this.e_trich_yeu='',
+                this.e_noi_dung='',
+                this.e_do_mat='',
+                this.e_id_lanh_dao='',
+                this.e_don_vi_nhan=[],
+                this.e_don_vi_nhan_ed=[],
+                this.e_can_bo_tham_muu='',
+                this.e_luu_tru='',
+                this.e_ghi_chu='',
+                this.e_listDonViEd='',
+                this.e_listDonVi=this.listDonVi,
+            ]);
+            await axios.get('/px03/public/editvanbandi/'+id)
+            .then(async data=>{
+                // Xử lý đơn vị nhận
+                if(data.data[0].don_vi_nhan) {
+                    var don_vi_nhan = await data.data[0].don_vi_nhan.replace(/, /g, ',').split(',');
+                    this.e_listDonViEd = await this.e_listDonVi.filter( e=>{
+                        return don_vi_nhan.includes(e.ky_hieu);
+                    });
+                    var listConLai = await this.e_listDonVi.filter( e=>{
+                        return don_vi_nhan.includes(e.ky_hieu) == false;
+                    });
+                    this.e_listDonVi = listConLai;
+                    // setTimeout(() => this.$store.dispatch('acChangeListDonVi', {'data':listConLai}),500);
+                }
+                // end
+                if(data.data[0].id) this.e_id = data.data[0].id;
+                if(data.data[0].id_nguon_di) this.e_id_nguon_di = data.data[0].id_nguon_di;
+                if(data.data[0].so) this.e_so = data.data[0].so;
+                if(data.data[0].ngay) this.e_ngay = data.data[0].ngay;
+                if(data.data[0].id_loai) this.e_id_loai = data.data[0].id_loai;
+                if(data.data[0].trich_yeu) this.e_trich_yeu = data.data[0].trich_yeu;
+                if(data.data[0].noi_dung) this.e_noi_dung = data.data[0].noi_dung;
+                if(data.data[0].do_mat) this.e_do_mat = data.data[0].do_mat;
+                if(data.data[0].id_lanh_dao) this.e_id_lanh_dao = data.data[0].id_lanh_dao;
+                if(data.data[0].can_bo_tham_muu)this.e_can_bo_tham_muu = data.data[0].can_bo_tham_muu;
+                if(data.data[0].luu_tru) this.e_luu_tru = data.data[0].luu_tru;
+                if(data.data[0].ghi_chu) this.e_ghi_chu = data.data[0].ghi_chu;
+            })
+            
         },
         loadViewDataById(data){
             this.v_ten_nguon = data.data[0].ten_nguon;
@@ -414,39 +436,38 @@ export default {
             this.error ='';
         },
         addListOneDV(){
-            var listChon = this.listDonVi.filter(list=>{
+            var listChon = this.e_listDonVi.filter(list=>{
                 return this.e_don_vi_nhan.includes(list.id);
-            });
-            var listConLai = this.listDonVi.filter(list =>{
-                return this.e_don_vi_nhan.includes(list.id) == false;
             });
             if(this.e_listDonViEd != []) {this.e_listDonViEd = this.e_listDonViEd.concat(listChon);}
             else{this.e_listDonViEd = listChon;}
-            this.$store.dispatch('acChangeListDonVi', {'data':listConLai});
+            this.e_listDonVi = this.e_listDonVi.filter(list =>{
+                return this.e_don_vi_nhan.includes(list.id) == false;
+            });
         },
-        async addListAllDV(){
-            if(this.listDonVi.length != 0){
-                this.e_listDonViEd = await this.listDonVi.concat(this.e_listDonViEd);
-            }
-            await this.$store.dispatch('acChangeListDonVi', {'data':[]});
+        addListAllDV(){
+            this.e_listDonVi = []
+            this.e_listDonViEd = this.listDonVi;
         },
         removeListOneDV(){
             // xử lý các đơn vị chưa được chọn
             var listChon = this.e_listDonViEd.filter(list=>{
                 return this.e_don_vi_nhan_ed.includes(list.id);
             });
-            var listConLai = this.listDonVi.concat(listChon);
-            this.$store.dispatch('acChangeListDonVi', {'data':listConLai});
+            this.e_listDonVi = this.e_listDonVi.concat(listChon);
             // xử lý các đơn vị được chọn
             this.e_listDonViEd = this.e_listDonViEd.filter(list=>{
                 return this.e_don_vi_nhan_ed.includes(list.id) == false;
             });
         },
         removeListAllDV(){
-            var listConLai = this.listDonVi.concat(this.e_listDonViEd);
-            this.$store.dispatch('acChangeListDonVi', {'data':listConLai});
+            this.e_listDonVi = this.listDonVi;
             this.e_listDonViEd = [];
         },
+        xulyNgayThang(date){
+            var d = new Date(date);
+            return d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
+        }
     },
     components:{
 
@@ -454,23 +475,71 @@ export default {
         searchComponent,
         addComponent,
     },
+    created(){
+        this.$store.dispatch('acListDonVi');
+    }
     
 }
 </script>
 
-<style>
+<style scoped>
 .form-row.details>div{
     border-top:1px dashed rgb(219, 222, 248);
     border-radius:3px;
     padding:5px;
 }
-.active{
-    opacity:1;
-    margin-top:0;
+.content__header{
+    padding: 10px;
+    font-weight: bold;
+    border-radius:3px;
 }
 .tieude{
     font-size: 1.2rem;
     color: #ffffff;
     font-weight: bold;
 }
+.noidung{
+    overflow-y: scroll;
+}
+.noidung::-webkit-scrollbar {
+    width: 10px;
+}
+
+.noidung::-webkit-scrollbar-thumb {
+    background-color: rgb(196, 191, 191);
+    -webkit-box-shadow: inset 0 0 6px rgba(112, 107, 107, 0.3);
+}
+
+.noidung::-webkit-scrollbar-track {
+    background-color: rgb(255, 253, 253);
+    -webkit-box-shadow: inset 0 0 6px rgba(75, 72, 72, 0.3);
+}
+
+/* Buttons */
+/* .noidung::-webkit-scrollbar-button:single-button {
+  background-color: #bbbbbb;
+  display: block;
+  border-style: solid;
+  height: 13px;
+  width: 16px;
+} */
+/* Up */
+/* .noidung::-webkit-scrollbar-button:single-button:vertical:decrement {
+  border-width: 0 8px 8px 8px;
+  border-color: transparent transparent #555555 transparent;
+} */
+
+/* .noidung::-webkit-scrollbar-button:single-button:vertical:decrement:hover {
+  border-color: transparent transparent #777777 transparent;
+} */
+/* Down */
+/* .noidung::-webkit-scrollbar-button:single-button:vertical:increment {
+  border-width: 8px 8px 0 8px;
+  border-color: #555555 transparent transparent transparent;
+} */
+
+/* .noidung::-webkit-scrollbar-button:vertical:single-button:increment:hover {
+  border-color: #777777 transparent transparent transparent;
+} */
+
 </style>

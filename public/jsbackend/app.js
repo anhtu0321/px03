@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 15);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2327,7 +2327,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this3 = this;
 
     // this.list();
-    axios.get("/px03/public/api/editChucNang/".concat(this.$route.params.id)).then(function (response) {
+    axios.get("/px03/public/editChucNang/".concat(this.$route.params.id)).then(function (response) {
       _this3.name = response.data[0].name;
       _this3.display_name = response.data[0].display_name;
       _this3.key_code = response.data[0].key_code;
@@ -3518,8 +3518,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.list();
       })["catch"](function (error) {
-        _this.error = error.response.data.errors;
-        console.log(error.response.data.message);
+        _this.error = error.response.data.errors; // console.log(error.response.data.message);
       });
     },
     list: function list() {
@@ -3547,7 +3546,7 @@ __webpack_require__.r(__webpack_exports__);
     list: _list_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     paginate: _page_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  mounted: function mounted() {
+  created: function created() {
     this.list();
   }
 });
@@ -43685,7 +43684,7 @@ var render = function() {
                                   staticClass: "btn btn-success btn-sm",
                                   attrs: { type: "submit" }
                                 },
-                                [_vm._v("Sửa loại văn bản")]
+                                [_vm._v("Sửa Chức năng")]
                               )
                             : _vm._e(),
                           _vm._v(" "),
@@ -44651,7 +44650,7 @@ var render = function() {
                                   staticClass: "btn btn-success btn-sm",
                                   attrs: { type: "submit" }
                                 },
-                                [_vm._v("Sửa loại văn bản")]
+                                [_vm._v("Sửa Đơn vị")]
                               )
                             : _vm._e(),
                           _vm._v(" "),
@@ -45424,7 +45423,7 @@ var render = function() {
                                   staticClass: "btn btn-success btn-sm",
                                   attrs: { type: "submit" }
                                 },
-                                [_vm._v("Sửa loại văn bản")]
+                                [_vm._v("Sửa Lãnh đạo")]
                               )
                             : _vm._e(),
                           _vm._v(" "),
@@ -68227,7 +68226,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store(storeInfo);
 
 /***/ }),
 
-/***/ 1:
+/***/ 15:
 /*!******************************************!*\
   !*** multi ./resources/jsbackend/app.js ***!
   \******************************************/

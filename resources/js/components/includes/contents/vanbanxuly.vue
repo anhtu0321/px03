@@ -150,8 +150,8 @@ export default {
         getVanBanDenById(id){
             axios.get('/px03/public/editvanbanden/'+id)
             .then(response=>{
-                this.trang_thai = response.data[0].trang_thai;
-                this.luu_tru = response.data[0].luu_tru;
+                if(response.data[0].trang_thai) this.trang_thai = response.data[0].trang_thai;
+                if(response.data[0].luu_tru) this.luu_tru = response.data[0].luu_tru;
                 this.id = response.data[0].id;
             })
         },

@@ -10,7 +10,7 @@ import vanbanxuly from './components/includes/contents/vanbanxuly.vue'
 import chuaxuly from './components/includes/contents/chuaxuly.vue'
 
 const routes = [
-    { path: '/home', component: home },
+    { path: '/', component: home },
     { path: '/vanbanden', component: vanbanden },
     { path: '/vanbandi', component: vanbandi },
     { path: '/vanbanxuly', component: vanbanxuly },

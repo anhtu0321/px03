@@ -13,7 +13,7 @@ class DonViController extends Controller
     }
     public function listNoPaginate()
     {
-        return DonVi::orderBy('khoi','asc')->orderBy('thu_tu','asc')->get();
+        return DonVi::orderBy('khoi','asc')->orderBy('thu_tu','asc')->where('trang_thai','=','1')->get();
     }
     public function store(Request $request)
     {

@@ -1,89 +1,91 @@
 <template>
-    <div class="content__add mt-3">
+    <div class="content__add mt-3 bg-light">
         <button class="btn btn-danger btn-sm mb-3" @click.prevent="showAdd" v-if="show">
             <i class="fas fa-times"></i> Đóng
         </button>
         <button class="btn btn-success btn-sm mb-3" @click.prevent="showAdd" v-else>
             <i class="fas fa-plus-square"></i> Thêm Văn bản đến
         </button>
-        <div class="content__form-add" :class="classadd" v-if="show">
-            <div class="bg-info d-flex justify-content-center align-items-center mb-3 p-2 tieude">
-                THÊM VĂN BẢN ĐẾN
+        <transition name='add'>
+            <div class="content__form-add" v-if="show">
+                <div class="bg-info d-flex justify-content-center align-items-center mb-3 p-2 tieude">
+                    THÊM VĂN BẢN ĐẾN
+                </div>
+                
+                <form style="position:relative" method="post" enctype="multipart/form-data" @submit.prevent="add">
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label>Cơ quan ban hành</label>
+                            <select v-model="id_nguon_den" class="form-control form-control-sm">
+                                <option value="">--- Chọn cơ quan, đơn vị ban hành ---</option>
+                                <option v-for="nguonden in listNguonDen.data" :key="nguonden.id" :value="nguonden.id">{{ nguonden.ten_nguon }}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label>Số văn bản</label>
+                            <input type="text" v-model="so" class="form-control form-control-sm">
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label>Ngày văn bản</label>
+                            <input type="date" v-model="ngay" class="form-control form-control-sm">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Loại văn bản</label>
+                            <select class="form-control form-control-sm" v-model="id_loai">
+                                <option value="">--- Chọn Loại văn bản ---</option>
+                                <option v-for="loai in listLoai" :key="loai.id" :value="loai.id">{{ loai.ten_loai }}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label>Trích yếu</label>
+                            <input type="text" class="form-control form-control-sm" v-model="trich_yeu" :class="{'is-invalid':(error && error.trich_yeu)}" @focus="removeErr">
+                            <p class="thongbao" v-if="error && error.trich_yeu">{{ error.trich_yeu[0] }}</p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label>Độ mật</label>
+                            <select class="form-control form-control-sm" v-model="do_mat">
+                                <option value="">Không mật</option>
+                                <option value="1">Mật</option>
+                                <option value="2">Tối Mật</option>
+                                <option value="3">Tuyệt Mật</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Người ký</label>
+                            <input type="text" class="form-control form-control-sm" v-model="nguoi_ky">
+                        </div>
+                        <div class="col-md-5 mb-3">
+                            <label>File đính kèm</label>
+                            <input type="file" class="form-control form-control-sm" @change="getFile">
+                        </div>
+                        <div class="col-md-7 mb-3">
+                            <label>Phê duyệt của lãnh đạo</label>
+                            <input type="text" class="form-control form-control-sm" v-model="phe_duyet">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Cán bộ xử lý</label>
+                            <select class="form-control form-control-sm" v-model="id_user_xu_ly">
+                                <option value="">--- Chọn Cán bộ xử lý ---</option>
+                                <option v-for="user in listUser.data" :key="user.id" :value="user.id">{{ user.fullname }}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label>Hạn xử lý</label>
+                            <input type="date" class="form-control form-control-sm" v-model="han_xu_ly">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label>Ghi chú</label>
+                            <input type="text" class="form-control form-control-sm" v-model="ghi_chu">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3 text-right">
+                            <button class="btn btn-primary">Thêm Văn bản</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            
-            <form style="position:relative" method="post" enctype="multipart/form-data" @submit.prevent="add">
-                <div class="form-row">
-                    <div class="col-md-4 mb-3">
-                        <label>Cơ quan ban hành</label>
-                        <select v-model="id_nguon_den" class="form-control form-control-sm">
-                            <option value="">--- Chọn cơ quan, đơn vị ban hành ---</option>
-                            <option v-for="nguonden in listNguonDen.data" :key="nguonden.id" :value="nguonden.id">{{ nguonden.ten_nguon }}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2 mb-3">
-                        <label>Số văn bản</label>
-                        <input type="text" v-model="so" class="form-control form-control-sm">
-                    </div>
-                    <div class="col-md-2 mb-3">
-                        <label>Ngày văn bản</label>
-                        <input type="date" v-model="ngay" class="form-control form-control-sm">
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label>Loại văn bản</label>
-                        <select class="form-control form-control-sm" v-model="id_loai">
-                            <option value="">--- Chọn Loại văn bản ---</option>
-                            <option v-for="loai in listLoai" :key="loai.id" :value="loai.id">{{ loai.ten_loai }}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label>Trích yếu</label>
-                        <input type="text" class="form-control form-control-sm" v-model="trich_yeu" :class="{'is-invalid':(error && error.trich_yeu)}" @focus="removeErr">
-                        <p class="thongbao" v-if="error && error.trich_yeu">{{ error.trich_yeu[0] }}</p>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label>Độ mật</label>
-                        <select class="form-control form-control-sm" v-model="do_mat">
-                            <option value="">Không mật</option>
-                            <option value="1">Mật</option>
-                            <option value="2">Tối Mật</option>
-                            <option value="3">Tuyệt Mật</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label>Người ký</label>
-                        <input type="text" class="form-control form-control-sm" v-model="nguoi_ky">
-                    </div>
-                    <div class="col-md-5 mb-3">
-                        <label>File đính kèm</label>
-                        <input type="file" class="form-control form-control-sm" @change="getFile">
-                    </div>
-                    <div class="col-md-7 mb-3">
-                        <label>Phê duyệt của lãnh đạo</label>
-                        <input type="text" class="form-control form-control-sm" v-model="phe_duyet">
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label>Cán bộ xử lý</label>
-                        <select class="form-control form-control-sm" v-model="id_user_xu_ly">
-                            <option value="">--- Chọn Cán bộ xử lý ---</option>
-                            <option v-for="user in listUser.data" :key="user.id" :value="user.id">{{ user.fullname }}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2 mb-3">
-                        <label>Hạn xử lý</label>
-                        <input type="date" class="form-control form-control-sm" v-model="han_xu_ly">
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label>Ghi chú</label>
-                        <input type="text" class="form-control form-control-sm" v-model="ghi_chu">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-12 mb-3 text-right">
-                        <button class="btn btn-primary">Thêm Văn bản</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+        </transition>
     </div>
 </template>
 
@@ -93,7 +95,6 @@ export default {
         return{
              // dùng để ẩn hiện form thêm
             show:false,
-            classadd:'',
             //dữ liệu thêm văn bản 
             id_nguon_den:'',
             so:'',
@@ -126,14 +127,12 @@ export default {
         async showAdd(){ //ẩn hiện form thêm
             if(this.show == false){
                 this.show = true;
-                await setTimeout(()=>{this.classadd='active'},200);
                 if(this.listUser=='') await this.$store.dispatch('acListUser');
                 if(this.listNguonDen=='') await this.$store.dispatch('acListNguonDen');
                 if(this.listLoai=='') await this.$store.dispatch('acListLoai');
                 
             }else{
-                this.classadd = '';
-                setTimeout(()=>{this.show = false},500);
+                this.show = false;
             }
         },
         // Luu van ban den vao co so du lieu
@@ -186,21 +185,22 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .content__add{
     width:100%;
     border:1px solid #ebebeb;
     border-radius:5px;
     padding:10px;
 }
-.content__form-add{
-    opacity: 0;
-    margin-top: -436px;
-    transition: all 0.5s ease;
-}
 .thongbao{
 	color:crimson;
 	font-size:0.8rem;
 	margin-top: 5px;
+}
+.add-enter-active, .add-leave-active {
+  transition: opacity .5s;
+}
+.add-enter, .add-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

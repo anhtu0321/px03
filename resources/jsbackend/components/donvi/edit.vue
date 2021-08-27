@@ -60,7 +60,7 @@
 								</div>
 							</div>
 							<div class="form-group col-md-12 text-right">
-								<button type="submit" class="btn btn-success btn-sm" v-if="ktquyen('donvi_sua')">Sửa loại văn bản</button>
+								<button type="submit" class="btn btn-success btn-sm" v-if="ktquyen('donvi_sua')">Sửa Đơn vị</button>
 								<router-link to="/donvi" class="btn btn-warning btn-sm">Quay lại</router-link>
 							</div>
 					</form>

@@ -5,9 +5,6 @@
                 <img src="/px03/public/images/cand.png"/>
                 <h1>CÔNG AN TỈNH HƯNG YÊN</h1>
             </div>
-            <div class="banner__right">
-                <img src="/px03/public/images/covn.png"/>
-            </div>
         </div>
     </div>
 </template>
@@ -65,13 +62,14 @@ export default {
     width: 20%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 .banner__left img{
     margin-top:10px;
-    width:230px;
-    height:80%;
+    margin-bottom:10px;
+    width:150px;
+    height:50%;
 }
 .banner__left h1{
     font-size:1.2rem;

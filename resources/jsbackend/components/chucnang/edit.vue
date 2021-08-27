@@ -44,7 +44,7 @@
 								
 							</div>
 							<div class="form-group col-md-12 text-right">
-								<button type="submit" class="btn btn-success btn-sm" v-if="ktquyen('chucnang_sua')">Sửa loại văn bản</button>
+								<button type="submit" class="btn btn-success btn-sm" v-if="ktquyen('chucnang_sua')">Sửa Chức năng</button>
 								<router-link to="/chucnang" class="btn btn-warning btn-sm">Quay lại</router-link>
 							</div>
 					</form>
@@ -152,7 +152,7 @@ export default {
 	components:{contentHeader, list, paginate},
 	mounted(){
 		// this.list();
-		axios.get(`/px03/public/api/editChucNang/${this.$route.params.id}`)
+		axios.get(`/px03/public/editChucNang/${this.$route.params.id}`)
         .then(response=>{
             this.name = response.data[0].name;
 			this.display_name = response.data[0].display_name;

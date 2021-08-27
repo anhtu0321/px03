@@ -3,7 +3,7 @@
         <div class="menu__sub">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <router-link to='/home' class="nav-link" active-class="active">Home</router-link>
+                    <router-link to='/' exact class="nav-link" active-class="active">Home</router-link>
                 </li>
                 <li class="nav-item">
                     <router-link to='/vanbanden' class="nav-link" active-class="active">Văn bản đến</router-link>

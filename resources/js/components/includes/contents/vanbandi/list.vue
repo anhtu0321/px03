@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="content__list mb-3 mt-3">
+    <div class="content__list mb-3 mt-3 bg-light">
         <table class="table table-bordered table-sm">
             <thead class="thead-light">
                 <th>#</th>
@@ -10,7 +10,7 @@
                 <th>Ngày</th>
                 <th>Trích yếu</th>
                 <th>Độ mật</th>
-                <th>Đơn vị nhận</th>
+                <th>Lãnh đạo ký</th>
                 <th>File</th>
                 <th>Cập nhật</th>
             </thead>
@@ -20,10 +20,10 @@
                     <td>{{ list.ten_nguon }}</td>
                     <td>{{ list.ten_loai }}</td>
                     <td>{{ list.so }}</td>
-                    <td>{{ list.ngay }}</td>
+                    <td>{{ xulyNgayThang(list.ngay) }}</td>
                     <td>{{ list.trich_yeu }}</td>
                     <td>{{ getNameDoMat(list.do_mat) }}</td>
-                    <td>{{ list.don_vi_nhan }}</td>
+                    <td>{{ list.cap_bac }} {{ list.ho_ten }}</td>
                     <td v-if="['doc', 'docx', 'xls', 'xlsx'].includes(list.duoi_file)">
                         <a :href="`/px03/public/vanbandinupload/${ list.file }`">
                             <img width="25px" src="/px03/public/images/word-icon.png">
@@ -83,16 +83,9 @@ export default {
         }
     },
     methods: {
-        async getVanBanDiById(id){
+        getVanBanDiById(id){
             // await this.$store.dispatch('acListUser');
-            if(this.$store.getters.getListNguonDi == '') await this.$store.dispatch('acListNguonDi');
-            if(this.$store.getters.getListLoai =='') await this.$store.dispatch('acListLoai');
-            if(this.$store.state.listLanhDao=='') await this.$store.dispatch('acListLanhDao');
-            await this.$store.dispatch('acListDonVi');
-            await axios.get('/px03/public/editvanbandi/'+id)
-            .then(response=>{
-                this.$emit('dataById', response);
-            })
+            this.$emit('dataById', id);
         },
         async viewVanBanDiById(id){
             await axios.get('/px03/public/viewvanbandi/'+id)
@@ -139,6 +132,10 @@ export default {
         },
         loadData(){
             this.$store.dispatch('acSearchDi', {data:this.dataRequestSearch, page:page});
+        },
+        xulyNgayThang(date){
+            var d = new Date(date);
+            return d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
         }
         
     },

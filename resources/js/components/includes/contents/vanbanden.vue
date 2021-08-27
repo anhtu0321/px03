@@ -1,6 +1,6 @@
 <template>
     <div class="content__sub mt-3">
-        
+        <div class="bg-info text-light col-md-12 mb-3 content__header">QUẢN LÝ VĂN BẢN ĐẾN</div>
         <search-component v-if="ktquyen('vanbanden_xem')"></search-component>
         <add-component v-if="ktquyen('vanbanden_them')"></add-component>
         <listcomponent @dataById="loadDataById" @viewDataById="loadViewDataById" :id="e_id" @getPage="setPage" v-if="ktquyen('vanbanden_xem')"></listcomponent>
@@ -119,7 +119,7 @@
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Ngày văn bản</label>
-                                        <div class="text-primary" >{{v_ngay}}</div>
+                                        <div class="text-primary" >{{xulyNgayThang(v_ngay)}}</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Loại văn bản</label>
@@ -177,7 +177,7 @@
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label>Hạn xử lý</label>
-                                        <div class="text-primary">{{v_han_xu_ly}}</div>
+                                        <div class="text-primary">{{xulyNgayThang(v_han_xu_ly)}}</div>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label>Trạng thái</label>
@@ -398,7 +398,11 @@ export default {
 				}
 			}
 			return false;
-		}
+        },
+        xulyNgayThang(date){
+            var d = new Date(date);
+            return d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
+        }
     },
     components:{
         listcomponent,
@@ -415,9 +419,10 @@ export default {
     border-radius:3px;
     padding:5px;
 }
-.active{
-    opacity:1;
-    margin-top:0;
+.content__header{
+    padding: 10px;
+    font-weight: bold;
+    border-radius:3px;
 }
 .tieude{
     font-size: 1.2rem;

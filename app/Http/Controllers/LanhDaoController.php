@@ -11,6 +11,10 @@ class LanhDaoController extends Controller
     {
         return LanhDao::orderBy('thu_tu','asc')->paginate(30);
     }
+    public function listLanhDao()
+    {
+        return LanhDao::orderBy('thu_tu','asc')->where('trang_thai','=','1')->paginate(50);
+    }
     
     public function store(Request $request)
     {

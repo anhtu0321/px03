@@ -12,7 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    // .js('resources/jsbackend/app.js', 'public/jsbackend')
+    .js('resources/jsbackend/app.js', 'public/jsbackend')
     // .sass('resources/sass/app.scss', 'public/css')
     .options({
         processCssUrls: false

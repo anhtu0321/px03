@@ -16,11 +16,10 @@ class VanBanDiController extends Controller
         $vanbandi = DB::table('van_ban_di')
         ->leftjoin('nguon_di','van_ban_di.id_nguon_di', '=', 'nguon_di.id')
         ->leftjoin('loai_van_ban','van_ban_di.id_loai', '=', 'loai_van_ban.id')
-        ->select('van_ban_di.id','van_ban_di.so','van_ban_di.ngay','van_ban_di.trich_yeu','van_ban_di.ghi_chu','van_ban_di.han_xu_ly','van_ban_di.trang_thai','van_ban_di.file','van_ban_di.duoi_file', 'nguon_di.ten_nguon', 'loai_van_ban.ten_loai')
+        ->select('van_ban_di.id','van_ban_di.so','van_ban_di.ngay','van_ban_di.trich_yeu','van_ban_di.ghi_chu','van_ban_di.han_xu_ly','van_ban_di.trang_thai','van_ban_di.file','van_ban_di.duoi_file','van_ban_di.id_lanh_dao', 'nguon_di.ten_nguon', 'loai_van_ban.ten_loai')
         ->orderBy('van_ban_di.id','desc')
         ->paginate(30);
         return $vanbandi;
-
     }
     
     public function store(Request $request)
@@ -70,7 +69,6 @@ class VanBanDiController extends Controller
         ->leftjoin('lanh_dao','van_ban_di.id_lanh_dao', '=', 'lanh_dao.id')
         ->where('van_ban_di.id',$id)
         ->select('van_ban_di.*', 'nguon_di.ten_nguon', 'loai_van_ban.ten_loai', 'lanh_dao.cap_bac', 'lanh_dao.ho_ten')
-
         ->get();
         return $vanbandi;
     }
@@ -134,7 +132,8 @@ class VanBanDiController extends Controller
         $vanbandi = DB::table('van_ban_di')
         ->leftjoin('nguon_di','van_ban_di.id_nguon_di', '=', 'nguon_di.id')
         ->leftjoin('loai_van_ban','van_ban_di.id_loai', '=', 'loai_van_ban.id')
-        ->select('van_ban_di.id','van_ban_di.so','van_ban_di.ngay','van_ban_di.trich_yeu','van_ban_di.noi_dung','van_ban_di.do_mat','van_ban_di.don_vi_nhan','van_ban_di.can_bo_tham_muu','van_ban_di.luu_tru','van_ban_di.ghi_chu','van_ban_di.file','van_ban_di.duoi_file', 'nguon_di.ten_nguon', 'loai_van_ban.ten_loai')
+        ->leftjoin('lanh_dao','van_ban_di.id_lanh_dao', '=', 'lanh_dao.id')
+        ->select('van_ban_di.id','van_ban_di.so','van_ban_di.ngay','van_ban_di.trich_yeu','van_ban_di.noi_dung','van_ban_di.do_mat','van_ban_di.don_vi_nhan','van_ban_di.can_bo_tham_muu','van_ban_di.luu_tru','van_ban_di.ghi_chu','van_ban_di.file','van_ban_di.duoi_file', 'nguon_di.ten_nguon', 'loai_van_ban.ten_loai','lanh_dao.cap_bac','lanh_dao.ho_ten')
         ->where('van_ban_di.trich_yeu','LIKE', '%'.$request->trich_yeu.'%')
         
         ->where(function($query) use ($request){
